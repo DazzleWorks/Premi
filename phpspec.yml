@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Premi
+        psr4_prefix: Premi
+        src_path: app
