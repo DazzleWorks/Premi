@@ -5,12 +5,12 @@ ISTRUZIONI PER L'USO:
 3. aggiungere cartella /vendor
 4. aggiungere cartella /node_modules
 
-ISTTRUZIONI COMMENTI:
+ISTRUZIONI COMMENTI:
 form standard che deve avere ogni file:
 
 /**
  * @file: slide.php
- * @author: Burlin Valerio
+ * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class implements....
  * 
@@ -21,4 +21,22 @@ form standard che deve avere ogni file:
  * +---------+------+------------+--------+-------------+
  */
 
-Lingua RIGOROSAMENTE INGLESE
+Lingua RIGOROSAMENTE INGLESE —> primo entry nella tabella è la creazione della classe
+
+
+ISTRUZIONE CAMPI PRIVATI DI UNA CLASSE
+
+/**
+ * Descrizione
+ * @type {}
+ * @modificatore di accesso
+ */
+
+ISTRUZIONI FUNZIONE
+
+/**
+ * Descrizione funzione
+ * @param {type} Descrizione
+ * @returns {type} Descrizione
+ * @modificatore di accesso
+ */
