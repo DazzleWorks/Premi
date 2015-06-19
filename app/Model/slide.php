@@ -21,7 +21,7 @@ class Slide extends Eloquent {
     /**
      * Indicates if the model should be timestamped
      * 
-     * @var timestamps bool
+     * @var bool
      */
     public $timestamps = false;
     
@@ -29,8 +29,8 @@ class Slide extends Eloquent {
      * The attributes of the class.
      *
      * @var x ->
-     * @var y ->
-     * @var components -> 
      */
-    private $x, $y, $components = array();
+    private $x; 
+            
+    private $y, $components = array();
 }
