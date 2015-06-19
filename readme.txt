@@ -10,7 +10,7 @@ form standard che deve avere ogni file:
 
 /**
  * @file: slide.php
- * @author: Burlin Valerio
+ * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class implements....
  * 
