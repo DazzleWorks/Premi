@@ -10,7 +10,7 @@ before_install:
 
 before_script:
    - npm install
-   - node_modules/karma/bin/karma start my.conf.js --single-run
+   - node_modules/karma/bin/karma start my.conf.js
 
 script:
    - phpunit
