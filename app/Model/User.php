@@ -72,7 +72,9 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      * @param $email
      * @param $projects
      */
-    public function __construct(/*$_id,*/ $username, $password, /*$firstname, $lastname,*/ $email, $projects){
+
+    /**
+    public function __construct($_id, $username, $password, $firstname, $lastname, $email, $projects){
         //$this->_id = $_id;
         $this->username = $username;
         $this->password = $password;
@@ -81,6 +83,7 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
         $this->email = $email;
         $this->projects = $projects;
     }
+     * */
 
     /**
      * getter method that returns the user _id
