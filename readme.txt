@@ -1,4 +1,4 @@
-ISTRUZIONI PER L'USO:
+﻿ISTRUZIONI PER L'USO:
 
 1. rinominare file '.env.example' --> .env
 2. modificare DB_HOST con il proprio localhost (verificarlo con mongodb)
@@ -29,7 +29,7 @@ ISTRUZIONE CAMPI PRIVATI DI UNA CLASSE
 /**
  * Descrizione
  * @type {}
- * @modificatore di accesso
+ * access modificatore di accesso
  */
 
 ISTRUZIONI FUNZIONE
@@ -38,5 +38,5 @@ ISTRUZIONI FUNZIONE
  * Descrizione funzione
  * @param {type} Descrizione
  * @returns {type} Descrizione
- * @modificatore di accesso
+ * @access modificatore di accesso
  */
