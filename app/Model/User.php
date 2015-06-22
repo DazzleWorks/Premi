@@ -49,28 +49,42 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     protected $hidden = ['password', 'remember_token'];
 
 
-    /**
-     * Id of the User
-     * @type {integer}
-     * @private
-     */
     private $_id;
-
-    /**
-     * Unique sequence of characters used to identify a user
-     * @type {integer}
-     * @private
-     */
-
     private $username;
+    private $password;
     private $firstname;
     private $lastname;
     private $email;
-
-    private $projects;
+    /**
+     * array of project created by the user
+     * @type {array}
+     * @private
+     */
+    private $projects = [];
 
     /**
-     * @return mixed
+     * constructor method of the User class
+     * @param $_id
+     * @param $username
+     * @param $password
+     * @param $firstname
+     * @param $lastname
+     * @param $email
+     * @param $projects
+     */
+    public function __construct($_id, $username, $password, $firstname, $lastname, $email, $projects){
+        $this->_id = $_id;
+        $this->username = $username;
+        $this->password = $password;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->projects = $projects;
+    }
+
+    /**
+     * getter method that returns the user _id
+     * @returns {integer} Returns the user _id
      */
     public function getId()
     {
@@ -78,7 +92,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $id
+     * setter method that sets the user _id
+     * @param $id {Integer}
      */
     public function setId($id)
     {
@@ -86,7 +101,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @return mixed
+     * getter method that returns the User username
+     * @return {string} Returns the User username
      */
     public function getUsername()
     {
@@ -94,7 +110,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $username
+     * setter method that sets the User username
+     * @param $username {string}
      */
     public function setUsername($username)
     {
@@ -102,7 +119,26 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @return mixed
+     * getter method that returns the User password
+     * @return {string} returns the user password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * setter method that sets the User password
+     * @param $password {string}
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * getter method that returns the User firstname
+     * @return {String} Returns the User firstname
      */
     public function getFirstname()
     {
@@ -110,7 +146,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $firstname
+     * setter method that sets the User firstname
+     * @param $firstname {string}
      */
     public function setFirstname($firstname)
     {
@@ -118,7 +155,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @return mixed
+     * getter method that returns the User lastname
+     * @return {String} Returns the User lastname
      */
     public function getLastname()
     {
@@ -126,7 +164,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $lastname
+     * setter method that sets the User lastname
+     * @param $lastname {string}
      */
     public function setLastname($lastname)
     {
@@ -134,7 +173,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @return mixed
+     * getter method that returns the User email
+     * @return {String} Returns the User email
      */
     public function getEmail()
     {
@@ -142,7 +182,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $email
+     * setter method that sets the User email
+     * @param $email {string}
      */
     public function setEmail($email)
     {
@@ -150,7 +191,9 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @return mixed
+     * getter method that returns the User projects
+     * @return array {Project} Returns the User array of projects
+     * Returns the User array of projects
      */
     public function getProjects()
     {
@@ -158,11 +201,13 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * @param mixed $projects
+     * setter method that sets the User array of projects
+     * @param $projects array {Project}
      */
     public function setProjects($projects)
     {
         $this->projects = $projects;
     }
+
 
 }
