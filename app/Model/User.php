@@ -84,7 +84,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
 
     /**
      * getter method that returns the user _id
-     * @returns {integer} Returns the user _id
+     * @return array {integer} Returns the user _id
+     * Returns the user _id
      */
     public function getId()
     {
@@ -207,6 +208,11 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     public function setProjects($projects)
     {
         $this->projects = $projects;
+    }
+
+    public function getProfileByUsername($username){
+        $user = User::find($username);
+        return $user;
     }
 
 

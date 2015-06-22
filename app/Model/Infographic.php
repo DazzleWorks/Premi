@@ -39,7 +39,8 @@ class Infographic extends Eloquent
 
     /**
      * getter method that returns the Infographic _id
-     * @returns {integer} Returns the Infographic _id
+     * @return array {integer}
+     * Returns the Infographic _id
      */
     public function getId()
     {

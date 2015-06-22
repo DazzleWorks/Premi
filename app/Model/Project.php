@@ -115,4 +115,8 @@ class Project extends Eloquent
         $this->infographics = $infographics;
     }
 
+    public function getProjectById($id){
+        $project = Projects::find($id);
+        return $project;
+    }
 }
