@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+Route::controller('user', 'UserController');
+Route::controller('project', 'ProjectController');
+// Dovrei creare un nuovo controller solo per creare la view della home page -> è poco conveniente in questo caso
+Route::get('/', function () {return View::make('index', array('title' => 'Home page'));});
+
+
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/

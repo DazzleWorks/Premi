@@ -20,7 +20,7 @@ use Jenssegers\Mongodb\Model as Eloquent;
 
 class Project extends Eloquent
 {
-    private $_id;
+    //private $_id;
     private $name;
     private $presentation;
 
@@ -36,8 +36,8 @@ class Project extends Eloquent
      * @param $presentation
      * @param $infographics
      */
-    public function __construct($_id, $name, $presentation, $infographics){
-        $this->_id = $_id;
+    public function __construct(/*$_id,*/ $name, $presentation, $infographics){
+        //$this->_id = $_id;
         $this->name = $name;
         $this->presentation = $presentation;
         $this->infographics = $infographics;
