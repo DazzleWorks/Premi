@@ -4,13 +4,13 @@ namespace Premi;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @file: slide.php
- * @author: DazzleWorks
- * @date: 2015-06-19
- * @description: This class stores slide data that is retrieved by the slide controller
+ * @File: slide.php
+ * @Author: DazzleWorks
+ * @Date: 2015-06-19
+ * @Description: This class stores slide data that is retrieved by the slide controller
  * 
  * +---------+------------+----------------+--------------+--------------+ 
- * | Version |    Date    |   Programmer   |    Modify    | Description  |
+ * | Version |    Date    |   Programmer   |    Changes   | Description  |
  * +---------+------------+----------------+--------------+--------------+
  * |  0.0.1  | 2015-06-19 | Burlin Valerio | class Slide  | create class |
  * +---------+------------+----------------+--------------+--------------+
@@ -24,7 +24,7 @@ class Slide extends Eloquent {
      */
     public $timestamps = false;
     
-    private $idSlide;
+    private $_id;
     
     /**
      * position of the slide relative to the axis X in the presentation's matrix
@@ -48,15 +48,23 @@ class Slide extends Eloquent {
     private $components = array();
     
     
-    public function __construct($id,$x,$y,$c) {
-        $this->idSlide = $id;
+    /**
+     * constructor function of the Slide class
+     *@param _id
+     *@param xIndex
+     *@param yIndex
+     *@param array components
+     *@return Il tipo del valore di ritorno
+     */
+    public function __construct($_id,$x,$y,$c) {
+        $this->_id = $_id;
         $this->xIndex = $x;
         $this->yIndex = $y;
         $this->components = $c;
     }
     
     public function getId() {
-        return $id;
+        return $this->_id;
     }
     
     /**

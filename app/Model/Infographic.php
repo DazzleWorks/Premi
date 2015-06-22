@@ -2,7 +2,6 @@
 
 namespace Premi;
 
-use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
@@ -12,11 +11,12 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * @description: This class is graphic visual rapresentation of the presentation that intends to present
  * information quickly and clearly. It contains the path of the image if the user already eloborated it.
  *
- * +---------+------------+---------------+--------------------+--------------+
- * | Version |     Date   |  Programmer   |        Change      |  Description |
- * +---------+------------+---------------+--------------------+--------------+
- * |  0.0.1  | 2015-06-19 |Suierica Bogdan| class Infographic  | create class |
- * +---------+------------+---------------+--------------------+--------------+
+ * +---------+------------+---------------+--------------------+---------------------------------+
+ * | Version |     Date   |  Programmer   |        Change      |         Description             |
+ * +---------+------------+---------------+--------------------+---------------------------------+
+ * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Infographic  | create class and its construct, |
+ * |         |            |               |                    | getter and setter functions     |
+ * +---------+------------+---------------+--------------------+---------------------------------+
  */
 
 class Infographic extends Eloquent
@@ -26,10 +26,10 @@ class Infographic extends Eloquent
     private $path;
 
     /**
-     * constructor method of the Infograhic class
-     * @param array $_id
-     * @param $name
-     * @param $path
+     * constructor function of the Infograhic class
+     * @param $_id {integer}
+     * @param $name {string}
+     * @param $path {string}
      */
     public function __construct($_id, $name, $path){
         $this->_id = $_id;
@@ -38,8 +38,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * getter method that returns the Infographic _id
-     * @returns {integer} Returns the Infographic _id
+     * getter function that returns the Infographic _id
+     * @returns {integer} returns the Infographic _id
      */
     public function getId()
     {
@@ -47,8 +47,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * setter method that sets the Infographic _id
-     * @param $id {Integer}
+     * setter function that sets the Infographic _id
+     * @param $id {integer}
      */
     public function setId($id)
     {
@@ -56,8 +56,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * getter method that returns the Infographic name
-     * @returns {string} Returns the Infographic name
+     * getter function that returns the Infographic name
+     * @returns {string} returns the Infographic name
      */
     public function getName()
     {
@@ -65,8 +65,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * setter method that sets the Infographic name
-     * @param $name {Integer}
+     * setter function that sets the Infographic name
+     * @param $name {integer}
      */
     public function setName($name)
     {
@@ -74,8 +74,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * getter method that returns the Infographic path
-     * @returns {string} Returns the Infographic path
+     * getter function that returns the Infographic path
+     * @returns {string} returns the Infographic path
      */
     public function getPath()
     {
@@ -83,8 +83,8 @@ class Infographic extends Eloquent
     }
 
     /**
-     * setter method that sets the Infographic path
-     * @param $path {Integer}
+     * setter function that sets the Infographic path
+     * @param $path {integer}
      */
     public function setPath($path)
     {
