@@ -49,7 +49,7 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     protected $hidden = ['password', 'remember_token'];
 
 
-    private $_id;
+    //private $_id;
     private $username;
     private $password;
     private $firstname;
@@ -72,8 +72,8 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      * @param $email
      * @param $projects
      */
-    public function __construct($_id, $username, $password, $firstname, $lastname, $email, $projects){
-        $this->_id = $_id;
+    public function __construct(/*$_id,*/ $username, $password, $firstname, $lastname, $email, $projects){
+        //$this->_id = $_id;
         $this->username = $username;
         $this->password = $password;
         $this->firstname = $firstname;
