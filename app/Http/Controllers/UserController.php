@@ -21,7 +21,7 @@ class UserController extends Controller
     
     public function getRegister()
     {
-        return View::make('register', array('title' => 'Register | LaraTweet'));
+        return \View::make('register', array('title' => 'Register | LaraTweet'));
     }
     
     public function postRegister()

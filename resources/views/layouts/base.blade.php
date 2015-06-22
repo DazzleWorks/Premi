@@ -16,11 +16,11 @@
  
             @include('includes.header')
  
-            {!!-- sto definendo una sezione vuota denominata "body" --!!}
+            {{-- sto definendo una sezione vuota denominata "body" --}}
  
-            {!!--@yield('body')--!!}
+            {{--@yield('body')--}}
  
-            {!!-- posso utilizzare anche un altro metodo per ottenere lo stesso risultato --!!}
+            {{-- posso utilizzare anche un altro metodo per ottenere lo stesso risultato --}}
  
             @section('body')
             @show
