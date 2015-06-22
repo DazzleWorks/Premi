@@ -52,15 +52,15 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     //private $_id;
     private $username;
     private $password;
-    private $firstname;
-    private $lastname;
+    //private $firstname;
+    //private $lastname;
     private $email;
     /**
      * array of project created by the user
      * @type {array}
      * @private
      */
-    private $projects = [];
+    private $projects = array();
 
     /**
      * constructor method of the User class
@@ -72,12 +72,12 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      * @param $email
      * @param $projects
      */
-    public function __construct(/*$_id,*/ $username, $password, $firstname, $lastname, $email, $projects){
+    public function __construct(/*$_id,*/ $username, $password, /*$firstname, $lastname,*/ $email, $projects){
         //$this->_id = $_id;
         $this->username = $username;
         $this->password = $password;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
+        //$this->firstname = $firstname;
+        //$this->lastname = $lastname;
         $this->email = $email;
         $this->projects = $projects;
     }
