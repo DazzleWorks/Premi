@@ -6,10 +6,11 @@ php:
 before_install:
    - export DISPLAY=:99.0
    - sh -e /etc/init.d/xvfb start
+   - composer self-update
 
 before_script:
    - npm install
-   - node_modules/karma/bin/karma start my.conf.js --single-run
+   - node_modules/karma/bin/karma start my.conf.js
 
 script:
    - phpunit
