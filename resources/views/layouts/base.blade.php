@@ -11,7 +11,7 @@
 <body>
 <div class="site-wrapper">
  
-    <div class="site-wrapper-inner  {!! Request::is('/') || Request::is('user/login') || Request::is('user/register') ? 'vertcenter' : '' !!}">
+    <div class="site-wrapper-inner  {!! Request::is('/') || Request::is('project/insert') || Request::is('user/register') ? 'vertcenter' : '' !!}">
         <div class="cover-container">
  
             @include('includes.header')

@@ -34,9 +34,9 @@ class UserController extends Controller
         if (!$user->save())
             return \Redirect::to('user/register')->with('errorMessage', 'Internal error')->withInput(\Input::except($exceptArr));
 
-        if (!Auth::attempt(array('username' => \Input::get('username'), 'password' => \Input::get('password'))))
+        if (!\Auth::attempt(array('username' => \Input::get('username'), 'password' => \Input::get('password'))))
             return \Redirect::to('user/register')->with('errorMessage', 'Internal error');
 
-        return \Redirect::intended('user/register');
+        return \Redirect::intended('user/profile');
     }
 }

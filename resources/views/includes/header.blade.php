@@ -5,7 +5,7 @@
  
             @if(!Auth::check())
                 <li {!! Request::is('/')?'class="active"':'' !!}><a href="{!! url('/') !!}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li {!! Request::is('user/login')?'class="active"':'' !!}><a href="{!! url('user/login') !!}"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
+                <li {!! Request::is('project/insert')?'class="active"':'' !!}><a href="{!! url('project/insert') !!}"><span class="glyphicon glyphicon-lock"></span> Project</a></li>
             <!--
             <li {{ Request::is('user/register')?'class="active"':'' }}><a href="{{ url('user/register') }}"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
             -->

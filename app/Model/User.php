@@ -28,6 +28,13 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     use Authenticatable, CanResetPassword;
 
     /**
+     * Indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
+    
+    /**
      * The database collection used by the model.
      *
      * @var string
