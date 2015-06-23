@@ -2,7 +2,6 @@
 
 namespace Premi;
 
-use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
@@ -20,14 +19,23 @@ use Jenssegers\Mongodb\Model as Eloquent;
 
 class Project extends Eloquent
 {
-    private $_id;
+    /**
+     * Indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
+    
+    protected $collection = 'users_collection';
+    
+    //private $_id;
     private $name;
     private $presentation;
 
     /*
      *array of infographics associated with the project
      */
-    private $infographics = [];
+    //private $infographics = [];
 
     /**
      * constructor method of the Project class
@@ -36,12 +44,12 @@ class Project extends Eloquent
      * @param $presentation
      * @param $infographics
      */
-    public function __construct($_id, $name, $presentation, $infographics){
-        $this->_id = $_id;
+    /*public function __construct($_id, $name, $presentation, $infographics){
+        //$this->_id = $_id;
         $this->name = $name;
         $this->presentation = $presentation;
         $this->infographics = $infographics;
-    }
+    }*/
 
     /**
      * getter method that returns the project _id
@@ -115,4 +123,8 @@ class Project extends Eloquent
         $this->infographics = $infographics;
     }
 
+    public function getProjectById($id){
+        $project = Projects::find($id);
+        return $project;
+    }
 }

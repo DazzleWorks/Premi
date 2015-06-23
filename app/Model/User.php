@@ -28,6 +28,13 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     use Authenticatable, CanResetPassword;
 
     /**
+     * Indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
+    
+    /**
      * The database collection used by the model.
      *
      * @var string
@@ -49,18 +56,18 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     protected $hidden = ['password', 'remember_token'];
 
 
-    private $_id;
+    //private $_id;
     private $username;
     private $password;
-    private $firstname;
-    private $lastname;
+    //private $firstname;
+    //private $lastname;
     private $email;
     /**
      * array of project created by the user
      * @type {array}
      * @private
      */
-    private $projects = [];
+    private $projects = array();
 
     /**
      * constructor method of the User class
@@ -72,19 +79,23 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      * @param $email
      * @param $projects
      */
+
+    /**
     public function __construct($_id, $username, $password, $firstname, $lastname, $email, $projects){
-        $this->_id = $_id;
+        //$this->_id = $_id;
         $this->username = $username;
         $this->password = $password;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
+        //$this->firstname = $firstname;
+        //$this->lastname = $lastname;
         $this->email = $email;
         $this->projects = $projects;
     }
+     * */
 
     /**
      * getter method that returns the user _id
-     * @returns {integer} Returns the user _id
+     * @return array {integer} Returns the user _id
+     * Returns the user _id
      */
     public function getId()
     {
@@ -207,6 +218,11 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     public function setProjects($projects)
     {
         $this->projects = $projects;
+    }
+
+    public function getProfileByUsername($username){
+        $user = User::find($username);
+        return $user;
     }
 
 
