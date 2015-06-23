@@ -28,36 +28,9 @@
 
     <body>
         <!-- TOP MENU BEGIN -->
-        <div ng-controller="topBarCtrl">
-            <top-bar>
-                <ul class="title-area">
-                    <li class="name">
-                        <h1><a href="#">PREMI</a></h1>
-                    </li>
-                    <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
-                </ul>
+        <div><top-bar-directive/></div>
 
-                <top-bar-section>
-                    <!-- Right Nav Section -->
-                    <ul class="right">
-                        <li class="active"><a href="#">Active</a></li>
-                        <li has-dropdown>
-                            <a href="#">Dropdown</a>
-                            <ul top-bar-dropdown>
-                                <li><a href="#">First link in dropdown</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <!-- Left Nav Section -->
-                    <ul class="left">
-                        <li><a href="#">Left</a></li>
-                    </ul>
-                </top-bar-section>
-            </top-bar>
-        </div>
-        <!-- TOP MENU END -->
-
+        <!-- AREA UTENTE -->
         <restricted-area-directive/>
 
 
@@ -74,6 +47,7 @@
     <script src="assets/libs/angular-route.min.js"></script>
 
     <script src="assets/libs/foundation/js/mm-foundation.js"></script>
+    <script src="assets/libs/foundation/js/foundation.min.js"></script>
 
     <script src="app/app.js" type="text/javascript"></script>
     <script src="app/controllers/controllers.js" type="text/javascript"></script>
