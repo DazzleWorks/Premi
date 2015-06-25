@@ -1,5 +1,6 @@
 <?php
-namespace Premi;
+
+namespace Premi\Model;
 
 use Jenssegers\Mongodb\Model as Eloquent;
 

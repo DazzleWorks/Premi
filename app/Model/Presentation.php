@@ -1,8 +1,7 @@
 <?php
 
-namespace Premi;
+namespace Premi\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**

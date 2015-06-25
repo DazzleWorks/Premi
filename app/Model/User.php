@@ -1,6 +1,6 @@
 <?php
 
-namespace Premi;
+namespace Premi\Model;
 
 use Illuminate\Auth\Authenticatable;
 use Jenssegers\Mongodb\Model as Eloquent;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
- * @file: user.php
+ * @file: User.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class stores user data that is retrieved by the user controller
@@ -20,8 +20,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * |  0.0.1  | 2015-06-19 |Suierica Bogdan| class User | create class |
  * +---------+------------+---------------+------------+--------------+
  */
-
-
 
 class User extends Eloquent implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -34,13 +32,6 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      */
     public $timestamps = false;
     
-    /**
-     * The database collection used by the model.
-     *
-     * @var string
-     */
-    protected $collection = 'users_collection';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -62,35 +53,12 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     //private $firstname;
     //private $lastname;
     private $email;
-    /**
-     * array of project created by the user
-     * @type {array}
-     * @private
-     */
-    private $projects = array();
-
-    /**
-     * constructor method of the User class
-     * @param $_id
-     * @param $username
-     * @param $password
-     * @param $firstname
-     * @param $lastname
-     * @param $email
-     * @param $projects
-     */
-
-    /**
-    public function __construct($_id, $username, $password, $firstname, $lastname, $email, $projects){
-        //$this->_id = $_id;
-        $this->username = $username;
-        $this->password = $password;
-        //$this->firstname = $firstname;
-        //$this->lastname = $lastname;
-        $this->email = $email;
-        $this->projects = $projects;
+    
+    
+    public function projects() {
+        return $this->embedsMany(Project::class);
     }
-     * */
+    
 
     /**
      * getter method that returns the user _id
@@ -227,3 +195,4 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
 
 
 }
+

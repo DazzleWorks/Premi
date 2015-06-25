@@ -1,5 +1,6 @@
 <?php
-namespace Premi;
+
+namespace Premi\Model;
 
 use App\Model\Component;
 
@@ -49,3 +50,4 @@ class RealTimeData extends Component {
         $pathHandlerJs = $ph;
     }
 }
+

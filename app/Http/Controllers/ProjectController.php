@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\Project;
+use Premi\Model\Project;
+use Premi\Model\User;
+
 
 class ProjectController extends Controller
 {
@@ -17,9 +19,12 @@ class ProjectController extends Controller
     
     public function postInsert()
     {
-        $project = new Project();
+        $project = new Project;
         $project->name = \Input::get('name');
         $project->presentation = \Input::get('presentation');
+        
+        $user = User::first();
+        $project = $user->projects()->save($project);
         
         if (!$project->save())
             return \Redirect::to('project/insert')->with('errorMessage', 'Internal error')->withInput(\Input::except($exceptArr));
@@ -30,3 +35,4 @@ class ProjectController extends Controller
         return \Redirect::intended('project/insert');
     }
 }
+

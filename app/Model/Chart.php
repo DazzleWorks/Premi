@@ -1,5 +1,6 @@
 <?php
-namespace Premi;
+
+namespace Premi\Model;
 
 use App\Model\Component;
 

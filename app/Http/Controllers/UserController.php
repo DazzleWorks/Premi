@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\User;
+use Premi\Model\User;
 
 class UserController extends Controller
 {
@@ -26,11 +26,11 @@ class UserController extends Controller
     
     public function postRegister()
     {
-        $user = new User();
+        $user = new User;
         $user->username = \Input::get('username');
         $user->password = \Hash::make(\Input::get('password'));
         $user->email = \Input::get('email');
-
+        
         if (!$user->save())
             return \Redirect::to('user/register')->with('errorMessage', 'Internal error')->withInput(\Input::except($exceptArr));
 

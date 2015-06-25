@@ -1,5 +1,6 @@
 <?php
-namespace Premi;
+
+namespace Premi\Model;
 
 use Jenssegers\Mongodb\Model as Eloquent;
 
@@ -105,3 +106,4 @@ class Slide extends Eloquent {
        $Y = $newY; 
     }
 }
+
