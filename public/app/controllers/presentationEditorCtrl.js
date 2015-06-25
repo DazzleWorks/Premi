@@ -63,12 +63,12 @@ angular.module('app.controllers.presentationEditorCtrl', ['ngRoute'])
         };
 
         $scope.avaiableFonts = [
-            {name: "Times New Roman"},
             {name: "Arial"},
-            {name: "Verdana"},
             {name: "Courier"},
             {name: "Georgia"},
-            {name: "Gadget"}
+            {name: "Indie Flower"},
+            {name: "Lato"},
+            {name: "Verdana"}
         ];
         
         $scope.updateColor=function(obj){
@@ -176,7 +176,7 @@ angular.module('app.controllers.presentationEditorCtrl', ['ngRoute'])
                     "text": "Beeeeee",
                     "fontSize": 40,
                     "fontWeight": "normal",
-                    "fontFamily": "Times New Roman",
+                    "fontFamily": "Lato",
                     "fontStyle": "",
                     "lineHeight": 1.16,
                     "textDecoration": "",

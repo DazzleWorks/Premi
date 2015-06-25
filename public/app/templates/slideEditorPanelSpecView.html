@@ -86,9 +86,16 @@
                   </div>
                 <div class="row">
                     <div class="large-12 columns">
-                        <label>Size
-                            <input type="number" ng-model="objectSelected.fontSize" ng-change="update()" class="large-6 columns" />
-                        </label>
+                        <div class="large-12 columns">
+                            <label>ScaleX
+                                <input type="number" ng-model="objectSelected.scaleX" ng-change="update()" step="0.1"/>
+                            </label>
+                        </div>
+                        <div class="large-12 columns">
+                            <label>ScaleY
+                                <input type="number" ng-model="objectSelected.scaleY" ng-change="update()" step="0.1"/>
+                            </label>
+                        </div>
                         <label>Color
                              <input type="color" ng-model="objectSelected.fill" ng-change="update()" class="large-6 columns" />
                         </label>
