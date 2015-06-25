@@ -1,0 +1,24 @@
+<div ng-controller= "slideEditorCtrl">
+    <div class="row">
+        <div class="large-2 columns" >
+            <ul id="components">
+                <li ng-repeat="component in components" class="editMenuItemContainer" ng-click='openModal(component.id)'>
+                    <div id="{{component.id}}" class="editMenuItemIcon {{component.classes}}">
+                        <span class="editMenuItemLabel">{{component.label}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="large-8 columns">
+            <canvas id="slide" width="800" height="600" style="border:1px solid #000000;" ></canvas>
+        </div>
+
+        <div class="large-2 columns">
+            <button id="btnShowEditComponentForm">Opzioni Modifica Componente</button>
+            <div id="editComponentForm">
+               <slide-editor-panel-spec-directive/>
+            </div>
+        </div>
+    </div>
+</div>

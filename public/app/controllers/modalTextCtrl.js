@@ -1,13 +1,15 @@
 angular.module('app.controllers.modalTextCtrl', ['ngRoute'])
 
-    .controller('modalTextCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
-        $scope.text= 'this is an example text'; // DA IMPORTARE IL TESTO
+    .controller('modalTextCtrl', function($scope, $modalInstance) {
+        $scope.data = {
+            text: ""
+        };
 
         $scope.ok = function () {
-            $modalInstance.close($scope.text);
+            $modalInstance.close($scope.data.text);
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-    }]);
+    });
