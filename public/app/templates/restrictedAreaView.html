@@ -1,0 +1,28 @@
+<div class="small-12 columns">
+    <h1>PROJECT NAME</h1>
+</div>
+
+
+<div id= "restrictedArea" ng-controller="restrictedAreaCtrl">
+
+    <nav  id="sectionMenu">
+        <div class="button-group">
+            <button type="button" class="button MenuRadioButtons" ng-model="radioModel"
+                ng-repeat="menuItem in menuItems"
+                    ng-attr-id="{{menuItem.key}}" btn-radio="'{{menuItem.key}}'">{{menuItem.txt}}
+            </button>
+        </div>
+    </nav>
+
+    <div ng-show= "isCurrentTab('myProjects');" id="myProjects" ng-controller="myProjectsCtrl">
+        <my-projects-directive/>
+    </div>
+
+    <div ng-show= "isCurrentTab('presentationEditor');" id="presentationEditor" ng-controller="presentationEditorCtrl">
+        <presentation-editor-directive/>
+    </div>
+
+    <div ng-show= "isCurrentTab('infographicEditor');" id="infographicEditor" ng-controller="infographicEditorCtrl">
+        <infographics-editor-directive/>
+    </div>
+</div>
