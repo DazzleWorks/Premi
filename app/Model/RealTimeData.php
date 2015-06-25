@@ -5,49 +5,73 @@ namespace Premi\Model;
 use App\Model\Component;
 
 /**
- * Description of realTimeData
+ * @file: RealTimeData.php
+ * @author: DazzleWorks
+ * @date: 2015-06-19
+ * @description: This class represents the structure of the data required to 
+ * represent a RealTimeData in a slide
  *
- * @author Valerio
+ * +---------+------------+---------------+--------------------+---------------------------------+
+ * | Version |     Date   |  Programmer   |       Modify       |           Description           |
+ * +---------+------------+---------------+--------------------+---------------------------------+
+ * |  1.0.0  | 2015-06-19 |Burlin Valerio | class RealTimeData | create class and its getter and |
+ * |         |            |               |                    | setter functions                | 
+ * +---------+------------+---------------+--------------------+---------------------------------+
  */
-class RealTimeData extends Component {
+class RealTimeData extends Component 
+{
+    /**
+     * indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
     
+    /**
+     * indicates the path to access the data parser 
+     * @var {string}
+     * @private
+     */
     private $pathParser;
     
+    /**
+     * indicates the path to access the data fallback in case of lack of 
+     * connection
+     * @var {string}
+     * @private
+     */
     private $pathFallback;
     
+    /**
+     * ???
+     * @var {string}
+     * @private
+     */
     private $pathHandlerJs;
     
     
-    public function __construct($pp,$pf,$ph) {
-        parent::__construct();
-        
-        $this->pathParser = $pp;
-        $this->pathFallback = $pf;
-        $this->pathHandlerJs = $ph;
-    }
-    
     public function getPathParser() {
-        return $pathParser;
+        return $this->pathParser;
     }
     
     public function getPathFallback() {
-        return $pathFallback;
+        return $this->pathFallback;
     }
     
     public function getPathHandlerJs() {
-        return $pathHandlerJs;
+        return $this->pathHandlerJs;
     }
     
-    public function setPathParser($pp) {
-        $pathParser = $pp;
+    public function setPathParser($pathParser) {
+        $this->pathParser = $pathParser;
     }
     
-    public function setPathFallback($pf) {
-        $pathFallback = $pf;
+    public function setPathFallback($pathFallback) {
+        $this->pathFallback = $pathFallbackf;
     }
     
-    public function setPathHandlerJs($ph) {
-        $pathHandlerJs = $ph;
+    public function setPathHandlerJs($pathHandlerJs) {
+        $this->pathHandlerJs = $pathHandlerJs;
     }
 }
 

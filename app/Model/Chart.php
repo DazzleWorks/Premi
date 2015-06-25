@@ -8,58 +8,81 @@ use App\Model\Component;
  * @file: Chart.php
  * @author: DazzleWorks
  * @date: 2015-06-19
- * @description: This class represents the structure of the data required to represent a chart.
+ * @description: This class represents the structure of the data required to 
+ * represent a chart in a slide
  *
  * +---------+------------+---------------+-------------+---------------------------------+
- * | Version |     Date   |  Programmer   |   Change    |         Description             |
+ * | Version |     Date   |  Programmer   |   Modify    |         Description             |
  * +---------+------------+---------------+-------------+---------------------------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Chart | create class and its construct, |
- * |         |            |               |             | getter and setter functions     |
+ * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Chart | create class and its getter and |
+ * |         |            |               |             | setter functions                |
  * +---------+------------+---------------+-------------+---------------------------------+
  */
-class Chart extends Component {
+class Chart extends Component 
+{
+    /**
+     * indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
     
     /**
-     * Indicates if the model should be timestamped
-     * @var bool
-     * @public
+     * indicates the type of Chart
+     * @var {string}
+     * @private 
      */
     private $type;
     
+    /**
+     * array data from which to generate the Chart
+     * @var array 
+     * @private
+     */
     private $data = array();
     
-    private $options = array();
     
-    
-    public function __construct($t,$d,$o) {
-        parent::__construct();
-        
-        $this->type = $t;
-        $this->data = $d;
-        $this->options = $o;
+    /**
+     * getter function that returns the Chart _id
+     * @return {integer} 
+     * returns the Chart _id
+     */
+    public function getId() {
+        return $this->_id;
     }
     
+    /**
+     * getter function that returns the type of Chart
+     * @return {string} 
+     * returns the type of Chart
+     */
     public function getType() {
-        return $type;
+        return $this->type;
     }
     
+    /**
+     * getter function that returns the data from which to generate the Chart
+     * @return array 
+     * returns the array data of the Chart
+     */
     public function getData() {
-        return $data;
+        return $this->data;
     }
     
-    public function getOptions() {
-        return $options;
+    /**
+     * setter function that sets the type of the Chart
+     * @param $type {string}
+     */
+    public function setType($type) {
+        $this->type = $type;
     }
     
-    public function setType($t) {
-        $type = $t;
+    /**
+     * setter function that sets the data from which to generate the Chart
+     * @param $data array
+     */
+    public function setData($data) {
+        $this->data = $data;
     }
     
-    public function setData($d) {
-        $data = $d;
-    }
-    
-    public function setOptions($o) {
-        $options = $o;
-    }
 }

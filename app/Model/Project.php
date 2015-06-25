@@ -4,100 +4,85 @@ namespace Premi\Model;
 
 use Jenssegers\Mongodb\Model as Eloquent;
 
-class Project extends Eloquent {
+/**
+ * @file: Project.php
+ * @author: DazzleWorks
+ * @date: 2015-06-19
+ * @description: This class represents a project of a user. It contains the
+ * presentation and zero or more infographic created by it
+ *
+ * +---------+------------+---------------+---------------+---------------------------------+
+ * | Version |     Date   |  Programmer   |    Modify     |  Description                    |
+ * +---------+------------+---------------+---------------+---------------------------------+
+ * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Project | create class and its getter and |
+ * |         |            |               |               | setter functions                |
+ * +---------+------------+---------------+---------------+---------------------------------+
+ */
+class Project extends Eloquent 
+{
     /**
-     * Indicates if the model should be timestamped
+     * indicates if the model should be timestamped
      * @var {boolean}
      * @public
      */
     public $timestamps = false;
     
     /**
-     * The attributes that are mass assignable.
-     *
+     * the attributes that are mass assignable
      * @var array
+     * @protected
      */
     protected $fillable = ['name', 'presentation'];
     
+    /**
+     * indicates the name of a Project
+     * @var {string}
+     * @private 
+     */
     private $name;
-    private $presentation;
-
+    
+    
+    /**
+     * functions that allows to have a single embedded Presentation in a Project 
+     * @return array
+     */
+    public function presentation() {
+        return $this->embedsOne(Presentation::class);
+    }
+    
+    /**
+     * functions that allows to have embedded Infographic in a Project 
+     * @return array
+     */
+    public function infographics() {
+        return $this->embedsMany(Infographic::class);
+    }
 
     /**
-     * getter method that returns the project _id
-     * @returns {integer} Returns the project _id
+     * getter function that returns the Project _id
+     * @returns {integer} 
+     * returns the Project _id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->_id;
     }
 
     /**
-     * setter method that sets the project _id
-     * @param $id {Integer}
+     * getter function that returns the Project name
+     * @return {string} 
+     * returns the Project name
      */
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-
-    /**
-     * getter method that returns the Project name
-     * @return {string} Returns the Project name
-     */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
-     * setter method that sets the Project name
+     * setter function that sets the Project name
      * @param $name {string}
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
-
-    /**
-     * getter method that returns the Project presentation
-     * @return {Presentation} Returns the Project presentation
-     */
-    public function getPresentation()
-    {
-        return $this->presentation;
-    }
-
-    /**
-     * setter method that sets the Project presentation
-     * @param $name {Presentation}
     
-    public function setPresentation($presentation)
-    {
-        $this->presentation = $presentation;
-    }
-
-    
-     * getter method that returns the Project infographics
-     * @return array {Infographic} Returns the Project infographics
-     
-    public function getInfographics()
-    {
-        return $this->infographics;
-    }
-
-    /**
-     * setter method that sets the Project infographics
-     * @param $infographics array {Infographics}
-     
-    public function setInfographics($infographics)
-    {
-        $this->infographics = $infographics;
-    }
-
-    public function getProjectById($id){
-        $project = Projects::find($id);
-        return $project;
-    }*/
 }
 

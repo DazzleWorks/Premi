@@ -5,26 +5,59 @@ namespace Premi\Model;
 use App\Model\Component;
 
 /**
- * Description of image
+ * @file: Image.php
+ * @author: DazzleWorks
+ * @date: 2015-06-19
+ * @description: This class represents the structure of the data required to 
+ * represent an image in a slide
  *
- * @author Valerio
+ * +---------+------------+---------------+-------------+---------------------------------+
+ * | Version |     Date   |  Programmer   |   Modify    |         Description             |
+ * +---------+------------+---------------+-------------+---------------------------------+
+ * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Image | create class and its getter and |
+ * |         |            |               |             | setter functions                |
+ * +---------+------------+---------------+-------------+---------------------------------+
  */
-class Image extends Component {
+class Image extends Component 
+{
+    /**
+     * indicates if the model should be timestamped
+     * @var {boolean}
+     * @public
+     */
+    public $timestamps = false;
     
+    /**
+     * indicates the path to retrieve the file for the Image
+     * @var {string}
+     * @private 
+     */
     private $path;
     
     
-    public function __construct($p) {
-        parent::__construct();
-        
-        $this->path = $p;
+    /**
+     * getter function that returns the Image _id
+     * @return {integer} 
+     * returns the Image _id
+     */
+    public function getId() {
+        return $this->_id;
     }
     
+    /**
+     * getter function that returns the path to retrieve the file for the Image
+     * @return {string} 
+     * returns the path to retrieve the file for the Image
+     */
     public function getPath() {
-        return $path;
+        return $this->path;
     }
     
-    public function setPath($p) {
-        $path = $p;
+    /**
+     * setter function that sets the path to retrieve the file for the Image
+     * @param $path {string}
+     */
+    public function setPath($path) {
+        $this->path = $path;
     }
 }

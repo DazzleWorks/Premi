@@ -5,105 +5,98 @@ namespace Premi\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @File: slide.php
- * @Author: DazzleWorks
- * @Date: 2015-06-19
- * @Description: This class stores slide data that is retrieved by the slide controller
+ * @file: Slide.php
+ * @author: DazzleWorks
+ * @date: 2015-06-19
+ * @description: This class stores slide data that is retrieved by the slide 
+ * controller
  * 
- * +---------+------------+----------------+--------------+--------------+ 
- * | Version |    Date    |   Programmer   |    Changes   | Description  |
- * +---------+------------+----------------+--------------+--------------+
- * |  0.0.1  | 2015-06-19 | Burlin Valerio | class Slide  | create class |
- * +---------+------------+----------------+--------------+--------------+
+ * +---------+------------+----------------+--------------+---------------------------------+ 
+ * | Version |    Date    |   Programmer   |    Modify    |          Description            |
+ * +---------+------------+----------------+--------------+---------------------------------+
+ * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Slide  | create class and its getter and |
+ * |         |            |                |              | setter functions                |
+ * +---------+------------+----------------+--------------+---------------------------------+
  */
-class Slide extends Eloquent {
-    
+class Slide extends Eloquent 
+{
     /**
-     * Indicates if the model should be timestamped
-     * @var bool
+     * indicates if the model should be timestamped
+     * @var {boolean}
      * @public
      */
     public $timestamps = false;
     
-    private $_id;
-    
     /**
-     * position of the slide relative to the axis X in the presentation's matrix
-     * @var int
+     * position of the Slide relative to the axis X in the presentation's matrix
+     * @var {integer}
      * @private
      */
     private $xIndex; 
     
     /**
-     * position of the slide relative to the axis Y in the presentation's matrix
-     * @var int
+     * position of the Slide relative to the axis Y in the presentation's matrix
+     * @var {integer}
      * @access private
      */
     private $yIndex;
-            
-    /**
-     * array of components of which is formed the slide
-     * @var array
-     * @access private
-     */
-    private $components = array();
-    
+           
     
     /**
-     * constructor function of the Slide class
-     *@param _id
-     *@param xIndex
-     *@param yIndex
-     *@param array components
-     *@return Il tipo del valore di ritorno
+     * functions that allows to have embedded Component in a Slide 
+     * @return array
      */
-    public function __construct($_id,$x,$y,$c) {
-        $this->_id = $_id;
-        $this->xIndex = $x;
-        $this->yIndex = $y;
-        $this->components = $c;
+    public function components() {
+        return $this->embedsMany(Component::class);
     }
-    
+   
+    /**
+     * getter function that returns the Slide _id
+     * @return {integer} 
+     * returns the Slide _id
+     */
     public function getId() {
         return $this->_id;
     }
     
     /**
-     * return the position of the slide relative to the axis X in the presentation's matrix
-     * @returns {integer} position of the slide relative to the axis X in the presentation's matrix
-     * @public
+     * getter function that return the position of the slide relative to the 
+     * axis X in the presentation's matrix
+     * @returns {integer} 
+     * returns the position of the slide relative to the axis X in the 
+     * presentation's matrix
      */
-    public function getX() {
-        return $x;
+    public function getXIndex() {
+        return $this->xIndex;
     }
     
     /**
-     * return the position of the slide relative to the axis Y in the presentation's matrix
-     * @returns {integer} position of the slide relative to the axis Y in the presentation's matrix
-     * @public
+     * getter function that return the position of the slide relative to the 
+     * axis Y in the presentation's matrix
+     * @returns {integer} 
+     * returns the position of the slide relative to the axis Y in the 
+     * presentation's matrix
      */
-    public function getY() {
-        return $y;
+    public function getYIndex() {
+        return $this->yIndex;
     }
     
     /**
-     * 
-     * @param {type} Descrizione
-     * @returns {type} Descrizione
-     * @modificatore di accesso
+     * setter function that sets the position of the slide relative to the 
+     * axis X in the presentation's matrix
+     * @param $xIndex {integer} 
      */
-    public function setX($newX) {
-       $x = $newX; 
-    }
-    
+    public function setXIndex($xIndex) {
+        $this->xIndex = $xIndex; 
+    }    
+             
     /**
-     * 
-     * @param {type} Descrizione
-     * @returns {type} Descrizione
-     * @modificatore di accesso
+     * setter function that sets the position of the slide relative to the 
+     * axis Y in the presentation's matrix
+     * @param $yIndex {integer} 
      */
-    public function setY($newY) {
-       $Y = $newY; 
+    public function setY($yIndex) {
+        $this->yIndex = $yIndex; 
     }
 }
 
