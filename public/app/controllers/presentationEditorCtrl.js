@@ -62,7 +62,19 @@ angular.module('app.controllers.presentationEditorCtrl', ['ngRoute'])
             $scope.canvas.renderAll();
         };
 
-
+        $scope.avaiableFonts = [
+            {name: "Times New Roman"},
+            {name: "Arial"},
+            {name: "Verdana"},
+            {name: "Courier"},
+            {name: "Georgia"},
+            {name: "Gadget"}
+        ];
+        
+        $scope.updateColor=function(obj){
+            obj.fill= obj.fontColor;
+            $scope.canvas.renderAll();
+        };
 
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
@@ -87,7 +99,7 @@ angular.module('app.controllers.presentationEditorCtrl', ['ngRoute'])
             }
         };
 
-
+        
 
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
