@@ -1,6 +1,6 @@
 angular.module('app.controllers.modalTextCtrl', ['ngRoute'])
 
-    .controller('modalTextCtrl', function($scope, $modalInstance) {
+    .controller('modalTextCtrl',['$scope','$modalInstance', function($scope, $modalInstance) {
         $scope.data = {
             text: ""
         };
@@ -12,4 +12,4 @@ angular.module('app.controllers.modalTextCtrl', ['ngRoute'])
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-    });
+    }]);

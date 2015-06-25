@@ -65,6 +65,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         $scope.avaiableFonts = [
             {name: "Arial"},
             {name: "Courier"},
+            {name: "Fredoka One"},
             {name: "Georgia"},
             {name: "Indie Flower"},
             {name: "Lato"},
@@ -84,7 +85,8 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                 });
 
                 modalInstance.result.then(function (text) {
-                    console.log(text);  // RITORNA IL TESTO DA INSERIRE NELL'OGGETTO
+                   // console.log(text);  // RITORNA IL TESTO DA INSERIRE NELL'OGGETTO
+                    $scope.addText(text);
                 });
 
             }else if (elementType === "editImage"){
@@ -95,11 +97,12 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
                 modalInstance.result.then(function (selectedImg) {
                     console.log(selectedImg);
+                    $scope.insertImageOnCanvas(selectedImg);
                 });
             }
         };
 
-
+        
 
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
@@ -213,5 +216,26 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         //         visible: "true"
         //     },
         // ];
-
+        
+        $scope.addText= function(text){
+             $scope.canvas.add(new fabric.Text(text, {
+                        fontFamily: 'Loto',
+                        fontSize: 25
+                      }));
+        };
+        
+        $scope.insertImageOnCanvas= function(source_path){
+            fabric.Image.fromURL(source_path, function(oImg) {
+                // scale image down, and flip it, before adding it onto canvas
+                oImg.scale(0.5).setFlipX(true);
+                oImg.set({
+                    left: $scope.canvas.width/10,
+                    top: $scope.canvas.height/5,
+                    scaleY: ($scope.canvas.height*0.8) / oImg.width,
+                    scaleX: ($scope.canvas.width*0.8) / oImg.width  
+                });
+                $scope.canvas.add(oImg);
+            });   
+        };
+        
 }]);
