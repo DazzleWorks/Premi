@@ -1,113 +1,44 @@
 <form id="slideEditorPanelSpec">
-    <!--    //Li toglierei perché si possono ottenere da drag and drop senza appesantire l'interfaccia grafica
-    <fieldset>
-        <legend>common fields</legend>
-        <div class="row">
-            <div class="large-6 columns">
-                <label>X</label>
-                <input type="number" ng-model="objectSelected.left" />
-
-            </div>
-            <div class="large-6 columns">
-                <label>Y</label>
-                <input type="number" ng-model="objectSelected.top" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="large-6 columns">
-                <label>Height</label>
-                <input type="number" ng-model="objectSelected.height" />
-
-            </div>
-            <div class="large-6 columns">
-                <label>Width</label>
-                <input type="number" ng-model="objectSelected.width" />
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-6 columns">
-                <label>ScaleX (*100)</label>
-                <input type="number" ng-model="objectSelected.scaleX" />
-
-            </div>
-            <div class="large-6 columns">
-                <label>ScaleY (*100)</label>
-                <input type="number" ng-model="objectSelected.scaleY" />
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns">
-                <label> Angle </label>
-                <input type="number" ng-model="objectSelected.angle" />
-
-            </div>
-        </div>
-
-    </fieldset>
-    -->
-    <fieldset>
-        <legend> evaluated </legend>
-        <p>scelta={{objectSelected.type}}</p>
-        <div ng-switch on="objectSelected.type">
-            <div ng-switch-when="text">
-                <!-- code to render a large video block-->
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Testo:
-                            <textarea placeholder="Inserisci il testo qui" ng-model="objectSelected.text" ng-change="update()">{{objectSelected.text}}</textarea>
-                        </label>
-                    </div>
+    <div ng-switch on="objectSelected.type">
+        <!-- TYPE TEXT -->
+        <div ng-switch-when="text">
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Text
+                        <textarea placeholder="Inserisci il testo qui" ng-model="objectSelected.text" ng-change="update()">{{objectSelected.text}}</textarea>
+                    </label>
                 </div>
-                <div class="row"><!-- Da collegare-->
-                    <ul>
-                        <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleBold(objectSelected)"><b>B</b></button></li>
-                        <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleItalic(objectSelected)"><i>I</i></button></li>
-                        <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleUnderlined(objectSelected)"><u>U</u></button></li>
-                    </ul>
+            </div>
+            <div class="row">
+                <ul>
+                    <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleBold(objectSelected)"><b>B</b></button></li>
+                    <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleItalic(objectSelected)"><i>I</i></button></li>
+                    <li class="formatButtons-list"><button class="formatButtons" ng-click="toggleUnderlined(objectSelected)"><u>U</u></button></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Size
+                        <input type="number" ng-model="objectSelected.fontSize" ng-change="update()"/>
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Size
-                            <input type="number" ng-model="objectSelected.fontSize" ng-change="update()"/>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                      <label>Select Font
-                          <select ng-model="objectSelected.fontFamily" ng-change="update()" >
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Select Font
+                        <select ng-model="objectSelected.fontFamily" ng-change="update()" >
                             <option ng-repeat="font in avaiableFonts" ng-value="font.name">{{font.name}}</option>
                         </select>
-                      </label>
-                    </div>
-                  </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <div class="large-12 columns">
-                            <label>ScaleX
-                                <input type="number" ng-model="objectSelected.scaleX" ng-change="update()" step="0.1"/>
-                            </label>
-                        </div>
-                        <div class="large-12 columns">
-                            <label>ScaleY
-                                <input type="number" ng-model="objectSelected.scaleY" ng-change="update()" step="0.1"/>
-                            </label>
-                        </div>
-                        <label>Color
-                             <input type="color" ng-model="objectSelected.fill" ng-change="update()" class="large-6 columns" />
-                        </label>
-                    </div>
+                    </label>
                 </div>
             </div>
-            <div ng-switch-default>
-                <!-- code to render the regular video block -->
-                <p>Default</p>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Color
+                        <input type="color" ng-model="objectSelected.fill" ng-change="update()" class="large-6 columns" />
+                    </label>
+                </div>
             </div>
         </div>
-
-
-    </fieldset>
+    </div>
 </form>

@@ -15,9 +15,8 @@
         </div>
 
         <div class="large-2 columns">
-            <button id="btnShowEditComponentForm">Opzioni Modifica Componente</button>
-            <div id="editComponentForm">
-               <slide-editor-panel-spec-directive/>
+            <div ng-show= "objectSelected !== 'null'">
+                <slide-editor-panel-directive/>
             </div>
         </div>
     </div>

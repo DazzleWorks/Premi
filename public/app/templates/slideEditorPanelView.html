@@ -1,28 +1,30 @@
-<fieldset>
-    <legend>common fields</legend>
-    <div class="row">
-        <div class="large-6 columns">
-            <label>X
-                <input type="number" placeholder="{{objectSelected.left}}" />
-            </label>
-        </div>
-        <div class="large-6 columns">
-            <label>Y
-                <input type="number" placeholder="" />
-            </label>
-        </div>
-    </div>
+<form id="slideEditorPanel">
+        <p>{{objectSelected.type}}</p>
 
-    <div class="row">
-        <div class="large-6 columns">
-            <label>Height
-                <input type="number" placeholder="" />
-            </label>
+        <div class="row">
+            <div class="large-6 columns">
+                <label>ScaleX
+                    <input type="number" ng-model="objectSelected.scaleX" ng-change="update()" step="0.1"/>
+                </label>
+            </div>
+            <div class="large-6 columns">
+                <label>ScaleY
+                    <input type="number" ng-model="objectSelected.scaleY" ng-change="update()" step="0.1"/>
+                </label>
+            </div>
         </div>
-        <div class="large-6 columns">
-            <label>Width
-                <input type="number" placeholder="" />
-            </label>
+
+        <div class= "row">
+            <div class="large-6 columns">
+                <label>zIndex
+                    <input type="number" ng-model="objectSelected.zIndex" ng-change="update()" step="1"/>
+                </label>
+            </div>
+            <div class="large-6 columns">
+                <button class="button" ng-click="removeObject(objectSelected)">Delete</button>
+            </div>
         </div>
-    </div>
-</fieldset>
+
+        <slide-editor-panel-spec-directive/>
+
+</form>

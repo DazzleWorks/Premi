@@ -51,7 +51,6 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             }else
             obj.fontStyle="italic";
             $scope.canvas.renderAll();
-            //$scope.canvas.renderAll.bind($scope.canvas);
         };
 
         $scope.toggleUnderlined = function(obj){
@@ -76,6 +75,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             obj.fill= obj.fontColor;
             $scope.canvas.renderAll();
         };
+
 
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
@@ -102,45 +102,66 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             }
         };
 
-        
+
 
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
         $scope.canvas.loadFromJSON($scope.slideComponents, $scope.canvas.renderAll.bind($scope.canvas));
+        $scope.objectSelected= "null";
 
         $scope.canvas.on('selection:cleared', function() {
-            // console.log("persa selezione");
-            $scope.objectSelected ="null";
+            $scope.objectSelected = "null";
             $scope.$apply();
         });
 
         $scope.canvas.on('object:modified', function(options) {
-            //console.log(options.target.type);
-            $scope.objectSelected=options.target;
+            $scope.objectSelected = options.target;
             $scope.$apply();
         });
 
         $scope.canvas.on('object:moving', function(options) {
-            //console.log(options.target.type);
-            $scope.objectSelected=options.target;
+            $scope.objectSelected = options.target;
             $scope.$apply();
         });
 
         $scope.canvas.on('object:selected', function(options) {
-            //console.log(options.target.type);
-            $scope.objectSelected=options.target;
+            $scope.objectSelected = options.target;
             $scope.$apply();
         });
 
         $scope.canvas.on('object:modified', function(options) {
         });
+
+        $scope.removeObject= function(obj) {
+            $scope.canvas.remove(obj);  // FUNZIONA MA DA ERRORE
+        };
+
+        $scope.addText= function(text){
+            $scope.canvas.add(new fabric.Text(text, {
+                fontFamily: 'Loto',
+                fontSize: 25
+            }));
+        };
+
+        $scope.insertImageOnCanvas= function(source_path){
+            fabric.Image.fromURL(source_path, function(oImg) {
+                // scale image down, and flip it, before adding it onto canvas
+                oImg.scale(0.5).setFlipX(true);
+                oImg.set({
+                    left: $scope.canvas.width / 10,
+                    top: $scope.canvas.height / 5,
+                    scaleY: ($scope.canvas.height * 0.8) / oImg.width,
+                    scaleX: ($scope.canvas.width * 0.8) / oImg.width
+                });
+                $scope.canvas.add(oImg);
+            });
+        };
 
 
 
         // serializzazione
         jQuery("#btnSerialize").click(function() {
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
-            // '{"objects":[],"background":"rgba(0, 0, 0, 0)"}'
         });
 
 
@@ -166,6 +187,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                     "strokeMiterLimit": 10,
                     "scaleX": 1,
                     "scaleY": 1,
+                    "zIndex": 1,
                     "angle": 0,
                     "flipX": false,
                     "flipY": false,
@@ -189,53 +211,4 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             ],
             "background": ""
         };
-
-        // $scope.EditPanels = [
-        //     {
-        //         id: "textEdit",
-        //         visible: "true"
-        //     },
-        //     {
-        //         id: "imageEdit",
-        //         visible: "true"
-        //     },
-        //     {
-        //         id: "tableEdit",
-        //         visible: "true"
-        //     },
-        //     {
-        //         id: "chartEdit",
-        //         visible: "true"
-        //     },
-        //     {
-        //         id: "RealTimeDataEdit",
-        //         visible: "true"
-        //     },
-        //     {
-        //         id: "ShapeEdit",
-        //         visible: "true"
-        //     },
-        // ];
-        
-        $scope.addText= function(text){
-             $scope.canvas.add(new fabric.Text(text, {
-                        fontFamily: 'Loto',
-                        fontSize: 25
-                      }));
-        };
-        
-        $scope.insertImageOnCanvas= function(source_path){
-            fabric.Image.fromURL(source_path, function(oImg) {
-                // scale image down, and flip it, before adding it onto canvas
-                oImg.scale(0.5).setFlipX(true);
-                oImg.set({
-                    left: $scope.canvas.width/10,
-                    top: $scope.canvas.height/5,
-                    scaleY: ($scope.canvas.height*0.8) / oImg.width,
-                    scaleX: ($scope.canvas.width*0.8) / oImg.width  
-                });
-                $scope.canvas.add(oImg);
-            });   
-        };
-        
 }]);
