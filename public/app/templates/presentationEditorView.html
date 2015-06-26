@@ -1,29 +1,14 @@
 <div ng-controller="presentationEditorCtrl">
-    <h1>Presentation Editor</h1>
-    <div class="row">
-        <div class="large-2 columns" >
-            <ul id="components">
-                <li class="editMenuItemContainer generalMenuSettings  fa fa-cogs fa-2x large-8">
-                    <div id="editMenuSettings" class="editMenuItemIcon">
-                        <span class="editMenuItemLabel">Settings</span>
-                    </div>
-                </li>
-                <li class="editMenuItemContainer generalMenuSettings fa fa-puzzle-piece fa-2x large-8">
-                    <div  id="editMenuStyle" class="editMenuItemIcon">
-                        <span class="editMenuItemLabel">Style</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div id="slideEditor" ng-controller= "slideEditorCtrl">
         <slide-editor-directive/>
     </div>
 
     <div class="row">
-        <div class="large-12" >
-            <button id="btnSerialize">Serializza</button>
+        <div class="large-1 columns">
+            <button class="button radius" id="btnSerialize">Serializza</button>
+        </div>
+        <div class="large-11 columns">
             <p id="serialized"></p>
         </div>
     </div>

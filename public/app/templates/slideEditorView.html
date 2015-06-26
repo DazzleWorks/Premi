@@ -2,10 +2,14 @@
     <div class="row">
         <div class="large-2 columns" >
             <ul id="components">
-                <li ng-repeat="component in components" class="editMenuItemContainer" ng-click='openModal(component.id)'>
-                    <div id="{{component.id}}" class="editMenuItemIcon {{component.classes}}">
-                        <span class="editMenuItemLabel">{{component.label}}</span>
-                    </div>
+                <li class="editMenuItemContainer">
+                    <button class="button secondary expand radius"><i class="fa fa-cogs"></i> settings</button>
+                </li>
+                <li class="editMenuItemContainer">
+                    <button class="button secondary expand radius"><i class="fa fa-puzzle-piece"></i> style</button>
+                </li>
+                <li class="editMenuItemContainer" ng-repeat="component in components" ng-click='openModal(component.id)'>
+                    <button class="button expand radius" id="{{component.id}}"><i class="{{component.classes}}"></i> {{component.label}}</button>
                 </li>
             </ul>
         </div>

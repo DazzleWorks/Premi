@@ -1,5 +1,5 @@
 <form id="slideEditorPanel">
-        <p>{{objectSelected.type}}</p>
+        <h4>{{objectSelected.type}}</h4>
 
         <div class="row">
             <div class="large-6 columns">
@@ -16,12 +16,15 @@
 
         <div class= "row">
             <div class="large-6 columns">
-                <label>zIndex
+                <label>z-index
                     <input type="number" ng-model="objectSelected.zIndex" ng-change="update()" step="1"/>
                 </label>
             </div>
+        </div>
+
+        <div class= "row">
             <div class="large-6 columns">
-                <button class="button" ng-click="removeObject(objectSelected)">Delete</button>
+                <button class="button tiny round" ng-click="removeObject(objectSelected)">Delete</button>
             </div>
         </div>
 

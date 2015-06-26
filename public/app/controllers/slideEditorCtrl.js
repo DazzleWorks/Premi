@@ -6,27 +6,27 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             {
                 label: "Text",
                 id: "editText",
-                classes: "fa fa-font fa-2x"
+                classes: "fa fa-font"
             },
             {
                 label: "Image",
                 id: "editImage",
-                classes: "fa fa-camera-retro fa-2x"
+                classes: "fa fa-camera-retro"
             },
             {
                 label: "Table",
                 id: "editTable",
-                classes: "fa fa-table fa-2x"
+                classes: "fa fa-table"
             },
             {
                 label: "Chart",
                 id: "editChart",
-                classes: "fa fa-bar-chart fa-2x"
+                classes: "fa fa-bar-chart"
             },
             {
-                label: "RealTimeData",
+                label: "RealTime",
                 id: "editRealTimeData",
-                classes: "fa fa-globe fa-2x"
+                classes: "fa fa-globe"
             }
         ];
 

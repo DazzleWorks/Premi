@@ -1,12 +1,17 @@
 <div id= "restrictedArea" ng-controller="restrictedAreaCtrl">
     <div class="row">
-        <nav  id="sectionMenu">
-            <div class="button-group">
-                <button type="button" class="button MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'">My Projects</button>
-                <button type="button" class="button MenuRadioButtons" ng-model="radioModel" ng-attr-id="presentationEditor" btn-radio= "'presentationEditor'">Presentation Editor</button>
-                <button type="button" class="button MenuRadioButtons" ng-model="radioModel" ng-attr-id="infographicEditor" btn-radio= "'infographicEditor'">Infographic Editor</button>
-            </div>
-        </nav>
+        <div class= "large-3 columns">
+            <h1>{{radioModel}}</h1>
+        </div>
+        <div class= "large-6 columns">
+            <nav id="section-menu">
+                <div class="button-group">
+                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'">My Projects</button>
+                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="presentationEditor" btn-radio= "'presentationEditor'">Presentation Editor</button>
+                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="infographicEditor" btn-radio= "'infographicEditor'">Infographic Editor</button>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <div class= "row">
