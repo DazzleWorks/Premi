@@ -11,6 +11,7 @@ use Premi\Model\User;
 
 class UserController extends Controller
 {
+    /*
     public function showUser($username = ''){
         if(empty($username)){
             return Redirect::to('user/profile/' . Auth::user()->username);
@@ -39,4 +40,5 @@ class UserController extends Controller
 
         return \Redirect::intended('user/profile');
     }
+    */
 }

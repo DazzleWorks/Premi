@@ -3,10 +3,12 @@
 namespace Premi\Model;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
 
 /**
  * @file: User.php
@@ -27,6 +29,12 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     use Authenticatable, CanResetPassword;
 
     /**
+     * The database collection used by the model.
+     *
+     * @var string
+     */
+    protected $collection = 'users';
+    /**
      * indicates if the model should be timestamped
      * @var {boolean}
      * @public
@@ -46,13 +54,6 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
      * @protected
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * indicates the username of a User
-     * @var {string} 
-     * @private
-     */
-    private $username;
     
     /**
      * indicates the password of a User
@@ -62,18 +63,11 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     private $password;
     
     /**
-     * indicates the firs tname of a User
+     * indicates the name of a User
      * @var {string} 
      * @private
      */
-    private $firstname;
-    
-    /**
-     * indicates the last name of a User
-     * @var {string} 
-     * @private
-     */
-    private $lastname;
+    private $name;
     
     /**
      * indicates the email of a User
@@ -100,22 +94,6 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
         return $this->_id;
     }
 
-    /**
-     * getter function that returns the User username
-     * @return {string} 
-     * returns the User username
-     */
-    public function getUsername() {
-        return $this->username;
-    }
-
-    /**
-     * setter function that sets the User username
-     * @param $username {string}
-     */
-    public function setUsername($username) {
-        $this->username = $username;
-    }
 
     /**
      * getter function that returns the User password
@@ -135,37 +113,20 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
     }
 
     /**
-     * getter function that returns the User firstname
+     * getter function that returns the User name
      * @return {string} 
-     * returns the User firstname
+     * returns the User name
      */
-    public function getFirstname() {
-        return $this->firstname;
+    public function getName() {
+        return $this->name;
     }
 
     /**
-     * setter function that sets the User firstname
-     * @param $firstname {string}
+     * setter function that sets the User name
+     * @param $name {string}
      */
-    public function setFirstname($firstname) {
-        $this->firstname = $firstname;
-    }
-
-    /**
-     * getter function that returns the User lastname
-     * @return {string} 
-     * returns the User lastname
-     */
-    public function getLastname() {
-        return $this->lastname;
-    }
-
-    /**
-     * setter function that sets the User lastname
-     * @param $lastname {string}
-     */
-    public function setLastname($lastname) {
-        $this->lastname = $lastname;
+    public function setName($name) {
+        $this->name = $name;
     }
 
     /**

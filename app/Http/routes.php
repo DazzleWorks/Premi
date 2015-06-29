@@ -11,12 +11,30 @@
 |
 */
 
+/*
 Route::controller('user', 'UserController');
 Route::controller('project', 'ProjectController');
 // Dovrei creare un nuovo controller solo per creare la view della home page -> è poco conveniente in questo caso
 Route::get('/', function () {return View::make('index', array('title' => 'Home page'));});
+*/
 
-
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+Route::get('/logout', function(){
+    Auth::logout();
+});
+
+Route::get('/chi', function(){
+    return Auth::user();
+});

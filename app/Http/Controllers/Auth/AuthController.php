@@ -2,10 +2,11 @@
 
 namespace Premi\Http\Controllers\Auth;
 
-use Premi\User;
+use Premi\Model\User;
 use Validator;
 use Premi\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
 
 class AuthController extends Controller
 {
@@ -22,6 +23,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers;
 
+    protected $redirectPath = '/chi';
+
     /**
      * Create a new authentication controller instance.
      *
@@ -31,6 +34,7 @@ class AuthController extends Controller
     {
         $this->middleware('guest', ['except' => 'getLogout']);
     }
+
 
     /**
      * Get a validator for an incoming registration request.
