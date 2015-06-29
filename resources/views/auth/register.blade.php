@@ -20,7 +20,7 @@
     
     <div class="col-md-6">
         Second Name
-        <input type="text" name="secondName" value="{{ old('secondName') }}">
+        <input type="text" name="lastName" value="{{ old('lastName') }}">
     </div>
 
     <div>

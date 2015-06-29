@@ -37,11 +37,13 @@ class User extends Eloquent implements AuthenticatableContract,
      * the attributes that are mass assignable
      * @var array
      * @protected
-     * @name : indicates the name of a User
+     * @name: indicates the username of a User
      * @email: indicates the email of a User
+     * @firstName: indicates the name of a User
+     * @lastName: indicates the surname of a User
      * @password: indicates the password of a User
      */
-    protected $fillable = ['username', 'email', 'firstName', 'secondName', 
+    protected $fillable = ['username', 'email', 'firstName', 'lastName', 
                            'password'];
 
     /**
@@ -52,7 +54,6 @@ class User extends Eloquent implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
     
      
-    
     /**
      * functions that allows to have embedded Project in a User 
      * @return array

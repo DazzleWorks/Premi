@@ -12,12 +12,11 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * slide that are designed to describe and explain something to a group of 
  * people
  *
- * +---------+------------+---------------+--------------------+---------------------------------+
- * | Version |     Date   |  Programmer   |       Modify       |  Description                    |
- * +---------+------------+---------------+--------------------+---------------------------------+
- * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Presentation | create class and its getter and |
- * |         |            |               |                    | setter functions                |
- * +---------+------------+---------------+--------------------+---------------------------------+
+ * +---------+------------+---------------+--------------------+---------------+
+ * | Version |     Date   |  Programmer   |       Modify       |  Description  |
+ * +---------+------------+---------------+--------------------+---------------+
+ * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Presentation | create class  |
+ * +---------+------------+---------------+--------------------+---------------+
  */
 class Presentation extends Eloquent
 {
@@ -29,11 +28,12 @@ class Presentation extends Eloquent
     public $timestamps = false;
     
     /**
-     * indicates the title of the Presentation
-     * @var {string}
-     * @private
+     * the attributes that are mass assignable
+     * @var array
+     * @protected
+     * @title: indicates the title of the Presentation
      */
-    private $title;
+    protected $fillable = ['title'];
     
     
     /**
@@ -43,33 +43,4 @@ class Presentation extends Eloquent
     public function slides() {
         return $this->embedsMany(Slide::class);
     }
-    
-    
-    /**
-     * getter function that returns the Presentation _id
-     * @returns {integer} 
-     * returns the Presentation _id
-     */
-    public function getId() {
-        return $this->_id;
-    }
-
-    /**
-     * getter function that returns the title of a Presentation 
-     * @return {string} 
-     * returns the title of a Presentation 
-     */
-    public function getTitle() {
-        return $this->title;
-    }
-
-    /**
-     * setter function that sets the title of a Presentation
-     * @param $title {string}
-     */
-    public function setTitle($title) {
-        $this->title = $title;
-    }
-
-
 }

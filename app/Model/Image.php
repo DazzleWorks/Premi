@@ -11,12 +11,11 @@ use App\Model\Component;
  * @description: This class represents the structure of the data required to 
  * represent an image in a slide
  *
- * +---------+------------+---------------+-------------+---------------------------------+
- * | Version |     Date   |  Programmer   |   Modify    |         Description             |
- * +---------+------------+---------------+-------------+---------------------------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Image | create class and its getter and |
- * |         |            |               |             | setter functions                |
- * +---------+------------+---------------+-------------+---------------------------------+
+ * +---------+------------+---------------+-------------+--------------+
+ * | Version |     Date   |  Programmer   |   Modify    | Description  |
+ * +---------+------------+---------------+-------------+--------------+
+ * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Image | create class |
+ * +---------+------------+---------------+-------------+--------------+
  */
 class Image extends Component 
 {
@@ -28,36 +27,10 @@ class Image extends Component
     public $timestamps = false;
     
     /**
-     * indicates the path to retrieve the file for the Image
-     * @var {string}
-     * @private 
+     * the attributes that are mass assignable
+     * @var array
+     * @protected
+     * @path: indicates the path to retrieve the file for the Image
      */
-    private $path;
-    
-    
-    /**
-     * getter function that returns the Image _id
-     * @return {integer} 
-     * returns the Image _id
-     */
-    public function getId() {
-        return $this->_id;
-    }
-    
-    /**
-     * getter function that returns the path to retrieve the file for the Image
-     * @return {string} 
-     * returns the path to retrieve the file for the Image
-     */
-    public function getPath() {
-        return $this->path;
-    }
-    
-    /**
-     * setter function that sets the path to retrieve the file for the Image
-     * @param $path {string}
-     */
-    public function setPath($path) {
-        $this->path = $path;
-    }
+    protected $fillable = ['path'];
 }

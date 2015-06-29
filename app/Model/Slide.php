@@ -11,12 +11,11 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * @description: This class stores slide data that is retrieved by the slide 
  * controller
  * 
- * +---------+------------+----------------+--------------+---------------------------------+ 
- * | Version |    Date    |   Programmer   |    Modify    |          Description            |
- * +---------+------------+----------------+--------------+---------------------------------+
- * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Slide  | create class and its getter and |
- * |         |            |                |              | setter functions                |
- * +---------+------------+----------------+--------------+---------------------------------+
+ * +---------+------------+----------------+--------------+--------------+ 
+ * | Version |    Date    |   Programmer   |    Modify    | Description  |
+ * +---------+------------+----------------+--------------+--------------+
+ * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Slide  | create class |
+ * +---------+------------+----------------+--------------+--------------+
  */
 class Slide extends Eloquent 
 {
@@ -28,19 +27,16 @@ class Slide extends Eloquent
     public $timestamps = false;
     
     /**
-     * position of the Slide relative to the axis X in the presentation's matrix
-     * @var {integer}
-     * @private
+     * the attributes that are mass assignable
+     * @var array
+     * @protected
+     * @xIndex: position of the Slide relative to the axis X in the 
+     *          presentation's matrix
+     * @yIndex: position of the Slide relative to the axis Y in the 
+     *          presentation's matrix
      */
-    private $xIndex; 
-    
-    /**
-     * position of the Slide relative to the axis Y in the presentation's matrix
-     * @var {integer}
-     * @access private
-     */
-    private $yIndex;
-           
+    protected $fillable = ['xIndex', 'yIndex'];
+     
     
     /**
      * functions that allows to have embedded Component in a Slide 
@@ -48,55 +44,6 @@ class Slide extends Eloquent
      */
     public function components() {
         return $this->embedsMany(Component::class);
-    }
-   
-    /**
-     * getter function that returns the Slide _id
-     * @return {integer} 
-     * returns the Slide _id
-     */
-    public function getId() {
-        return $this->_id;
-    }
-    
-    /**
-     * getter function that return the position of the slide relative to the 
-     * axis X in the presentation's matrix
-     * @returns {integer} 
-     * returns the position of the slide relative to the axis X in the 
-     * presentation's matrix
-     */
-    public function getXIndex() {
-        return $this->xIndex;
-    }
-    
-    /**
-     * getter function that return the position of the slide relative to the 
-     * axis Y in the presentation's matrix
-     * @returns {integer} 
-     * returns the position of the slide relative to the axis Y in the 
-     * presentation's matrix
-     */
-    public function getYIndex() {
-        return $this->yIndex;
-    }
-    
-    /**
-     * setter function that sets the position of the slide relative to the 
-     * axis X in the presentation's matrix
-     * @param $xIndex {integer} 
-     */
-    public function setXIndex($xIndex) {
-        $this->xIndex = $xIndex; 
-    }    
-             
-    /**
-     * setter function that sets the position of the slide relative to the 
-     * axis Y in the presentation's matrix
-     * @param $yIndex {integer} 
-     */
-    public function setY($yIndex) {
-        $this->yIndex = $yIndex; 
     }
 }
 

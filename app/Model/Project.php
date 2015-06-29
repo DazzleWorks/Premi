@@ -11,12 +11,11 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * @description: This class represents a project of a user. It contains the
  * presentation and zero or more infographic created by it
  *
- * +---------+------------+---------------+---------------+---------------------------------+
- * | Version |     Date   |  Programmer   |    Modify     |  Description                    |
- * +---------+------------+---------------+---------------+---------------------------------+
- * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Project | create class and its getter and |
- * |         |            |               |               | setter functions                |
- * +---------+------------+---------------+---------------+---------------------------------+
+ * +---------+------------+---------------+---------------+---------------+
+ * | Version |     Date   |  Programmer   |    Modify     |  Description  |
+ * +---------+------------+---------------+---------------+---------------+
+ * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Project | create class  |
+ * +---------+------------+---------------+---------------+---------------+
  */
 class Project extends Eloquent 
 {
@@ -31,15 +30,9 @@ class Project extends Eloquent
      * the attributes that are mass assignable
      * @var array
      * @protected
+     * @name: indicates the name of a Project
      */
-    protected $fillable = ['name', 'presentation'];
-    
-    /**
-     * indicates the name of a Project
-     * @var {string}
-     * @private 
-     */
-    private $name;
+    protected $fillable = ['name'];
     
     
     /**
@@ -57,32 +50,5 @@ class Project extends Eloquent
     public function infographics() {
         return $this->embedsMany(Infographic::class);
     }
-
-    /**
-     * getter function that returns the Project _id
-     * @returns {integer} 
-     * returns the Project _id
-     */
-    public function getId() {
-        return $this->_id;
-    }
-
-    /**
-     * getter function that returns the Project name
-     * @return {string} 
-     * returns the Project name
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
-     * setter function that sets the Project name
-     * @param $name {string}
-     */
-    public function setName($name) {
-        $this->name = $name;
-    }
-    
 }
 
