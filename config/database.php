@@ -50,8 +50,6 @@ return [
             'driver'   => 'mongodb',
             'host'     => env ('DB_HOST', 'localhost'),
             'port'     => 27017,
-            // 'username' => 'username',
-            // 'password' => 'password',
             'database' => 'premi',
             'options' => [
                 'db' => 'admin' // sets the authentication database required by mongo 3

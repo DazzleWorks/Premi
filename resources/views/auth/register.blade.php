@@ -4,13 +4,23 @@
     {!! csrf_field() !!}
 
     <div class="col-md-6">
-        Name
-        <input type="text" name="name" value="{{ old('name') }}">
+        UserName
+        <input type="text" name="username" value="{{ old('username') }}">
     </div>
 
     <div>
         Email
         <input type="email" name="email" value="{{ old('email') }}">
+    </div>
+    
+    <div class="col-md-6">
+        First Name
+        <input type="text" name="firstName" value="{{ old('firstName') }}">
+    </div>
+    
+    <div class="col-md-6">
+        Second Name
+        <input type="text" name="secondName" value="{{ old('secondName') }}">
     </div>
 
     <div>
