@@ -1,15 +1,16 @@
-function Component(x, y, zIndex, width, height, angle, opacity) {
+function Component(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity) {
     this.x = x;
     this.y = y;
+    this.zIndex = zIndex;
     this.width = width;
     this.height = height;
-    this.zIndex = zIndex;
-    this.x = x;
+    this.scaleX= scaleX;
+    this.scaleY= scaleY;
     this.angle = angle;
     this.opacity = opacity;
 }
 
-function Text(x, y, zIndex, width, height, angle, opacity, string, size, color, font, bold, italic) {
+function Text(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity, string, size, color, font, bold, italic) {
     Component.call(this, x, y, zIndex, width, height, angle, opacity);//costruttore di Component con i parametri successivi a this
     /*this = new Component();*/
     this.string = string;
@@ -20,19 +21,19 @@ function Text(x, y, zIndex, width, height, angle, opacity, string, size, color, 
     this.font = italic;
 }
 
-function Chart(x, y, zIndex, width, height, angle, opacity, type, data, options) {
+function Chart(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity, type, data, options) {
     Component.call(this, x, y, zIndex, width, height, angle, opacity);
     this.type = type;
     this.data = data;
     this.options = options;
 }
 
-function Image(x, y, zIndex, width, height, angle, opacity, path) {
+function Image(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity, path) {
     Component.call(this, x, y, zIndex, width, height, angle, opacity);
     this.path = path;
 }
 
-function Table(x, y, zIndex, width, height, angle, opacity, row, column, title, data) {
+function Table(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity, row, column, title, data) {
     Component.call(this, x, y, zIndex, width, height, angle, opacity);
     this.row = row;
     this.column= column;
@@ -40,7 +41,7 @@ function Table(x, y, zIndex, width, height, angle, opacity, row, column, title, 
     this.data=data; //elements of the table, they are components, usually Text
 }
 
-function RealTimeData(x, y, zIndex, width, height, angle, opacity, pathParser, pathHandler, pathFallback) {
+function RealTimeData(x, y, zIndex, width, height, scaleX, scaleY, angle, opacity, pathParser, pathHandler, pathFallback) {
     Component.call(this, x, y, zIndex, width, height, angle, opacity);
     this.pathParser = pathParser;
     this.pathHandler= pathHandler;
@@ -63,7 +64,6 @@ function Infographic(id,path){
     this.id = id;
     this.path = path;
 }
-
 
 function Project(id, ownerId){
     this.id = id;

@@ -96,7 +96,6 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                 });
 
                 modalInstance.result.then(function (selectedImg) {
-                    console.log(selectedImg);
                     $scope.insertImageOnCanvas(selectedImg);
                 });
             }
@@ -157,6 +156,14 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             });
         };
 
+        $scope.bringForward = function (obj) {
+            obj.bringForward(false);
+        }
+
+        $scope.sendBackwards = function (obj) {
+            obj.sendBackwards(false);
+        }
+
 
 
         // serializzazione
@@ -187,7 +194,6 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                     "strokeMiterLimit": 10,
                     "scaleX": 1,
                     "scaleY": 1,
-                    "zIndex": 1,
                     "angle": 0,
                     "flipX": false,
                     "flipY": false,

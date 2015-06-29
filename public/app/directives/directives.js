@@ -3,6 +3,7 @@
 angular.module('app.directives',
     [
         'ngRoute',
+        'app.directives.homePageDirective',
         'app.directives.infographicEditorDirective',
         'app.directives.menuPageSwitcherDirective',
         'app.directives.myProjectsDirective',

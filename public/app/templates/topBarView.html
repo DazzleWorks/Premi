@@ -1,7 +1,7 @@
 <top-bar class="top-bar" role="navigation">
     <ul class="title-area">
         <li class="name">
-            <h1><a href="#">PREMI</a></h1>
+            <h1><a href="#" ng-click="openHome()">PREMI</a></h1>
         </li>
     </ul>
 
@@ -9,18 +9,18 @@
         <!-- Right Nav Section -->
         <ul class="right">
             <li class="divider"></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="#" ng-click= "openLogin()">Login</a></li>
 
             <li class="divider"></li>
-            <li class="has-form"><a class= "button round" href="#">Sign up</a></li>
+            <li class="has-form"><a class= "button round" href="#" ng-click= "openSignup()">Sign up</a></li>
 
             <li class="divider"></li>
             <li has-dropdown class="has-dropdown">
                 <a href="#">Menu</a>
                 <ul top-bar-dropdown class="dropdown">
-                    <li><a href="#">HOME</a></li>
+                    <li><a href="#" ng-click="openHome()">HOME</a></li>
                     <li><a href="#">My Account</a></li>
-                    <li><a href="#">My Projects</a></li>
+                    <li><a href="#" ng-click="openRestrictedArea()">My Projects</a></li>
                 </ul>
             </li>
         </ul>

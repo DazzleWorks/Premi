@@ -12,6 +12,10 @@ body {
     font-family: "lato";
 }
 
+#homePage {
+    background-color: lightblue;
+}
+
 .row{
     max-width: 100% !important;
     margin-top: 0.5em !important;
@@ -40,6 +44,14 @@ body {
 #folder {
     margin: 0 !important;
     list-style-type: none;
+}
+
+#modal-footer-img {
+    border-top: 1px solid #999;
+}
+
+#slideEditorPanelTitle {
+    text-transform:uppercase;
 }
 
 /*.editMenuItemContainer:hover{
@@ -73,14 +85,15 @@ body {
 }*/
 
 /* formatButtons */
-.formatButtons{
+/*.formatButtons{
     padding:5px;
     float: left;
     min-width: 30px;
-}
+}*/
 
 .formatButtons-list{
     float: left;
+    list-style-type: none;
 }
 
 .imgThumbnailEditor{
