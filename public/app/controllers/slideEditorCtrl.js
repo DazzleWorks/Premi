@@ -166,7 +166,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
         // serializzazione
         $scope.saveSlide = function () {
-            jQuery("#serialized").html(JSON.stringify($scope.canvas));
+        //    jQuery("#serialized").html(JSON.stringify($scope.canvas));
             slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
         };
 

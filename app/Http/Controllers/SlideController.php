@@ -15,7 +15,7 @@ use Premi\Model\Component;
 class SlideController extends Controller
 {
     public function postInsert() {
-        console.log("Ciao Fabio");
+        echo "Ciao Fabio";
         
         if(\Auth::check()) {
             $user = \Auth::user();
