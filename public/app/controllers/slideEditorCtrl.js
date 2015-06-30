@@ -157,11 +157,11 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
         $scope.bringForward = function (obj) {
             obj.bringForward(false);
-        }
+        };
 
         $scope.sendBackwards = function (obj) {
             obj.sendBackwards(false);
-        }
+        };
 
 
         // serializzazione
