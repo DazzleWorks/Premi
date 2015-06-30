@@ -1,28 +1,37 @@
-<fieldset>
-    <legend>common fields</legend>
-    <div class="row">
-        <div class="large-6 columns">
-            <label>X
-                <input type="number" placeholder="{{objectSelected.left}}" />
-            </label>
-        </div>
-        <div class="large-6 columns">
-            <label>Y
-                <input type="number" placeholder="" />
-            </label>
+<form>
+    <div class="row" id="slideEditorPanelTitle">
+        <div class="large-12 columns">
+            <center><h4>{{objectSelected.type}}</h4></center>
         </div>
     </div>
 
     <div class="row">
         <div class="large-6 columns">
-            <label>Height
-                <input type="number" placeholder="" />
+            <label>ScaleX
+                <input type="number" ng-model="objectSelected.scaleX" ng-change="update()" step="0.1"/>
             </label>
         </div>
         <div class="large-6 columns">
-            <label>Width
-                <input type="number" placeholder="" />
+            <label>ScaleY
+                <input type="number" ng-model="objectSelected.scaleY" ng-change="update()" step="0.1"/>
             </label>
         </div>
     </div>
-</fieldset>
+
+    <div class= "row">
+        <div class="large-10 columns">
+            <ul class="button-group round">
+                <li><a class="button tiny" ng-click="bringForward(objectSelected)"><i class="fa fa-arrow-circle-up fa-lg"></i></a></li>
+                <li><a class="button tiny" ng-click="sendBackwards(objectSelected)"><i class="fa fa-arrow-circle-down fa-lg"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class= "row">
+        <div class="large-6 columns">
+            <button class="button tiny round" ng-click="removeObject(objectSelected)">Delete</button>
+        </div>
+    </div>
+
+    <slide-editor-panel-spec-directive/>
+</form>

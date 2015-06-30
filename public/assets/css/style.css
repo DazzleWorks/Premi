@@ -8,59 +8,97 @@ and open the template in the editor.
     Author     : fabio
 */
 
+body {
+    font-family: "lato";
+}
+
+#homePage {
+    background-color: lightblue;
+}
+
 .row{
     max-width: 100% !important;
+    margin-top: 0.5em !important;
 }
 
 .editMenuItemContainer{
     list-style-type: none;
-    background-color: black;
-    border: 1px solid white;
-    padding: 10px;
-    text-align:center;
 }
 
-.editMenuItemContainer:hover{
+.button {
+    margin-bottom: 0.225rem !important;
+}
+
+#slideEditorPanel {
+    background-color: #e7e7e7;
+}
+
+#slideEditorPanelSpec {
+    background-color: #e7e7e7;
+}
+
+#section-menu {
+    float: right;
+}
+
+#folder {
+    margin: 0 !important;
+    list-style-type: none;
+}
+
+#modal-footer-img {
+    border-top: 1px solid #999;
+}
+
+#slideEditorPanelTitle {
+    text-transform:uppercase;
+}
+
+/*.editMenuItemContainer:hover{
     background-color: #007095;
     cursor:pointer;
-}
+}*/
 
-.generalMenuSettings{
+/*.generalMenuSettings{
     background-color: #43AC6A;
-}
+}*/
 
-.generalMenuSettings > div {
-    color: #000 !important;
-}
-
-.editMenuItemContainer > div{
-    color:#fff;
-}
+/*.generalMenuSettings > div {
+    color:#000 !important;
+}*/
+/*
 .editMenuItemIcon{
-    margin-left:auto;margin-right:auto;
-
-}
-
-.editMenuItemLabel{
     margin-left:auto;
     margin-right:auto;
+}*/
+
+/*.editMenuItemLabel{
     display: block;
+    margin-left:auto;
     font-size: initial;
+    margin-right:auto;
     text-align: center;
-}
+}*/
 
-#slideEditForm input{
+/*#slideEditForm input{
     min-width: 60px !important;
+}*/
 
-}
-
-/**Form buttons*/
-.formatButtons{
+/* formatButtons */
+/*.formatButtons{
     padding:5px;
     float: left;
     min-width: 30px;
-}
+}*/
 
 .formatButtons-list{
     float: left;
+    list-style-type: none;
+}
+
+.imgThumbnailEditor{
+    float: left;
+    height: 80px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }

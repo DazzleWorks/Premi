@@ -1,0 +1,27 @@
+<div ng-controller= "slideEditorCtrl">
+    <div class="row">
+        <div class="large-2 columns" >
+            <ul id="components">
+                <li class="editMenuItemContainer">
+                    <button class="button secondary expand radius"><i class="fa fa-cogs"></i> settings</button>
+                </li>
+                <li class="editMenuItemContainer">
+                    <button class="button secondary expand radius"><i class="fa fa-puzzle-piece"></i> style</button>
+                </li>
+                <li class="editMenuItemContainer" ng-repeat="component in components" ng-click='openModal(component.id)'>
+                    <button class="button expand radius" id="{{component.id}}"><i class="{{component.classes}}"></i> {{component.label}}</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="large-8 columns">
+            <canvas id="slide" width="800" height="600" style="border:1px solid #000000;" ></canvas>
+        </div>
+
+        <div class="large-2 columns" id="slideEditorPanel">
+            <div ng-show= "objectSelected !== 'null'">
+                <slide-editor-panel-directive/>
+            </div>
+        </div>
+    </div>
+</div>

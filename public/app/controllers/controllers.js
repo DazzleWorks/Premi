@@ -3,7 +3,12 @@
 angular.module('app.controllers',
     [
         'ngRoute',
+        'app.controllers.homePageCtrl',
         'app.controllers.infographicEditorCtrl',
+        'app.controllers.modalImageCtrl',
+        'app.controllers.modalLoginCtrl',
+        'app.controllers.modalSignupCtrl',
+        'app.controllers.modalTextCtrl',
         'app.controllers.myProjectsCtrl',
         'app.controllers.presentationEditorCtrl',
         'app.controllers.restrictedAreaCtrl',
