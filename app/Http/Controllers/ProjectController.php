@@ -21,7 +21,6 @@ class ProjectController extends Controller
     {
         $project = new Project;
         $project->name = \Input::get('name');
-        $project->presentation = \Input::get('presentation');
         
         $user = User::first();
         $project = $user->projects()->save($project);
