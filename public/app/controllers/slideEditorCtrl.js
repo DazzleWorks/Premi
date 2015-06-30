@@ -1,6 +1,6 @@
 angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
-    .controller('slideEditorCtrl', ['$scope', '$modal', function($scope, $modal) {
+    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', function($scope, $modal, slideFactory) {
 
         $scope.components = [
             {
@@ -167,16 +167,17 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         // serializzazione
         $scope.saveSlide = function () {
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
+            slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
         };
 
 
         // slide
         $scope.addSlide = function (position) {
             if (position === "up") {
+                console.log("OK!");
                 $scope.saveSlide();
                 $scope.canvas.clear();
                 $scope.canvas = new fabric.Canvas('slide');
-
             }
         };
 

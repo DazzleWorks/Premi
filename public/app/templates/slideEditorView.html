@@ -10,12 +10,12 @@
                 </li>
             </ul>
             <ul class="editMenuContainer">
-                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide(up)"><i class="fa fa-plus"></i></a></li>
+                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('up')"><i class="fa fa-plus"></i></a></li>
                 <ul class="button-group">
-                    <li><a href="" class="button tiny success" ng-click="addSlide(left)"><i class="fa fa-plus"></i></a></li>
-                    <li><a href="" class="button tiny success" ng-click="addSlide(right)"><i class="fa fa-plus"></i></a></li>
+                    <li><a href="" class="button tiny success" ng-click="addSlide('left')"><i class="fa fa-plus"></i></a></li>
+                    <li><a href="" class="button tiny success" ng-click="addSlide('right')"><i class="fa fa-plus"></i></a></li>
                 </ul>
-                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide(down)"><i class="fa fa-plus"></i></a></li>
+                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('down')"><i class="fa fa-plus"></i></a></li>
             </ul>
             <ul>
                 <li class="editMenuItemContainer" ng-repeat="component in components" ng-click='openModal(component.id)'>
