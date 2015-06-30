@@ -49,7 +49,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:8',
         ]);
     }
 

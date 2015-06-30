@@ -31,10 +31,15 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+// Logout routes...
 Route::get('/logout', function(){
     Auth::logout();
 });
 
+// 
 Route::get('/chi', function(){
     return Auth::user();
 });
+
+// Slide routes...
+Route::post('slide/insert', '\SlideController@postInsert');

@@ -30,15 +30,17 @@ class Text extends Component
      * the attributes that are mass assignable
      * @var array
      * @protected
-     * @content: indicates the content of the Text box
-     * @dim: indicates the dimension of the Text font
-     * @color: indicates the color of the Text
-     * @alignment: indicates the aligmentt of the Text
-     * @backgroundColor: indicates the background color of the Text box
-     * @bold: indicates if the Text is bold
-     * @italic: indicates if the Text is italic
-     * @underscore: indicates if the Text is underscore
+     * @text: indicates the content of the Text box
+     * @fontSize: indicates the dimension of the Text font
+     * @fontWeight: 
+     * @fontFamily: 
+     * @fontStyle: 
+     * @lineHeight: 
+     * @textDecoration: 
+     * @textAlign: 
+     * @textBackgroundColor:
      */
-    protected $fillable = ['content', 'dim', 'color', 'alignment', 
-                           'backgroundColor', 'bold', 'italic', 'underscore'];
+    protected $fillable = ['text', 'fontSize', 'fontWeight', 'fontFamily', 
+                           'fontStyle', 'lineHeight', 'textDecoration', 
+                           'textAlign', 'textBackgroundColor'];
 }

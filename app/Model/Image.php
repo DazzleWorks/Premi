@@ -31,6 +31,13 @@ class Image extends Component
      * @var array
      * @protected
      * @path: indicates the path to retrieve the file for the Image
+     * @filters:
+     * @crossOrigin:
+     * @alignX:
+     * @alignY:
+     * @meetOrSlice:
+     * @background:
      */
-    protected $fillable = ['path'];
+    protected $fillable = ['src', 'filters', 'crossOrigin', 'alignX', 'alignY',
+                           'meetOrSlice', 'background'];
 }
