@@ -25,6 +25,10 @@ body {
     list-style-type: none;
 }
 
+.editMenuContainer {
+    text-align: center;
+}
+
 .button {
     margin-bottom: 0.225rem !important;
 }

@@ -3,7 +3,7 @@
         <!-- TYPE TEXT -->
         <div ng-switch-when="text">
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                     <label>Text
                         <textarea placeholder="Inserisci il testo qui" ng-model="objectSelected.text" ng-change="update()">{{objectSelected.text}}</textarea>
                     </label>
@@ -11,7 +11,7 @@
             </div>
 
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                 <ul class="button-group">
                     <li><a class="button tiny" ng-click="toggleBold(objectSelected)"><b>B</b></a></li>
                     <li><a class="button tiny" ng-click="toggleItalic(objectSelected)"><i>I</i></a></li>
@@ -21,7 +21,7 @@
             </div>
 
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                     <label>Size
                         <input type="number" ng-model="objectSelected.fontSize" ng-change="update()"/>
                     </label>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                     <label>Select Font
                         <select ng-model="objectSelected.fontFamily" ng-change="update()" >
                             <option ng-repeat="font in avaiableFonts" ng-value="font.name">{{font.name}}</option>
@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="large-12 columns">
+                <div class="small-12 columns">
                     <label>Color
-                        <input type="color" ng-model="objectSelected.fill" ng-change="update()" class="large-6 columns" />
+                        <input type="color" ng-model="objectSelected.fill" ng-change="update()" class="small-6 columns" />
                     </label>
                 </div>
             </div>

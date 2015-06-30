@@ -3,6 +3,7 @@
 angular.module('app',
     [
         'ngRoute',
+        'ngResource',
         'app.controllers',
         'app.directives',
         'app.filters',

@@ -1,6 +1,6 @@
 angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
-    .controller('slideEditorCtrl', ['$scope', '$modal', function($scope, $modal) {
+    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', function($scope, $modal, slideFactory) {
 
         $scope.components = [
             {
@@ -30,14 +30,13 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             }
         ];
 
-        $scope.update=function(){
+        $scope.update = function(){
             $scope.canvas.renderAll();
         };
 
 
-
         // text
-        $scope.toggleBold=function(obj){
+        $scope.toggleBold = function(obj){
             if(obj.fontWeight==="bold"){
                 obj.fontWeight="normal";
             }else
@@ -71,7 +70,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             {name: "Verdana"}
         ];
 
-        $scope.updateColor=function(obj){
+        $scope.updateColor = function(obj) {
             obj.fill= obj.fontColor;
             $scope.canvas.renderAll();
         };
@@ -102,10 +101,10 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         };
 
 
-
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
         $scope.canvas.loadFromJSON($scope.slideComponents, $scope.canvas.renderAll.bind($scope.canvas));
+        $scope.update();
         $scope.objectSelected= "null";
 
         $scope.canvas.on('selection:cleared', function() {
@@ -165,11 +164,22 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         }
 
 
-
         // serializzazione
-        jQuery("#btnSerialize").click(function() {
+        $scope.saveSlide = function () {
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
-        });
+            slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
+        };
+
+
+        // slide
+        $scope.addSlide = function (position) {
+            if (position === "up") {
+                console.log("OK!");
+                $scope.saveSlide();
+                $scope.canvas.clear();
+                $scope.canvas = new fabric.Canvas('slide');
+            }
+        };
 
 
 

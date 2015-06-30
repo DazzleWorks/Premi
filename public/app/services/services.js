@@ -2,6 +2,8 @@
 
 angular.module('app.services',
     [
-        'ngRoute'
+        'ngRoute',
+        'ngResource',
+        'app.services.slideServices'
     ]
 );
