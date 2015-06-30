@@ -30,14 +30,38 @@ abstract class Component extends Eloquent
      * the attributes that are mass assignable
      * @var array
      * @protected
-     * @xIndex: position of the Component relative to the axis X in the slide
-     * @yIndex: position of the Component relative to the axis Y in the slide
-     * @zIndex: position of the Component relative to the axis Z in the slide
-     * @height: the height of the box of Component
+     * @type: indicates the type of the Component
+     * @originX: 
+     * @originY: 
+     * @left:
+     * @top: 
      * @width: the width of the box of Component
-     * @angle: the angle of rotation of the Component relative to the axis X
-     * #@opacity: the level of opacity of the Component
+     * @height: the height of the box of Component
+     * @fill: 
+     * @stroke: 
+     * @strokeWidth:
+     * @strokeDashArray:
+     * @strokeLineCap:
+     * @strokeLineJoin:
+     * @strokeMiterLimit:
+     * @scaleX:
+     * @scaleY:
+     * @angle:
+     * @flipX:
+     * @flipY:
+     * @opacity:
+     * @shadow:
+     * @visible:
+     * @clipTo:
+     * @backgroundColor:
+     * @fillRule:
+     * @globalCompositeOperation:
      */
-    protected $fillable = ['xIndex' , 'yIndex', 'zIndex', 'height', 'width',
-                           'angle', 'opacity'];
+    protected $fillable = ['type', 'originX', 'OriginY', 'left', 'top', 'width',
+                           'height', 'fill', 'stroke', 'strokeWidth', 
+                           'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
+                           'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
+                           'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
+                           'clipTo', 'backgroundColor', 'fillRule', 
+                           'globalCompositeOperation'];
 }
