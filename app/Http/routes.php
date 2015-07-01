@@ -19,7 +19,7 @@ Route::get('/', function () {return View::make('index', array('title' => 'Home p
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    \View::make('index');
 });
 
 // Authentication routes...
@@ -38,8 +38,11 @@ Route::get('/logout', function(){
 
 // 
 Route::get('/chi', function(){
-    return Auth::user();
+    return url('/api/slides');
 });
 
 // Slide routes...
-Route::post('slide/insert', '\SlideController@postInsert');
+Route::group(array('prefix' => 'api'), function() {
+    Route::resource('slides', 'slideController');
+    
+});

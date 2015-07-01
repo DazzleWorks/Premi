@@ -7,21 +7,15 @@
 * @param {integer} idPrs - identify the project that contains the Slide
 * @param {integer} idSlide - identify the the Slide
 */
-angular.module('app.services.slideServices', ['ngRoute', 'ngResource'])
-
+angular.module('app.services.slideServices', [])
+    
     .factory('slideFactory', ['$http', function ($http, data, idPrj, idPrs, idSlide) {
         return function () {
-            $http.post('/project/'+idPrj+'/presentation/'+idPrs+'/slide/'+idSlide, {msg:data})
-                .success(function(data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    console.log(data);
-                })
-                .error(function(data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    console.log('errore');
-                })
-        }
-    // $resource("/api/posts/:id");
+           $http({
+                method: 'POST',
+                url: '../api/slides',
+                //data: xsrf,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        };
     }]);
