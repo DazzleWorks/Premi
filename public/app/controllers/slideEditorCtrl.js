@@ -127,11 +127,8 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             $scope.$apply();
         });
 
-        $scope.canvas.on('object:modified', function(options) {
-        });
-
-        $scope.removeObject= function(obj) {
-            $scope.canvas.remove(obj);  // FUNZIONA MA DA ERRORE
+        $scope.removeObject= function() {
+            $scope.canvas.remove($scope.canvas.getActiveObject());
         };
 
         $scope.addText= function(text){
@@ -167,17 +164,27 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         // serializzazione
         $scope.saveSlide = function () {
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
-            slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
+            // slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
         };
 
 
         // slide
         $scope.addSlide = function (position) {
             if (position === "up") {
-                console.log("OK!");
                 $scope.saveSlide();
                 $scope.canvas.clear();
-                $scope.canvas = new fabric.Canvas('slide');
+            }
+            else if (position === "down") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
+            }
+            else if (position === "left") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
+            }
+            else if (position === "right") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
             }
         };
 
