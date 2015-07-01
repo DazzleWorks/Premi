@@ -24,4 +24,4 @@ angular.module('app.services.slideServices', ['ngRoute', 'ngResource'])
                 })
         }
     // $resource("/api/posts/:id");
-    }]);
+}]);

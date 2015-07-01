@@ -1,6 +1,6 @@
 angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
-    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', function($scope, $modal, slideFactory) {
+    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', 'presentationData', function($scope, $modal, slideFactory, presentationData) {
 
         $scope.components = [
             {
@@ -166,8 +166,10 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
             // slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
             $scope.svg=$scope.canvas.toSVG({suppressPreamble: true});
-            console.log($scope.svg);
+
+            presentationData.saveSlide($scope.svg);
         };
+
 
 
         // slide
@@ -234,6 +236,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                     "textBackgroundColor": ""
                 }
             ],
-            "background": ""
+            "background": "",
+            "x":1,"y":1
         };
 }]);
