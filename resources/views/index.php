@@ -1,3 +1,9 @@
+<!--
+ * resources/views/index.php
+ * @author: Burlin Valerio
+ * @date: 2015-06-20
+ * Home page of the software Premi
+ -->
 <!doctype html>
 <html ng-app="app" ng-controller="homePageCtrl">
     <head>
@@ -78,3 +84,4 @@
 
     </body>
 </html>
+

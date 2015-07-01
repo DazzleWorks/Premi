@@ -9,13 +9,16 @@
 */
 angular.module('app.services.slideServices', [])
     
-    .factory('slideFactory', ['$http', function ($http, data, idPrj, idPrs, idSlide) {
+    .factory('slideFactory', ['$http', function ($http/*, data*/) {
         return function () {
            $http({
                 method: 'POST',
-                url: '../api/slides',
+                url: '/api/slides',
                 //data: xsrf,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .success(function(data) {
+                console.log(data);
             });
         };
     }]);

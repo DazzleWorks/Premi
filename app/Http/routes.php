@@ -19,7 +19,7 @@ Route::get('/', function () {return View::make('index', array('title' => 'Home p
 */
 
 Route::get('/', function () {
-    \View::make('index');
+    return view('index');
 });
 
 // Authentication routes...

@@ -12,8 +12,6 @@ use Premi\Model\Slide;
 class SlideController extends Controller
 {
     public function store() {
-        echo "Ciao Fabio";
-        
         
         return \Response::json(array('success' => true));
         /**
