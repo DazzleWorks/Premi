@@ -165,6 +165,8 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         $scope.saveSlide = function () {
             jQuery("#serialized").html(JSON.stringify($scope.canvas));
             // slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
+            $scope.svg=$scope.canvas.toSVG({suppressPreamble: true});
+            console.log($scope.svg);
         };
 
 
