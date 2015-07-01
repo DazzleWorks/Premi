@@ -95,11 +95,14 @@
 
     </div>
 </div>-->
-
+                       <!-- <presentation-directive /> -->
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-                            <section ng-bind-html="slide.src">
-
+                                <!-- <section ng-bind-html="slide.src">-->
+                                <section ng-repeat="columnId in columnsIds">
+                                    <section ng-repeat="slide in (slidesSVG | filter:{x:columnId}) " ng-bind-html="slide.src">
+                                    <!--<section ng-repeat="y in this[slide]" ng-if="y !== 1" ng-bind-html="y.src"></section> -->
+                                    </section>
                                 </section>
 				<section>
 					<h1>Reveal.js</h1>

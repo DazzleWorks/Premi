@@ -18,7 +18,9 @@
 						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
 					</p>
 				</section>
-
+                                <section ng-repeat="columnId in columnsIds">  <!-- -->
+                                    <section ng-repeat="slide in slidesSVG" ng-bind-html="slide.src"></section>
+                                </section>
 				<section>
 					<h2>Hello There</h2>
 					<p>
