@@ -38,7 +38,7 @@ Route::get('/logout', function(){
 
 // 
 Route::get('/chi', function(){
-    return url('/api/slides');
+    return Auth::user();
 });
 
 // Slide routes...
