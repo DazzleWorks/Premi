@@ -8,6 +8,21 @@ use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Slide;
 
+/**
+ * @file: app/Http/Controller/SlideController.php
+ * @author: DazzleWorks
+ * @date: 2015-06-20
+ * @description: This class handles the saving, editing, deleting and viewing,
+ * through a specific view, of a slide.
+ * 
+ * +---------+------------+---------------+----------------------+-------------+
+ * | Version |     Date   |  Programmer   |        Modify        | Description |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.0.0  | 2015-06-20 |Burlin Valerio |class SlideController |create class | 
+ * |         |            |               |                      |and its      |
+ * |         |            |               |                      |functions    |
+ * +---------+------------+---------------+----------------------+-------------+
+ */
 
 class SlideController extends Controller
 {

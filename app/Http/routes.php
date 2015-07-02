@@ -1,23 +1,29 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+/**
+ * @file: app/Http/routes.php
+ * @author: DazzleWorks
+ * @date: 2015-06-21
+ * @description: This file contains all of the routes for an application. Simply
+ *               tell the URIs it should respond to and give it the controller
+ *               to call when that URI is requested.
+ * 
+ * +---------+------------+---------------+-------------+----------------+
+ * | Version |     Date   |  Programmer   |    Modify   |  Description   |
+ * +---------+------------+---------------+-------------+----------------+
+ * |  0.1.0  | 2015-06-21 |Suierica Bogdan| routes.php  |create class    | 
+ * |         |            |               |             |and auth routes |
+ * +---------+------------+---------------+-------------+----------------+
+ * |  0.2.0  | 2015-06-21 |Burlin Valerio | routes.php  |add users and   | 
+ * |         |            |               |             |slides routes   |
+ * +---------+------------+---------------+-------------+----------------+
+ */
 
 /*
-Route::controller('user', 'UserController');
 Route::controller('project', 'ProjectController');
-// Dovrei creare un nuovo controller solo per creare la view della home page -> è poco conveniente in questo caso
-Route::get('/', function () {return View::make('index', array('title' => 'Home page'));});
 */
 
+// Home Page routes...
 Route::get('/', function () {
     return view('index');
 });
@@ -36,13 +42,11 @@ Route::get('/logout', function(){
     Auth::logout();
 });
 
-// 
-Route::get('/chi', function(){
-    return Auth::user();
-});
-
-// Slide routes...
 Route::group(array('prefix' => 'api'), function() {
-    Route::resource('slides', 'slideController');
+    // User routes...
+    Route::resource('users', 'UserController', 
+                    ['only' => 'show']);
     
+    // Slide routes...
+    Route::resource('slides', 'SlideController');
 });

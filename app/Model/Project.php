@@ -5,7 +5,7 @@ namespace Premi\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @file: Project.php
+ * @file: app/Model/Project.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class represents a project of a user. It contains the
@@ -20,14 +20,14 @@ use Jenssegers\Mongodb\Model as Eloquent;
 class Project extends Eloquent 
 {
     /**
-     * indicates if the model should be timestamped
+     * Indicates if the model should be timestamped
      * @var {boolean}
      * @public
      */
     public $timestamps = false;
     
     /**
-     * the attributes that are mass assignable
+     * The attributes that are mass assignable
      * @var array
      * @protected
      * @name: indicates the name of a Project
@@ -36,7 +36,8 @@ class Project extends Eloquent
     
     
     /**
-     * functions that allows to have a single embedded Presentation in a Project 
+     * Functions that allows to have a single embedded Presentation in a Project
+     *  
      * @return array
      */
     public function presentation() {
@@ -44,7 +45,8 @@ class Project extends Eloquent
     }
     
     /**
-     * functions that allows to have embedded Infographic in a Project 
+     * Functions that allows to have embedded Infographic in a Project 
+     * 
      * @return array
      */
     public function infographics() {

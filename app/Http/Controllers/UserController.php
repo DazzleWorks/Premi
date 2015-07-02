@@ -9,36 +9,39 @@ use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
 
+/**
+ * @file: app/Http/Controller/UserController.php
+ * @author: DazzleWorks
+ * @date: 2015-06-20
+ * @description: This class handles the user data, meets the requirements of 
+ * views and queries the database when necessary
+ *
+ * +---------+------------+---------------+----------------------+-------------+
+ * | Version |     Date   |  Programmer   |        Modify        | Description |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class | 
+ * |         |            |               |                      |and show     |
+ * |         |            |               |                      |function     |
+ * +---------+------------+---------------+----------------------+-------------+
+ */
 class UserController extends Controller
 {
-    /*
-    public function showUser($username = ''){
-        if(empty($username)){
-            return Redirect::to('user/profile/' . Auth::user()->username);
+    /**
+     * This method returns the data to display a user's profile
+     * 
+     * @return array json
+     */
+    public function show(){
+        if(!\Auth::user()) {
+            return redirect()->route('auth/login');
         }
-        $profile = User::getProfileByUsername($username);
-        return $profile;
-    }
-    
-    public function getRegister()
-    {
-        return \View::make('register', array('title' => 'Register | LaraTweet'));
-    }
-    
-    public function postRegister()
-    {
-        $user = new User;
-        $user->username = \Input::get('username');
-        $user->password = \Hash::make(\Input::get('password'));
-        $user->email = \Input::get('email');
         
-        if (!$user->save())
-            return \Redirect::to('user/register')->with('errorMessage', 'Internal error')->withInput(\Input::except($exceptArr));
-
-        if (!\Auth::attempt(array('username' => \Input::get('username'), 'password' => \Input::get('password'))))
-            return \Redirect::to('user/register')->with('errorMessage', 'Internal error');
-
-        return \Redirect::intended('user/profile');
+        $user = \Auth::user();
+        
+        $project = $user->projects()->find(array('_id' => '1', 'name' => '1'))->get();
+        
+        return \Response::json(array('firstName' => $user->firstName, 
+                                     'lastName' => $user->lastName,
+                                     'email' => $user->email), $project);
     }
-    */
 }

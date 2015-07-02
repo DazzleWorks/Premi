@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
- * @file: User.php
+ * @file: app/Model/User.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class stores user data that is retrieved by the user 
@@ -27,17 +27,17 @@ class User extends Eloquent implements AuthenticatableContract,
     use Authenticatable, CanResetPassword;
 
     /**
-     * indicates if the model should be timestamped
+     * Indicates if the model should be timestamped
      * @var {boolean}
      * @public
      */
     public $timestamps = false;
     
     /**
-     * the attributes that are mass assignable
+     * The attributes that are mass assignable
      * @var array
      * @protected
-     * @name: indicates the username of a User
+     * @username: indicates the username of a User
      * @email: indicates the email of a User
      * @firstName: indicates the name of a User
      * @lastName: indicates the surname of a User
@@ -47,7 +47,7 @@ class User extends Eloquent implements AuthenticatableContract,
                            'password'];
 
     /**
-     * the attributes excluded from the model's JSON form
+     * The attributes excluded from the model's JSON form
      * @var array
      * @protected
      */
@@ -55,7 +55,8 @@ class User extends Eloquent implements AuthenticatableContract,
     
      
     /**
-     * functions that allows to have embedded Project in a User 
+     * Functions that allows to have embedded Project in a User 
+     * 
      * @return array
      */
     public function projects() {

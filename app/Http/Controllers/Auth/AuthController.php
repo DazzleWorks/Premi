@@ -7,24 +7,29 @@ use Validator;
 use Premi\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/**
+ * @file: app/Http/Controller/Auth/AuthController.php
+ * @author: DazzleWorks
+ * @date: 2015-06-21
+ * @description: This class handles the registration of new users, as well as 
+ *               the authentication of existing users.
+ * 
+ * +---------+------------+---------------+----------------------+-------------+
+ * | Version |     Date   |  Programmer   |        Modify        | Description |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.0.0  | 2015-06-21 |Suierica Bogdan| class AuthController |create class | 
+ * |         |            |               |                      |and its      |
+ * |         |            |               |                      |functions    |
+ * +---------+------------+---------------+----------------------+-------------+
+ */
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
     use AuthenticatesAndRegistersUsers;
 
     protected $redirectPath = '/chi';
 
+    
     /**
      * Create a new authentication controller instance.
      *
@@ -35,18 +40,16 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-
     /**
-     * Get a validator for an incoming registration request.
-     *
+     * Get a validator for an incoming registration request
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'username' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:255',
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'password' => 'required|confirmed|min:8',
@@ -54,8 +57,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
+     * Create a new user instance after a valid registration
      * @param  array  $data
      * @return User
      */

@@ -12,11 +12,6 @@ use Premi\Model\User;
 
 class ProjectController extends Controller
 {
-    public function getInsert()
-    {
-        return \View::make('insert', array('title' => 'Project | LaraTweet'));
-    }
-    
     public function postInsert()
     {
         $project = new Project;
