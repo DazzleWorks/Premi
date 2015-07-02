@@ -62,5 +62,11 @@ class User extends Eloquent implements AuthenticatableContract,
     public function projects() {
         return $this->embedsMany(Project::class);
     }
+    
+    public function getParamByUsername($username) {
+        $user = User::find('$username');
+        return array('username' => $user->username, 'email' => $user->email,
+                     'firstName' => $user->firstName, 'lastName' => $user->lastName);
+    }
 }
 
