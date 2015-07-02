@@ -40,13 +40,17 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 // Logout routes...
 Route::get('/logout', function(){
     Auth::logout();
+    \Redirect::to('/');
 });
 
 Route::group(array('prefix' => 'api'), function() {
     // User routes...
-    Route::resource('users', 'UserController', 
+    Route::resource('user', 'UserController', 
                     ['only' => 'show']);
     
+    // Project routes..
+    Route::resource('user.project', 'ProjectController');
+    
     // Slide routes...
-    Route::resource('slides', 'SlideController');
+    //Route::resource('slide', 'SlideController');
 });

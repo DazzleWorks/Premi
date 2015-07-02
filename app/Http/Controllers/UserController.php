@@ -3,7 +3,8 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
@@ -31,17 +32,19 @@ class UserController extends Controller
      * 
      * @return array json
      */
-    public function show(){
+    public function show($username= ""){
         if(!\Auth::user()) {
             return redirect()->route('auth/login');
         }
         
-        $user = \Auth::user();
+        if(empty($username)) {
+            $username = \Auth::user()->username;
+        }
         
-        $project = $user->projects()->find(array('_id' => '1', 'name' => '1'))->get();
+        $user = getParamByUsername($username);
         
-        return \Response::json(array('firstName' => $user->firstName, 
-                                     'lastName' => $user->lastName,
-                                     'email' => $user->email), $project);
+        $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
+        
+        return response()->view('profile', $user, $project);
     }
 }
