@@ -43,21 +43,21 @@ Route::get('/logout', function(){
 Route::group(array('prefix' => 'api'), function() {
     // User routes...
     Route::resource('user', 'UserController',
-                    ['except' => 'create']);
+                    ['except' => ['create', 'edit']]);
                        
     // Project routes...
     Route::resource('user.project', 'ProjectController',
-                    ['except' => 'create']);
+                    ['except' => ['create', 'edit']]);
     
     // Infographic routes...
     Route::resource('user.project.infographic', 'InfographicController',
-                    ['except' => 'create']);
+                    ['except' => ['create', 'edit']]);
     
     //Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
-                    ['except' => 'create']);
+                    ['except' => ['create', 'edit']]);
     
     // Slide routes...
     Route::resource('user.project.presentation.slide', 'SlideController',
-                    ['except' => 'create']);
+                    ['except' => ['create', 'edit']]);
 });
