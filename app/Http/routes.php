@@ -19,10 +19,6 @@
  * +---------+------------+---------------+-------------+----------------+
  */
 
-/*
-Route::controller('project', 'ProjectController');
-*/
-
 // Home Page routes...
 Route::get('/', function () {
     return view('index');
@@ -46,17 +42,22 @@ Route::get('/logout', function(){
 
 Route::group(array('prefix' => 'api'), function() {
     // User routes...
-    Route::resource('user', 'UserController'); 
+    Route::resource('user', 'UserController',
+                    ['except' => 'create']);
                        
     // Project routes...
-    Route::resource('user.project', 'ProjectController');
+    Route::resource('user.project', 'ProjectController',
+                    ['except' => 'create']);
     
     // Infographic routes...
-    Route::resource('user.project.infographic', 'InfographicController');
+    Route::resource('user.project.infographic', 'InfographicController',
+                    ['except' => 'create']);
     
     //Presentation routes..
-    Route::resource('user.project.presentation', 'PresentationController');
+    Route::resource('user.project.presentation', 'PresentationController',
+                    ['except' => 'create']);
     
     // Slide routes...
-    Route::resource('user.project.presentation.slide', 'SlideController');
+    Route::resource('user.project.presentation.slide', 'SlideController',
+                    ['except' => 'create']);
 });

@@ -16,7 +16,12 @@ class InfographicController extends Controller
      */
     public function index()
     {
-        //
+        $user = \Auth::user();
+        
+        $project = $user->projects()->where('_id', '=', $project)->get();
+        
+        $infographic = $project->infographics()->get();
+        return response($infographic);
     }
 
     /**
