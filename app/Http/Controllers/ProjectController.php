@@ -26,19 +26,87 @@ use Premi\Model\User;
 
 class ProjectController extends Controller
 {
-    public function create() {
-        
-    }
-    
-    public function store() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
         $user = \Auth::user();
-        
-        $project = new Project;
-        $project->name = \Input::get('name');
-        
+
+        $project = $user->projects()->get();
+
+        return response($project);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $user = \Auth::user();
+
+        $project = new Project(array('name' => \Input::get('name')));
+
         $project = $user->projects()->save($project);
-        
-        return \Redirect::intended('user/project/' . $project->_id)->with();
+
+        return response(true);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $project
+     * @return Response
+     */
+    public function show($project)
+    {
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        return response($project);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $project
+     * @return Response
+     */
+    public function update($project)
+    {
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $project->name = \Input::get('name');
+
+        $project->save();
+
+        return response(true);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $project
+     * @return Response
+     */
+    public function destroy($project)
+    {
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $project->delete();
+
+        return response(true);
     }
 }
 

@@ -21,7 +21,7 @@ class PresentationController extends Controller
 
         $presentation = $user->projects()->where('_id', '=', $project)->presentations()->get();
 
-        return response($pres);
+        return response($presentation);
     }
 
 
