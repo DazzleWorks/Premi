@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Presentation;
 
 class PresentationController extends Controller
 {
@@ -14,20 +15,15 @@ class PresentationController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index($project)
     {
-        //
+        $user = \Auth::user();
+
+        $presentation = $user->projects()->where('_id', '=', $project)->presentations()->get();
+
+        return response($pres);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +32,13 @@ class PresentationController extends Controller
      */
     public function store()
     {
-        //
+        $user = \Auth::user();
+
+        $presentation = new Presentation(array('title' => \Input::get('title')));
+
+        $project = $user->projects()->where('_id', '=', $project)->presentations()->save($presentation);
+
+        return response(true);
     }
 
     /**
@@ -45,21 +47,17 @@ class PresentationController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($project, $presentation)
     {
-        //
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $presentation = $project->presentations()->get();
+
+        return response($pres);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +65,19 @@ class PresentationController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($project)
     {
-        //
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $presentation = $project->presentations()->get();
+
+        $presentation->title = \Input::get('title');
+
+        $presentation->save();
+
+        return response(true);
     }
 
     /**
@@ -80,6 +88,14 @@ class PresentationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $presentation = $project->presentations()->get();
+
+        $presentation->delete();
+
+        return response(true);
     }
 }
