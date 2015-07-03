@@ -82,7 +82,7 @@
 
         <script src="app/services/slideService.js" type="text/javascript"></script>
         <script src="app/services/loginService.js" type="text/javascript"></script>
-        
+        <script src="app/services/signupService.js" type="text/javascript"></script>
+
     </body>
 </html>
-
