@@ -7,6 +7,7 @@ use Validator;
 use Premi\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+
 /**
  * @file: app/Http/Controller/Auth/AuthController.php
  * @author: DazzleWorks

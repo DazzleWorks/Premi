@@ -7,19 +7,18 @@
 * @param {integer} idPrs - identify the project that contains the Slide
 * @param {integer} idSlide - identify the the Slide
 */
-angular.module('app.services.loginService', ['ngRoute'])
+angular.module('app.services.loginService', [])
 
-    .factory('loginFactory', ['$http', function ($http, user, pass) {
+    .factory('loginFactory', ['$http', function ($http, credentials) {
         return function () {
            $http({
                 method: 'POST',
                 url: '/auth/login',
-                data: {"username":user,"password":pass},
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data: credentials
             })
             .success(function(data) {
                 console.log(data);
             });
         };
-    }])
-    ;
+    }]);
