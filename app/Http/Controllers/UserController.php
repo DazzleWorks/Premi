@@ -20,9 +20,9 @@ use Premi\Http\Controllers\Controller;
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class | 
- * |         |            |               |                      |and show     |
- * |         |            |               |                      |function     |
+ * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class,| 
+ * |         |            |               |                      |index & show |
+ * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+
  */
 class UserController extends Controller
@@ -46,5 +46,40 @@ class UserController extends Controller
         $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
         
         return response($user, $project);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update()
+    {
+        $user = \Auth::user();
+        
+        $user->email = \Input::get('email');
+        $user->firstName = \Input::get('firstName');
+        $user->secondName = \Input::get('secondName');
+        $user->password = \Input::get('password');
+        
+        $user->save();
+        
+        return response(true);
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy()
+    {
+        $user = \Auth::user();
+                
+        $user->delete();
+        
+        return response(true);
     }
 }

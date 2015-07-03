@@ -3,7 +3,6 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
@@ -71,5 +70,56 @@ class SlideController extends Controller
         $slide = $infographic->slides()->where('id', '=', $slide)->get(); 
         
         return response($slide);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($project,$presentation,$slide)
+    {
+        $user = \Auth::user();
+        
+        $project = $user->projects()->where('_id', '=', $project)->get();
+        
+        $presentation = $project->presentation()->first()->get();
+        
+        $slide = $presentation->slides()->where('_id', '=', $slide);
+        
+        $slide->yIndex = \Input::get('xIndex');
+        $slide->xIndex = \Input::get('yIndex');
+        
+        $string = \Input::get('components');
+        $json_o = json_decode($string,true);
+        foreach($json_o[component] as $comp) {
+            $slide->components()->save($comp);
+        }
+        
+        $slide->save();
+        
+        return response(true);
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($project,$slide)
+    {
+        $user = \Auth::user();
+
+        $project = $user->projects()->where('_id', '=', $project)->get();
+
+        $presentation = $project->presentations()->first();
+
+        $slide = $presentation->slides()->where('_id', '=', $slide)->get();
+        
+        $slide->delete();
+
+        return response(true);
     }
 }

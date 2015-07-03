@@ -43,7 +43,7 @@ Route::get('/logout', function(){
 Route::group(array('prefix' => 'api'), function() {
     // User routes...
     Route::resource('user', 'UserController',
-                    ['except' => ['create', 'edit']]);
+                    ['except' => ['index', 'store', 'create', 'edit']]);
                        
     // Project routes...
     Route::resource('user.project', 'ProjectController',

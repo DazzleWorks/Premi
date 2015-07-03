@@ -5,9 +5,6 @@ namespace Premi\Http\Controllers;
 use Illuminate\Http\Request;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\User;
-use Premi\Model\Project;
-use Premi\Model\Infographic;
 
 class InfographicController extends Controller
 {
