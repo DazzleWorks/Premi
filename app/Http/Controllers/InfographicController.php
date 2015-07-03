@@ -3,9 +3,11 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\User;
+use Premi\Model\Project;
+use Premi\Model\Infographic;
 
 class InfographicController extends Controller
 {
@@ -14,24 +16,13 @@ class InfographicController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index($project)
     {
         $user = \Auth::user();
         
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $infographic = $user->projects()->where('_id', '=', $project)->infographics()->get();
         
-        $infographic = $project->infographics()->get();
         return response($infographic);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -39,9 +30,15 @@ class InfographicController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store($project)
     {
-        //
+        $user = \Auth::user();
+        
+        $infographic = new Infographic(array('name' => \Input::get('name'), 'path' => \Input::get('path')));
+        
+        $project = $user->projects()->where('_id', '=', $project)->infographics()->save($infographic);
+               
+        return response(true);
     }
 
     /**
@@ -50,20 +47,15 @@ class InfographicController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($project,$infographic)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+        $user = \Auth::user();
+        
+        $project = $user->projects()->where('_id', '=', $project)->get();
+                
+        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        
+        return response($infographic);
     }
 
     /**
@@ -72,9 +64,20 @@ class InfographicController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($project,$infographic)
     {
-        //
+        $user = \Auth::user();
+        
+        $project = $user->projects()->where('_id', '=', $project)->get();
+        
+        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        
+        $infographic->name = \Input::get('name');
+        $infographic->path = \Input::get('path');
+        
+        $infographic->save();
+        
+        return response(true);
     }
 
     /**
@@ -83,8 +86,16 @@ class InfographicController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($project,$infographic)
     {
-        //
+        $user = \Auth::user();
+        
+        $project->$user->projects()->where('_id', '=', $project)->get();
+        
+        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        
+        $infographic->delete();
+        
+        return response(true);
     }
 }
