@@ -80,8 +80,9 @@
         <script src="app/directives/topBarDirective.js" type="text/javascript"></script>
         <script src="app/directives/topMenuDirective.js" type="text/javascript"></script>
 
-        <script src="app/services/slideServices.js" type="text/javascript"></script>
-
+        <script src="app/services/slideService.js" type="text/javascript"></script>
+        <script src="app/services/loginService.js" type="text/javascript"></script>
+        
     </body>
 </html>
 

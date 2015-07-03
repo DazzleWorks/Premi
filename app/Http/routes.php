@@ -43,14 +43,20 @@ Route::get('/logout', function(){
     \Redirect::to('/');
 });
 
+
 Route::group(array('prefix' => 'api'), function() {
     // User routes...
-    Route::resource('user', 'UserController', 
-                    ['only' => 'show']);
-    
-    // Project routes..
+    Route::resource('user', 'UserController'); 
+                       
+    // Project routes...
     Route::resource('user.project', 'ProjectController');
     
+    // Infographic routes...
+    Route::resource('user.project.infographic', 'InfographicController');
+    
+    //Presentation routes..
+    Route::resource('user.project.presentation', 'PresentationController');
+    
     // Slide routes...
-    //Route::resource('slide', 'SlideController');
+    Route::resource('user.project.presentation.slide', 'SlideController');
 });

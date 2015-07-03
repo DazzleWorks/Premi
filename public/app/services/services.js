@@ -4,7 +4,7 @@ angular.module('app.services',
     [
         'ngRoute',
         'ngResource',
-        'app.services.slideServices',
+        'app.services.slideService',
         'app.services.loginService'
     ]
 );

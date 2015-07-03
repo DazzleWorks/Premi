@@ -45,6 +45,6 @@ class UserController extends Controller
         
         $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
         
-        return response()->view('profile', $user, $project);
+        return response()->view($user, $project);
     }
 }

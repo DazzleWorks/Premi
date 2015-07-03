@@ -7,7 +7,7 @@
 * @param {integer} idPrs - identify the project that contains the Slide
 * @param {integer} idSlide - identify the the Slide
 */
-angular.module('app.services.slideServices', [])
+angular.module('app.services.slideService', [])
     
     .factory('slideFactory', ['$http', function ($http/*, data*/) {
         return function () {
