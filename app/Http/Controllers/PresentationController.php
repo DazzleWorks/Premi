@@ -47,15 +47,15 @@ class PresentationController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($project, $presentation)
+    public function show($project)
     {
         $user = \Auth::user();
 
         $project = $user->projects()->where('_id', '=', $project)->get();
 
-        $presentation = $project->presentations()->get();
+        $presentation = $project->presentations()->first();
 
-        return response($pres);
+        return response($presentation);
     }
 
 
@@ -71,7 +71,7 @@ class PresentationController extends Controller
 
         $project = $user->projects()->where('_id', '=', $project)->get();
 
-        $presentation = $project->presentations()->get();
+        $presentation = $project->presentations()->first();
 
         $presentation->title = \Input::get('title');
 
@@ -92,7 +92,7 @@ class PresentationController extends Controller
 
         $project = $user->projects()->where('_id', '=', $project)->get();
 
-        $presentation = $project->presentations()->get();
+        $presentation = $project->presentations()->first();
 
         $presentation->delete();
 
