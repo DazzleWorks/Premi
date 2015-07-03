@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\Presentation;
 
 class PresentationController extends Controller
 {
@@ -21,7 +20,7 @@ class PresentationController extends Controller
 
         $presentation = $user->projects()->where('_id', '=', $project)->presentations()->get();
 
-        return response($pres);
+        return response($presentation);
     }
 
 
@@ -30,13 +29,13 @@ class PresentationController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store($project)
     {
         $user = \Auth::user();
 
         $presentation = new Presentation(array('title' => \Input::get('title')));
 
-        $project = $user->projects()->where('_id', '=', $project)->presentations()->save($presentation);
+        $user->projects()->where('_id', '=', $project)->presentations()->save($presentation);
 
         return response(true);
     }
@@ -86,7 +85,7 @@ class PresentationController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($project)
     {
         $user = \Auth::user();
 

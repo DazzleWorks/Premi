@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\Slide;
 
 /**
  * @file: app/Http/Controller/SlideController.php
@@ -26,21 +25,51 @@ use Premi\Model\Slide;
 
 class SlideController extends Controller
 {
-    public function store() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index($project,$presentation)
+    {
+        $user = \Auth::user();
         
-        return \Response::json(array('success' => true));
-        /**
-        if(\Auth::check()) {
-            $user = \Auth::user();
-        }
-        else {
-            return \Redirect::to('user/login');
-        }
-         chiamate per user->project->ecc (meglio!!)
-        $components = json_decode(qualcosa);
-        foreach($components->objects as $object) {
-            $object = $user->project->presentation->slide->components()->save($object);
-        }
-        return \Redirect::intended('user/login');*/
+        $slide = $user->projects()->where('_id', '=', $project)->infographics()->where('_id', '=', $presentation)->slides()->get();
+        
+        return response($slide);
+    }
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store($project,$presentation) {
+        $user = \Auth::user();
+        
+        $slide = new Slide(array('xIndex' => \Input::get('xIndex'), 'yIndex' => \Input::get('yIndex')));
+        
+        $user->projects()->where('_id', '=', $project)->presentation()->where('_id', '=', $presentation)->slides()->save($slide);
+               
+        return response(true);   
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($project,$infographic,$slide)
+    {
+        $user = \Auth::user();
+        
+        $project = $user->projects()->where('_id', '=', $project)->get();
+                
+        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        
+        $slide = $infographic->slides()->where('id', '=', $slide)->get(); 
+        
+        return response($slide);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\User;
+
 
 /**
  * @file: app/Http/Controller/UserController.php
