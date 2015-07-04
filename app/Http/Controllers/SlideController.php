@@ -59,7 +59,11 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
+<<<<<<< HEAD
     public function show($project,$slide)
+=======
+    public function show($project, $slide)
+>>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     {
         $user = \Auth::user();
         
@@ -78,7 +82,11 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
+<<<<<<< HEAD
     public function update($project,$slide)
+=======
+    public function update($project, $slide)
+>>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     {
         $user = \Auth::user();
         

@@ -28,7 +28,6 @@ class AuthController extends Controller
 {
     use AuthenticatesAndRegistersUsers;
 
-    protected $redirectPath = '/chi';
 
     
     /**

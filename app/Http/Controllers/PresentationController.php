@@ -8,6 +8,10 @@ use Premi\Http\Controllers\Controller;
 
 class PresentationController extends Controller
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     /**
      * Store a newly created resource in storage.
      *
