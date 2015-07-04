@@ -5,7 +5,7 @@ namespace Premi\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @file: Slide.php
+ * @file: app/Model/Slide.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class stores slide data that is retrieved by the slide 

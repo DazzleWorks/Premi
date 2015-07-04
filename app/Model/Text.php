@@ -5,7 +5,7 @@ namespace Premi\Model;
 use App\Model\Component;
 
 /**
- * @file: Text.php
+ * @file: app/Model/Text.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class represents the structure of the data required to 
@@ -32,13 +32,13 @@ class Text extends Component
      * @protected
      * @text: indicates the content of the Text box
      * @fontSize: indicates the dimension of the Text font
-     * @fontWeight: 
-     * @fontFamily: 
-     * @fontStyle: 
-     * @lineHeight: 
-     * @textDecoration: 
-     * @textAlign: 
-     * @textBackgroundColor:
+     * @fontWeight: indicates the thickness of the Text
+     * @fontFamily: indicates the family of a Text font
+     * @fontStyle: indicates the style og a Text font
+     * @lineHeight: indicates the height of a line of the Text box  
+     * @textDecoration: indicates the type of decoration of the Text content
+     * @textAlign: indicates the alignment of the Text
+     * @textBackgroundColor: indicates the background color of a Text box
      */
     protected $fillable = ['text', 'fontSize', 'fontWeight', 'fontFamily', 
                            'fontStyle', 'lineHeight', 'textDecoration', 

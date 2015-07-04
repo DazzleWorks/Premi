@@ -11,13 +11,13 @@ use Premi\Http\Controllers\Controller;
  * @author: DazzleWorks
  * @date: 2015-06-21
  * @description: This class handles the saving, editing, deleting and viewing, 
- *               through a specific view, of a project 
+ *               through a specific view, of a project. 
  * 
  * +---------+------------+--------------+-----------------------+-------------+
  * | Version |     Date   |  Programmer  |        Modify         | Description |
  * +---------+------------+--------------+-----------------------+-------------+
  * |  1.0.0  | 2015-06-21 |Burlin Valerio|class ProjectController| create class| 
- * |         |            |              |                       | and its     |
+ * |         |            |              |                       | and its rest|
  * |         |            |              |                       | functions   |
  * +---------+------------+--------------+-----------------------+-------------+
  */
@@ -57,8 +57,7 @@ class ProjectController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $project
+     * @param int $project: the id of a project
      * @return Response
      */
     public function show($project)
@@ -73,8 +72,7 @@ class ProjectController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $project
+     * @param int $project: the id of a project
      * @return Response
      */
     public function update($project)
@@ -92,8 +90,7 @@ class ProjectController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $project
+     * @param int $project: the id of a project
      * @return Response
      */
     public function destroy($project)

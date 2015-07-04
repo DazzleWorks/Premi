@@ -5,7 +5,7 @@ namespace Premi\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @file: Infographic.php
+ * @file: app/Model/Infographic.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class is graphic visual rapresentation of the presentation 

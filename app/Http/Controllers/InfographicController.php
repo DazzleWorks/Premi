@@ -6,11 +6,27 @@ use Illuminate\Http\Request;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
+/**
+ * @file: app/Http/Controller/InfographicController.php
+ * @author: DazzleWorks
+ * @date: 2015-06-23
+ * @description: This class handles the infographic data, meets the requirements of 
+ * views and queries the database when necessary.
+ *
+ * +---------+------------+---------------+----------------------+-------------+
+ * | Version |     Date   |  Programmer   |        Modify        | Description |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class                |create class,| 
+ * |         |            |               | InfographicController|and its rest |
+ * |         |            |               |                      |functions    |
+ * +---------+------------+---------------+----------------------+-------------+
+ */
+
 class InfographicController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param int $project: the id of a project  
      * @return Response
      */
     public function index($project)
@@ -24,7 +40,7 @@ class InfographicController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @param int $project: the id of a project 
      * @return Response
      */
     public function store($project)
@@ -40,8 +56,8 @@ class InfographicController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project 
+     * @param int $infographic: the id of an infographic
      * @return Response
      */
     public function show($project,$infographic)
@@ -57,8 +73,8 @@ class InfographicController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project 
+     * @param int $infographic: the id of an infographic
      * @return Response
      */
     public function update($project,$infographic)
@@ -79,8 +95,8 @@ class InfographicController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project 
+     * @param int $infographic: the id of an infographic
      * @return Response
      */
     public function destroy($project,$infographic)

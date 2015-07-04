@@ -17,6 +17,13 @@
  * |  0.2.0  | 2015-06-21 |Burlin Valerio | routes.php  |add users and   | 
  * |         |            |               |             |slides routes   |
  * +---------+------------+---------------+-------------+----------------+
+ * |  0.3.0  | 2015-06-22 |Burlin Valerio | routes.php  |add projects and| 
+ * |         |            |               |             |presentation    |
+ * |         |            |               |             |routes          |
+ * +---------+------------+---------------+-------------+----------------+
+ * |  1.0.0  | 2015-06-22 |Burlin Valerio | routes.php  |add infographics| 
+ * |         |            |               |             |routes          |
+ * +---------+------------+---------------+-------------+----------------+
  */
 
 // Home Page routes...

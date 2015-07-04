@@ -9,15 +9,15 @@ use Premi\Http\Controllers\Controller;
 /**
  * @file: app/Http/Controller/SlideController.php
  * @author: DazzleWorks
- * @date: 2015-06-20
+ * @date: 2015-06-23
  * @description: This class handles the saving, editing, deleting and viewing,
  * through a specific view, of a slide.
  * 
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-20 |Burlin Valerio |class SlideController |create class | 
- * |         |            |               |                      |and its      |
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio |class SlideController |create class | 
+ * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+
  */
@@ -26,7 +26,7 @@ class SlideController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param int $project: the id of a project
      * @return Response
      */
     public function index($project)
@@ -40,7 +40,7 @@ class SlideController extends Controller
     
     /**
      * Store a newly created resource in storage.
-     *
+     * @param int $project: the id of a project
      * @return Response
      */
     public function store($project) {
@@ -55,15 +55,11 @@ class SlideController extends Controller
     
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
+     * @param int $slide: the id of a slide
      * @return Response
      */
-<<<<<<< HEAD
-    public function show($project,$slide)
-=======
     public function show($project, $slide)
->>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     {
         $user = \Auth::user();
         
@@ -78,15 +74,11 @@ class SlideController extends Controller
     
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
+     * @param int $slide: the id of a slide
      * @return Response
      */
-<<<<<<< HEAD
     public function update($project,$slide)
-=======
-    public function update($project, $slide)
->>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     {
         $user = \Auth::user();
         
@@ -112,8 +104,8 @@ class SlideController extends Controller
     
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
+     * @param int $slide: the id of a slide
      * @return Response
      */
     public function destroy($project,$slide)

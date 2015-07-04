@@ -5,7 +5,7 @@ namespace Premi\Model;
 use App\Model\Component;
 
 /**
- * @file: RealTimeData.php
+ * @file: app/Model/RealTimeData.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class represents the structure of the data required to 

@@ -6,15 +6,27 @@ use Illuminate\Http\Request;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
+/**
+ * @file: app/Http/Controller/PresentationController.php
+ * @author: DazzleWorks
+ * @date: 2015-06-23
+ * @description: This class handles the saving, editing, deleting and viewing,
+ * through a specific view, of a presentation.
+ *
+ * +---------+------------+---------------+-----------------------+-------------+
+ * | Version |     Date   |  Programmer   |        Modify         | Description |
+ * +---------+------------+---------------+-----------------------+-------------+
+ * |  1.0.0  | 2015-06-23 |Suierica Bogdan| class                 |create class,| 
+ * |         |            |               | PresentationController|and its rest |
+ * |         |            |               |                       |functions    |
+ * +---------+------------+---------------+-----------------------+-------------+
+ */
+
 class PresentationController extends Controller
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> a522aa6c07625cf46723dfccebe2cf592a7989bf
     /**
      * Store a newly created resource in storage.
-     *
+     * @param int $project: the id of a project
      * @return Response
      */
     public function store($project)
@@ -30,8 +42,7 @@ class PresentationController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
      * @return Response
      */
     public function show($project)
@@ -48,8 +59,7 @@ class PresentationController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
      * @return Response
      */
     public function update($project)
@@ -69,8 +79,7 @@ class PresentationController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param int $project: the id of a project
      * @return Response
      */
     public function destroy($project)

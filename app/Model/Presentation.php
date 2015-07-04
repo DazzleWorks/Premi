@@ -5,7 +5,7 @@ namespace Premi\Model;
 use Jenssegers\Mongodb\Model as Eloquent;
 
 /**
- * @file: Presentation.php
+ * @file: app/Model/Presentation.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class is the presentation of the project. Contains all the 

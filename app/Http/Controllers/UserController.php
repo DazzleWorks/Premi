@@ -14,17 +14,18 @@ use Premi\Http\Controllers\Controller;
  * @file: app/Http/Controller/UserController.php
  * @author: DazzleWorks
  * @date: 2015-06-20
- * @description: This class handles the user data, meets the requirements of 
- * views and queries the database when necessary
+ * @description: This class handles the deleting and viewing, through a specific 
+ * view, of a user.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
  * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class,| 
- * |         |            |               |                      |index & show |
+ * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+
  */
+
 class UserController extends Controller
 {
     /**

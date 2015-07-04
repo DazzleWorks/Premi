@@ -5,7 +5,7 @@ namespace Premi\Model;
 use App\Model\Component;
 
 /**
- * @file: Chart.php
+ * @file: app/Model/Chart.php
  * @author: DazzleWorks
  * @date: 2015-06-19
  * @description: This class represents the structure of the data required to 
