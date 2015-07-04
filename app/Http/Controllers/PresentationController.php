@@ -8,20 +8,6 @@ use Premi\Http\Controllers\Controller;
 
 class PresentationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index($project)
-    {
-        $user = \Auth::user();
-
-        $presentation = $user->projects()->where('_id', '=', $project)->presentations()->get();
-
-        return response($presentation);
-    }
-
 
     /**
      * Store a newly created resource in storage.

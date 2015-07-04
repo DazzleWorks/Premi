@@ -29,7 +29,7 @@ class SlideController extends Controller
      *
      * @return Response
      */
-    public function index($project,$presentation)
+    public function index($project)
     {
         $user = \Auth::user();
         
@@ -43,7 +43,7 @@ class SlideController extends Controller
      *
      * @return Response
      */
-    public function store($project,$presentation) {
+    public function store($project) {
         $user = \Auth::user();
         
         $slide = new Slide(array('xIndex' => \Input::get('xIndex'), 'yIndex' => \Input::get('yIndex')));
@@ -59,7 +59,7 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($project,$infographic,$slide)
+    public function show($project, $slide)
     {
         $user = \Auth::user();
         
@@ -78,7 +78,7 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($project,$presentation,$slide)
+    public function update($project, $slide)
     {
         $user = \Auth::user();
         
