@@ -29,11 +29,11 @@ class SlideController extends Controller
      *
      * @return Response
      */
-    public function index($project,$presentation)
+    public function index($project)
     {
         $user = \Auth::user();
         
-        $slide = $user->projects()->where('_id', '=', $project)->infographics()->where('_id', '=', $presentation)->slides()->get();
+        $slide = $user->projects()->where('_id', '=', $project)->presentation()->first()->slides()->get();
         
         return response($slide);
     }
@@ -43,12 +43,12 @@ class SlideController extends Controller
      *
      * @return Response
      */
-    public function store($project,$presentation) {
+    public function store($project) {
         $user = \Auth::user();
         
         $slide = new Slide(array('xIndex' => \Input::get('xIndex'), 'yIndex' => \Input::get('yIndex')));
         
-        $user->projects()->where('_id', '=', $project)->presentation()->where('_id', '=', $presentation)->slides()->save($slide);
+        $user->projects()->where('_id', '=', $project)->presentation()->first()->slides()->save($slide);
                
         return response(true);   
     }
@@ -59,15 +59,15 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($project,$infographic,$slide)
+    public function show($project,$slide)
     {
         $user = \Auth::user();
         
         $project = $user->projects()->where('_id', '=', $project)->get();
                 
-        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        $presentation = $project->presentations()->first()->get();
         
-        $slide = $infographic->slides()->where('id', '=', $slide)->get(); 
+        $slide = $presentation->slides()->where('id', '=', $slide)->get(); 
         
         return response($slide);
     }
@@ -78,7 +78,7 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($project,$presentation,$slide)
+    public function update($project,$slide)
     {
         $user = \Auth::user();
         

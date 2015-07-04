@@ -55,7 +55,7 @@ Route::group(array('prefix' => 'api'), function() {
     
     //Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
-                    ['except' => ['create', 'edit']]);
+                    ['except' => ['index', 'create', 'edit']]);
     
     // Slide routes...
     Route::resource('user.project.presentation.slide', 'SlideController',
