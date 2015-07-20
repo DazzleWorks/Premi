@@ -8,6 +8,8 @@
 <html ng-app="app" ng-controller="homePageCtrl">
     <head>
         <meta charset="utf-8">
+        <title>Premi - Presentation Editor</title>
+
         <script src="assets/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
         <!-- custom -->
         <script src="assets/js/model.js"></script>
@@ -60,6 +62,7 @@
         <script src="app/controllers/modalSignupCtrl.js" type="text/javascript"></script>
         <script src="app/controllers/modalTextCtrl.js" type="text/javascript"></script>
         <script src="app/controllers/myProjectsCtrl.js" type="text/javascript"></script>
+        <script src="app/controllers/presentationCtrl.js" type="text/javascript"></script>
         <script src="app/controllers/presentationEditorCtrl.js" type="text/javascript"></script>
         <script src="app/controllers/restrictedAreaCtrl.js" type="text/javascript"></script>
         <script src="app/controllers/sectionChooserCtrl.js" type="text/javascript"></script>
@@ -71,6 +74,7 @@
         <script src="app/directives/infographicEditorDirective.js" type="text/javascript"></script>
         <script src="app/directives/menuPageSwitcherDirective.js" type="text/javascript"></script>
         <script src="app/directives/myProjectsDirective.js" type="text/javascript"></script>
+        <script src="app/directives/presentationDirective.js" type="text/javascript"></script>
         <script src="app/directives/presentationEditorDirective.js" type="text/javascript"></script>
         <script src="app/directives/restrictedAreaDirective.js" type="text/javascript"></script>
         <script src="app/directives/slideEditorDirective.js" type="text/javascript"></script>
@@ -83,6 +87,8 @@
         <script src="app/services/slideService.js" type="text/javascript"></script>
         <script src="app/services/loginService.js" type="text/javascript"></script>
         <script src="app/services/signupService.js" type="text/javascript"></script>
+        <script src="app/services/presentationServices.js" type="text/javascript"></script>
+        <script src="app/services/slideServices.js" type="text/javascript"></script>
 
     </body>
 </html>

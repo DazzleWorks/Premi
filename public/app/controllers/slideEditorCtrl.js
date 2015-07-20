@@ -1,6 +1,6 @@
 angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
 
-    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', function($scope, $modal, slideFactory) {
+    .controller('slideEditorCtrl', ['$scope', '$modal', 'slideFactory', 'presentationData', function($scope, $modal, slideFactory, presentationData) {
 
         $scope.components = [
             {
@@ -127,11 +127,8 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
             $scope.$apply();
         });
 
-        $scope.canvas.on('object:modified', function(options) {
-        });
-
-        $scope.removeObject= function(obj) {
-            $scope.canvas.remove(obj);  // FUNZIONA MA DA ERRORE
+        $scope.removeObject= function() {
+            $scope.canvas.remove($scope.canvas.getActiveObject());
         };
 
         $scope.addText= function(text){
@@ -167,17 +164,33 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
         // serializzazione
         $scope.saveSlide = function () {
         //    jQuery("#serialized").html(JSON.stringify($scope.canvas));
-            slideFactory ();
+            // slideFactory ();
+            // jQuery("#serialized").html(JSON.stringify($scope.canvas));
+            // slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
+            // $scope.svg=$scope.canvas.toSVG({suppressPreamble: true});
+            //
+            // presentationData.saveSlide($scope.svg);
         };
+
 
 
         // slide
         $scope.addSlide = function (position) {
             if (position === "up") {
-                console.log("OK!");
                 $scope.saveSlide();
                 $scope.canvas.clear();
-                $scope.canvas = new fabric.Canvas('slide');
+            }
+            else if (position === "down") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
+            }
+            else if (position === "left") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
+            }
+            else if (position === "right") {
+                $scope.saveSlide();
+                $scope.canvas.clear();
             }
         };
 
@@ -225,6 +238,7 @@ angular.module('app.controllers.slideEditorCtrl', ['ngRoute'])
                     "textBackgroundColor": ""
                 }
             ],
-            "background": ""
+            "background": "",
+            "x":1,"y":1
         };
 }]);
