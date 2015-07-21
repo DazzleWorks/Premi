@@ -1,21 +1,22 @@
 angular.module('app.controllers.modalSignupCtrl', ['ngRoute'])
 
-    .controller('modalLoginCtrl', ['$scope','$http', '$modalInstance','signupFactory',  function($scope, $http, $modalInstance, signupFactory) {
-      $scope.data = {
-          username: "xxx",
-          mail: "email@prova.it",
-          firstname: "Prova",
-          lastname: "Riprova",
-          password: "password",
-          password_confirmation: "password"
-      };
+    .controller('modalSignupCtrl', ['$scope','$http', '$modalInstance', 'signupFactory', function($scope, $http, $modalInstance, signupFactory) {
+
+        $scope.signup_data = {
+            username: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            password: ""
+        };
+
+        $scope.checkFields = function(){
+			$scope.fieldsError = false;
+		}
 
         $scope.ok = function () {
-            $http.post("http://localhost:8000/auth/register", $scope.data).
-                    success(function(data, status, headers, config){
-                        console.log(data);
-                    });
-            $modalInstance.close( /*loginFactory($scope.data)*/);
+            $scope.signup_ok = signupFactory.signup(/*$scope.signup_data*/);
+            $modalInstance.close();
         };
 
         $scope.cancel = function () {

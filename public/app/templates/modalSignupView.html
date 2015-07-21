@@ -1,19 +1,33 @@
 <div class="modal-header">
     <h3 class="modal-title">SIGNUP</h3>
 </div>
+<form ng-submit="ok()">
+    <div class="modal-body">
+    	<label>Email</label>
+    	<input type="email" ng-model="signup_data.email" placeholder="Enter your email">
 
-<div class="modal-body">
+    	<label>Username</label>
+        <input type="text" ng-model="signup_data.username" class="form-control" placeholder="Enter username">
 
-  <input type="text" ng-model="data.username" class="form-control">
-  <input type="text" ng-model="data.mail" class="form-control">
-  <input type="text" ng-model="data.firstname" class="form-control">
-  <input type="text" ng-model="data.lastname" class="form-control">
-  <input type="password" ng-model="data.password" class="form-control">
-  <input type="password" ng-model="data.password_confirmation" class="form-control">
+        <label>Password</label>
+    	<input type="password" placeholder="Enter password">
 
-</div>
+        <label>Repeat password</label>
+    	<input type="password" ng-model="signup_data.password" placeholder="Repeat password">
+        <!-- metto la verifica nel model solo nel secondo caso perche' cosi' ho la pwd validata -->
 
-<div class="modal-footer">
-    <button class="button" ng-click="ok()">OK</button>
-    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
-</div>
+        <label>First Name</label>
+    	<input type="text" ng-model="signup_data.firstname" placeholder="Enter your first name">
+
+        <label>Last Name</label>
+    	<input type="text" ng-model="signup_data.lastname" placeholder="Enter your last name">
+
+    </div>
+
+    <div class="modal-footer">
+        <!-- <button class="button" ng-click="ok()">OK</button> -->
+     	<button type="submit" id="submit" ng-disabled="fieldsError">Confirm</button>
+
+        <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+    </div>
+</form>

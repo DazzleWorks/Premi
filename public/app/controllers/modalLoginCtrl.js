@@ -1,17 +1,19 @@
 angular.module('app.controllers.modalLoginCtrl', ['ngRoute'])
 
-    .controller('modalLoginCtrl', ['$scope','$http', '$modalInstance','loginFactory',  function($scope, $http, $modalInstance, loginFactory) {
-        $scope.data = {
-            username: "xxx",
-            password: "fabioros"
-        };
+    .controller('modalLoginCtrl', ['$scope','$http', '$modalInstance','loginFactory', function($scope, $http, $modalInstance, loginFactory) {
+
+        $scope.login_credentials = {};
+        $scope.login_credentials_due = {};
 
         $scope.ok = function () {
-            $http.post("http://localhost:8000/auth/login", $scope.data).
-                    success(function(data, status, headers, config){
-                        console.log(data);
-                    });
-            $modalInstance.close( /*loginFactory($scope.data)*/);
+
+            $scope.login_credentials = loginFactory.login();
+            console.log($scope.login_credentials);
+
+            $scope.login_credentials_due = loginFactory.login_due();
+            console.log($scope.login_credentials_due);
+
+            $modalInstance.close();
         };
 
         $scope.cancel = function () {

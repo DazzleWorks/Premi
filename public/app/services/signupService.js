@@ -7,18 +7,22 @@
 * @param {integer} idPrs - identify the project that contains the Slide
 * @param {integer} idSlide - identify the the Slide
 */
-angular.module('app.services.signupService', [])
+angular.module('app.services.signupService', ['ngRoute', 'ngResource'])
 
-    .factory('signupFactory', ['$http', function ($http, credentials) {
-        return function () {
-           $http({
+    .factory('signupFactory', ['$http', '$resource', function ($http, $resource) {
+
+        return $resource('/auth/register', {}, {
+            signup:{
                 method: 'POST',
-                url: '/auth/register',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                data: credentials
-            })
-            .success(function(data) {
-                console.log(data);
-            });
-        };
+                // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                params: {
+                    email: "fabioros@gmail.com",
+                    username: "fabioros",
+                    firstName: "Fabio",
+                    lastName: "Ros",
+                    password: "tettegrosse"
+                }
+            }
+        });
+
     }]);

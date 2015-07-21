@@ -6,6 +6,7 @@ angular.module('app.services',
         'ngResource',
         'app.services.slideService',
         'app.services.loginService',
+        'app.services.signupService',
         'app.services.presentationServices',
         'app.services.slideServices'
     ]
