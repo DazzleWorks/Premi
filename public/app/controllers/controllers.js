@@ -3,19 +3,19 @@
 angular.module('app.controllers',
     [
         'ngRoute',
-        'app.controllers.homePageCtrl',
-        'app.controllers.infographicEditorCtrl',
-        'app.controllers.modalImageCtrl',
-        'app.controllers.modalLoginCtrl',
-        'app.controllers.modalSignupCtrl',
-        'app.controllers.modalTextCtrl',
-        'app.controllers.myProjectsCtrl',
-        'app.controllers.presentationCtrl',
-        'app.controllers.presentationEditorCtrl',
-        'app.controllers.restrictedAreaCtrl',
-        'app.controllers.sectionChooserCtrl',
-        'app.controllers.slideEditorCtrl',
-        'app.controllers.topBarCtrl',
-        'app.controllers.topMenuCtrl'
+        'app.controllers.HomePageCtrl',
+        'app.controllers.ImageCtrl',
+        'app.controllers.InfographicEditorCtrl',
+        'app.controllers.LoginCtrl',
+        'app.controllers.MyProjectsCtrl',
+        'app.controllers.PresentationCtrl',
+        'app.controllers.PresentationEditorCtrl',
+        'app.controllers.RestrictedAreaCtrl',
+        'app.controllers.SectionChooserCtrl',
+        'app.controllers.SignupCtrl',
+        'app.controllers.SlideEditorCtrl',
+        'app.controllers.TextCtrl',
+        'app.controllers.TopBarCtrl',
+        'app.controllers.TopMenuCtrl'
     ]
 );

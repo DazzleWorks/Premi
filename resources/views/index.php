@@ -5,7 +5,7 @@
  * Home page of the software Premi
  -->
 <!doctype html>
-<html ng-app="app" ng-controller="homePageCtrl">
+<html ng-app="app" ng-controller="HomePageCtrl">
     <head>
         <meta charset="utf-8">
         <title>Premi - Presentation Editor</title>
@@ -22,21 +22,21 @@
         <link href="assets/libs/foundation/css/foundation.css" rel="stylesheet" type="text/css">
 
         <!-- font -->
-        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+        <!-- <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
+        <!-- <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'> -->
+        <!-- <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'> -->
     </head>
 
 
     <body>
         <!-- TOP MENU BEGIN -->
-        <div><top-bar-directive/></div>
+        <div><top-bar-me/></top-bar-me></div>
 
         <!-- HOME PAGE -->
-        <div ng-show= "home === 'true'"><home-page-directive/></div>
+        <div ng-show= "home === 'true'"><home-page></home-page></div>
 
         <!-- AREA UTENTE -->
-        <div ng-show= "restrictedArea === 'true'"><restricted-area-directive/></div>
+        <div ng-show= "restrictedArea === 'true'"><restricted-area></restricted-area></div>
 
 
         <!-- script -->
@@ -55,40 +55,57 @@
         <script src="app/filters/filters.js" type="text/javascript"></script>
         <script src="app/services/services.js" type="text/javascript"></script>
 
-        <script src="app/controllers/homePageCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/infographicEditorCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/modalImageCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/modalLoginCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/modalSignupCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/modalTextCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/myProjectsCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/presentationCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/presentationEditorCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/restrictedAreaCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/sectionChooserCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/slideEditorCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/topBarCtrl.js" type="text/javascript"></script>
-        <script src="app/controllers/topMenuCtrl.js" type="text/javascript"></script>
+            <!-- controllers -->
+            <script src="app/controllers/home/HomePageCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/home/LoginCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/home/SignupCtrl.js" type="text/javascript"></script>
 
-        <script src="app/directives/homePageDirective.js" type="text/javascript"></script>
-        <script src="app/directives/infographicEditorDirective.js" type="text/javascript"></script>
-        <script src="app/directives/menuPageSwitcherDirective.js" type="text/javascript"></script>
-        <script src="app/directives/myProjectsDirective.js" type="text/javascript"></script>
-        <script src="app/directives/presentationDirective.js" type="text/javascript"></script>
-        <script src="app/directives/presentationEditorDirective.js" type="text/javascript"></script>
-        <script src="app/directives/restrictedAreaDirective.js" type="text/javascript"></script>
-        <script src="app/directives/slideEditorDirective.js" type="text/javascript"></script>
-        <script src="app/directives/slideEditorPanelDirective.js" type="text/javascript"></script>
-        <script src="app/directives/slideEditorPanelSpecDirective.js" type="text/javascript"></script>
-        <script src="app/directives/textEditorPanelDirective.js" type="text/javascript"></script>
-        <script src="app/directives/topBarDirective.js" type="text/javascript"></script>
-        <script src="app/directives/topMenuDirective.js" type="text/javascript"></script>
+            <script src="app/controllers/infographic/InfographicEditorCtrl.js" type="text/javascript"></script>
 
-        <script src="app/services/slideService.js" type="text/javascript"></script>
-        <script src="app/services/loginService.js" type="text/javascript"></script>
-        <script src="app/services/signupService.js" type="text/javascript"></script>
-        <script src="app/services/presentationServices.js" type="text/javascript"></script>
-        <script src="app/services/slideServices.js" type="text/javascript"></script>
+            <script src="app/controllers/main/TopBarCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/main/TopMenuCtrl.js" type="text/javascript"></script>
+
+            <script src="app/controllers/presentation/PresentationCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/presentation/PresentationEditorCtrl.js" type="text/javascript"></script>
+
+            <script src="app/controllers/restrictedArea/RestrictedAreaCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/restrictedArea/SectionChooserCtrl.js" type="text/javascript"></script>
+
+            <script src="app/controllers/slide/ImageCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/slide/TextCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/slide/SlideEditorCtrl.js" type="text/javascript"></script>
+
+            <script src="app/controllers/user/MyProjectsCtrl.js" type="text/javascript"></script>
+
+
+            <!-- directives -->
+            <script src="app/directives/home/homePage.js" type="text/javascript"></script>
+
+            <script src="app/directives/infographic/infographicEditor.js" type="text/javascript"></script>
+
+            <script src="app/directives/main/topBar.js" type="text/javascript"></script>
+            <script src="app/directives/main/topMenu.js" type="text/javascript"></script>
+
+            <script src="app/directives/presentation/presentation.js" type="text/javascript"></script>
+            <script src="app/directives/presentation/presentationEditor.js" type="text/javascript"></script>
+
+            <script src="app/directives/restrictedArea/restrictedArea.js" type="text/javascript"></script>
+
+            <script src="app/directives/slide/slideEditor.js" type="text/javascript"></script>
+            <script src="app/directives/slide/slideEditorPanel.js" type="text/javascript"></script>
+            <script src="app/directives/slide/slideEditorPanelSpec.js" type="text/javascript"></script>
+            <script src="app/directives/slide/textEditorPanel.js" type="text/javascript"></script>
+
+            <script src="app/directives/user/myProjects.js" type="text/javascript"></script>
+
+
+            <!-- services -->
+            <script src="app/services/home/login.js" type="text/javascript"></script>
+            <script src="app/services/home/signup.js" type="text/javascript"></script>
+
+            <script src="app/services/presentation/presentation.js" type="text/javascript"></script>
+
+            <script src="app/services/slide/slide.js" type="text/javascript"></script>
 
     </body>
 </html>
