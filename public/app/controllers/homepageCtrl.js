@@ -25,6 +25,7 @@ angular.module('app.controllers.homePageCtrl', ['ngRoute'])
 
             modalInstance.result.then(function (text) {
                 // INSERIRE FUNZIONE
+                console.log("login");
             });
         }
 
@@ -34,9 +35,10 @@ angular.module('app.controllers.homePageCtrl', ['ngRoute'])
                 controller: 'modalSignupCtrl'
             });
 
-            modalInstance.result.then(function (text) {
+            // modalInstance.result.then(function (text) {
             //     // INSERIRE FUNZIONE
-            });
+            //     console.log("signup");
+            // });
         }
 
 }]);
