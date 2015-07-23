@@ -19,7 +19,7 @@ angular.module('app.services.loginService', ['ngRoute', 'ngResource'])
                 method: 'POST',
                 // parameters to pass
                 params: {
-                    email: "fabioros@gmail.com",
+                    username: "xxx",
                     password: "fabioros"
                 }
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -29,7 +29,7 @@ angular.module('app.services.loginService', ['ngRoute', 'ngResource'])
                 method: 'GET',
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
-                    email: "fabioros@gmail.com",
+                    username: "xxx",
                     password: "fabioros"
                 }
             }
