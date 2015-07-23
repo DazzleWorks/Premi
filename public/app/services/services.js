@@ -4,10 +4,9 @@ angular.module('app.services',
     [
         'ngRoute',
         'ngResource',
-        'app.services.slideService',
-        'app.services.loginService',
-        'app.services.signupService',
-        'app.services.presentationServices',
-        'app.services.slideServices'
+        'app.services.login',
+        'app.services.presentation',
+        'app.services.signup',
+        'app.services.slide'
     ]
 );
