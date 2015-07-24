@@ -19,7 +19,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.openLogin = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/templates/LoginView.html',
+                templateUrl: 'app/templates/login.html',
                 controller: 'LoginCtrl'
             });
 
@@ -30,7 +30,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.openSignup = function () {
             var modalInstance = $modal.open({
-                templateUrl: 'app/templates/SignupView.html',
+                templateUrl: 'app/templates/signup.html',
                 controller: 'SignupCtrl'
             });
 

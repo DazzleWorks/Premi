@@ -23,15 +23,6 @@ angular.module('app.services.login', ['ngRoute', 'ngResource'])
                     password: "fabioros"
                 }
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            },
-
-            login_due:{
-                method: 'GET',
-                // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                params: {
-                    username: "xxx",
-                    password: "fabioros"
-                }
             }
         });
     }]);
