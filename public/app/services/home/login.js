@@ -16,8 +16,7 @@ angular.module('app.services.login', ['ngRoute', 'ngResource'])
                 login: {
                     method: 'POST',
                     params: {
-                        // DA CORREGGERE BACK-END: no email --> si username
-                        email: data.username,
+                        username: data.username,
                         password: data.password
                     }
                 }

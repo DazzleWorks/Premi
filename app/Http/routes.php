@@ -31,6 +31,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('check', function(){
+   echo Auth::user(); 
+});
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
