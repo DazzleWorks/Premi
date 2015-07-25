@@ -9,18 +9,23 @@
 */
 angular.module('app.services.signup', ['ngRoute', 'ngResource'])
 
-    .factory('signupFactory', ['$http', '$resource', function ($http, $resource) {
+    .factory('signupService', ['$scope', '$http', '$resource', function ($scope, $http, $resource) {
 
         return $resource('/auth/register', {}, {
             signup:{
                 method: 'POST',
-                // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
-                    email: "fabioros@gmail.com",
-                    username: "fabioros",
-                    firstName: "Fabio",
-                    lastName: "Ros",
-                    password: "tettegrosse"
+                    // email: "fabioros@gmail.com",
+                    // username: "fabioros",
+                    // firstName: "Fabio",
+                    // lastName: "Ros",
+                    // password: "fabioros"
+
+                    email: $scope.signup_data.email,
+                    username: $scope.signup_data.username,
+                    firstName: $scope.signup_data.firstName,
+                    lastName: $scope.signup_data.lastName,
+                    password: $scope.signup_data.password
                 }
             }
         });

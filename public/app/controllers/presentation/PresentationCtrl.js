@@ -2,7 +2,7 @@ angular.module('app.controllers.PresentationCtrl', ['ngRoute'])
 
 .controller('PresentationCtrl', ['$scope', '$sce', 'presentationData', function($scope, $sce, presentationData) {
 
-    $scope.columnsIds=[1,2];
+    var columnsIds=[1,2];
 
     presentationData.loadSlide();
 //    $scope.getColumnsIds= function(){

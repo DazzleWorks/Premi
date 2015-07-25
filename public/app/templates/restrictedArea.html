@@ -6,15 +6,20 @@
         <div class= "small-6 columns">
             <nav id="section-menu">
                 <div class="button-group">
-                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'">My Projects</button>
-                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="presentationEditor" btn-radio= "'presentationEditor'">Presentation Editor</button>
-                    <button type="button" class="button radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="infographicEditor" btn-radio= "'infographicEditor'">Infographic Editor</button>
+                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myAccount" btn-radio= "'myAccount'">My Account</button>
+                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'">My Projects</button>
+                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="presentationEditor" btn-radio= "'presentationEditor'">Presentation Editor</button>
+                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="infographicEditor" btn-radio= "'infographicEditor'">Infographic Editor</button>
                 </div>
             </nav>
         </div>
     </div>
 
     <div class= "row">
+        <div ng-show= "radioModel == 'myAccount'" id="myAccount" ng-controller="MyAccountCtrl">
+            <my-account></my-account>
+        </div>
+
         <div ng-show= "radioModel == 'myProjects'" id="myProjects" ng-controller="MyProjectsCtrl">
             <my-projects></my-projects>
         </div>

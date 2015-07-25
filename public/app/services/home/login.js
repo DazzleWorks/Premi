@@ -9,17 +9,17 @@
 */
 angular.module('app.services.login', ['ngRoute', 'ngResource'])
 
-    .factory('loginFactory', ['$http', '$resource', function ($http, $resource) {
+    .factory('loginService', ['$http', '$resource', function ($http, $resource) {
 
         // association resource - url
         return $resource('/auth/login', {}, {
             // function name
-            login:{
+            login: {
                 // call's type
                 method: 'POST',
                 // parameters to pass
                 params: {
-                    username: "xxx",
+                    email: "fabioros@gmail.com",
                     password: "fabioros"
                 }
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},

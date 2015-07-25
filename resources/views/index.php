@@ -36,7 +36,7 @@
         <div ng-show= "home === 'true'"><home-page></home-page></div>
 
         <!-- AREA UTENTE -->
-        <div ng-show= "restrictedArea === 'true'"><restricted-area></restricted-area></div>
+        <div ng-show= "home === 'false'"><restricted-area></restricted-area></div>
 
 
         <!-- script -->
@@ -62,19 +62,16 @@
 
             <script src="app/controllers/infographic/InfographicEditorCtrl.js" type="text/javascript"></script>
 
-            <script src="app/controllers/main/TopBarCtrl.js" type="text/javascript"></script>
-            <script src="app/controllers/main/TopMenuCtrl.js" type="text/javascript"></script>
-
             <script src="app/controllers/presentation/PresentationCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/presentation/PresentationEditorCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/restrictedArea/RestrictedAreaCtrl.js" type="text/javascript"></script>
-            <script src="app/controllers/restrictedArea/SectionChooserCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/slide/ImageCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/slide/TextCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/slide/SlideEditorCtrl.js" type="text/javascript"></script>
 
+            <script src="app/controllers/user/MyAccountCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/user/MyProjectsCtrl.js" type="text/javascript"></script>
 
 
@@ -96,16 +93,20 @@
             <script src="app/directives/slide/slideEditorPanelSpec.js" type="text/javascript"></script>
             <script src="app/directives/slide/textEditorPanel.js" type="text/javascript"></script>
 
+            <script src="app/directives/user/myAccount.js" type="text/javascript"></script>
             <script src="app/directives/user/myProjects.js" type="text/javascript"></script>
 
 
             <!-- services -->
             <script src="app/services/home/login.js" type="text/javascript"></script>
+            <script src="app/services/home/logout.js" type="text/javascript"></script>
             <script src="app/services/home/signup.js" type="text/javascript"></script>
 
             <script src="app/services/presentation/presentation.js" type="text/javascript"></script>
 
             <script src="app/services/slide/slide.js" type="text/javascript"></script>
+
+            <script src="app/services/user/user.js" type="text/javascript"></script>
 
     </body>
 </html>

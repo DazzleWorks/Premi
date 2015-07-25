@@ -1,6 +1,6 @@
 angular.module('app.controllers.SignupCtrl', ['ngRoute'])
 
-    .controller('SignupCtrl', ['$scope','$http', '$modalInstance', 'signupFactory', function($scope, $http, $modalInstance, signupFactory) {
+    .controller('SignupCtrl', ['$scope','$http', '$modalInstance', 'signupService', function($scope, $http, $modalInstance, signupService) {
 
         $scope.signup_data = {
             username: "",
@@ -11,12 +11,12 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
         };
 
         $scope.checkFields = function(){
-			$scope.fieldsError = false;
+			var fieldsError = false;
 		}
 
         $scope.ok = function () {
-            $scope.signup_ok = signupFactory.signup(/*$scope.signup_data*/);
-            $modalInstance.close();
+            var user = signupService.signup(/*$scope.signup_data*/);
+            $modalInstance.close(user);
         };
 
         $scope.cancel = function () {
