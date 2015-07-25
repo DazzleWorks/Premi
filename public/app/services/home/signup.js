@@ -20,7 +20,8 @@ angular.module('app.services.signup', ['ngRoute', 'ngResource'])
                         username: data.username,
                         firstName: data.firstName,
                         lastName: data.lastName,
-                        password: data.password
+                        password: data.password,
+                        password_confirmation: data.password_confirmation
                     }
                 }
             })

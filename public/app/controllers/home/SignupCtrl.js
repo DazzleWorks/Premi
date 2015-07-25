@@ -7,7 +7,8 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
             email: "",
             firstName: "",
             lastName: "",
-            password: ""
+            password: "",
+            password_confirmation: ""
         };
 
         $scope.checkFields = function(){
