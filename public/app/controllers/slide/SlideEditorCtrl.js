@@ -79,7 +79,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/templates/TextView.html',
+                    templateUrl: 'app/templates/text.html',
                     controller: 'TextCtrl'
                 });
 
@@ -90,7 +90,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
             }else if (elementType === "editImage"){
                 var modalInstance = $modal.open({
-                    templateUrl: 'app/templates/modalImageView.html',
+                    templateUrl: 'app/templates/image.html',
                     controller: 'ImageCtrl'
                 });
 

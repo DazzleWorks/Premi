@@ -15,7 +15,7 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
 		}
 
         $scope.ok = function () {
-            var user = signupService.signup(/*$scope.signup_data*/);
+            var user = signupService($scope.signup_data).signup();
             $modalInstance.close(user);
         };
 

@@ -11,18 +11,17 @@ angular.module('app.services.login', ['ngRoute', 'ngResource'])
 
     .factory('loginService', ['$http', '$resource', function ($http, $resource) {
 
-        // association resource - url
-        return $resource('/auth/login', {}, {
-            // function name
-            login: {
-                // call's type
-                method: 'POST',
-                // parameters to pass
-                params: {
-                    email: "fabioros@gmail.com",
-                    password: "fabioros"
+        return function(data) {
+            return $resource('/auth/login', {}, {
+                login: {
+                    method: 'POST',
+                    params: {
+                        // DA CORREGGERE BACK-END: no email --> si username
+                        email: data.username,
+                        password: data.password
+                    }
                 }
-                // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            }
-        });
+            })
+        };
+
     }]);

@@ -4,14 +4,14 @@
 <form>
     <div class="modal-body">
     	<label>Username</label>
-        <input type="text" ng-model="data.text" class="form-control">
-        
+        <input type="text" ng-model="login_data.username" class="form-control">
+
     	<label>Password</label>
-        <input type="password" ng-model="data.password" class="form-control">
+        <input type="password" ng-model="login_data.password" class="form-control">
     </div>
 
     <div class="modal-footer">
-        <button class="button" ng-click="ok()">OK</button>
+        <button class="button small radius" ng-click="ok()">OK</button>
         <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
     </div>
 </form>

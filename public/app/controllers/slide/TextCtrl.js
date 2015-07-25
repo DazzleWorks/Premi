@@ -1,15 +1,16 @@
 angular.module('app.controllers.TextCtrl', ['ngRoute'])
 
-    .controller('TextCtrl',['$scope','$modalInstance', function($scope, $modalInstance) {
-        var data = {
+    .controller('TextCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+
+        $scope.data = {
             text: ""
         };
 
-        var ok = function () {
-            $modalInstance.close(data.text);
+        $scope.ok = function () {
+            $modalInstance.close($scope.data.text);
         };
 
-        var cancel = function () {
+        $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
     }]);

@@ -2,7 +2,7 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute'])
 
     .controller('ImageCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-        var insertImage = function (imageId) {
+        $scope.insertImage = function (imageId) {
             $modalInstance.close(imageId);
         };
 
@@ -45,7 +45,7 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute'])
         //     };
         // };
 
-        var cancel = function () {
+        $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
 
