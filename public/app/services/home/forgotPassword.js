@@ -7,17 +7,15 @@
 * @param {integer} idPrs - identify the project that contains the Slide
 * @param {integer} idSlide - identify the the Slide
 */
-angular.module('app.services.login', ['ngRoute', 'ngResource'])
+angular.module('app.services.forgotPassword', ['ngRoute', 'ngResource'])
 
-    .factory('loginService', ['$http', '$resource', function ($http, $resource) {
+    .factory('forgotPasswordService', ['$http', '$resource', function ($http, $resource) {
 
         return function(data) {
-            return $resource('/auth/login', {}, {
+            return $resource('/auth/...', {}, {
                 login: {
                     method: 'POST',
                     params: {
-                        email: data.username,
-                        password: data.password
                     }
                 }
             })

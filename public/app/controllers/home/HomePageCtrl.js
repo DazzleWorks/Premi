@@ -23,16 +23,18 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    console.log(data);
-                    $scope.user = data;
+                    // DA SISTEMARE RETURN DEL BACK-END
+                    // $scope.user = data;
+                    $scope.user = "true";
                 });
             }
         };
 
         $scope.logout = function () {
             if ($scope.user !== "false") {
-                var user_logout = logoutService.logout();
-                console.log(user_logout);
+                // DA SISTEMARE RETURN DEL BACK-END
+                // var user_logout = logoutService.logout();
+                var user_logout = "true";
                 if (user_logout === "true")
                     $scope.user = "false";
             }
@@ -46,9 +48,22 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    $scope.user = data;
+                    // DA SISTEMARE RETURN DEL BACK-END
+                    // $scope.user = data;
+                    $scope.user = "true";
                 });
             }
+        };
+
+        $scope.resetPassword = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/resetPassword.html',
+                controller: 'ResetPasswordCtrl',
+                windowClass: 'myModal'
+            });
+            modalInstance.result.then(function (data) {
+                console.log("reset");
+            });
         };
 
 }]);

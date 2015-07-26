@@ -56,8 +56,10 @@
         <script src="app/services/services.js" type="text/javascript"></script>
 
             <!-- controllers -->
+            <script src="app/controllers/home/ForgotPasswordCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/HomePageCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/LoginCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/home/ResetPasswordCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/SignupCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/infographic/InfographicEditorCtrl.js" type="text/javascript"></script>
@@ -98,6 +100,7 @@
 
 
             <!-- services -->
+            <!-- <script src="app/services/home/forgotPassword.js" type="text/javascript"></script> -->
             <script src="app/services/home/login.js" type="text/javascript"></script>
             <script src="app/services/home/logout.js" type="text/javascript"></script>
             <script src="app/services/home/signup.js" type="text/javascript"></script>

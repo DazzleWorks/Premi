@@ -4,6 +4,7 @@ angular.module('app.services',
     [
         'ngRoute',
         'ngResource',
+        // 'app.services.forgotPassword',
         'app.services.login',
         'app.services.logout',
         'app.services.presentation',
