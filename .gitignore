@@ -1,8 +1,8 @@
 /bootstrap/compiled.php
 /node_modules
-/vendor
 .env.*.php
 .env.php
 .env
 .idea/
 /nbproject/private/
+
