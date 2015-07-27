@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\User;
 
 
 /**
@@ -33,20 +34,20 @@ class UserController extends Controller
      * 
      * @return array json
      */
-    public function show($username= ""){
+    public function show($username){
         if(!\Auth::user()) {
-            return redirect()->route('auth/login');
+            return response()->json(['status' => 'utente non loggato']);/*redirect()->route('auth/login');*/
         }
         
-        if(empty($username)) {
+        /*if(empty($username)) {
             $username = \Auth::user()->username;
-        }
+        }*/
         
-        $user = getParamByUsername($username);
+        $data = User::getParamByUsername($username);
         
-        $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
+        // $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
         
-        return response($user, $project);
+        return response($data);
     }
     
     /**

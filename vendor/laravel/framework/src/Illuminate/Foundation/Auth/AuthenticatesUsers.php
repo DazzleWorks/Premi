@@ -36,14 +36,14 @@ trait AuthenticatesUsers
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return redirect()->intended($this->redirectPath());
+            return response($credentials); /*redirect()->intended($this->redirectPath());*/
         }
 
-        return redirect($this->loginPath())
+        return response()->json(['status' => 'credenziali errate']); /*redirect($this->loginPath())
             ->withInput($request->only('email', 'remember'))
             ->withErrors([
                 'email' => $this->getFailedLoginMessage(),
-            ]);
+            ]);*/
     }
 
     /**

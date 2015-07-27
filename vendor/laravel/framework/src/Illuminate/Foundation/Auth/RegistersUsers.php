@@ -30,13 +30,15 @@ trait RegistersUsers
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            $this->throwValidationException(
+            /*$this->throwValidationException(
                 $request, $validator
-            );
+            );*/
+            return response()->json(['status' => 'errore nelle credenziali inserite']);
         }
 
         Auth::login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        $user = Auth::user();
+        return response($user); /*redirect($this->redirectPath());*/
     }
 }

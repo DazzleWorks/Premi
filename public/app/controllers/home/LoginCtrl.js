@@ -21,6 +21,7 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
 
         $scope.ok = function () {
             var user = loginService($scope.login_data).login();
+            console.log(user);
             $modalInstance.close(user);
         };
 
