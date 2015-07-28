@@ -43,11 +43,12 @@ class UserController extends Controller
             $username = \Auth::user()->username;
         }*/
         
-        $data = User::getParamByUsername($username);
+        $user = \Auth::user();
+        //$data = User::getParamByUsername($username);
         
         // $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
         
-        return response($data);
+        return response($user);
     }
     
     /**
