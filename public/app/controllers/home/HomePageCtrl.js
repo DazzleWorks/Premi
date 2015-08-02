@@ -4,6 +4,9 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
     .controller('HomePageCtrl', ['$scope', '$modal', 'logoutService', function($scope, $modal, logoutService) {
 
+        // disconnect any user on load page
+        logoutService.logout();
+
         $scope.home = "true";
         $scope.user = "false";
 
@@ -23,20 +26,18 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    // DA SISTEMARE RETURN DEL BACK-END
-                    // $scope.user = data;
-                    $scope.user = "true";
+                    if (data !== undefined)
+                        $scope.user = data;
+                    else
+                        $scope.user = "false";
                 });
             }
         };
 
         $scope.logout = function () {
             if ($scope.user !== "false") {
-                // DA SISTEMARE RETURN DEL BACK-END
-                // var user_logout = logoutService.logout();
-                var user_logout = "true";
-                if (user_logout === "true")
-                    $scope.user = "false";
+                var user_logout = logoutService.logout();
+                $scope.user = "false";
             }
         };
 
@@ -48,9 +49,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    // DA SISTEMARE RETURN DEL BACK-END
-                    // $scope.user = data;
-                    $scope.user = "true";
+                    if (data !== undefined)
+                        $scope.user = data;
+                    else
+                        $scope.user = "false";
                 });
             }
         };

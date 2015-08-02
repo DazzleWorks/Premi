@@ -15,14 +15,20 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 $modalInstance.close();
-                console.log(data);
             });
         };
 
         $scope.ok = function () {
             var user = loginService($scope.login_data).login();
-            console.log(user);
-            $modalInstance.close(user);
+            user.$promise.then(
+                // loginService.login() success
+                function(data){
+                    $modalInstance.close(data.username);
+                },
+                // loginService.login() unsuccess
+                function(data){
+                    $modalInstance.close();
+                });
         };
 
         $scope.cancel = function () {

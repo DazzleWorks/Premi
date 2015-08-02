@@ -16,6 +16,12 @@ body {
     text-align: center;
 }
 
+#userData {
+    /*border: 1px black solid;*/
+    background-color: #eeeeee;
+    padding-left: 1em;
+}
+
 #footer {
     position: fixed;
     bottom: 0;

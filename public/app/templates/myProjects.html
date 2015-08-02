@@ -1,11 +1,19 @@
-<div class="small-3 columns">
-    <ul id="folder">
-        <li ng-repeat="Project in Projects">
-            <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{Project.Title}}</a></span>
-            <ul id="sub-{{$index+1}}">
-                <li ng-repeat="Section in Project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href>{{Section}}</a></li>
-            </ul>
-        </li>
-    </ul>
+<div class="row" id="myProjects">
+    <div class="small-2 columns">
+        <button class="button small radius success">Nuovo progetto</button>
+    </div>
 </div>
-<div class="small-9 columns "style="background-color: #ececec;">Il mio progetto</div>
+
+<div class="row" id="myProjects">
+    <div class="small-3 columns">
+        <ul id="folder">
+            <li ng-repeat="Project in Projects">
+                <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{Project.Title}}</a></span>
+                <ul id="sub-{{$index+1}}">
+                    <li ng-repeat="Section in Project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href>{{Section}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="small-9 columns "style="background-color: #ececec;">Il mio progetto</div>
+</div>
