@@ -26,8 +26,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    if (data !== undefined)
+                    if (data !== undefined) {
                         $scope.user = data;
+                        $scope.openRestrictedArea();
+                    }
                     else
                         $scope.user = "false";
                 });
