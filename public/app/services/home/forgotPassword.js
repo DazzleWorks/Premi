@@ -12,7 +12,7 @@ angular.module('app.services.forgotPassword', ['ngRoute', 'ngResource'])
     .factory('forgotPasswordService', ['$http', '$resource', function ($http, $resource) {
 
         return function(data) {
-            return $resource('/auth/email', {}, {
+            return $resource('/password/email', {}, {
                 login: {
                     method: 'POST',
                     params: {
