@@ -13,9 +13,9 @@
             <li><a href="#" ng-show="user !== 'false'" ng-click= "logout()">Logout</a></li>
 
             <li class="divider"></li>
-            <li class="has-form"><a class= "button round" href="#" ng-click= "signUp()">Sign up</a></li>
+            <li class="has-form"><a class= "button round" href="#" ng-show="user === 'false'" ng-click= "signUp()">Sign up</a></li>
 
-            <li class="divider"></li>
+            <li class="divider" ng-show="user === 'false'"></li>
             <li has-dropdown class="has-dropdown">
                 <a href="#">Menu</a>
                 <ul top-bar-dropdown class="dropdown">
