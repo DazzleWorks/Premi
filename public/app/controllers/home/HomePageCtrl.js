@@ -26,8 +26,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    if (data !== undefined)
+                    if (data !== undefined) {
                         $scope.user = data;
+                        $scope.openRestrictedArea();
+                    }
                     else
                         $scope.user = "false";
                 });
@@ -38,6 +40,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             if ($scope.user !== "false") {
                 var user_logout = logoutService.logout();
                 $scope.user = "false";
+                $scope.openHome();
             }
         };
 
@@ -49,8 +52,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     windowClass: 'myModal'
                 });
                 modalInstance.result.then(function (data) {
-                    if (data !== undefined)
+                    if (data !== undefined){
                         $scope.user = data;
+                        $scope.openRestrictedArea();
+                    }
                     else
                         $scope.user = "false";
                 });
