@@ -12,7 +12,7 @@ angular.module('app.services.user', ['ngRoute', 'ngResource'])
 
     .factory('userService', ['$http', '$resource', function ($http, $resource) {
 
-        return $resource('/api/user/fabioros', {}, {
+        return $resource('/api/user/:id', {}, {
             getDati:{
                 method: 'GET',
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
