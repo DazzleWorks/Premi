@@ -16,10 +16,8 @@ body {
     text-align: center;
 }
 
-#userData {
-    /*border: 1px black solid;*/
-    background-color: #eeeeee;
-    padding-left: 1em;
+.user-data {
+    background-color: #efefef;
 }
 
 #footer {
@@ -36,7 +34,7 @@ body {
 }
 
 .row{
-    max-width: 100% !important;
+    max-width: 98% !important;
     margin-top: 0.5em !important;
 }
 
@@ -149,7 +147,7 @@ body {
 .infographicsList img{
 	max-width:200px;
 	display:block;
-} 
+}
 
 .infographicsList a{
 	text-align: center !important;
