@@ -4,19 +4,19 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         $scope.Projects = [
             {
                 Title: "MyProject1",
-                sections: ["Presentation", "Infographics", "Modules"]
+                sections: ["Presentation", "Infographics"]
             }, {
                 Title: "MyProject2",
-                sections: ["Presentation", "Infographics", "Modules"]
+                sections: ["Presentation", "Infographics"]
             }, {
                 Title: "MyProject3",
-                sections: ["Presentation", "Infographics", "Modules"]
+                sections: ["Presentation", "Infographics"]
             }, {
                 Title: "MyProject4",
-                sections: ["Presentation", "Infographics", "Modules"]
+                sections: ["Presentation", "Infographics"]
             }, {
                 Title: "MyProject5",
-                sections: ["Presentation", "Infographics", "Modules"]
+                sections: ["Presentation", "Infographics"]
             }
         ];
 
