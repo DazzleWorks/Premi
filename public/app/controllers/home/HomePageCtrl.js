@@ -2,7 +2,7 @@
 
 angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
-    .controller('HomePageCtrl', ['$scope', '$modal', 'logoutService', function($scope, $modal, logoutService) {
+    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService', function($scope, $rootScope, $modal, logoutService) {
 
         // disconnect any user on load page
         logoutService.logout();
@@ -15,6 +15,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         };
 
         $scope.openRestrictedArea = function () {
+            $rootScope.$broadcast('loadUserData');
             $scope.home = "false";
         };
 

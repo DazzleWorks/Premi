@@ -1,8 +1,9 @@
 angular.module('app.controllers.MyAccountCtrl', ['ngRoute'])
 
-    .controller('MyAccountCtrl', ['$scope', 'userService', function($scope, userService) {
+    .controller('MyAccountCtrl', ['$scope', '$rootScope', 'userService', function($scope, $rootScope, userService) {
 
-        if ($scope.radioModel === "myAccount")
+        $rootScope.$on('loadUserData', function (e) {
             $scope.user_data = userService.getDati({id:$scope.user});
+        });
 
 }]);

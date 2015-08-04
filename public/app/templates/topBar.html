@@ -8,21 +8,12 @@
     <top-bar-section class="top-bar-section">
         <!-- Right Nav Section -->
         <ul class="right">
+            <li class="divider" ng-show="user === 'false'"></li>
+            <li class="has-form"><a class= "button round" href="#" ng-show="user === 'false'" ng-click= "signUp()">Sign up</a></li>
+
             <li class="divider"></li>
             <li><a href="#" ng-show="user === 'false'" ng-click= "login()">Login</a></li>
             <li><a href="#" ng-show="user !== 'false'" ng-click= "logout()">Logout</a></li>
-
-            <li class="divider"></li>
-            <li class="has-form"><a class= "button round" href="#" ng-show="user === 'false'" ng-click= "signUp()">Sign up</a></li>
-
-            <li class="divider" ng-show="user === 'false'"></li>
-            <li has-dropdown class="has-dropdown">
-                <a href="#">Menu</a>
-                <ul top-bar-dropdown class="dropdown">
-                    <li><a href="#" ng-click="openHome()">HOME</a></li>
-                    <li><a href="#" ng-click="openRestrictedArea()">Restricted area</a></li>
-                </ul>
-            </li>
         </ul>
 
         <!-- Left Nav Section -->
