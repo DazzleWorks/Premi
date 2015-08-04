@@ -15,6 +15,10 @@ angular.module('app.services.user', ['ngRoute', 'ngResource'])
         return $resource('/api/user/:id', {}, {
             getDati:{
                 method: 'GET',
+                isArray: true
+                // transformResponse: function (data) {
+                //     return {list: angular.fromJson(data)}
+                // }
                 // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }
         });
