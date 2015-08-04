@@ -13,7 +13,7 @@ angular.module('app.services.forgotPassword', ['ngRoute', 'ngResource'])
 
         return function(data) {
             return $resource('/password/email', {}, {
-                login: {
+                sendEmail: {
                     method: 'POST',
                     params: {
                         email: data.email
