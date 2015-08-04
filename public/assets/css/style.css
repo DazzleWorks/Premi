@@ -154,3 +154,8 @@ body {
 .infographicsList a{
 	text-align: center !important;
 }
+
+.infographicListDelete{
+    text-align: center !important;
+    color:red;
+}

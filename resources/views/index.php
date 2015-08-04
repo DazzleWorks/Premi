@@ -56,6 +56,8 @@
         <script src="app/services/services.js" type="text/javascript"></script>
 
             <!-- controllers -->
+            <script src="app/controllers/home/DeleteInfographicCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/home/DeleteProjectCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/ForgotPasswordCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/HomePageCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/LoginCtrl.js" type="text/javascript"></script>

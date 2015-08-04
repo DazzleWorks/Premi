@@ -3,6 +3,8 @@
 angular.module('app.controllers',
     [
         'ngRoute',
+        'app.controllers.DeleteInfographicCtrl',
+        'app.controllers.DeleteProjectCtrl',
         'app.controllers.ForgotPasswordCtrl',
         'app.controllers.HomePageCtrl',
         'app.controllers.ImageCtrl',
