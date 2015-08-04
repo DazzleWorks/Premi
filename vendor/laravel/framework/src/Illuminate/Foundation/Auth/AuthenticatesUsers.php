@@ -5,6 +5,7 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 trait AuthenticatesUsers
 {
     use RedirectsUsers;
@@ -24,7 +25,7 @@ trait AuthenticatesUsers
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return response($credentials->username); 
+            return response($credentials); 
         }
 
         return response()->json(['status' => 'credenziali errate']); 
@@ -39,5 +40,18 @@ trait AuthenticatesUsers
     protected function getCredentials(Request $request)
     {
         return $request->only('username', 'password');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? 
+                $this->redirectAfterLogout : '/');
     }
 }
