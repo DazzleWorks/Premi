@@ -56,14 +56,13 @@
         <script src="app/services/services.js" type="text/javascript"></script>
 
             <!-- controllers -->
-            <script src="app/controllers/home/DeleteInfographicCtrl.js" type="text/javascript"></script>
-            <script src="app/controllers/home/DeleteProjectCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/ForgotPasswordCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/HomePageCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/LoginCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/ResetPasswordCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/SignupCtrl.js" type="text/javascript"></script>
 
+            <script src="app/controllers/infographic/DeleteInfographicCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/infographic/InfographicEditorCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/presentation/PresentationCtrl.js" type="text/javascript"></script>
@@ -78,6 +77,7 @@
             <script src="app/controllers/user/MyAccountCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/user/MyProjectsCtrl.js" type="text/javascript"></script>
 
+            <script src="app/controllers/project/DeleteProjectCtrl.js" type="text/javascript"></script>
 
             <!-- directives -->
             <script src="app/directives/home/homePage.js" type="text/javascript"></script>

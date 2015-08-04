@@ -64,19 +64,29 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 windowClass: 'myModal'
             });
             modalInstance.result.then(function (data) {
-                $modalInstance.close();
+                //modalInstance.close();
             });
 
         };
 
-        $scope.deleteInfographic = function (){
+        $scope.deleteInfographic = function (id, index){
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteInfographic.html',
                 controller: 'DeleteInfographicCtrl',
                 windowClass: 'myModal'
             });
             modalInstance.result.then(function (data) {
-                $modalInstance.close();
+                //$scope.infographics ;
+                $scope.infographics.forEach(function(element, index, array){
+                    console.log(id);
+                    if(element.id === id){
+                        delete $scope.infographics[element];
+                    }
+                });
+                $scope.apply;
+                console.log($scope.infographics);
+                $scope.infographics.splice(index, 1);
+                //$modalInstance.close();
             });
 
         };

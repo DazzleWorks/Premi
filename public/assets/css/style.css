@@ -131,7 +131,7 @@ body {
 	padding-bottom:5px !important;
 }
 .presentationFront{
-	/*height: auto;*/
+	height: auto !important;
 	width:50% !important;
 }
 
@@ -155,6 +155,9 @@ body {
 	text-align: center !important;
 }
 
+.infographicsList > button{
+    display: block !important;
+}
 .infographicListDelete{
     text-align: center !important;
     color:red;

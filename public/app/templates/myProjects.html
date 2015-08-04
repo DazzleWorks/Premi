@@ -16,8 +16,8 @@
         </ul>
     </div>
     <div class="small-9 columns "style="background-color: #ececec;"><h3>PROJECT NAME</h3>
-    	<div class="myPresentationContainer">
-			<h4><span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip" title="In this section you can run or edit your presentation."> Presentation </span></h4>
+		<h4><span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip " title="In this section you can run or edit your presentation."> Presentation </span></h4>
+		<div class="myPresentationContainer  small-offset-1">
 			<img src="../assets/img/google-now.jpg" class="presentationFront">
 			<div class="icon-bar three-up projectMenu">
 			  <a class="item custonMenuIcon" href="../presentation.html" target="_blank">
@@ -36,10 +36,12 @@
     	</div>
     		
     	<h4>Infographics</h4>
-    		<a href="#" class="button" >Add new Infographic</a>
-    		<ul class="inline-list infographicsList">
+			<div class="row small-offset-1">
+    			<a href="#" class="button small-offset-1" >Add new Infographic</a>
+			</div>
+    		<ul class="inline-list infographicsList small-9 columns ">
 				<li class="animate-repeat" ng-repeat="infographic in infographics">
-					<a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic($index)">Delete</a>
+					<a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>
 				</li>
 			</ul>
     
