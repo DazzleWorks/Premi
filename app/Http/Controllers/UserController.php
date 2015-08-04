@@ -35,7 +35,7 @@ class UserController extends Controller
         if(!\Auth::user()) {
             return response()->json(['status' => 'utente non loggato']);
         }
-        
+       
         $data = User::getParamByUsername($username);
         
         return response($data);
