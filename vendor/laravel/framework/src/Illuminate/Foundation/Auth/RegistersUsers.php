@@ -10,19 +10,9 @@ trait RegistersUsers
     use RedirectsUsers;
 
     /**
-     * Show the application registration form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getRegister()
-    {
-        return view('auth.register');
-    }
-
-    /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postRegister(Request $request)
@@ -30,15 +20,12 @@ trait RegistersUsers
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            /*$this->throwValidationException(
-                $request, $validator
-            );*/
-            return response()->json(['status' => 'errore nelle credenziali inserite']);
+            $messages = $validator->messages();
+            return response($messages);
         }
-
-        Auth::login($this->create($request->all()));
-
-        $user = Auth::user();
-        return response($user); /*redirect($this->redirectPath());*/
+        else {
+            $user = Auth::login($this->create($request->all()));
+            return response($user->username);
+        }
     }
 }

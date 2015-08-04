@@ -64,9 +64,8 @@ class User extends Eloquent implements AuthenticatableContract,
     }
     
     public static function getParamByUsername($username) {
-        $user = User::find('$username');
-        return $user; /*array('username' => $user->username, 'email' => $user->email,
-                     'firstName' => $user->firstName, 'lastName' => $user->lastName);*/
+        $user = User::where('username', '=', $username)->get(array('username', 'email', 'firstName', 'lastName'));
+        return $user;
     }
 }
 
