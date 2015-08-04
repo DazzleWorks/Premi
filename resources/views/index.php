@@ -78,6 +78,7 @@
             <script src="app/controllers/user/MyProjectsCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/project/DeleteProjectCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/project/NewProjectCtrl.js" type="text/javascript"></script>
 
             <!-- directives -->
             <script src="app/directives/home/homePage.js" type="text/javascript"></script>

@@ -69,6 +69,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
+
         $scope.deleteInfographic = function (id, index){
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteInfographic.html',
@@ -91,4 +92,17 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
+        $scope.newProject = function (){
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/newProject.html',
+                controller: 'NewProjectCtrl',
+                windowClass: 'myModal'
+            });
+            modalInstance.result.then(function (data) {
+                console.log(data);
+                $scope.Projects.push({title:data,id:"zz"});
+                //modalInstance.close();
+            });
+
+        };
 }]);
