@@ -21,9 +21,16 @@
  * |         |            |               |             |presentation    |
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
- * |  1.0.0  | 2015-06-22 |Burlin Valerio | routes.php  |add infographics| 
+ * |  0.4.0  | 2015-06-22 |Burlin Valerio | routes.php  |add infographics| 
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
+ * |  0.5.0  | 2015-08-01 |Suierica Bogdan| routes.php  |add password    |
+ * |         |            |               |             |reset link      |
+ * |         |            |               |             |request routes  |
+ * +---------+------------+---------------+-------------+----------------+
+ * |  0.5.1  | 2015-08-01 |Suierica Bogdan| routes.php  |add password    |
+ * |         |            |               |             |reset routes    |
+ * +---------+------------+---------------+-------------+----------------+ 
  */
 
 // Home Page routes...
