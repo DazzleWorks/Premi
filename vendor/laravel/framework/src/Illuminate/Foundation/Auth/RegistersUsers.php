@@ -24,11 +24,11 @@ trait RegistersUsers
             return response($messages);
         }
         else {
-            Auth::login($this->create($request->all()));
+            $this->create($request->all());
             $credentials = $this->getCredentials($request);
             Auth::attempt($credentials, $request->has('remember'));
             $username = Auth::user()->username;
-            return response($username);
+            return response()->json(['username' => $username]);
         }
     }
 }
