@@ -3,6 +3,8 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
     .controller('NewProjectCtrl', ['$scope', '$rootScope', '$http', '$modalInstance','projectsService', function($scope, $rootScope, $http, $modalInstance, projectsService) {
 
         var project_data = {
+            user: $scope.user,
+            id: "",
             name: ""
         };
 
@@ -10,11 +12,13 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
 
             project_data.name = $scope.projectName;
 
-            var project = projectsService(project_data).new({id:$scope.user});
+            var project = projectsService(project_data).new();
             project.$promise.then(
                 function(data){
-                    if(data.response === true)
-                        $modalInstance.close(data);
+                    if(data.id !== '') {
+                        project_data.id = data.id;
+                        $modalInstance.close(project_data);
+                    }
                     else
                         $modalInstance.close("Project build failed, server error");
                 },

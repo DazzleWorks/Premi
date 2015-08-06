@@ -10,7 +10,7 @@ angular.module('app.services.projects', ['ngRoute', 'ngResource'])
     .factory('projectsService', ['$http', '$resource', function ($http, $resource) {
 
         return function(data) {
-            return $resource('api/user/:id/project', {}, {
+            return $resource('api/user/' + data.user + '/project', {}, {
                 new: {
                     method: 'POST',
                     params: {

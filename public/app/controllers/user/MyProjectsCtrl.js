@@ -4,59 +4,59 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         $scope.currentProjectName= "Progetto di diga - papà castoro e giovani marmotte";
 
-        $scope.Projects = [
+        $scope.projects = [
             {
-                Title: "MyProject1",
+                title: "MyProject1",
                 sections: ["Presentation", "Infographics"],
                 id:1
             }, {
-                Title: "MyProject2",
+                title: "MyProject2",
                 sections: ["Presentation", "Infographics"],
                 id:2
             }, {
-                Title: "MyProject3",
+                title: "MyProject3",
                 sections: ["Presentation", "Infographics"],
                 id:3
             }, {
-                Title: "MyProject4",
+                title: "MyProject4",
                 sections: ["Presentation", "Infographics"],
                 id:4
             }, {
-                Title: "MyProject5",
+                title: "MyProject5",
                 sections: ["Presentation", "Infographics"],
                 id:5
             }
         ];
 
         $scope.infographics=[
-            {   title:"Title1",
+            {   title:"title1",
                 id:"a1",
                 img:"../assets/img/infographicPlaceholder.png"
                 },
             {
-                title:"Title2",
+                title:"title2",
                 id:"a2",
                 img:"../assets/img/infographicPlaceholder.png"
             },
             {
-                title:"Title3",
+                title:"title3",
                 id:"a3",
                 img:"../assets/img/infographicPlaceholder.png"
             },
             {
-                title:"Title4",
+                title:"title4",
                 id:"a4",
                 img:"../assets/img/infographicPlaceholder.png"},
             {
-                title:"Title5",
+                title:"title5",
                 id:"a5",
                 img:"../assets/img/infographicPlaceholder.png"},
             {
-                title:"Title6",
+                title:"title6",
                 id:"a6",
                 img:"../assets/img/infographicPlaceholder.png"},
             {
-                title:"Title7",
+                title:"title7",
                 id:"a7",
                 img:"../assets/img/infographicPlaceholder.png"}
         ];
@@ -106,10 +106,15 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 windowClass: 'myModal'
             });
             modalInstance.result.then(function (data) {
-                console.log(data);
-                $scope.Projects.push({Title:"placeholder title",
-                    sections: ["Presentation", "Infographics"],
-                    id:"zz"});
+                if (data !== 'error'){
+                    $scope.projects.push(
+                        {
+                            title: data.name,
+                            id: data.id,
+                            sections: ["Presentation", "Infographics"]
+                        }
+                    );
+                }
                 //modalInstance.close();
             });
             //console.log(data);

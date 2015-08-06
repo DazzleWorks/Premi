@@ -7,10 +7,10 @@
 <div class="row" id="myProjects">
     <div class="small-3 columns">
         <ul id="folder">
-            <li ng-repeat="Project in Projects">
-                <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{Project.Title}}</a></span>
+            <li ng-repeat="project in projects">
+                <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{project.title}}</a></span>
                 <ul id="sub-{{$index+1}}">
-                    <li ng-repeat="Section in Project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#{{Section}}Section">{{Section}}</a></li>
+                    <li ng-repeat="Section in project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#{{Section}}Section">{{Section}}</a></li>
                 </ul>
             </li>
         </ul>
