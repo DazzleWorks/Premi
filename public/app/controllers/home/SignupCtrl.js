@@ -11,17 +11,25 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
             password_confirmation: ""
         };
 
+        $scope.error = {
+            username: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            password: ""
+        };
+
         $scope.checkFields = function(){
 			var fieldsError = false;
 		}
 
         $scope.ok = function () {
             var user = signupService($scope.signup_data).signup();
-            console.log(user);
             user.$promise.then(
                 // signupService.signup() success
                 function(data){
-                    $modalInstance.close(data.username);
+                    if (Array.isArray(data.username) === false)
+                        $modalInstance.close(data.username);
                 },
                 // signupService.signup() unsuccess
                 function(data){
