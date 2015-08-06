@@ -25,7 +25,8 @@ trait AuthenticatesUsers
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return response($credentials); 
+            $username = Auth::user()->username;
+            return response()->json(['username' => $username]); 
         }
 
         return response()->json(['status' => 'credenziali errate']); 

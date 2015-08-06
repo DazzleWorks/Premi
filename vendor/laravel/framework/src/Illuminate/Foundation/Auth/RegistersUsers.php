@@ -18,17 +18,17 @@ trait RegistersUsers
     public function postRegister(Request $request)
     {
         $validator = $this->validator($request->all());
-        
-
+       
         if ($validator->fails()) {
             $messages = $validator->messages();
             return response($messages);
         }
         else {
-            $user = Auth::login($this->create($request->all()));
+            $this->create($request->all());
             $credentials = $this->getCredentials($request);
             Auth::attempt($credentials, $request->has('remember'));
-            return response($credentials);
+            $username = Auth::user()->username;
+            return response()->json(['username' => $username]);
         }
     }
 }

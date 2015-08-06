@@ -2,8 +2,7 @@
 
 namespace Premi\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Premi\Http\Requests;
+use Illuminate\Http\Response;
 use Premi\Http\Controllers\Controller;
 
 /**
@@ -52,7 +51,7 @@ class ProjectController extends Controller
 
         $project = $user->projects()->save($project);
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
     /**
