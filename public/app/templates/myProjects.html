@@ -10,13 +10,13 @@
             <li ng-repeat="Project in Projects">
                 <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{Project.Title}}</a></span>
                 <ul id="sub-{{$index+1}}">
-                    <li ng-repeat="Section in Project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href>{{Section}}</a></li>
+                    <li ng-repeat="Section in Project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#{{Section}}Section">{{Section}}</a></li>
                 </ul>
             </li>
         </ul>
     </div>
-    <div class="small-9 columns "style="background-color: #ececec;"><h3>PROJECT NAME</h3>
-		<h4><span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip " title="In this section you can run or edit your presentation."> Presentation </span></h4>
+    <div class="small-9 columns "style="background-color: #ececec;"><h3 class="ProjectTitle">{{currentProjectName}}</h3>
+		<h4 id="PresentationSection"><span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip " title="In this section you can run or edit your presentation."> Presentation </span></h4>
 		<div class="myPresentationContainer  small-offset-1">
 			<img src="../assets/img/google-now.jpg" class="presentationFront">
 			<div class="icon-bar three-up projectMenu">
@@ -34,8 +34,8 @@
 			  </a>
 			</div>
     	</div>
-    		
-    	<h4>Infographics</h4>
+
+    	<h4 id="InfographicsSection">Infographics</h4>
 			<div class="row small-offset-1">
     			<a href="#" class="button small-offset-1" >Add new Infographic</a>
 			</div>
@@ -44,7 +44,7 @@
 					<a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>
 				</li>
 			</ul>
-    
-    
+
+
     </div>
 </div>

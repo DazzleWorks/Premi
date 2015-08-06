@@ -1,22 +1,30 @@
 angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
     .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', function($scope, $rootScope, $modal) {
+
+        $scope.currentProjectName= "Progetto di diga - papà castoro e giovani marmotte";
+
         $scope.Projects = [
             {
                 Title: "MyProject1",
-                sections: ["Presentation", "Infographics"]
+                sections: ["Presentation", "Infographics"],
+                id:1
             }, {
                 Title: "MyProject2",
-                sections: ["Presentation", "Infographics"]
+                sections: ["Presentation", "Infographics"],
+                id:2
             }, {
                 Title: "MyProject3",
-                sections: ["Presentation", "Infographics"]
+                sections: ["Presentation", "Infographics"],
+                id:3
             }, {
                 Title: "MyProject4",
-                sections: ["Presentation", "Infographics"]
+                sections: ["Presentation", "Infographics"],
+                id:4
             }, {
                 Title: "MyProject5",
-                sections: ["Presentation", "Infographics"]
+                sections: ["Presentation", "Infographics"],
+                id:5
             }
         ];
 
@@ -69,7 +77,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
-
         $scope.deleteInfographic = function (id, index){
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteInfographic.html',
@@ -100,9 +107,12 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 console.log(data);
-                $scope.Projects.push({title:data,id:"zz"});
+                $scope.Projects.push({Title:"placeholder title",
+                    sections: ["Presentation", "Infographics"],
+                    id:"zz"});
                 //modalInstance.close();
             });
+            //console.log(data);
 
         };
 }]);

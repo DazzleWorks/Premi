@@ -12,8 +12,6 @@ angular.module('app.controllers.MyAccountCtrl', ['ngRoute'])
                 },
                 function(data) {
                 });
-
-
         });
 
 }]);

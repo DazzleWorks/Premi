@@ -110,6 +110,8 @@
 
             <script src="app/services/presentation/presentation.js" type="text/javascript"></script>
 
+            <script src="app/services/project/projects.js" type="text/javascript"></script>
+
             <script src="app/services/slide/slide.js" type="text/javascript"></script>
 
             <script src="app/services/user/user.js" type="text/javascript"></script>

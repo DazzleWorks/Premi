@@ -160,3 +160,7 @@ body {
     text-align: center !important;
     color:red;
 }
+
+.ProjectTitle{
+    text-transform: uppercase;
+}

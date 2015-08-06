@@ -8,19 +8,21 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         logoutService.logout();
 
         $scope.home = "true";
-        $scope.user = "false";
+        $rootScope.user = "false";
+        // $rootScope.user = "false"
 
         $scope.openHome = function () {
             $scope.home = "true";
         };
 
         $scope.openRestrictedArea = function () {
-            $rootScope.$broadcast('loadUserData');
+            if ($rootScope.user !== "false")
+                $rootScope.$broadcast('loadUserData');
             $scope.home = "false";
         };
 
         $scope.login = function () {
-            if ($scope.user === "false") {
+            if ($rootScope.user === "false") {
                 var modalInstance = $modal.open({
                     templateUrl: 'app/templates/login.html',
                     controller: 'LoginCtrl',
@@ -28,25 +30,25 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 });
                 modalInstance.result.then(function (data) {
                     if (data !== undefined) {
-                        $scope.user = data;
+                        $rootScope.user = data;
                         $scope.openRestrictedArea();
                     }
                     else
-                        $scope.user = "false";
+                        $rootScope.user = "false";
                 });
             }
         };
 
         $scope.logout = function () {
-            if ($scope.user !== "false") {
+            if ($rootScope.user !== "false") {
                 var user_logout = logoutService.logout();
-                $scope.user = "false";
+                $rootScope.user = "false";
                 $scope.openHome();
             }
         };
 
         $scope.signUp = function () {
-            if ($scope.user === "false") {
+            if ($rootScope.user === "false") {
                 var modalInstance = $modal.open({
                     templateUrl: 'app/templates/signup.html',
                     controller: 'SignupCtrl',
@@ -54,11 +56,11 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 });
                 modalInstance.result.then(function (data) {
                     if (data !== undefined){
-                        $scope.user = data;
+                        $rootScope.user = data;
                         $scope.openRestrictedArea();
                     }
                     else
-                        $scope.user = "false";
+                        $rootScope.user = "false";
                 });
             }
         };
