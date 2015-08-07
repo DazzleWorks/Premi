@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Project;
+use Premi\Model\Presentation;
+use Premi\Model\Slide;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -33,10 +35,9 @@ class ProjectController extends Controller
     public function index()
     {
         $user = \Auth::user();
-
         $project = $user->projects()->get();
 
-        return response($project);
+        return response()->json($project);
     }
 
 
@@ -50,8 +51,13 @@ class ProjectController extends Controller
         $user = \Auth::user();
 
         $project = new Project(array('name' => $request->get('name')));
-
         $project = $user->projects()->save($project);
+        
+        $presentation = new Presentation(array('title' => $request->get('name')));
+        $presentation = $project->presentation()->save($presentation);
+        
+        //$slide = new Slide();
+        //$slide = $user->$project->$presentation->slides()->save($slide);
 
         return response()->json($project);
     }
