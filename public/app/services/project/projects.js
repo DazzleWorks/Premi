@@ -13,9 +13,7 @@ angular.module('app.services.projects', ['ngRoute', 'ngResource'])
             return $resource('api/user/' + data.user + '/project', {}, {
                 new: {
                     method: 'POST',
-                    params: {
-                        projectName: data.name
-                    }
+                    params: {name:data.name}
                 }
             })
         };

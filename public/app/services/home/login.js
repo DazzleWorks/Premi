@@ -9,18 +9,18 @@
 */
 angular.module('app.services.login', ['ngRoute', 'ngResource'])
 
-    .factory('loginService', ['$http', '$resource', function ($http, $resource) {
+    .factory('loginService', ['$resource', function ($resource) {
 
-        return function(data) {
-            return $resource('/auth/login', {}, {
-                login: {
-                    method: 'POST',
-                    params: {
-                        username: data.username,
-                        password: data.password
-                    }
-                }
-            })
-        };
+        //return function(data) {
+        return $resource('/auth/login')//, {}, {
+                //login: {
+                    //method: 'POST',
+                    //params: {
+                        //username: data.username,
+                        //password: data.password
+                    //}
+                //}
+            //})
+        //};
 
     }]);

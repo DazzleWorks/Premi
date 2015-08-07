@@ -2,8 +2,10 @@
 
 namespace Premi\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Project;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -43,15 +45,16 @@ class ProjectController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $user = \Auth::user();
+        return response($request);
+        //$user = \Auth::user();
 
-        $project = new Project(array('name' => \Input::get('name')));
+        //$project = new Project(array('name' => $request->get('name')));
 
-        $project = $user->projects()->save($project);
+        //$project = $user->projects()->save($project);
 
-        return response()->json(['status' => true]);
+        //return response()->json(['status' => true]);
     }
 
     /**
