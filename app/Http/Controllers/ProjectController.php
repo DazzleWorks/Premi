@@ -47,14 +47,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        return response($request);
-        //$user = \Auth::user();
+        $user = \Auth::user();
 
-        //$project = new Project(array('name' => $request->get('name')));
+        $project = new Project(array('name' => $request->get('name')));
 
-        //$project = $user->projects()->save($project);
+        $project = $user->projects()->save($project);
 
-        //return response()->json(['status' => true]);
+        return response()->json($project);
     }
 
     /**

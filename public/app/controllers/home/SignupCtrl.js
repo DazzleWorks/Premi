@@ -24,7 +24,15 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
 		}
 
         $scope.ok = function () {
-            var user = signupService($scope.signup_data).signup();
+            var credentials = {
+                username: $scope.signup_data.username,
+                email: $scope.signup_data.email,
+                firstName: $scope.signup_data.firstName,
+                lastName: $scope.signup_data.lastName,
+                password: $scope.signup_data.password,
+                password_confirmation: $scope.signup_data.password_confirmation 
+            };
+            var user = signupService.save(credentials);
             user.$promise.then(
                 // signupService.signup() success
                 function(data){

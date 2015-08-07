@@ -9,8 +9,13 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
         };
 
         $scope.ok = function () {
-
-            var project = projectsService($scope.project_data).new();
+            //var project = projectsService($scope.project_data).new();
+            var projectData = {
+                user: $scope.project_data.user,
+                id: $scope.project_data.id,
+                name: $scope.project_data.name
+            };
+            var project = projectsService.save({user:$scope.user},projectData);
             project.$promise.then(
                 function(data){
                     if(data.id !== '') {
