@@ -75,42 +75,9 @@ body {
     text-transform:uppercase;
 }
 
-/*.editMenuItemContainer:hover{
-    background-color: #007095;
-    cursor:pointer;
-}*/
-
-/*.generalMenuSettings{
-    background-color: #43AC6A;
-}*/
-
-/*.generalMenuSettings > div {
-    color:#000 !important;
-}*/
-/*
-.editMenuItemIcon{
-    margin-left:auto;
-    margin-right:auto;
-}*/
-
-/*.editMenuItemLabel{
-    display: block;
-    margin-left:auto;
-    font-size: initial;
-    margin-right:auto;
-    text-align: center;
-}*/
-
-/*#slideEditForm input{
-    min-width: 60px !important;
-}*/
-
-/* formatButtons */
-/*.formatButtons{
-    padding:5px;
-    float: left;
-    min-width: 30px;
-}*/
+.project {
+    background-color: #ececec;
+}
 
 .formatButtons-list{
     float: left;
@@ -129,12 +96,18 @@ body {
 	padding-bottom:5px !important;
 }
 .presentationFront{
+    text-align: center;
 	height: auto !important;
 	width:50% !important;
 }
 
 .projectMenu{
 	max-width:50%;
+}
+
+.projectTitle{
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .infographicMenu{
@@ -159,8 +132,4 @@ body {
 .infographicListDelete{
     text-align: center !important;
     color:red;
-}
-
-.ProjectTitle{
-    text-transform: uppercase;
 }

@@ -11,16 +11,6 @@ angular.module('app.services.login', ['ngRoute', 'ngResource'])
 
     .factory('loginService', ['$resource', function ($resource) {
 
-        //return function(data) {
-        return $resource('/auth/login')//, {}, {
-                //login: {
-                    //method: 'POST',
-                    //params: {
-                        //username: data.username,
-                        //password: data.password
-                    //}
-                //}
-            //})
-        //};
+        return $resource('/auth/login');
 
     }]);

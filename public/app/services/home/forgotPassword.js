@@ -9,17 +9,8 @@
 */
 angular.module('app.services.forgotPassword', ['ngRoute', 'ngResource'])
 
-    .factory('forgotPasswordService', ['$http', '$resource', function ($http, $resource) {
+    .factory('forgotPasswordService', ['$resource', function ($resource) {
 
-        return function(data) {
-            return $resource('/password/email', {}, {
-                sendEmail: {
-                    method: 'POST',
-                    params: {
-                        email: data.email
-                    }
-                }
-            })
-        };
+        return $resource('/password/email');
 
     }]);

@@ -19,12 +19,7 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
         };
 
         $scope.ok = function () {
-            //var user = loginService($scope.login_data).login();
-            var credentials = {
-                username: $scope.login_data.username,
-                password: $scope.login_data.password
-            };
-            var user = loginService.save(credentials);
+            var user = loginService.save($scope.login_data);
             user.$promise.then(
                 // loginService.login() success
                 function(data){

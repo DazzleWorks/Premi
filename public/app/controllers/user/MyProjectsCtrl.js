@@ -109,8 +109,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 if (data !== 'error'){
                     $scope.projects.push(
                         {
-                            title: data.name,
-                            id: data.id,
+                            title: data.pname,
+                            id: data.pid,
                             sections: ["Presentation", "Infographics"]
                         }
                     );

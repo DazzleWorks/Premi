@@ -5,7 +5,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
     .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService', function($scope, $rootScope, $modal, logoutService) {
 
         // disconnect any user on load page
-        logoutService.logout();
+        logoutService.get();
 
         $scope.home = "true";
         $rootScope.user = "false";
@@ -41,7 +41,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.logout = function () {
             if ($rootScope.user !== "false") {
-                var user_logout = logoutService.logout();
+                var user_logout = logoutService.get();
                 $rootScope.user = "false";
                 $scope.openHome();
             }

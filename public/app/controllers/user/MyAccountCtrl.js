@@ -5,7 +5,7 @@ angular.module('app.controllers.MyAccountCtrl', ['ngRoute'])
         $scope.user_data = {};
 
         $rootScope.$on('loadUserData', function (e) {
-            var user = userService.getDati({id:$scope.user});
+            var user = userService.query({id:$scope.user});
             user.$promise.then (
                 function(data) {
                     $scope.user_data = user[0];
