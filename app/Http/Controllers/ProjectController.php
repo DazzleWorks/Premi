@@ -30,7 +30,7 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function index()
     {
@@ -43,21 +43,22 @@ class ProjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @return Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $user = \Auth::user();
+        $name  = $request->get('name');
 
-        $project = new Project(array('name' => $request->get('name')));
+        $project = new Project(array('name' => $name));
         $project = $user->projects()->save($project);
         
-        $presentation = new Presentation(array('title' => $request->get('name')));
+        $presentation = new Presentation(array('title' => $name));
         $presentation = $project->presentation()->save($presentation);
         
-        //$slide = new Slide();
-        //$slide = $user->$project->$presentation->slides()->save($slide);
+        $slide = new Slide();
+        $slide = $presentation->slides()->save($slide);
 
         return response()->json($project);
     }
@@ -65,7 +66,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function show($project)
     {
@@ -80,7 +81,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function update($project)
     {
@@ -98,7 +99,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function destroy($project)
     {
