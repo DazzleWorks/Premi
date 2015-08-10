@@ -33,9 +33,13 @@ body {
     max-width: 350px !important;
 }
 
-.row{
+.row {
     max-width: 98% !important;
     margin-top: 0.5em !important;
+}
+
+.row-top-space {
+    margin-top: 1em !important;
 }
 
 .editMenuItemContainer{
@@ -48,6 +52,24 @@ body {
 
 .button {
     margin-bottom: 0.225rem !important;
+}
+
+/*.ng-invalid.ng-dirty {
+    border-color: red;
+}
+
+.ng-valid.ng-dirty {
+    border-color: green;
+}*/
+
+.signupError {
+    margin-top: -10px;
+    font-size: 0.7em;
+    color: red;
+}
+
+.error {
+    border-color: red;
 }
 
 #slideEditorPanel {
@@ -95,8 +117,12 @@ body {
 	padding-top:5px !important;
 	padding-bottom:5px !important;
 }
-.presentationFront{
+
+.myPresentationContainer {
     text-align: center;
+}
+
+.presentationFront{
 	height: auto !important;
 	width:50% !important;
 }

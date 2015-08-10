@@ -1,25 +1,30 @@
 <div class="modal-header">
     <h3 class="modal-title">SIGNUP</h3>
 </div>
-<form ng-submit="ok()">
+<form name="signup" ng-submit="ok()" >
     <div class="modal-body">
     	<label>Email</label>
-    	<input type="email" ng-model="signup_data.email" placeholder="Enter your email">
+    	<input type="email" ng-model="signup_data.email" placeholder="Enter your email" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.email}}</div>
 
     	<label>Username</label>
-        <input type="text" ng-model="signup_data.username" class="form-control" placeholder="Enter username">
+        <input type="text" ng-model="signup_data.username" class="form-control" placeholder="Enter username" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.username}}</div>
 
         <label>Password</label>
-    	<input type="password" ng-model="signup_data.password"  placeholder="Enter password">
+    	<input type="password" minlength=8 ng-model="signup_data.password" placeholder="Enter password" required />
 
         <label>Repeat password</label>
-    	<input type="password" ng-model="signup_data.password_confirmation" placeholder="Repeat password">
+    	<input type="password" minlength=8 ng-model="signup_data.password_confirmation" placeholder="Repeat password" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.password}}</div>
 
         <label>First Name</label>
-    	<input type="text" ng-model="signup_data.firstName" placeholder="Enter your first name">
+    	<input type="text" ng-model="signup_data.firstName" placeholder="Enter your first name" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.firstName}}</div>
 
         <label>Last Name</label>
-    	<input type="text" ng-model="signup_data.lastName" placeholder="Enter your last name">
+    	<input type="text" ng-model="signup_data.lastName" placeholder="Enter your last name" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.lastName}}</div>
 
     </div>
 

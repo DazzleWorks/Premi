@@ -7,7 +7,7 @@
 
 angular.module('app.services.projects', ['ngRoute', 'ngResource'])
 
-    .factory('projectsService', ['$resource', function ($resource) {
+    .factory('projectsService', ['$resource', function($resource) {
 
         return $resource('api/user/:user/project');
 

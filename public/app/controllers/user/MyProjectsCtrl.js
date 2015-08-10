@@ -2,7 +2,10 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
     .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', function($scope, $rootScope, $modal) {
 
-        $scope.currentProjectName= "Progetto di diga - papà castoro e giovani marmotte";
+        $scope.currentProject = {
+            id: "",
+            name: "Progetto di diga - papà castoro e giovani marmotte"
+        };
 
         $scope.projects = [
             {
