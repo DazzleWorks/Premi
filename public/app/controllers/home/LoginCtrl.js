@@ -23,7 +23,10 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
             user.$promise.then(
                 // loginService.login() success
                 function(data){
-                    $modalInstance.close(data.username);
+                    if (data.username !== undefined)
+                        $modalInstance.close(data.username);
+                    else
+                        $scope.error = 'Credenziali errate'
                 },
                 // loginService.login() unsuccess
                 function(data){

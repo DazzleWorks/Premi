@@ -68,8 +68,10 @@ body {
     color: red;
 }
 
-.error {
-    border-color: red;
+.loginError {
+    margin: -10px 0 10px 0;
+    font-size: 0.7em;
+    color: red;
 }
 
 #slideEditorPanel {

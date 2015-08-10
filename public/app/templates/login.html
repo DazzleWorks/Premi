@@ -8,6 +8,8 @@
 
     	<label>Password <a ng-click="forgotPassword()">(forgot password)</a></label>
         <input type="password" ng-model="login_data.password" class="form-control">
+
+        <div class="loginError" ng-show="error !== ''">{{error}}</div>
     </div>
 
     <div class="modal-footer">
