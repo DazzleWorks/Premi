@@ -13,11 +13,11 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
             project.$promise.then(
                 function(data){
                     if(data.id !== '') {
-                        $scope.project_data.id = data.id;
+                        $scope.project_data.id = data._id;
                         $modalInstance.close($scope.project_data);
                     }
                     else
-                        $modalInstance.close("Project build failed, server error");
+                        $modalInstance.close("Project build failed");
                 },
                 function(data){
                     $modalInstance.close("error");

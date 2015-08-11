@@ -8,9 +8,12 @@
         <div>
             <ul id="folder">
                 <li ng-repeat="project in projects">
-                    <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{project.title}}</a></span>
+                    <a href="#sub-{{$index+1}}">{{$index+1}}</a>
+                    <span ng-class="TreeProjectTitle"><a>{{project.name}}</a></span>
+
                     <ul id="sub-{{$index+1}}">
-                        <li ng-repeat="Section in project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#{{Section}}Section">{{Section}}</a></li>
+                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#PresentationSection">Presentation</a></li>
+                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#InfographicsSection">Infographics</a></li>
                     </ul>
                 </li>
             </ul>
@@ -20,7 +23,7 @@
 
 <div class="small-9 columns project">
 
-    <h3 class="projectTitle">{{currentProject.name}}</h3>
+    <h3 class="projectTitle" id="PresentationSection">{{currentProject.name}}</h3>
 
     <div class="row">
         <div class="small-12 small-centered columns">
@@ -31,7 +34,7 @@
                         <img src="../assets/img/play2.png" >
                         <label>Play</label>
                     </a>
-                    <a class="item custonMenuIcon"  ng-click="showPresentationEditorView()">
+                    <a class="item custonMenuIcon" ng-click="editProject()">
                         <img src="../assets/img/edit.png" >
                         <label>Edit</label>
                     </a>

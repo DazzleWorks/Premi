@@ -1,35 +1,12 @@
 angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
-    .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', function($scope, $rootScope, $modal) {
+    .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', 'projectsService', function($scope, $rootScope, $modal, projectsService) {
 
+        $scope.projects = [];
         $scope.currentProject = {
             id: "",
-            name: "Progetto di diga - papà castoro e giovani marmotte"
+            name: ""
         };
-
-        $scope.projects = [
-            {
-                title: "MyProject1",
-                sections: ["Presentation", "Infographics"],
-                id:1
-            }, {
-                title: "MyProject2",
-                sections: ["Presentation", "Infographics"],
-                id:2
-            }, {
-                title: "MyProject3",
-                sections: ["Presentation", "Infographics"],
-                id:3
-            }, {
-                title: "MyProject4",
-                sections: ["Presentation", "Infographics"],
-                id:4
-            }, {
-                title: "MyProject5",
-                sections: ["Presentation", "Infographics"],
-                id:5
-            }
-        ];
 
         $scope.infographics=[
             {   title:"title1",
@@ -49,22 +26,35 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             {
                 title:"title4",
                 id:"a4",
-                img:"../assets/img/infographicPlaceholder.png"},
-            {
-                title:"title5",
-                id:"a5",
-                img:"../assets/img/infographicPlaceholder.png"},
-            {
-                title:"title6",
-                id:"a6",
-                img:"../assets/img/infographicPlaceholder.png"},
-            {
-                title:"title7",
-                id:"a7",
-                img:"../assets/img/infographicPlaceholder.png"}
+                img:"../assets/img/infographicPlaceholder.png"
+            }
         ];
 
-        $scope.showPresentationEditorView = function(){
+        var setCurrentProject = function () {
+            $scope.currentProject.id = $scope.projects[0].id;
+            $scope.currentProject.name = $scope.projects[0].name;
+        };
+
+        $rootScope.$on('loadProjects', function(){
+            var load = projectsService.query({user:$scope.user});
+            load.$promise.then (
+                function(data) {
+                    for (prj in data) {
+                        if (prj !== "$promise" && prj !== "$resolved")
+                        $scope.projects.push(
+                            {
+                                id: data[prj]._id,
+                                name: data[prj].name
+                            }
+                        );
+                    };
+                    setCurrentProject();
+                },
+                function(data){
+                });
+        });
+
+        $scope.editProject = function(){
 			$rootScope.$broadcast('showPresentationEditor');
 		};
 
@@ -112,8 +102,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 if (data !== 'error'){
                     $scope.projects.push(
                         {
-                            title: data.pname,
-                            id: data.pid,
+                            title: data.name,
+                            id: data.id,
                             sections: ["Presentation", "Infographics"]
                         }
                     );
