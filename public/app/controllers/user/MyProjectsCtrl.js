@@ -36,22 +36,24 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         };
 
         $rootScope.$on('loadProjects', function(){
-            var load = projectsService.query({user:$scope.user});
-            load.$promise.then (
-                function(data) {
-                    for (prj in data) {
-                        if (prj !== "$promise" && prj !== "$resolved")
-                        $scope.projects.push(
-                            {
-                                id: data[prj]._id,
-                                name: data[prj].name
-                            }
-                        );
-                    };
-                    setCurrentProject();
-                },
-                function(data){
-                });
+            if ($scope.projects.length === 0) {
+                var load = projectsService.query({user:$scope.user});
+                load.$promise.then (
+                    function(data) {
+                        for (prj in data) {
+                            if (prj !== "$promise" && prj !== "$resolved")
+                            $scope.projects.push(
+                                {
+                                    id: data[prj]._id,
+                                    name: data[prj].name
+                                }
+                            );
+                        };
+                        setCurrentProject();
+                    },
+                    function(data){
+                    });
+            }
         });
 
         $scope.editProject = function(){
@@ -104,9 +106,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 if (data !== 'error'){
                     $scope.projects.push(
                         {
-                            title: data.name,
-                            id: data.id,
-                            sections: ["Presentation", "Infographics"]
+                            name: data.name,
+                            id: data.id
                         }
                     );
                 }
