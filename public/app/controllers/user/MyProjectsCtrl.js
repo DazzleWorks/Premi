@@ -62,10 +62,12 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteProject.html',
                 controller: 'DeleteProjectCtrl',
+                scope: $scope,
                 windowClass: 'myModal'
             });
             modalInstance.result.then(function (data) {
-                //modalInstance.close();
+                if (data === 'delete')
+                    setCurrentProject();
             });
 
         };

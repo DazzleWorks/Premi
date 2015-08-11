@@ -47,13 +47,13 @@
         </div>
     </div>
 
-    <div class="row row-top-space">
+    <div class="row row-top-space myPresentationContainer">
         <div class="row">
             <h4 id="InfographicsSection">Infographics</h4>
             <button class="button small radius success" >Add new Infographic</button>
         </div>
         <div>
-            <ul class="inline-list infographicsList small-9 columns ">
+            <ul class="inline-list infographicsList small-12 small-centered columns ">
                 <li class="animate-repeat" ng-repeat="infographic in infographics">
                     <a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>
                 </li>
