@@ -50,8 +50,10 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
                         $scope.isCorrect = false;
                     }
 
-                    if ($scope.isCorrect === true)
+                    if ($scope.isCorrect === true) {
+                        window.alert("Registrazione avvenuta con successo");
                         $modalInstance.close(data.username);
+                    }
                 },
                 // signupService.signup() unsuccess
                 function(data){
