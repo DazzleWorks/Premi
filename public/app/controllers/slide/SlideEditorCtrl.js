@@ -30,6 +30,15 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
         ];
 
+
+        var localData = {};
+            localData.currentX = 1;
+            localData.currentY = 1;
+
+            localData.maxX = 2;
+            localData.maxY = [1];
+
+
         $scope.update = function(){
             $scope.canvas.renderAll();
         };
@@ -102,12 +111,18 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
+
+        var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
+        $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+
         $scope.update();
         $scope.objectSelected= "null";
 
         $scope.canvas.on('selection:cleared', function() {
-            $scope.objectSelected = "null";
-            // $scope.$apply();
+            if ($scope.objectSelected !== "null") {
+                $scope.objectSelected = "null"
+                $scope.$apply();
+            }
         });
 
         $scope.canvas.on('object:modified', function(options) {
@@ -158,13 +173,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             obj.sendBackwards(false);
         };
 
-        var localData = {};
-            localData.currentX = 1;
-            localData.currentY = 1;
-
-            localData.maxX = 2;
-            localData.maxY = [1];
-
         var incrementMaxX = function () {
             localData.maxX ++;
         };
@@ -212,7 +220,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // load slide
         $scope.loadSlide = function () {
             var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
-            console.log(slide);
             $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
         };
 
