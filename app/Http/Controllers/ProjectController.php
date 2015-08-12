@@ -3,7 +3,6 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Project;
 use Premi\Model\Presentation;
@@ -29,10 +28,10 @@ class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
-    public function index()
+    public function index($username)
     {
         $user = \Auth::user();
         $project = $user->projects()->get();
@@ -44,9 +43,10 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$username)
     {
         $user = \Auth::user();
         $name  = $request->get('name');
@@ -68,11 +68,10 @@ class ProjectController extends Controller
      * @param int $project: the id of a project
      * @return Illuminate\Http\Response
      */
-    public function show($project)
+    public function show($username,$projectID)
     {
         $user = \Auth::user();
-
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects()->where('_id', '=', $projectID)->get();
 
         return response($project);
     }
@@ -80,32 +79,32 @@ class ProjectController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param String $username: the username of a user
      * @param int $project: the id of a project
      * @return Illuminate\Http\Response
      */
-    public function update($project)
+    public function update(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
+        $project = $user->projects()->where('_id', '=', $projectID)->get();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
-
-        $project->name = \Input::get('name');
+        $project->name = $request->get('name');
 
         $project->save();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param String $username: the username of a user
      * @param int $project: the id of a project
      * @return Illuminate\Http\Response
      */
-    public function destroy($project)
+    public function destroy($username,$projectID)
     {
         $user = \Auth::user();
-
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects()->where('_id', '=', $projectID)->get();
 
         $project->delete();
 

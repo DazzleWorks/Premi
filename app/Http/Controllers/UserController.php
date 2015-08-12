@@ -45,18 +45,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update()
+    public function update(Request $request)
     {
         $user = \Auth::user();
         
-        $user->email = \Input::get('email');
-        $user->firstName = \Input::get('firstName');
-        $user->secondName = \Input::get('secondName');
-        $user->password = \Input::get('password');
+        $user->email = $request->get('email');
+        $user->firstName = $request->get('firstName');
+        $user->secondName = $request->get('secondName');
+        $user->password = $request->get('password');
         
         $user->save();
         
-        return response(true);
+        return response()->json(['status' => true]);;
     }
     
     /**
@@ -71,6 +71,6 @@ class UserController extends Controller
                 
         $user->delete();
         
-        return response(true);
+        return response()->json(['status' => true]);;
     }
 }
