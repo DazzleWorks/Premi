@@ -51,10 +51,10 @@ class ProjectController extends Controller
         $user = \Auth::user();
         $name  = $request->get('name');
 
-        $project = new Project(array('name' => $name));
+        $project = new Project(['name' => $name]);
         $project = $user->projects()->save($project);
         
-        $presentation = new Presentation(array('title' => $name));
+        $presentation = new Presentation(['title' => $name]);
         $presentation = $project->presentation()->save($presentation);
         
         $slide = new Slide();
