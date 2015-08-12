@@ -67,6 +67,7 @@
 
             <script src="app/controllers/presentation/PresentationCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/presentation/PresentationEditorCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/presentation/PresentationStyleCtrl.js" type="text/javascript"></script>
 
             <script src="app/controllers/restrictedArea/RestrictedAreaCtrl.js" type="text/javascript"></script>
 
