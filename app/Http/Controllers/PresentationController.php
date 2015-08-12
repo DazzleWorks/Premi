@@ -26,72 +26,84 @@ class PresentationController extends Controller
 {
     /**
      * Store a newly created resource in storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @return Illuminate\Http\Response
      */
-    public function store($project)
+    public function store(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
 
-        $presentation = new Presentation(array('title' => \Input::get('title')));
+        $presentation = new Presentation(['title' => $request->get('title')]);
 
-        $user->projects()->where('_id', '=', $project)->presentations()->save($presentation);
+        $project = $user->projects();
+        $project = $project->find($projectID);
+        $project->presentation()->save($presentation);
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
     /**
      * Display the specified resource.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function show($project)
+    public function show($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
-        $presentation = $project->presentations()->first();
+        $presentation = $project->presentation()->first();
 
-        return response($presentation);
+        return response()->json($presentation);
     }
 
 
     /**
      * Update the specified resource in storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function update($project)
+    public function update(Request $request,$username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
-        $presentation = $project->presentations()->first();
-
-        $presentation->title = \Input::get('title');
-
+        $presentation = $project->presentation()->first();
+        $presentation->title = $request->get('title');
         $presentation->save();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
+    
     /**
      * Remove the specified resource from storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function destroy($project)
+    public function destroy($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
-        $presentation = $project->presentations()->first();
-
+        $presentation = $project->presentation()->first();
         $presentation->delete();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 }
