@@ -183,6 +183,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         var decrementCurrentY = function () {
             localData.currentY --;
+        };
 
         var incrementCurrentY = function () {
             localData.currentY ++;
