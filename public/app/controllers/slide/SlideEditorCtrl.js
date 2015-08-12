@@ -84,7 +84,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 });
 
                 modalInstance.result.then(function (text) {
-                   // console.log(text);  // RITORNA IL TESTO DA INSERIRE NELL'OGGETTO
                     $scope.addText(text);
                 });
 
@@ -103,13 +102,12 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
-        $scope.canvas.loadFromJSON($scope.slideComponents, $scope.canvas.renderAll.bind($scope.canvas));
         $scope.update();
         $scope.objectSelected= "null";
 
         $scope.canvas.on('selection:cleared', function() {
             $scope.objectSelected = "null";
-            $scope.$apply();
+            // $scope.$apply();
         });
 
         $scope.canvas.on('object:modified', function(options) {
@@ -127,18 +125,18 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.$apply();
         });
 
-        $scope.removeObject= function() {
+        $scope.removeObject = function() {
             $scope.canvas.remove($scope.canvas.getActiveObject());
         };
 
-        $scope.addText= function(text){
+        $scope.addText = function(text){
             $scope.canvas.add(new fabric.Text(text, {
                 fontFamily: 'Loto',
                 fontSize: 25
             }));
         };
 
-        $scope.insertImageOnCanvas= function(source_path){
+        $scope.insertImageOnCanvas = function(source_path){
             fabric.Image.fromURL(source_path, function(oImg) {
                 // scale image down, and flip it, before adding it onto canvas
                 oImg.scale(0.5).setFlipX(true);
@@ -161,84 +159,171 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
 
-        // serializzazione
-        $scope.saveSlide = function () {
-        //    jQuery("#serialized").html(JSON.stringify($scope.canvas));
-            // slideFactory ();
-            // jQuery("#serialized").html(JSON.stringify($scope.canvas));
-            // slideFactory (JSON.stringify($scope.canvas), '1', '2', '3');
-            // $scope.svg=$scope.canvas.toSVG({suppressPreamble: true});
-            //
-            // presentationData.saveSlide($scope.svg);
+        var localData = {};
+            localData.currentX = 1;
+            localData.currentY = 1;
+
+            localData.maxX = 2;
+            localData.maxY = [1];
+
+        var incrementMaxX = function () {
+            localData.maxX ++;
+        };
+
+        var incrementMaxY = function (x) {
+            localData.maxY[x-1] ++;
+        };
+
+        var incrementCurrentX = function () {
+            localData.currentX ++;
+        };
+
+        var decrementCurrentX = function () {
+            localData.currentX --;
+        };
+
+        var decrementCurrentY = function () {
+            localData.currentY --;
+        };
+
+        var incrementCurrentY = function () {
+            localData.currentY ++;
+        };
+
+        var resetCurrentY = function () {
+            localData.currentY = 1;
+        };
+
+        var offset = function (direction, index) {
+            if (direction === "right") {
+                localData.maxY.push(0);
+                for (i = localData.currentX; i < localData.maxX; ++ i) {
+                    localData.maxY[i]= localData.maxY[i-1];
+                }
+                localData.maxY[localData.currentX-1] = 1;
+                for (i = 0; i < slidesSVG.length; ++i) {
+                    if (slidesSVG[i].x >= localData.currentX) {
+                        ++ slidesSVG[i].x;
+                    }
+                }
+            }
         };
 
 
+        // load slide
+        $scope.loadSlide = function () {
+            var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
+            console.log(slide);
+            $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+        };
 
-        // slide
+
+        // add slide
         $scope.addSlide = function (position) {
             if (position === "up") {
                 $scope.saveSlide();
-                $scope.canvas.clear();
+                // $scope.canvas.clear();
             }
             else if (position === "down") {
                 $scope.saveSlide();
-                $scope.canvas.clear();
+                incrementCurrentY();
+                incrementMaxY(localData.currentX);
+                // $scope.canvas.clear();
+                if (localData.currentY < localData.maxY[localData.currentX-1]) {
+                    offset("down", 0);
+                }
             }
             else if (position === "left") {
                 $scope.saveSlide();
-                $scope.canvas.clear();
+                // $scope.canvas.clear();
             }
             else if (position === "right") {
                 $scope.saveSlide();
-                $scope.canvas.clear();
+                incrementCurrentX();
+                resetCurrentY();
+                incrementMaxX();
+                // $scope.canvas.clear();
+                if (localData.currentX < localData.maxX) {
+                    offset("right", 0);
+                }
+                localData.maxY[localData.currentX-1]= 1;
             }
         };
 
-
-
-        // slides components
-        $scope.slideComponents = {
-            "objects": [
-                {
-                    "id": 2,
-                    "type": "text",
-                    "originX": "left",
-                    "originY": "top",
-                    "left": 50,
-                    "top": 50,
-                    "width": 100,
-                    "height": 50,
-                    "fill": "rgb(0,0,0)",
-                    "stroke": null,
-                    "strokeWidth": 1,
-                    "strokeDashArray": null,
-                    "strokeLineCap": "butt",
-                    "strokeLineJoin": "miter",
-                    "strokeMiterLimit": 10,
-                    "scaleX": 1,
-                    "scaleY": 1,
-                    "angle": 0,
-                    "flipX": false,
-                    "flipY": false,
-                    "opacity": 1,
-                    "shadow": null,
-                    "visible": true,
-                    "clipTo": null,
-                    "backgroundColor": "",
-                    "fillRule": "nonzero",
-                    "globalCompositeOperation": "source-over",
-                    "text": "Beeeeee",
-                    "fontSize": 40,
-                    "fontWeight": "normal",
-                    "fontFamily": "Georgia",
-                    "fontStyle": "",
-                    "lineHeight": 1.16,
-                    "textDecoration": "",
-                    "textAlign": "left",
-                    "textBackgroundColor": ""
+        // change slide
+        $scope.changeSlide = function (position) {
+            if (position === "up") {
+                $scope.saveSlide();
+                if (localData.currentY > 1) {
+                    decrementCurrentY();
                 }
-            ],
-            "background": "",
-            "x":1,"y":1
+
+                $scope.loadSlide();
+                $scope.update();
+
+                if (localData.currentY > 1) {
+                    // BUTTON UP ENABLE
+                }
+                else {
+                    // BUTTON UP DISABLE
+                }
+            }
+            else if (position === "down") {
+                $scope.saveSlide();
+                if (localData.currentY < localData.maxY(localData.currentX)) {
+                    incrementCurrentY();
+                }
+
+                $scope.loadSlide();
+                $scope.update();
+
+                if (localData.currentY < localData.maxY(localData.currentX)) {
+                    // BUTTON DOWN ENABLE
+                }
+                else {
+                    // BUTTON DOWN DISABLE
+                }
+            }
+            else if (position === "left") {
+                $scope.saveSlide();
+                if (localData.currentX > 1) {
+                    decrementCurrentX();
+                    resetCurrentY();
+                }
+
+                $scope.loadSlide();
+                $scope.update();
+
+                if (localData.currentX > 1) {
+                    // BUTTON LEFT ENABLE
+                }
+                else {
+                    // BUTTON LEFT DISABLE
+                }
+            }
+            else if (position === "right") {
+                $scope.saveSlide();
+                if (localData.currentX < localData.maxX) {
+                    incrementCurrentX();
+                    resetCurrentY();
+                }
+
+                $scope.loadSlide();
+                $scope.update();
+
+                if (localData.currentX < localData.maxX) {
+                    // BUTTON RIGHT ENABLE
+                }
+                else {
+                    // BUTTON RIGHT DISABLE
+                }
+            }
         };
+
+        // serializzazione
+        $scope.saveSlide = function () {
+            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
+            presentationData.saveSlide(slideJSON, localData.currentX, localData.currentY);
+        };
+
 }]);
