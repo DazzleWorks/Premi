@@ -1,50 +1,63 @@
-<div class="row" id="myProjects">
-    <div class="small-2 columns">
-        <button class="button small radius success" ng-click="newProject()">New Project</button>
+<div class="small-3 columns">
+    <div class="row">
+        <div>
+            <button class="button small radius success" ng-click="newProject()">New Project</button>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <ul id="folder">
+                <li ng-repeat="project in projects">
+                    <a href="#sub-{{$index+1}}">{{$index+1}}</a>
+                    <span ng-class="TreeProjectTitle"><a>{{project.name}}</a></span>
+
+                    <ul id="sub-{{$index+1}}">
+                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#PresentationSection">Presentation</a></li>
+                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#InfographicsSection">Infographics</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
-<div class="row" id="myProjects">
-    <div class="small-3 columns">
-        <ul id="folder">
-            <li ng-repeat="project in projects">
-                <a href="#sub-{{$index+1}}">{{$index+1}}</a><span ng-class="TreeProjectTitle"> <a href=>{{project.title}}</a></span>
-                <ul id="sub-{{$index+1}}">
-                    <li ng-repeat="Section in project.sections"><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#{{Section}}Section">{{Section}}</a></li>
-                </ul>
-            </li>
-        </ul>
+<div class="small-9 columns project"  ng-show="currentProject.name !== ''">
+
+    <h3 class="projectTitle" id="PresentationSection">{{currentProject.name}}</h3>
+
+    <div class="row">
+        <div class="small-12 small-centered columns">
+            <div class="myPresentationContainer">
+                <img src="../assets/img/google-now.jpg" class="presentationFront">
+                <div class="icon-bar three-up projectMenu">
+                    <a class="item custonMenuIcon" href="../presentation.html">
+                        <img src="../assets/img/play2.png" >
+                        <label>Play</label>
+                    </a>
+                    <a class="item custonMenuIcon" ng-click="editProject()">
+                        <img src="../assets/img/edit.png" >
+                        <label>Edit</label>
+                    </a>
+                    <a class="item custonMenuIcon" ng-click="deleteProject()">
+                        <img src="../assets/img/delete.svg" >
+                        <label>Delete</label>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="small-9 columns "style="background-color: #ececec;"><h3 class="ProjectTitle">{{currentProjectName}}</h3>
-		<h4 id="PresentationSection"><span data-tooltip aria-haspopup="true" data-options="disable_for_touch:true" class="has-tip " title="In this section you can run or edit your presentation."> Presentation </span></h4>
-		<div class="myPresentationContainer  small-offset-1">
-			<img src="../assets/img/google-now.jpg" class="presentationFront">
-			<div class="icon-bar three-up projectMenu">
-			  <a class="item custonMenuIcon" href="../presentation.html" target="_blank">
-				<img src="../assets/img/play2.png" >
-				<label>Play</label>
-			  </a>
-			  <a class="item custonMenuIcon"  ng-click="showPresentationEditorView()">
-				<img src="../assets/img/edit.png" >
-				<label>Edit</label>
-			  </a>
-			  <a class="item custonMenuIcon" ng-click="deleteProject()">
-				<img src="../assets/img/delete.svg" >
-				<label>Delete</label>
-			  </a>
-			</div>
-    	</div>
 
-    	<h4 id="InfographicsSection">Infographics</h4>
-			<div class="row small-offset-1">
-    			<a href="#" class="button small-offset-1" >Add new Infographic</a>
-			</div>
-    		<ul class="inline-list infographicsList small-9 columns ">
-				<li class="animate-repeat" ng-repeat="infographic in infographics">
-					<a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>
-				</li>
-			</ul>
-
-
+    <div class="row row-top-space myPresentationContainer">
+        <div class="row">
+            <h4 id="InfographicsSection">Infographics</h4>
+            <button class="button small radius success" >Add new Infographic</button>
+        </div>
+        <div>
+            <ul class="inline-list infographicsList small-12 small-centered columns ">
+                <li class="animate-repeat" ng-repeat="infographic in infographics">
+                    <a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

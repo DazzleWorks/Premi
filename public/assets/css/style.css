@@ -40,9 +40,13 @@ body {
     max-width: 350px !important;
 }
 
-.row{
+.row {
     max-width: 98% !important;
     margin-top: 0.5em !important;
+}
+
+.row-top-space {
+    margin-top: 1em !important;
 }
 
 .editMenuItemContainer{
@@ -55,6 +59,26 @@ body {
 
 .button {
     margin-bottom: 0.225rem !important;
+}
+
+/*.ng-invalid.ng-dirty {
+    border-color: red;
+}
+
+.ng-valid.ng-dirty {
+    border-color: green;
+}*/
+
+.signupError {
+    margin-top: -10px;
+    font-size: 0.7em;
+    color: red;
+}
+
+.loginError {
+    margin: -10px 0 10px 0;
+    font-size: 0.7em;
+    color: red;
 }
 
 #slideEditorPanel {
@@ -82,42 +106,9 @@ body {
     text-transform:uppercase;
 }
 
-/*.editMenuItemContainer:hover{
-    background-color: #007095;
-    cursor:pointer;
-}*/
-
-/*.generalMenuSettings{
-    background-color: #43AC6A;
-}*/
-
-/*.generalMenuSettings > div {
-    color:#000 !important;
-}*/
-/*
-.editMenuItemIcon{
-    margin-left:auto;
-    margin-right:auto;
-}*/
-
-/*.editMenuItemLabel{
-    display: block;
-    margin-left:auto;
-    font-size: initial;
-    margin-right:auto;
-    text-align: center;
-}*/
-
-/*#slideEditForm input{
-    min-width: 60px !important;
-}*/
-
-/* formatButtons */
-/*.formatButtons{
-    padding:5px;
-    float: left;
-    min-width: 30px;
-}*/
+.project {
+    background-color: #ececec;
+}
 
 .formatButtons-list{
     float: left;
@@ -135,6 +126,11 @@ body {
 	padding-top:5px !important;
 	padding-bottom:5px !important;
 }
+
+.myPresentationContainer {
+    text-align: center;
+}
+
 .presentationFront{
 	height: auto !important;
 	width:50% !important;
@@ -142,6 +138,11 @@ body {
 
 .projectMenu{
 	max-width:50%;
+}
+
+.projectTitle{
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .infographicMenu{
@@ -167,9 +168,6 @@ body {
     text-align: center !important;
     color:red;
 }
-
 .ProjectTitle{
     text-transform: uppercase;
-}
-
-
+}aas

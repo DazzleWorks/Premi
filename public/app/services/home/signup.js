@@ -9,22 +9,8 @@
 */
 angular.module('app.services.signup', ['ngRoute', 'ngResource'])
 
-    .factory('signupService', ['$http', '$resource', function ($http, $resource) {
+    .factory('signupService', ['$resource', function ($resource) {
 
-        return function(data) {
-            return $resource('/auth/register', {}, {
-                signup:{
-                    method: 'POST',
-                    params: {
-                        email: data.email,
-                        username: data.username,
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        password: data.password,
-                        password_confirmation: data.password_confirmation
-                    }
-                }
-            })
-        };
+        return $resource('/auth/register');
 
     }]);

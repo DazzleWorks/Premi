@@ -11,10 +11,6 @@ angular.module('app.services.logout', ['ngRoute', 'ngResource'])
 
     .factory('logoutService', ['$http', '$resource', function ($http, $resource) {
 
-        return $resource('/auth/logout', {}, {
-            logout: {
-                method: 'GET'
-            }
-        });
+        return $resource('/auth/logout');
 
     }]);

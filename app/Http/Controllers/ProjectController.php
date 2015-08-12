@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Project;
+use Premi\Model\Presentation;
+use Premi\Model\Slide;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -28,39 +30,43 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function index()
     {
         $user = \Auth::user();
-
         $project = $user->projects()->get();
 
-        return response($project);
+        return response()->json($project);
     }
 
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @return Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return response($request);
-        //$user = \Auth::user();
+        $user = \Auth::user();
+        $name  = $request->get('name');
 
-        //$project = new Project(array('name' => $request->get('name')));
+        $project = new Project(array('name' => $name));
+        $project = $user->projects()->save($project);
+        
+        $presentation = new Presentation(array('title' => $name));
+        $presentation = $project->presentation()->save($presentation);
+        
+        $slide = new Slide();
+        $slide = $presentation->slides()->save($slide);
 
-        //$project = $user->projects()->save($project);
-
-        //return response()->json(['status' => true]);
+        return response()->json($project);
     }
 
     /**
      * Display the specified resource.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function show($project)
     {
@@ -75,7 +81,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function update($project)
     {
@@ -93,7 +99,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param int $project: the id of a project
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function destroy($project)
     {

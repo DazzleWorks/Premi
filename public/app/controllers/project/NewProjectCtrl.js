@@ -9,16 +9,15 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
         };
 
         $scope.ok = function () {
-
-            var project = projectsService($scope.project_data).new();
+            var project = projectsService.save({user:$scope.user}, $scope.project_data);
             project.$promise.then(
                 function(data){
                     if(data.id !== '') {
-                        $scope.project_data.id = data.id;
+                        $scope.project_data.id = data._id;
                         $modalInstance.close($scope.project_data);
                     }
                     else
-                        $modalInstance.close("Project build failed, server error");
+                        $modalInstance.close("Project build failed");
                 },
                 function(data){
                     $modalInstance.close("error");
