@@ -14,6 +14,13 @@ body {
 
 #homePage {
     text-align: center;
+    min-height: 800px;
+    margin-top:-10px;
+    background:url("../img/flatBackground.png") ;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
 }
 
 .user-data {
@@ -164,3 +171,5 @@ body {
 .ProjectTitle{
     text-transform: uppercase;
 }
+
+
