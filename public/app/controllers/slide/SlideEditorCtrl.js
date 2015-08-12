@@ -158,7 +158,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             obj.sendBackwards(false);
         };
 
-
         var localData = {};
             localData.currentX = 1;
             localData.currentY = 1;
@@ -184,7 +183,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         var decrementCurrentY = function () {
             localData.currentY --;
-        };
 
         var incrementCurrentY = function () {
             localData.currentY ++;

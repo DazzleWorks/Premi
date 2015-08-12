@@ -16,6 +16,7 @@ body {
     text-align: center;
     min-height: 800px;
     margin-top:-10px;
+    background-color: #8A748F !important;
     background:url("../img/flatBackground.png") ;
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -170,4 +171,58 @@ body {
 }
 .ProjectTitle{
     text-transform: uppercase;
-}aas
+}
+
+section.homeCheckbox {
+   /* width: 160px;*/
+    display: inline-block;
+}
+section.homeCheckbox input {
+    display: block;
+    opacity: 0;
+}
+section.homeCheckbox label {
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    background: rgb(189, 189, 189);
+    border-radius: 30px;
+
+    transition: background-color 0.4s;
+    -moz-transition: background-color 0.4s;
+    -webkit-transition: background-color 0.4s;
+}
+section.homeCheckbox label:after {
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    content: '';
+    position: absolute;
+    background: #FFF;
+    border-radius: 10px;
+}
+section.homeCheckbox input:checked + label {
+   /* background: rgb(39, 173, 95);*/
+}
+input:checked + label:after {
+    left: auto;
+    right: 0;
+}
+
+section.homeCheckbox p {
+    /*font: normal 8px/40px Arial;*/
+    color: rgb(189, 189, 189);
+    display: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+section.homeCheckbox input:checked ~ p:nth-of-type(1) {
+    //color: rgb(39, 173, 95);
+    display: block;
+}
+section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
+    display: block;
+}
