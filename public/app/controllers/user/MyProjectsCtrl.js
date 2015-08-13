@@ -5,7 +5,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         $scope.projects = [];
         $rootScope.currentProject = {
             id: "",
-            name: ""
+            name: "",
+            presentation: ""
         };
 
         $scope.infographics=[
@@ -33,22 +34,24 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         var setCurrentProject = function () {
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
+            $rootScope.currentProject.presentation = $scope.projects[0].presentation;
         };
 
 
-        $scope.refreshProjects= function(){
+        $scope.refreshProjects = function() {
             if ($scope.projects.length === 0) {
                 var load = projectsService.query({user:$scope.user});
                 load.$promise.then (
                     function(data) {
                         for (prj in data) {
                             if (prj !== "$promise" && prj !== "$resolved")
-                                $scope.projects.push(
-                                    {
-                                        id: data[prj]._id,
-                                        name: data[prj].name
-                                    }
-                                );
+                            $scope.projects.push(
+                                {
+                                    id: data[prj]._id,
+                                    name: data[prj].name,
+                                    presentation: data[prj].presentation._id
+                                }
+                            );
                         };
                         setCurrentProject();
                     },
@@ -59,11 +62,11 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         $rootScope.$on('loadProjects', $scope.refreshProjects);
 
-        $scope.editProject = function(){
+        $scope.editProject = function() {
 			$rootScope.$broadcast('showPresentationEditor');
 		};
 
-        $scope.deleteProject = function (){
+        $scope.deleteProject = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteProject.html',
                 controller: 'DeleteProjectCtrl',
@@ -109,12 +112,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data !== 'error'){
-                    $scope.projects.push(
-                        {
-                            name: data.name,
-                            id: data.id
-                        }
-                    );
+                    $scope.refreshProjects();
                 }
                 //modalInstance.close();
             });

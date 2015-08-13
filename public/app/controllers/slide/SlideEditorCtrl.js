@@ -1,6 +1,6 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$modal', 'slideFactory', 'presentationData', function($scope, $modal, slideFactory, presentationData) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', 'slideFactory', 'presentationService', function($scope, $rootScope, $modal, slideFactory, presentationService) {
 
         $scope.components = [
             {
@@ -38,35 +38,34 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             localData.maxX = 2;
             localData.maxY = [1];
 
-
         $scope.update = function(){
             $scope.canvas.renderAll();
         };
 
 
         // text
-        $scope.toggleBold = function(obj){
-            if(obj.fontWeight==="bold"){
-                obj.fontWeight="normal";
-            }else
-            obj.fontWeight="bold";
-            $scope.canvas.renderAll();;
+        $scope.toggleBold = function(obj) {
+            if (obj.fontWeight === "bold")
+                obj.fontWeight = "normal";
+            else
+                obj.fontWeight = "bold";
+            $scope.update();
         };
 
-        $scope.toggleItalic = function(obj){
-            if(obj.fontStyle==="italic"){
+        $scope.toggleItalic = function(obj) {
+            if (obj.fontStyle === "italic")
                 delete obj.fontStyle;
-            }else
-            obj.fontStyle="italic";
-            $scope.canvas.renderAll();
+            else
+                obj.fontStyle="italic";
+            $scope.update();
         };
 
         $scope.toggleUnderlined = function(obj){
-            if(obj.textDecoration==="underline"){
+            if (obj.textDecoration === "underline")
                 delete obj.textDecoration;
-            }else
-            obj.textDecoration='underline';
-            $scope.canvas.renderAll();
+            else
+                obj.textDecoration = 'underline';
+            $scope.update();
         };
 
         $scope.avaiableFonts = [
@@ -80,8 +79,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         ];
 
         $scope.updateColor = function(obj) {
-            obj.fill= obj.fontColor;
-            $scope.canvas.renderAll();
+            obj.fill = obj.fontColor;
+            $scope.update();
         };
 
 
@@ -121,7 +120,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // canvas
         $scope.canvas = new fabric.Canvas('slide');
 
-        var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
+        // var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
+        var slide = presentationService.get
         $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
 
         $scope.update();
