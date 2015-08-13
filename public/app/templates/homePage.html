@@ -40,6 +40,12 @@
         </div>
     </div>
 
+    <div id="searchResults" class="row">
+        <ul class="small-10 small-offset-1 columns">
+            <li ng-repeat="searchResult in searchResults" class="searchResultItem small-2 columns"<!-- ng-click="setCurrentProject(project.id)"--><a href><img src="../assets/img/google-now.jpg"/><span>{{searchResult.name}}</span></a></li>
+        </ul>
+    </div>
+
 <!-- switch [END] -->
    <!--
     <div class= "row">

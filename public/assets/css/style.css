@@ -454,4 +454,21 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     -moz-border-radius: 3px 0 0 3px;
     border-radius: 3px 0 0 3px;
 }
+#projectSelector > ul > li > a >span{
+    padding-left: 6px;
+}
 /*** PROJECTS MENU [END] ***/
+
+#searchResults .searchResultItem {
+    list-style: none !important;
+}
+
+#searchResults .searchResultItem >img{
+    min-height: 100px;
+    width: 100%;
+
+}
+#searchResults .searchResultItem >a{
+    width: 100%;
+    color: #BDBDBD;
+}

@@ -77,5 +77,65 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 console.log("reset");
             });
         };
+        /**/
 
+        $scope.searchResults=[
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            },
+            {
+                name:"prj1",
+                id:"id",
+                username:"username"
+            }
+        ];
+
+        /**/
 }]);
