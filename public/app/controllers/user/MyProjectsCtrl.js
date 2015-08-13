@@ -37,7 +37,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
         };
 
-        $rootScope.$on('loadProjects', function(){
+
+        $scope.refreshProjects = function() {
             if ($scope.projects.length === 0) {
                 var load = projectsService.query({user:$scope.user});
                 load.$promise.then (
@@ -57,13 +58,15 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                     function(data){
                     });
             }
-        });
+        };
 
-        $scope.editProject = function(){
+        $rootScope.$on('loadProjects', $scope.refreshProjects);
+
+        $scope.editProject = function() {
 			$rootScope.$broadcast('showPresentationEditor');
 		};
 
-        $scope.deleteProject = function (){
+        $scope.deleteProject = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/deleteProject.html',
                 controller: 'DeleteProjectCtrl',
@@ -71,8 +74,10 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 windowClass: 'myModal'
             });
             modalInstance.result.then(function (data) {
-                if (data === 'delete')
-                    setCurrentProject();
+                if (data === 'delete'){
+                    $scope.projects=[];
+                    $scope.refreshProjects();
+                }
             });
 
         };
@@ -107,7 +112,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data !== 'error'){
-                    // chiamo refresh
+                    $scope.refreshProjects();
                 }
                 //modalInstance.close();
             });
