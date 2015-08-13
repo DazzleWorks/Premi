@@ -3,7 +3,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
     .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', 'projectsService', function($scope, $rootScope, $modal, projectsService) {
 
         $scope.projects = [];
-        $scope.currentProject = {
+        $rootScope.currentProject = {
             id: "",
             name: ""
         };
@@ -31,8 +31,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         ];
 
         var setCurrentProject = function () {
-            $scope.currentProject.id = $scope.projects[0].id;
-            $scope.currentProject.name = $scope.projects[0].name;
+            $rootScope.currentProject.id = $scope.projects[0].id;
+            $rootScope.currentProject.name = $scope.projects[0].name;
         };
 
         $rootScope.$on('loadProjects', function(){

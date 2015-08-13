@@ -58,20 +58,22 @@ class ProjectController extends Controller
         $presentation = $project->presentation()->save($presentation);
         
         $slide = new Slide();
-        $slide = $presentation->slides()->save($slide);
+        $presentation->slides()->save($slide);
 
         return response()->json($project);
     }
 
     /**
      * Display the specified resource.
-     * @param int $project: the id of a project
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
      * @return Illuminate\Http\Response
      */
     public function show($username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects()->where('_id', '=', $projectID)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
         return response($project);
     }
@@ -79,14 +81,16 @@ class ProjectController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param Illuminate\Http\Request
      * @param String $username: the username of a user
-     * @param int $project: the id of a project
+     * @param String $projectID: the id of a project
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects()->where('_id', '=', $projectID)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
         $project->name = $request->get('name');
 
@@ -98,17 +102,18 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
-     * @param int $project: the id of a project
+     * @param String $projectID: the id of a project
      * @return Illuminate\Http\Response
      */
     public function destroy($username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects()->where('_id', '=', $projectID)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
         $project->delete();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 }
 

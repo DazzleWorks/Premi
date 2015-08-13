@@ -26,8 +26,8 @@ class UserController extends Controller
 {
     /**
      * Returns the data to display a user's profile
-     * 
-     * @return array json
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
     public function show($username){
         if(!\Auth::user()) {
@@ -41,11 +41,11 @@ class UserController extends Controller
     
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$username)
     {
         $user = \Auth::user();
         
@@ -61,11 +61,10 @@ class UserController extends Controller
     
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($username)
     {
         $user = \Auth::user();
                 
