@@ -32,11 +32,33 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             }
         ];
 
-        var setCurrentProject = function () {
+        var resetCurrentProject = function () {
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
             $rootScope.currentProject.slide = $scope.projects[0].slide;
+        };
+
+        var findProjectById = function(id){
+            var k;
+            var obj={ id: "", name: "", presentation: ""};
+            for (k = 0; k < $scope.projects.length; ++k) {
+                    console.log($scope.projects[k].id + " === " + id);
+
+                //console.log($scope.projects[k].id);
+                if($scope.projects[k].id===id) {
+                    obj = $scope.projects[k];
+                }
+            }
+            return obj;
+        };
+
+        $scope.setCurrentProject = function (id) {
+            var obj= findProjectById(id);
+            console.log(obj);
+            $rootScope.currentProject.id =obj.id;
+            $rootScope.currentProject.name = obj.name;
+            $rootScope.currentProject.presentation = obj.presentation;
         };
 
 
@@ -56,7 +78,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                 }
                             );
                         };
-                        setCurrentProject();
+                        resetCurrentProject();
                     },
                     function(data){
                     });
