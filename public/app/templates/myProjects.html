@@ -4,18 +4,15 @@
             <button class="button small radius success" ng-click="newProject()">New Project</button>
         </div>
     </div>
-    <div class="row">
-        <div>
-            <ul id="folder">
-                <li ng-repeat="project in projects">
-                    <a href="#sub-{{$index+1}}">{{$index+1}}</a>
-                    <span ng-class="TreeProjectTitle"><a>{{project.name}}</a></span>
-
-                    <ul id="sub-{{$index+1}}">
-                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#PresentationSection">Presentation</a></li>
-                        <li><a id="s-{{$index+1}}" ng-class="TreeProjectSection" href="#InfographicsSection">Infographics</a></li>
-                    </ul>
-                </li>
+    <div class="row" id="projectSelectorWrapper">
+        <div id='projectSelector'>
+            <ul>
+                <li ng-repeat="project in projects" class="projectSelectorItem"><a href='#'><img src="../assets/img/project_90x90.png" width="40px"/><span>{{project.name}}</span></a></li>
+                <!--
+                <li class='active'><a href='#'><span>Products</span></a></li>
+                <li><a href='#'><span>About</span></a></li>
+                <li class='last'><a href='#'><span>Contact</span></a></li>
+                -->
             </ul>
         </div>
     </div>
