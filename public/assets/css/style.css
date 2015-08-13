@@ -212,6 +212,9 @@ input:checked + label:after {
     right: 0;
 }
 
+.mainSearchBar{
+    text-align: center !important;
+}
 section.homeCheckbox p {
     /*font: normal 8px/40px Arial;*/
     color: rgb(189, 189, 189);
