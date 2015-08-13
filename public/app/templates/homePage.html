@@ -9,7 +9,7 @@
     <!-- Search Bar [BEGIN]-->
     <div class="row">
         <div class="small-10 small-offset-1 columns">
-            <input  type="text" ng-model="searchText"/>
+            <input  type="text" ng-model="searchText" class="mainSearchBar"/>
         </div>
     </div>
 
@@ -38,6 +38,12 @@
         <div class="small-2 columns small-offset-5">
             <button class="button radius" id="searchSubmit">Search</button>
         </div>
+    </div>
+
+    <div id="searchResults" class="row">
+        <ul class="small-10 small-offset-1 columns">
+            <li ng-repeat="searchResult in searchResults" class="searchResultItem small-2 columns"<!-- ng-click="setCurrentProject(project.id)"--><a href><img src="../assets/img/google-now.jpg"/><span>{{searchResult.name}}</span></a></li>
+        </ul>
     </div>
 
 <!-- switch [END] -->

@@ -6,7 +6,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         $rootScope.currentProject = {
             id: "",
             name: "",
-            presentation: ""
+            presentation: "",
+            slide: ""
         };
 
         $scope.infographics=[
@@ -31,16 +32,39 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             }
         ];
 
-        var setCurrentProject = function () {
+        var resetCurrentProject = function () {
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
+            $rootScope.currentProject.slide = $scope.projects[0].slide;
+        };
+
+        var findProjectById = function(id){
+            var k;
+            var obj={ id: "", name: "", presentation: ""};
+            for (k = 0; k < $scope.projects.length; ++k) {
+                    console.log($scope.projects[k].id + " === " + id);
+
+                //console.log($scope.projects[k].id);
+                if($scope.projects[k].id===id) {
+                    obj = $scope.projects[k];
+                }
+            }
+            return obj;
+        };
+
+        $scope.setCurrentProject = function (id) {
+            var obj= findProjectById(id);
+            console.log(obj);
+            $rootScope.currentProject.id =obj.id;
+            $rootScope.currentProject.name = obj.name;
+            $rootScope.currentProject.presentation = obj.presentation;
         };
 
 
         $scope.refreshProjects = function() {
             if ($scope.projects.length === 0) {
-                var load = projectsService.query({user:$scope.user});
+                var load = projectsService.query({user:$rootScope.user});
                 load.$promise.then (
                     function(data) {
                         for (prj in data) {
@@ -49,11 +73,12 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                 {
                                     id: data[prj]._id,
                                     name: data[prj].name,
-                                    presentation: data[prj].presentation._id
+                                    presentation: data[prj].presentation._id,
+                                    slide: data[prj].presentation.slides[0]._id
                                 }
                             );
                         };
-                        setCurrentProject();
+                        resetCurrentProject();
                     },
                     function(data){
                     });
@@ -75,7 +100,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data === 'delete'){
-                    $scope.projects=[];
+                    $scope.projects = [];
                     $scope.refreshProjects();
                 }
             });
@@ -112,6 +137,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data !== 'error'){
+                    $scope.projects = [];
                     $scope.refreshProjects();
                 }
                 //modalInstance.close();

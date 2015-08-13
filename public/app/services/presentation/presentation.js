@@ -11,7 +11,12 @@ angular.module('app.services.presentation', ['ngRoute', 'ngResource'])
 
     .factory('presentationService', ['$resource', function($resource) {
 
-        return $resource('api/user/{:user}/project/{:project}/presentation/{:presentation}/slide{:slide}');
+        return $resource('api/user/:user/project/:project/presentation/:presentation', null,
+            {
+                'update': {
+                    method:'PUT'
+                }
+            });
 
     }]);
 
