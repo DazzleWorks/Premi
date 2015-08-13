@@ -63,6 +63,9 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+//Search for projects by username
+Route::post('search/byUsername', 'ProjectController@searchByUsername');
+
 // Logout routes...
 Route::get('/logout', function(){
     Auth::logout();
