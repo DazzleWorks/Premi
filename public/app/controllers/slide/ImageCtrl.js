@@ -50,7 +50,7 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute'])
         };
 
 
-        var imageList = [
+        $scope.imageList = [
             {
               url: 'http://i.imgur.com/wt4NRqA.jpg',
               id: '1',

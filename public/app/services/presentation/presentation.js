@@ -9,9 +9,14 @@
 */
 angular.module('app.services.presentation', ['ngRoute', 'ngResource'])
 
+    // .factory('presentationService', '$resource' function($resource){
+    //
+    //     return $resource('/auth/register');
+    // })
+
     .service('presentationData', function() {
 
-        this.saveSlide = function (slide, x, y) {
+        this.saveSlide = function (x, y, json, svg) {
             var obj=
                 '{"x":' + x
                 + ', "y":'
@@ -24,7 +29,7 @@ angular.module('app.services.presentation', ['ngRoute', 'ngResource'])
 
         this.loadSlide = function (cx, cy) {
             var i;
-            for (i = 0; i<slidesJSON.length; i++) {
+            for (i = 0; i < slidesJSON.length; i++) {
                 if (slidesJSON[i].x === cx && slidesJSON[i].y === cy)
                     return slidesJSON[i];
             }

@@ -9,7 +9,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.home = "true";
         $rootScope.user = "false";
-        // $rootScope.user = "false"
+        $rootScope.currentProject = '';
 
         $scope.openHome = function () {
             $scope.home = "true";
