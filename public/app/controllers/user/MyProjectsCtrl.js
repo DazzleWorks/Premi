@@ -6,7 +6,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         $rootScope.currentProject = {
             id: "",
             name: "",
-            presentation: ""
+            presentation: "",
+            slide: ""
         };
 
         $scope.infographics=[
@@ -35,12 +36,13 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
+            $rootScope.currentProject.slide = $scope.projects[0].slide;
         };
 
 
         $scope.refreshProjects = function() {
             if ($scope.projects.length === 0) {
-                var load = projectsService.query({user:$scope.user});
+                var load = projectsService.query({user:$rootScope.user});
                 load.$promise.then (
                     function(data) {
                         for (prj in data) {
@@ -49,7 +51,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                 {
                                     id: data[prj]._id,
                                     name: data[prj].name,
-                                    presentation: data[prj].presentation._id
+                                    presentation: data[prj].presentation._id,
+                                    slide: data[prj].presentation.slides[0]._id
                                 }
                             );
                         };
@@ -75,7 +78,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data === 'delete'){
-                    $scope.projects=[];
+                    $scope.projects = [];
                     $scope.refreshProjects();
                 }
             });
@@ -112,6 +115,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data !== 'error'){
+                    $scope.projects = [];
                     $scope.refreshProjects();
                 }
                 //modalInstance.close();
