@@ -226,3 +226,31 @@ section.homeCheckbox input:checked ~ p:nth-of-type(1) {
 section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     display: block;
 }
+
+.transitionsWrapper{
+    max-width: 33%;
+    float:left;
+}
+
+.transitionsWrapper >img{
+    max-width: 80%;
+    max-height: 120px;
+}
+
+.transitionsWrapper > p{
+    text-align: center;
+    clear:left;
+}
+
+.themesWrapper{
+    width: 20%;
+    max-width: 200px;
+    float:left;
+}
+
+.themesWrapper a{
+    text-align: center;
+}
+.themesWrapper p{
+    text-align: center;
+}

@@ -105,6 +105,15 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 modalInstance.result.then(function (selectedImg) {
                     $scope.insertImageOnCanvas(selectedImg);
                 });
+            }else if (elementType === "presentationStyle"){
+                var modalInstance = $modal.open({
+                    templateUrl: 'app/templates/presentationStyle.html',
+                    controller: 'PresentationStyleCtrl'
+                });
+
+                modalInstance.result.then(function (selectedImg) {
+                    $scope.insertImageOnCanvas(selectedImg);
+                });
             }
         };
 

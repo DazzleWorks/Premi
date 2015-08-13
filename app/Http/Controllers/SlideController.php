@@ -26,50 +26,71 @@ class SlideController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function index($project)
+    public function index($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
         
-        $slide = $user->projects()->where('_id', '=', $project)->presentation()->first()->slides()->get();
+        $project = $user->projects();
+        $project = $project-find($projectID);
         
-        return response($slide);
+        $presentation = $project->presentation()->first();
+        $slide = $presentation->slides()->get();
+        
+        return response()->json($slide);
     }
     
     /**
      * Store a newly created resource in storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function store($project) {
-        $user = \Auth::user();
-        
-        $slide = new Slide(array('xIndex' => \Input::get('xIndex'), 'yIndex' => \Input::get('yIndex')));
-        
-        $user->projects()->where('_id', '=', $project)->presentation()->first()->slides()->save($slide);
-               
-        return response(true);   
-    }
-    
-    /**
-     * Display the specified resource.
-     * @param int $project: the id of a project
-     * @param int $slide: the id of a slide
-     * @return Response
-     */
-    public function show($project, $slide)
+    public function store(Request $request,$username,$projectID,$presentationID)
     {
         $user = \Auth::user();
         
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $slide = new Slide(['xIndex' => $request->get('xIndex'), 
+                            'yIndex' => $request->get('yIndex'),
+                             'svg' => $request->get('svg')]);
+        
+        $project = $user->projects();
+        $project = $project->find($projectID);
+        
+        $presentation = $project->presentation()->first();
+        $presentation->slides()->save($slide);
+               
+        return response()->json(['status' => true]);   
+    }
+    
+    
+    /**
+     * Display the specified resource.
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @param String $slideID: the id of a slide
+     * @return Illuminate\Http\Response
+     */
+    public function show($username,$projectID,$presentationID,$slideID)
+    {
+        $user = \Auth::user();
+        
+        $project = $user->projects();
+        $project = $project->find($projectID);
                 
-        $presentation = $project->presentations()->first()->get();
+        $presentation = $project->presentation()->first();
         
-        $slide = $presentation->slides()->where('id', '=', $slide)->get(); 
+        $slide = $presentation->slides();
+        $slide = $slide->find($slideID); 
         
-        return response($slide);
+        return response()->json($slide);
     }
     
     /**
@@ -104,22 +125,26 @@ class SlideController extends Controller
     
     /**
      * Remove the specified resource from storage.
-     * @param int $project: the id of a project
-     * @param int $slide: the id of a slide
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @param String $slideID: the id of a slide
+     * @return Illuminate\Http\Response
      */
-    public function destroy($project,$slide)
+    public function destroy($username,$projectID,$presentationID,$slideID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $project = $user->projects();
+        $project = $project->find($projectID);
 
-        $presentation = $project->presentations()->first();
+        $presentation = $project->presentation()->first();
 
-        $slide = $presentation->slides()->where('_id', '=', $slide)->get();
+        $slide = $presentation->slides();
+        $slide = $slide->find($slideID);
         
         $slide->delete();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 }
