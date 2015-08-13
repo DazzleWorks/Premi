@@ -9,116 +9,117 @@
 */
 angular.module('app.services.presentation', ['ngRoute', 'ngResource'])
 
-    // .factory('presentationService', '$resource' function($resource){
+    .factory('presentationService', ['$resource', function($resource) {
+
+        return $resource('api/user/{:user}/project/{:project}/presentation/{:presentation}/slide{:slide}');
+
+    }]);
+
+    // .service('presentationData', function() {
     //
-    //     return $resource('/auth/register');
-    // })
-
-    .service('presentationData', function() {
-
-        this.saveSlide = function (x, y, json, svg) {
-            var obj=
-                '{"x":' + x
-                + ', "y":'
-                + y
-                + ', "src": $sce.trustAsHtml(\''
-                + slide
-                + '\')}'
-            return slidesJSON.push (obj);
-        };
-
-        this.loadSlide = function (cx, cy) {
-            var i;
-            for (i = 0; i < slidesJSON.length; i++) {
-                if (slidesJSON[i].x === cx && slidesJSON[i].y === cy)
-                    return slidesJSON[i];
-            }
-        };
-
-        var slidesJSON=[
-        {
-            "x":1, "y":1, "background": "", "objects": [{
-                "type": "text",
-                "originX": "left",
-                "originY": "top",
-                "left": 50,
-                "top": 50,
-                "width": 100,
-                "height": 50,
-                "fill": "rgb(0,0,0)",
-                "stroke": null,
-                "strokeWidth": 1,
-                "strokeDashArray": null,
-                "strokeLineCap": "butt",
-                "strokeLineJoin": "miter",
-                "strokeMiterLimit": 10,
-                "scaleX": 1,
-                "scaleY": 1,
-                "angle": 0,
-                "flipX": false,
-                "flipY": false,
-                "opacity": 1,
-                "shadow": null,
-                "visible": true,
-                "clipTo": null,
-                "backgroundColor": "",
-                "fillRule": "nonzero",
-                "globalCompositeOperation": "source-over",
-                "text": "Beeeeee",
-                "fontSize": 40,
-                "fontWeight": "normal",
-                "fontFamily": "Georgia",
-                "fontStyle": "",
-                "lineHeight": 1.16,
-                "textDecoration": "",
-                "textAlign": "left",
-                "textBackgroundColor": ""
-            }]
-        },
-
-        {
-            "x":2, "y":1, "background": "", "objects": [{
-                    "type": "text",
-                    "originX": "left",
-                    "originY": "top",
-                    "left": 50,
-                    "top": 50,
-                    "width": 100,
-                    "height": 50,
-                    "fill": "rgb(0,0,0)",
-                    "stroke": null,
-                    "strokeWidth": 1,
-                    "strokeDashArray": null,
-                    "strokeLineCap": "butt",
-                    "strokeLineJoin": "miter",
-                    "strokeMiterLimit": 10,
-                    "scaleX": 1,
-                    "scaleY": 1,
-                    "angle": 0,
-                    "flipX": false,
-                    "flipY": false,
-                    "opacity": 1,
-                    "shadow": null,
-                    "visible": true,
-                    "clipTo": null,
-                    "backgroundColor": "",
-                    "fillRule": "nonzero",
-                    "globalCompositeOperation": "source-over",
-                    "text": "Booooo",
-                    "fontSize": 40,
-                    "fontWeight": "normal",
-                    "fontFamily": "Georgia",
-                    "fontStyle": "",
-                    "lineHeight": 1.16,
-                    "textDecoration": "",
-                    "textAlign": "left",
-                    "textBackgroundColor": ""
-                }]
-        }
-        ];
-
-
-    });
+    //     this.saveSlide = function (x, y, json, svg) {
+    //         var obj=
+    //             '{"x":' + x
+    //             + ', "y":'
+    //             + y
+    //             + ', "src": $sce.trustAsHtml(\''
+    //             + slide
+    //             + '\')}'
+    //         return slidesJSON.push (obj);
+    //     };
+    //
+    //     this.loadSlide = function (cx, cy) {
+    //         var i;
+    //         for (i = 0; i < slidesJSON.length; i++) {
+    //             if (slidesJSON[i].x === cx && slidesJSON[i].y === cy)
+    //                 return slidesJSON[i];
+    //         }
+    //     };
+    //
+    //     var slidesJSON=[
+    //     {
+    //         "x":1, "y":1, "background": "", "objects": [{
+    //             "type": "text",
+    //             "originX": "left",
+    //             "originY": "top",
+    //             "left": 50,
+    //             "top": 50,
+    //             "width": 100,
+    //             "height": 50,
+    //             "fill": "rgb(0,0,0)",
+    //             "stroke": null,
+    //             "strokeWidth": 1,
+    //             "strokeDashArray": null,
+    //             "strokeLineCap": "butt",
+    //             "strokeLineJoin": "miter",
+    //             "strokeMiterLimit": 10,
+    //             "scaleX": 1,
+    //             "scaleY": 1,
+    //             "angle": 0,
+    //             "flipX": false,
+    //             "flipY": false,
+    //             "opacity": 1,
+    //             "shadow": null,
+    //             "visible": true,
+    //             "clipTo": null,
+    //             "backgroundColor": "",
+    //             "fillRule": "nonzero",
+    //             "globalCompositeOperation": "source-over",
+    //             "text": "Beeeeee",
+    //             "fontSize": 40,
+    //             "fontWeight": "normal",
+    //             "fontFamily": "Georgia",
+    //             "fontStyle": "",
+    //             "lineHeight": 1.16,
+    //             "textDecoration": "",
+    //             "textAlign": "left",
+    //             "textBackgroundColor": ""
+    //         }]
+    //     },
+    //
+    //     {
+    //         "x":2, "y":1, "background": "", "objects": [{
+    //                 "type": "text",
+    //                 "originX": "left",
+    //                 "originY": "top",
+    //                 "left": 50,
+    //                 "top": 50,
+    //                 "width": 100,
+    //                 "height": 50,
+    //                 "fill": "rgb(0,0,0)",
+    //                 "stroke": null,
+    //                 "strokeWidth": 1,
+    //                 "strokeDashArray": null,
+    //                 "strokeLineCap": "butt",
+    //                 "strokeLineJoin": "miter",
+    //                 "strokeMiterLimit": 10,
+    //                 "scaleX": 1,
+    //                 "scaleY": 1,
+    //                 "angle": 0,
+    //                 "flipX": false,
+    //                 "flipY": false,
+    //                 "opacity": 1,
+    //                 "shadow": null,
+    //                 "visible": true,
+    //                 "clipTo": null,
+    //                 "backgroundColor": "",
+    //                 "fillRule": "nonzero",
+    //                 "globalCompositeOperation": "source-over",
+    //                 "text": "Booooo",
+    //                 "fontSize": 40,
+    //                 "fontWeight": "normal",
+    //                 "fontFamily": "Georgia",
+    //                 "fontStyle": "",
+    //                 "lineHeight": 1.16,
+    //                 "textDecoration": "",
+    //                 "textAlign": "left",
+    //                 "textBackgroundColor": ""
+    //             }]
+    //     }
+    //     ];
+    //
+    //
+    // });
 
 
         // {"x":1,"y":1,"src":/*$sce.trustAsHtml(*/'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" xml:space="preserve"><desc>Created with Fabric.js 1.5.0</desc><defs></defs><rect x="-25" y="-30" rx="0" ry="0" width="50" height="60" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: red; fill-rule: nonzero; opacity: 1;" transform="translate(96.46 138.89) rotate(45)"></rect><g transform="translate(116.6 426.22)"><text font-family="Times New Roman" font-size="40" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"><tspan x="-66.6016" y="8.984" fill="rgb(0,0,0)">Beeeeee</tspan></text></g></svg>'/*)*/},

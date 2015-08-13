@@ -5,7 +5,8 @@ angular.module('app.controllers.NewProjectCtrl', ['ngRoute'])
         $scope.project_data = {
             user: $scope.user,
             id: "",
-            name: ""
+            name: "",
+            presentation: ""
         };
 
         $scope.ok = function () {

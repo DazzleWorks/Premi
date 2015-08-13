@@ -5,7 +5,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         $scope.projects = [];
         $rootScope.currentProject = {
             id: "",
-            name: ""
+            name: "",
+            presentation: ""
         };
 
         $scope.infographics=[
@@ -33,6 +34,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         var setCurrentProject = function () {
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
+            $rootScope.currentProject.presentation = $scope.projects[0].presentation;
         };
 
         $rootScope.$on('loadProjects', function(){
@@ -45,7 +47,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                             $scope.projects.push(
                                 {
                                     id: data[prj]._id,
-                                    name: data[prj].name
+                                    name: data[prj].name,
+                                    presentation: data[prj].presentation._id
                                 }
                             );
                         };
@@ -104,12 +107,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data !== 'error'){
-                    $scope.projects.push(
-                        {
-                            name: data.name,
-                            id: data.id
-                        }
-                    );
+                    // chiamo refresh
                 }
                 //modalInstance.close();
             });

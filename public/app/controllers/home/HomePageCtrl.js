@@ -7,9 +7,11 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         // disconnect any user on load page
         logoutService.get();
 
-        $scope.home = "true";
         $rootScope.user = "false";
-        $rootScope.currentProject = '';
+        $rootScope.currentProject = {};
+        $rootScope.currentSlide = {};
+
+        $scope.home = "true";
 
         $scope.openHome = function () {
             $scope.home = "true";
