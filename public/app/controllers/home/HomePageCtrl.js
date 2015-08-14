@@ -2,7 +2,7 @@
 
 angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
-    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService', function($scope, $rootScope, $modal, logoutService) {
+    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService','searchByUserService', function($scope, $rootScope, $modal, logoutService, searchByUserService) {
 
         // disconnect any user on load page
         logoutService.get();
@@ -79,24 +79,30 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         };
         /**/
 
+
+
         $scope.searchResultsByUsers=[
             {
-                username:"username"
-            },{
-                username:"username1"
-            },{
-                username:"username2"
-            },{
-                username:"username3"
-            },{
-                username:"username4"
-            },{
-                username:"username5"
-            },{
-                username:"username6"
-            },
+                username:""
+            }
         ];
 
+        $scope.searchByUsername=function(){
+
+            $rootScope.$on('searchByUserService', function (e) {
+                var searchResults = searchByUserService.query({user:$rootScope.searchText});
+
+                searchResults.$promise.then (
+                    function(data) {
+                        console.log(searchResults);
+                        $scope.searchResultsByUsers = searchResults;
+                    },
+                    function(data) {
+                    });
+            });
+
+        };
+        
         $scope.searchResults=[
             {
                 name:"prj1",

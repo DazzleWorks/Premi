@@ -12,7 +12,7 @@ angular.module('app.services.search', ['ngRoute', 'ngResource'])
 
     .factory('searchByUserService', ['$http', '$resource', function ($http, $resource) {
 
-        return $resource('/api/user/:id');
+        return $resource('search/byUsername/:user');
 
     }])
 
