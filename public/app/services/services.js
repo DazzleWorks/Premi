@@ -10,6 +10,7 @@ angular.module('app.services',
         'app.services.presentation',
         'app.services.project',
         'app.services.projects',
+        'app.services.search',
         'app.services.signup',
         'app.services.slide',
         'app.services.user'

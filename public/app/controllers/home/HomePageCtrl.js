@@ -79,61 +79,79 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         };
         /**/
 
+        $scope.searchResultsByUsers=[
+            {
+                username:"username"
+            },{
+                username:"username1"
+            },{
+                username:"username2"
+            },{
+                username:"username3"
+            },{
+                username:"username4"
+            },{
+                username:"username5"
+            },{
+                username:"username6"
+            },
+        ];
+
         $scope.searchResults=[
             {
                 name:"prj1",
                 id:"id",
-                username:"username"
+                username:"username1"
             },
             {
-                name:"prj1",
+                name:"prj2",
                 id:"id",
-                username:"username"
+                username:"username2"
             },
             {
-                name:"prj1",
+                name:"prj3",
                 id:"id",
-                username:"username"
+                username:"username3"
             },
             {
-                name:"prj1",
+                name:"prj4",
                 id:"id",
-                username:"username"
+                username:"username1"
             },
             {
-                name:"prj1",
+                name:"prj5",
                 id:"id",
-                username:"username"
+                username:"username2"
             },
             {
-                name:"prj1",
+                name:"prj6",
                 id:"id",
-                username:"username"
+                username:"username3"
             },
             {
-                name:"prj1",
+                name:"prj7",
                 id:"id",
-                username:"username"
+                username:"username4"
             },
             {
-                name:"prj1",
+                name:"prj8",
                 id:"id",
-                username:"username"
+                username:"username4"
             },
             {
-                name:"prj1",
+                name:"prj9",
                 id:"id",
-                username:"username"
+                username:"username4"
             },
             {
-                name:"prj1",
+                name:"prj10",
                 id:"id",
-                username:"username"
+                username:"username5"
             },
             {
-                name:"prj1",
+                name:"prj11",
                 id:"id",
-                username:"username"
+                username:"username6"
             }
         ];
 

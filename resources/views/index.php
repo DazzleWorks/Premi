@@ -107,6 +107,7 @@
             <script src="app/services/home/forgotPassword.js" type="text/javascript"></script>
             <script src="app/services/home/login.js" type="text/javascript"></script>
             <script src="app/services/home/logout.js" type="text/javascript"></script>
+            <script src="app/services/home/search.js" type="text/javascript"></script>
             <script src="app/services/home/signup.js" type="text/javascript"></script>
 
             <script src="app/services/presentation/presentation.js" type="text/javascript"></script>
