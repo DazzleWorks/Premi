@@ -69,12 +69,13 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                     function(data) {
                         for (prj in data) {
                             if (prj !== "$promise" && prj !== "$resolved")
+                            console.log(data[prj]);
                             $scope.projects.push(
                                 {
                                     id: data[prj]._id,
                                     name: data[prj].name,
-                                    presentation: data[prj].presentation._id,
-                                    slide: data[prj].presentation.slides[0]._id
+                                    presentation: data[prj].presentation._id.$id,
+                                    slide: data[prj].presentation.slides[0]._id.$id
                                 }
                             );
                         };

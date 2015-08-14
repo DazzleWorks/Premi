@@ -30,39 +30,14 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
         ];
 
+        $scope.currentSlide = {};
 
-
-
-        // $scope.currentSlide = {};
-
-        // api/user/{:user}/project/{:project}/presentation/{:presentation}/slide/{:slide}
-        // var load = presentationService.get({user: $rootScope.user, project: $rootScope.currentProject.id, presentation: $rootScope.currentProject.presentation, slide: ''});
-        // load.$promise.then (
-        //     function(data) {
-        //         console.log(data);
-        //     },
-        //     function(data){
-        //     });
-
-        $scope.prova = function () {
-            console.log($rootScope.currentProject);
-            var load = presentationService.get({user:$rootScope.user, project:$rootScope.currentProject.id, presentation:$rootScope.currentProject.presentation.$id});
-            load.$promise.then (
-                function(data) {
-                    console.log(data);
-                },
-                function(data){
-                });
+        var localData = {
+            currentX:1,
+            currentY: 1,
+            maxX: 1,
+            maxY: [1]
         };
-
-
-
-        var localData = {};
-            localData.currentX = 1;
-            localData.currentY = 1;
-
-            localData.maxX = 1;
-            localData.maxY = [1];
 
         $scope.update = function(){
             $scope.canvas.renderAll();
@@ -286,16 +261,25 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             // get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
         };
 
+        // variables:
+        // $scope.user = active user
+        // $scope.currentProject.id = active project's id
+        // $scope.currentProject.presentation = active project presentation's id
+        // $scope.currentSlide = active slide's id
+
+        // load slide that already exist
         $scope.loadSlide = function () {
             $scope.updateCurrentSlide();
-            var slide = slideService.get(currentSlide.id);
+            var slide = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
             $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
         };
 
+        // update slide that already exists
         $scope.updateSlide = function () {
-            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
-            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
-            slideService.update(currentSlide.id, slideJSON, slideSVG);
+            console.log($scope.currentProject); // log current project
+            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
+            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, (slideJSON, slideSVG));
         };
 
         // add slide

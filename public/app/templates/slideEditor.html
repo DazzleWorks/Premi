@@ -48,10 +48,11 @@
 
     <div class="row">
         <div class="small-1 columns">
-            <button class="button radius" id="saveButton" ng-click="prova()">Save</button>
+            <button class="button radius" id="saveButton" ng-click="updateSlide()">Save</button>
         </div>
         <div class="small-11 columns">
-            <p id="serialized"></p>
+            <p id="serialized">{{slideJSON}}</p>
+            <p id="serialized">{{slideSVG}}</p>
         </div>
     </div>
 </div>

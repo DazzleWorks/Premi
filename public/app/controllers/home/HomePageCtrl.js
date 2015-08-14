@@ -81,28 +81,30 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
 
 
-        $scope.searchResultsByUsers=[
-            {
-                username:""
-            }
-        ];
+
 
         $scope.searchByUsername=function(){
+            $scope.searchResultsByUsers=[];
 
             $rootScope.$on('searchByUserService', function (e) {
-                var searchResults = searchByUserService.query({user:$rootScope.searchText});
+                var searchResults = searchByUserService.query({user:$cope.searchText});
 
                 searchResults.$promise.then (
                     function(data) {
-                        console.log(searchResults);
+                        console.log("function-success-flag");
+                        console.log("OK"+searchResults);
                         $scope.searchResultsByUsers = searchResults;
+
                     },
                     function(data) {
+                        console.log("error"+searchResults);
+                        console.log("function-error-flag");
+
                     });
             });
 
         };
-        
+
         $scope.searchResults=[
             {
                 name:"prj1",
