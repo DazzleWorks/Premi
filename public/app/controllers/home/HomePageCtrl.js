@@ -77,35 +77,32 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 console.log("reset");
             });
         };
-        /**/
 
-
-
-
-
-        $scope.searchByUsername=function(){
-            $scope.searchResultsByUsers=[];
-
-            $rootScope.$on('searchByUserService', function (e) {
-                var searchResults = searchByUserService.query({user:$cope.searchText});
-
+        $scope.search = function () {
+            if ($scope.checked === false) {
+                var searchResults = searchByUserService.save(/*{user:$scope.searchText}*/);
                 searchResults.$promise.then (
                     function(data) {
-                        console.log("function-success-flag");
-                        console.log("OK"+searchResults);
-                        $scope.searchResultsByUsers = searchResults;
+                        console.log(data);
+                        $scope.searchResults = searchResults;
 
                     },
                     function(data) {
-                        console.log("error"+searchResults);
-                        console.log("function-error-flag");
-
                     });
-            });
-
+            }
+            else if ($scope.checked === true) {
+                var searchResults = searchByProjectService.get({project:$scope.searchText});
+                searchResults.$promise.then (
+                    function(data) {
+                        console.log(data);
+                        $scope.searchResults = searchResults;
+                    },
+                    function(data) {
+                    });
+            }
         };
 
-        $scope.searchResults=[
+        $scope.searchResults = [
             {
                 name:"prj1",
                 id:"id",
@@ -163,5 +160,4 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             }
         ];
 
-        /**/
 }]);
