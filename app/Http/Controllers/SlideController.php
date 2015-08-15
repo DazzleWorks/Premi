@@ -60,6 +60,12 @@ class SlideController extends Controller
                             'yIndex' => $request->get('yIndex'),
                              'svg' => $request->get('svg')]);
         
+        $objects = $request->get('objects');
+        foreach($objects as $object)
+        {
+            $slide->objects()->save($object);
+        }
+        
         $project = $user->projects();
         $project = $project->find($projectID);
         
