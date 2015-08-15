@@ -41,26 +41,21 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         var findProjectById = function(id){
             var k;
-            var obj={ id: "", name: "", presentation: ""};
+            var obj = {id: "", name: "", presentation: ""};
             for (k = 0; k < $scope.projects.length; ++k) {
-                    console.log($scope.projects[k].id + " === " + id);
-
-                //console.log($scope.projects[k].id);
-                if($scope.projects[k].id===id) {
+                if($scope.projects[k].id === id)
                     obj = $scope.projects[k];
-                }
             }
             return obj;
         };
 
         $scope.setCurrentProject = function (id) {
-            var obj= findProjectById(id);
-            console.log(obj);
-            $rootScope.currentProject.id =obj.id;
+            var obj = findProjectById(id);
+            $rootScope.currentProject.id = obj.id;
             $rootScope.currentProject.name = obj.name;
             $rootScope.currentProject.presentation = obj.presentation;
+            $rootScope.currentProject.slide = obj.slide;
         };
-
 
         $scope.refreshProjects = function() {
             if ($scope.projects.length === 0) {
@@ -69,7 +64,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                     function(data) {
                         for (prj in data) {
                             if (prj !== "$promise" && prj !== "$resolved")
-                            console.log(data[prj]);
                             $scope.projects.push(
                                 {
                                     id: data[prj]._id,
@@ -130,7 +124,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
-        $scope.newProject = function (){
+        $scope.newProject = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/newProject.html',
                 controller: 'NewProjectCtrl',
@@ -143,7 +137,5 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 }
                 //modalInstance.close();
             });
-            //console.log(data);
-
         };
 }]);

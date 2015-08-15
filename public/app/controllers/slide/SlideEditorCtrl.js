@@ -33,7 +33,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.currentSlide = {};
 
         var localData = {
-            currentX:1,
+            currentX: 1,
             currentY: 1,
             maxX: 1,
             maxY: [1]
@@ -84,7 +84,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.update();
         };
 
-
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
                 var modalInstance = $modal.open({
@@ -122,11 +121,11 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.canvas = new fabric.Canvas('slide');
 
         // var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
-        var slide = presentationService.get
-        $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+        // var slide = presentationService.get
+        // $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+        // $scope.update();
 
-        $scope.update();
-        $scope.objectSelected= "null";
+        $scope.objectSelected = "null";
 
         $scope.canvas.on('selection:cleared', function() {
             if ($scope.objectSelected !== "null") {
@@ -258,13 +257,18 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         $scope.updateCurrentSlide = function () {
-            // get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
+            // 1) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
+            // 2) load maxX and maxY
+
+            // temporary solution
+            $scope.currentSlide.id = $scope.currentProject.slide;
         };
 
         // variables:
         // $scope.user = active user
         // $scope.currentProject.id = active project's id
         // $scope.currentProject.presentation = active project presentation's id
+        // $scope.currentProject.slide = active project presentation's first slide id
         // $scope.currentSlide = active slide's id
 
         // load slide that already exist
@@ -274,13 +278,23 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
         };
 
+        // save new slide
+        $scope.saveSlide = function () {
+            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation});
+            $scope.currentSlide = slide.id; // TO VERIFY
+        };
+
         // update slide that already exists
         $scope.updateSlide = function () {
-            console.log($scope.currentProject); // log current project
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
             slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, (slideJSON, slideSVG));
         };
+
+        $rootScope.$on('showPresentationEditor', function () {
+            console.log($rootScope.currentProject);
+            $scope.loadSlide();
+        });
 
         // add slide
         $scope.addSlide = function (position) {
@@ -289,6 +303,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 incrementMaxY(localData.currentX);
                 $scope.canvas.clear();
                 offset("up", 0);
+                $scope.saveSlide();
             }
             else if (position === "down") {
                 $scope.updateSlide();
@@ -298,6 +313,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 if (localData.currentY < localData.maxY[localData.currentX-1]) {
                     offset("down", 0);
                 }
+                $scope.saveSlide();
             }
             else if (position === "left") {
                 $scope.updateSlide();
@@ -305,6 +321,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 incrementMaxX();
                 $scope.canvas.clear();
                 offset("left", 0);
+                $scope.saveSlide();
             }
             else if (position === "right") {
                 $scope.updateSlide();
@@ -316,6 +333,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     offset("right", 0);
                 }
                 localData.maxY[localData.currentX-1] = 1;
+                $scope.saveSlide();
             }
         };
 
