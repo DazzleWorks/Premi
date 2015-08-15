@@ -41,12 +41,22 @@
 
     <div id="searchResults" class="row" ng-show="checked" >
         <ul class="small-10 small-offset-1 columns" >
-            <li ng-repeat="searchResult in searchResults" class="searchResultItem small-2 columns" <!-- ng-click="setCurrentProject(project.id)" --><a href><img src="../assets/img/google-now.jpg"/><span>{{searchResult.name}}</span></a></li>
+            <li ng-repeat="project in searchResults.byProjectName" class="searchResultItem small-2 columns" ><!-- ng-click="setCurrentProject(project.id)" -->
+                <a href="/presentation.html?id={{project.id}}">
+                    <img src="../assets/img/google-now.jpg"/>
+                    <span>{{project.name}}</span>
+                </a>
+            </li>
         </ul>
     </div>
     <div id="searchResults" class="row" ng-hide="checked">
         <ul class="small-10 small-offset-1 columns">
-            <li ng-repeat="user in searchResultsByUsers" class="searchResultItem small-2 columns" <!-- ng-click="setCurrentProject(project.id)" --><a href><img src="../assets/img/user_male.png"/><span>{{user.username}}</span></a></li>
+            <li ng-repeat="user in searchResults.byUsername" class="searchResultItem small-2 columns" ><!-- ng-click="setCurrentProject(project.id)" -->
+                <a href>
+                    <img src="../assets/img/user_male.png"/>
+                    <span>{{user.username}}</span>
+                </a>
+            </li>
         </ul>
     </div>
 

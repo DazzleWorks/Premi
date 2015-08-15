@@ -13,6 +13,8 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.home = "true";
 
+        $scope.checked = false;
+
         $scope.openHome = function () {
             $scope.home = "true";
         };
@@ -84,7 +86,9 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 searchResults.$promise.then (
                     function(data) {
                         console.log(data);
-                        $scope.searchResults = searchResults;
+                        $scope.searchResults.byProjectName = [];
+                        $scope.searchResults.byUsername = searchResults;
+
 
                     },
                     function(data) {
@@ -95,69 +99,80 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 searchResults.$promise.then (
                     function(data) {
                         console.log(data);
-                        $scope.searchResults = searchResults;
+                        $scope.searchResults.byProjectName = searchResults;
+                        $scope.searchResults.byUsername = [];
                     },
                     function(data) {
                     });
             }
         };
 
-        $scope.searchResults = [
-            {
-                name:"prj1",
-                id:"id",
-                username:"username1"
-            },
-            {
-                name:"prj2",
-                id:"id",
-                username:"username2"
-            },
-            {
-                name:"prj3",
-                id:"id",
-                username:"username3"
-            },
-            {
-                name:"prj4",
-                id:"id",
-                username:"username1"
-            },
-            {
-                name:"prj5",
-                id:"id",
-                username:"username2"
-            },
-            {
-                name:"prj6",
-                id:"id",
-                username:"username3"
-            },
-            {
-                name:"prj7",
-                id:"id",
-                username:"username4"
-            },
-            {
-                name:"prj8",
-                id:"id",
-                username:"username4"
-            },
-            {
-                name:"prj9",
-                id:"id",
-                username:"username4"
-            },
-            {
-                name:"prj10",
-                id:"id",
-                username:"username5"
-            },
-            {
-                name:"prj11",
-                id:"id",
-                username:"username6"
-            }
-        ];
+        $scope.searchResults ={
+            byUsername:[
+                {username:"a"},
+                {username:"b"},
+                {username:"c"},
+                {username:"d"},
+                {username:"e"},
+                {username:"f"}
+            ],
+            byProjectName:[
+                {
+                    name:"prj1",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username1"
+                },
+                {
+                    name:"prj2",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username2"
+                },
+                {
+                    name:"prj3",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username3"
+                },
+                {
+                    name:"prj4",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username1"
+                },
+                {
+                    name:"prj5",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username2"
+                },
+                {
+                    name:"prj6",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username3"
+                },
+                {
+                    name:"prj7",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username4"
+                },
+                {
+                    name:"prj8",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username4"
+                },
+                {
+                    name:"prj9",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username4"
+                },
+                {
+                    name:"prj10",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username5"
+                },
+                {
+                    name:"prj11",
+                    id:"55cc87eeedee62610c8b4591",
+                    username:"username6"
+                }
+             ]
+    };
 
 }]);
