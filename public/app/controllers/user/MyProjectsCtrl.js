@@ -7,7 +7,9 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             id: "",
             name: "",
             presentation: "",
-            slide: ""
+            firstSlide: ""
+            // maxX: 0,
+            // maxY: 0
         };
 
         $scope.infographics=[
@@ -36,7 +38,9 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.id = $scope.projects[0].id;
             $rootScope.currentProject.name = $scope.projects[0].name;
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
-            $rootScope.currentProject.slide = $scope.projects[0].slide;
+            $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
+            // $rootScope.currentProject.maxX = $scope.projects[0].maxX;
+            // $rootScope.currentProject.maxY = $scope.projects[0].maxY;
         };
 
         var findProjectById = function(id){
@@ -54,7 +58,9 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.id = obj.id;
             $rootScope.currentProject.name = obj.name;
             $rootScope.currentProject.presentation = obj.presentation;
-            $rootScope.currentProject.slide = obj.slide;
+            $rootScope.currentProject.firstSlide = obj.firstSlide;
+            // $rootScope.currentProject.maxX = obj.maxX;
+            // $rootScope.currentProject.maxY = obj.maxY;
         };
 
         $scope.refreshProjects = function() {
@@ -69,7 +75,9 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                     id: data[prj]._id,
                                     name: data[prj].name,
                                     presentation: data[prj].presentation._id.$id,
-                                    slide: data[prj].presentation.slides[0]._id.$id
+                                    firstSlide: data[prj].presentation.slides[0]._id.$id
+                                    // maxX: data[prj].presentation.maxX,
+                                    // maxY: data[prj].presentation.maxY
                                 }
                             );
                         };
@@ -102,28 +110,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
-        $scope.deleteInfographic = function (id, index){
-            var modalInstance = $modal.open({
-                templateUrl: 'app/templates/deleteInfographic.html',
-                controller: 'DeleteInfographicCtrl',
-                windowClass: 'myModal'
-            });
-            modalInstance.result.then(function (data) {
-                //$scope.infographics ;
-                $scope.infographics.forEach(function(element, index, array){
-                    console.log(id);
-                    if(element.id === id){
-                        delete $scope.infographics[element];
-                    }
-                });
-                $scope.apply;
-                console.log($scope.infographics);
-                $scope.infographics.splice(index, 1);
-                //$modalInstance.close();
-            });
-
-        };
-
         $scope.newProject = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/newProject.html',
@@ -135,7 +121,26 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                     $scope.projects = [];
                     $scope.refreshProjects();
                 }
-                //modalInstance.close();
             });
         };
+
+        // $scope.deleteInfographic = function (id, index){
+        //     var modalInstance = $modal.open({
+        //         templateUrl: 'app/templates/deleteInfographic.html',
+        //         controller: 'DeleteInfographicCtrl',
+        //         windowClass: 'myModal'
+        //     });
+        //     modalInstance.result.then(function (data) {
+        //         //$scope.infographics;
+        //         $scope.infographics.forEach(function(element, index, array){
+        //             if(element.id === id){
+        //                 delete $scope.infographics[element];
+        //             }
+        //         });
+        //         $scope.apply;
+        //         $scope.infographics.splice(index, 1);
+        //         //$modalInstance.close();
+        //     });
+        //
+        // };
 }]);

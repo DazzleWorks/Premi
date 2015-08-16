@@ -2,53 +2,50 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
     .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, presentationService, slideService) {
 
-        $scope.components = [
-            {
-                label: "Text",
-                id: "editText",
-                classes: "fa fa-font"
-            },
-            {
-                label: "Image",
-                id: "editImage",
-                classes: "fa fa-camera-retro"
-            },
-            {
-                label: "Table",
-                id: "editTable",
-                classes: "fa fa-table"
-            },
-            {
-                label: "Chart",
-                id: "editChart",
-                classes: "fa fa-bar-chart"
-            },
-            {
-                label: "RealTime",
-                id: "editRealTimeData",
-                classes: "fa fa-globe"
-            }
-        ];
 
+// ----- VARIABLES & INITIALIZATION -----
         $scope.currentSlide = {};
-
-
-
-
 
         var localData = {
             currentX: 1,
             currentY: 1,
-            maxX: 1,
-            maxY: [1]
+            maxX: 0,
+            maxY: [0]
         };
 
+        $scope.buttons = {
+            up: 'disabled',
+            right: '',
+            down: '',
+            left: 'disabled'
+        };
+
+        $scope.components = [
+            {label: "Text", id: "editText", classes: "fa fa-font"},
+            {label: "Image", id: "editImage", classes: "fa fa-camera-retro"},
+            {label: "Table", id: "editTable", classes: "fa fa-table"},
+            {label: "Chart", id: "editChart", classes: "fa fa-bar-chart"},
+            {label: "RealTime", id: "editRealTimeData", classes: "fa fa-globe"}
+        ];
+
+        $scope.canvas = new fabric.Canvas('slide');
+        $scope.objectSelected = 'null';
+
+
+// ----- GENERAL -----
         $scope.update = function(){
             $scope.canvas.renderAll();
         };
 
 
-        // text
+// ----- TEXT -----
+        $scope.avaiableFonts = [
+            {name: "Arial"},
+            {name: "Courier"},
+            {name: "Georgia"},
+            {name: "Verdana"}
+        ];
+
         $scope.toggleBold = function(obj) {
             if (obj.fontWeight === "bold")
                 obj.fontWeight = "normal";
@@ -73,21 +70,13 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.update();
         };
 
-        $scope.avaiableFonts = [
-            {name: "Arial"},
-            {name: "Courier"},
-            // {name: "Fredoka One"},
-            {name: "Georgia"},
-            // {name: "Indie Flower"},
-            // {name: "Lato"},
-            {name: "Verdana"}
-        ];
-
         $scope.updateColor = function(obj) {
             obj.fill = obj.fontColor;
             $scope.update();
         };
 
+
+// ----- INSERT ELEMENT -----
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
                 var modalInstance = $modal.open({
@@ -121,27 +110,17 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
 
-        // canvas
-        $scope.canvas = new fabric.Canvas('slide');
-
-        // var slide = presentationData.loadSlide(localData.currentX, localData.currentY);
-        // var slide = presentationService.get
-        // $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
-        // $scope.update();
-
-        $scope.calculateZoomFactor= function($window){
-            //var factor=(angular.element($window).width() *0.615)/angular.element($window).width();
-
-            var canvasWidth=(800/1320)*angular.element($window).width();
-            var factor=canvasWidth/800;
-            //console.log(factor);
+// ----- CANVAS -----
+        $scope.calculateZoomFactor = function($window) {
+            var canvasWidth = (800 / 1320) * angular.element($window).width();
+            var factor = canvasWidth / 800;
             return factor;
         };
 
         $scope.zoomCanvas = function (factor) {
-            $scope.canvas.setHeight( $scope.canvas.getHeight() * factor);
+            $scope.canvas.setHeight($scope.canvas.getHeight() * factor);
             $scope.canvas.setWidth($scope.canvas.getWidth() * factor);
-            
+
             var objects = $scope.canvas.getObjects();
             for (var i in objects) {
                 var scaleX = objects[i].scaleX;
@@ -169,15 +148,9 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.zoomCanvas($scope.calculateZoomFactor($window));
 
 
-        $scope.resetCanvasSize =function(){
-
-            var scaleResetFactor=800/$scope.canvas.getWidth();//fattore per portare i valori a rapporto 1:1
-            console.log(scaleResetFactor);
+        $scope.resetCanvasSize = function() {
+            var scaleResetFactor = 800 / $scope.canvas.getWidth(); // fattore per portare i valori a rapporto 1:1
             $scope.zoomCanvas(scaleResetFactor);
-            /*
-            $scope.canvas.setWidth(800);
-            $scope.canvas.setHeight(600);
-            */
         };
 
         //this function recalculate canvas scale on window resize
@@ -185,11 +158,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.resetCanvasSize();
             $scope.zoomCanvas($scope.calculateZoomFactor($window));
         });
-
-
-
-
-        $scope.objectSelected = "null";
 
         $scope.canvas.on('selection:cleared', function() {
             if ($scope.objectSelected !== "null") {
@@ -219,7 +187,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         $scope.addText = function(text){
             $scope.canvas.add(new fabric.Text(text, {
-                // fontSize: 25
+                fontFamily: 'Arial',
+                fontSize: 25
             }));
         };
 
@@ -321,18 +290,18 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         $scope.updateCurrentSlide = function () {
-            // 1) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
-            // 2) load maxX and maxY
+            // 1) if (maxX === 0 and maxY[0] === 0) load maxX and maxY
+            // 2) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
 
             // temporary solution
-            $scope.currentSlide.id = $scope.currentProject.slide;
+            $scope.currentSlide.id = $scope.currentProject.firstSlide;
         };
 
         // variables:
         // $scope.user = active user
         // $scope.currentProject.id = active project's id
         // $scope.currentProject.presentation = active project presentation's id
-        // $scope.currentProject.slide = active project presentation's first slide id
+        // $scope.currentProject.firstSlide = active project presentation's first slide id
         // $scope.currentSlide = active slide's id
 
         // load slide that already exist
@@ -356,7 +325,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         $rootScope.$on('showPresentationEditor', function () {
-            console.log($rootScope.currentProject);
             $scope.loadSlide();
         });
 
@@ -410,12 +378,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.loadSlide();
                     $scope.update();
                 }
-                if (localData.currentY > 1) {
-                    // BUTTON UP ENABLE
-                }
-                else {
-                    // BUTTON UP DISABLE
-                }
+                if (localData.currentY > 1)
+                    $scope.buttons.up = '';
+                else
+                    $scope.buttons.up = 'disabled';
             }
             else if (position === "down") {
                 if (localData.currentY < localData.maxY(localData.currentX)) {
@@ -424,13 +390,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.loadSlide();
                     $scope.update();
                 }
-
-                if (localData.currentY < localData.maxY(localData.currentX)) {
-                    // BUTTON DOWN ENABLE
-                }
-                else {
-                    // BUTTON DOWN DISABLE
-                }
+                if (localData.currentY < localData.maxY(localData.currentX))
+                    $scope.buttons.down = '';
+                else
+                    $scope.buttons.down = 'disabled';
             }
             else if (position === "left") {
                 if (localData.currentX > 1) {
@@ -440,14 +403,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.loadSlide();
                     $scope.update();
                 }
-
-
-                if (localData.currentX > 1) {
-                    // BUTTON LEFT ENABLE
-                }
-                else {
-                    // BUTTON LEFT DISABLE
-                }
+                if (localData.currentX > 1)
+                    $scope.buttons.left = '';
+                else
+                    $scope.buttons.left = 'disabled';
             }
             else if (position === "right") {
                 if (localData.currentX < localData.maxX) {
@@ -457,14 +416,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.loadSlide();
                     $scope.update();
                 }
-
-
-                if (localData.currentX < localData.maxX) {
-                    // BUTTON RIGHT ENABLE
-                }
-                else {
-                    // BUTTON RIGHT DISABLE
-                }
+                if (localData.currentX < localData.maxX)
+                    $scope.buttons.right = '';
+                else
+                    $scope.buttons.right = 'disabled';
             }
         };
 }]);
