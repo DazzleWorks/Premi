@@ -1,6 +1,6 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', 'presentationService', 'slideService', function($scope, $rootScope, $modal, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, presentationService, slideService) {
 
         $scope.components = [
             {
@@ -31,6 +31,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         ];
 
         $scope.currentSlide = {};
+
+
+
+
 
         var localData = {
             currentX: 1,
@@ -124,6 +128,66 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // var slide = presentationService.get
         // $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
         // $scope.update();
+
+        $scope.calculateZoomFactor= function($window){
+            //var factor=(angular.element($window).width() *0.615)/angular.element($window).width();
+
+            var canvasWidth=(800/1320)*angular.element($window).width();
+            var factor=canvasWidth/800;
+            //console.log(factor);
+            return factor;
+        };
+
+        $scope.zoomCanvas = function (factor) {
+            $scope.canvas.setHeight( $scope.canvas.getHeight() * factor);
+            $scope.canvas.setWidth($scope.canvas.getWidth() * factor);
+            
+            var objects = $scope.canvas.getObjects();
+            for (var i in objects) {
+                var scaleX = objects[i].scaleX;
+                var scaleY = objects[i].scaleY;
+                var left = objects[i].left;
+                var top = objects[i].top;
+
+                var tempScaleX = scaleX * factor;
+                var tempScaleY = scaleY * factor;
+                var tempLeft = left * factor;
+                var tempTop = top * factor;
+
+                objects[i].scaleX = tempScaleX;
+                objects[i].scaleY = tempScaleY;
+                objects[i].left = tempLeft;
+                objects[i].top = tempTop;
+
+                objects[i].setCoords();
+            }
+
+            $scope.canvas.calcOffset();
+            $scope.canvas.renderAll();
+        };
+
+        $scope.zoomCanvas($scope.calculateZoomFactor($window));
+
+
+        $scope.resetCanvasSize =function(){
+
+            var scaleResetFactor=800/$scope.canvas.getWidth();//fattore per portare i valori a rapporto 1:1
+            console.log(scaleResetFactor);
+            $scope.zoomCanvas(scaleResetFactor);
+            /*
+            $scope.canvas.setWidth(800);
+            $scope.canvas.setHeight(600);
+            */
+        };
+
+        //this function recalculate canvas scale on window resize
+        angular.element($window).bind('resize', function () {
+            $scope.resetCanvasSize();
+            $scope.zoomCanvas($scope.calculateZoomFactor($window));
+        });
+
+
+
 
         $scope.objectSelected = "null";
 
@@ -403,5 +467,4 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 }
             }
         };
-
 }]);
