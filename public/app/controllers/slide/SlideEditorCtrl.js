@@ -32,10 +32,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         $scope.currentSlide = {};
 
-
-
-
-
         var localData = {
             currentX: 1,
             currentY: 1,
@@ -141,7 +137,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.zoomCanvas = function (factor) {
             $scope.canvas.setHeight( $scope.canvas.getHeight() * factor);
             $scope.canvas.setWidth($scope.canvas.getWidth() * factor);
-            
+
             var objects = $scope.canvas.getObjects();
             for (var i in objects) {
                 var scaleX = objects[i].scaleX;
