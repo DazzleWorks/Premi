@@ -2,8 +2,30 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute'])
 
     .controller('ImageCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
+        $scope.filename = "";
+
+        $scope.upload = function () {
+            console.log($scope.filename);
+        };
+
         $scope.insertImage = function (imageId) {
             $modalInstance.close(imageId);
+        };
+
+
+        $scope.uploadFile = function(files) {
+            console.log(files);
+            /*
+            var fd = new FormData();
+            //Take the first selected file
+            fd.append("file", files[0]);
+
+            $http.post(uploadUrl, fd, {
+                withCredentials: true,
+                headers: {'Content-Type': undefined },
+                transformRequest: angular.identity
+            }).success( console.log("ok");).error(console.log("ko"););
+            */
         };
 
         // $scope.upload = function () {
