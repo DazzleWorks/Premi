@@ -117,14 +117,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         };
 
         $scope.searchResults ={
-            byUsername:[
-                {username:"a"},
-                {username:"b"},
-                {username:"c"},
-                {username:"d"},
-                {username:"e"},
-                {username:"f"}
-            ],
+            byUsername:[],
             byProjectName:[
                 {
                     name:"prj1",
