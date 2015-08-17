@@ -12,6 +12,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $rootScope.currentSlide = {};
 
         $scope.home = "true";
+        $scope.searchViewVisibility="true";
 
         $scope.checked = false;
 
@@ -85,20 +86,41 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             $scope.searchResults.byUsername.push({username:results.username});
         };
 
+        $scope.searchViewVisibility = true;
+        $scope.userOfInterest={
+            username:""
+        };
+
+        $scope.toggleSearchViewVisibility = function(){
+            $scope.searchViewVisibility = !$scope.searchViewVisibility;
+        };
+
+        $scope.analizeUser = function (username){
+            $scope.userOfInterest.username=username;
+            $scope.toggleSearchViewVisibility();
+
+        };
+
+
+
+        $scope.searchResults = [];
+
         $scope.search = function () {
             if ($scope.checked === false) {
                 var searchResults = searchByUserService.query({username:$scope.searchText});
+                console.log(searchResults[0]);
                 searchResults.$promise.then (
                     function(data) {
-                        console.log(data);
-                        $scope.searchResults.byProjectName = [];
-                        $scope.searchResults.byUsername = [];
+                        // $scope.searchResults.byProjectName = [];
+                        // $scope.searchResults.byUsername = [];
                         if(data[0] !== undefined) {
-                            $scope.searchResults.byUsername = searchResults[0].username;
-                            $scope.formatResults(searchResults[0]);
-                            console.log(searchResults[0].username);
+                            var result = {};
+                            result.username = searchResults[0].username;
+                            result.id = searchResults[0].id;
+                            result.projects = searchResults[0].projects;
+                            $scope.searchResults.push(result);
                         }
-
+                        console.log($scope.searchResults);
                     },
                     function(data) {
                     });
@@ -115,66 +137,5 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     });
             }
         };
-
-        $scope.searchResults ={
-            byUsername:[],
-            byProjectName:[
-                {
-                    name:"prj1",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username1"
-                },
-                {
-                    name:"prj2",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username2"
-                },
-                {
-                    name:"prj3",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username3"
-                },
-                {
-                    name:"prj4",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username1"
-                },
-                {
-                    name:"prj5",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username2"
-                },
-                {
-                    name:"prj6",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username3"
-                },
-                {
-                    name:"prj7",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username4"
-                },
-                {
-                    name:"prj8",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username4"
-                },
-                {
-                    name:"prj9",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username4"
-                },
-                {
-                    name:"prj10",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username5"
-                },
-                {
-                    name:"prj11",
-                    id:"55cc87eeedee62610c8b4591",
-                    username:"username6"
-                }
-             ]
-    };
 
 }]);

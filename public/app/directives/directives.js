@@ -3,6 +3,7 @@
 angular.module('app.directives',
     [
         'ngRoute',
+        'app.directives.genericProject',
         'app.directives.homePage',
         'app.directives.infographicEditor',
         'app.directives.myAccount',
