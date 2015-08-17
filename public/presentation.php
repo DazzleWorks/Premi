@@ -1,3 +1,4 @@
+<?php ?>
 <!doctype html>
 <html ng-app="app" ng-controller= "PresentationCtrl">
 	<head>
@@ -57,7 +58,7 @@
 				progress: true,
 				history: true,
 				center: true,
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: '<?php $_GET['transition']; ?>', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [

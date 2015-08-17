@@ -7,7 +7,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             id: "",
             name: "",
             presentation: "",
-            firstSlide: ""
+            firstSlide: "",
+            transition:"slide"
             // maxX: 0,
             // maxY: 0
         };
@@ -39,6 +40,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.name = $scope.projects[0].name;
             $rootScope.currentProject.presentation = $scope.projects[0].presentation;
             $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
+            $rootScope.currentProject.transition = $scope.projects[0].transition;
             // $rootScope.currentProject.maxX = $scope.projects[0].maxX;
             // $rootScope.currentProject.maxY = $scope.projects[0].maxY;
         };
@@ -59,6 +61,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             $rootScope.currentProject.name = obj.name;
             $rootScope.currentProject.presentation = obj.presentation;
             $rootScope.currentProject.firstSlide = obj.firstSlide;
+            $rootScope.currentProject.transition = obj.transition;
             // $rootScope.currentProject.maxX = obj.maxX;
             // $rootScope.currentProject.maxY = obj.maxY;
         };
@@ -75,7 +78,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                     id: data[prj]._id,
                                     name: data[prj].name,
                                     presentation: data[prj].presentation._id.$id,
-                                    firstSlide: data[prj].presentation.slides[0]._id.$id
+                                    firstSlide: data[prj].presentation.slides[0]._id.$id,
+                                    transition:data[prj].presentation.transition
                                     // maxX: data[prj].presentation.maxX,
                                     // maxY: data[prj].presentation.maxY
                                 }

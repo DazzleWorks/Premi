@@ -3,8 +3,8 @@ angular.module('app.controllers.PresentationCtrl', ['ngRoute'])
 .controller('PresentationCtrl', ['$scope', '$sce'/*, 'presentationData'*/, function($scope, $sce/*, presentationData*/) {
 
     $scope.columnsIds=[1,2];
-    $scope.theme="solarized";
-    $scope.transition= 'slide'; // none/fade/slide/convex/concave/zoom
+    $scope.theme="league";
+    $scope.transition= 'zoom'; // none/fade/slide/convex/concave/zoom
     $scope.slidesSVG=[
         {"x":1,"y":1,"src":$sce.trustAsHtml('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" xml:space="preserve"><desc>Created with Fabric.js 1.5.0</desc><defs></defs><rect x="-25" y="-30" rx="0" ry="0" width="50" height="60" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: red; fill-rule: nonzero; opacity: 1;" transform="translate(96.46 138.89) rotate(45)"></rect><g transform="translate(116.6 426.22)"><text font-family="Times New Roman" font-size="40" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"><tspan x="-66.6016" y="8.984" fill="rgb(0,0,0)">x:1, y:1</tspan></text></g></svg>')},
         {"x":1,"y":2,"src":$sce.trustAsHtml('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" xml:space="preserve"><desc>Created with Fabric.js 1.5.0</desc><defs></defs><rect x="-25" y="-30" rx="0" ry="0" width="50" height="60" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: red; fill-rule: nonzero; opacity: 1;" transform="translate(96.46 138.89) rotate(45)"></rect><g transform="translate(116.6 426.22)"><text font-family="Times New Roman" font-size="40" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: ; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"><tspan x="-66.6016" y="8.984" fill="rgb(0,0,0)">x:1, y:2</tspan></text></g></svg>')},
@@ -15,6 +15,10 @@ angular.module('app.controllers.PresentationCtrl', ['ngRoute'])
     ];
 
         $scope.setPreferences=function() {
+            Reveal.configure({
+                    transition: 'zoom'
+                }
+            );
             //Reveal.config.transition = 'zoom';
             //Reveal.extend( Reveal.config, {transition:'zoom'});
         };
