@@ -125,9 +125,11 @@ class ProjectController extends Controller
      public function searchByUsername(Request $request){
         $username = $request -> get('username');
         
-        $projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));    
+        /*$projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));
+        return response()->json($projects);*/
         
-        return response()->json($projects);
+        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name'));
+        return response()->json($user);
      }
 }
 

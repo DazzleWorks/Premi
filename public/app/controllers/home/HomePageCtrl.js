@@ -80,15 +80,24 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             });
         };
 
+        $scope.formatResults = function (results){
+            $scope.searchResults.byUsername =[];
+            $scope.searchResults.byUsername.push({username:results.username});
+        };
+
         $scope.search = function () {
             if ($scope.checked === false) {
-                var searchResults = searchByUserService.save(/*{user:$scope.searchText}*/);
+                var searchResults = searchByUserService.query({username:$scope.searchText});
                 searchResults.$promise.then (
                     function(data) {
                         console.log(data);
                         $scope.searchResults.byProjectName = [];
-                        $scope.searchResults.byUsername = searchResults;
-
+                        $scope.searchResults.byUsername = [];
+                        if(data[0] !== undefined) {
+                            $scope.searchResults.byUsername = searchResults[0].username;
+                            $scope.formatResults(searchResults[0]);
+                            console.log(searchResults[0].username);
+                        }
 
                     },
                     function(data) {
