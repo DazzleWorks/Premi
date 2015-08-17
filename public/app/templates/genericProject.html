@@ -1,6 +1,9 @@
 <div>
-    <div class="row" id="projectSelectorWrapper">
-        <h4>{{userOfInterest.username}}'s projects</h4>
+    <div class="row">
+        <h4 id="GenericProfileTitle" class="small-8 columns">{{userOfInterest.username}}'s projects</h4>
+        <div class="small-2 small-offset-1 columns">
+            <button class="button round  icon-circle-arrow-left " ng-click= "resetHomePage()"><i class="icon-circle-arrow-left">BACK</i></button>
+        </div>
     </div>
     <div class="small-3 columns">
         <div class="row" id="projectSelectorWrapper">

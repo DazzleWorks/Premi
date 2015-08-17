@@ -24,6 +24,10 @@ body {
     background-attachment: fixed;
 }
 
+#homePageTitle{
+    color: #FFF;
+}
+
 .user-data {
     background-color: #efefef;
 }
@@ -273,7 +277,11 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 /*** PROJECTS MENU [BEGIN] ***/
 #projectSelectorWrapper{
     background-color: #ffffff;
+    background-color: transparent !important;
 }
+
+
+
 
 @import url(http://fonts.googleapis.com/css?family=Oxygen+Mono);
 /* Please Keep this font import at the very top of any CSS file */
@@ -298,7 +306,9 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     z-index: 597;
     float: left;
     background-color: #ffffff;
+    background-color: transparent !important;
 }
+
 #projectSelector ul li {
     background-color: #ECECEC;
     float: left;
@@ -330,7 +340,7 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 /* Custom CSS Styles */
 #projectSelector {
     width: 90%;
-    background: #ECECEC;
+    background-color: transparent !important;
     font-family: 'Oxygen Mono', Tahoma, Arial, sans-serif;
     zoom: 1;
     font-size: 12px;
@@ -472,4 +482,14 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 #searchResults .searchResultItem >a{
     width: 100%;
     color: #BDBDBD;
+    text-transform: capitalize;
+}
+
+#GenericProfileTitle{
+    color: #FFF;
+    text-transform: capitalize;
+}
+
+#backButtonContainer{
+    /*float: right;*/
 }

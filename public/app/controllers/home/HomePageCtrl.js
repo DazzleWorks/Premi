@@ -101,7 +101,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         };
 
-
+        $scope.resetHomePage = function(){
+            $scope.userOfInterest.username="";
+            $scope.searchViewVisibility = true;
+        };
 
         $scope.searchResults = [];
 
@@ -120,7 +123,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                             result.projects = searchResults[0].projects;
                             $scope.searchResults.push(result);
                         }
-                        console.log($scope.searchResults);
+                        //console.log($scope.searchResults);
                     },
                     function(data) {
                     });

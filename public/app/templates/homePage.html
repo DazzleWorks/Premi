@@ -1,7 +1,7 @@
 <div id="homePage">
-    <div class="row">
+    <div class="row" ng-show="searchViewVisibility">
         <div class="small-centered columns">
-            <h1>PREMI</h1>
+            <h1 id="homePageTitle">PREMI</h1>
         </div>
     </div>
 
@@ -67,6 +67,7 @@
     <div class="row" ng-hide="searchViewVisibility">
         <div class="small-12 columns">
             <generic-project></generic-project>
+
         </div>
     </div>
 
