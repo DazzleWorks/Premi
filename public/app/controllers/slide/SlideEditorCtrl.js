@@ -76,7 +76,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
 
-// ----- INSERT ELEMENT -----
+// ----- MODAL ELEMENT -----
         $scope.openModal = function (elementType) {
             if(elementType === "editText") {
                 var modalInstance = $modal.open({
@@ -88,7 +88,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.addText(text);
                 });
 
-            }else if (elementType === "editImage"){
+            } else if (elementType === "editImage"){
                 var modalInstance = $modal.open({
                     templateUrl: 'app/templates/image.html',
                     controller: 'ImageCtrl'
@@ -97,7 +97,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 modalInstance.result.then(function (selectedImg) {
                     $scope.insertImageOnCanvas(selectedImg);
                 });
-            }else if (elementType === "presentationStyle"){
+
+            } else if (elementType === "presentationStyle"){
                 var modalInstance = $modal.open({
                     templateUrl: 'app/templates/presentationStyle.html',
                     controller: 'PresentationStyleCtrl'
@@ -261,6 +262,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 // edit localData's variables
                 localData.maxY.push(0);
                 for (i = localData.currentX; i < localData.maxX; ++ i) {
+
                     localData.maxY[i] = localData.maxY[i-1];
                 }
                 localData.maxY[localData.currentX-1] = 1;
@@ -276,7 +278,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 // edit localData's variables
                 localData.maxY.push(0);
                 for (i = localData.currentX; i < localData.maxX; ++ i) {
-                    localData.maxY[i] = localData.maxY[i-1];
+                    localData.maxY[i+1] = localData.maxY[i];
                 }
                 localData.maxY[localData.currentX-1] = 1;
 

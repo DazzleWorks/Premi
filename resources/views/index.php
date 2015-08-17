@@ -96,6 +96,7 @@
 
             <script src="app/directives/restrictedArea/restrictedArea.js" type="text/javascript"></script>
 
+            <script src="app/directives/slide/imageUpload.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditor.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditorPanel.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditorPanelSpec.js" type="text/javascript"></script>
