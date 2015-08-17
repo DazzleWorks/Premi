@@ -52,6 +52,7 @@ body {
 
 .editMenuItemContainer{
     list-style-type: none;
+    min-width: 70px !important;
 }
 
 .editMenuContainer {

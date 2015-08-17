@@ -12,12 +12,7 @@ angular.module('app.services.search', ['ngRoute', 'ngResource'])
 
     .factory('searchByUserService', ['$http', '$resource', function ($http, $resource) {
 
-        return $resource('search/byUsername', null, {
-            'save': {
-                method: 'POST',
-                isArray: true
-            }
-        });
+        return $resource('search/byUsername');
 
     }])
 
