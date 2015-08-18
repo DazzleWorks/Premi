@@ -131,5 +131,29 @@ class ProjectController extends Controller
         $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name'));
         return response()->json($user);
      }
+     
+     /**
+      * Search for projects by the projects name
+      *
+      * @param Illuminate\Http\Request
+      * @return Response
+      */
+     public function searchByProjectsName(Request $request){
+         $projectName = $request->get('name');
+         
+         $usersProject = \Premi\Model\User::where('projects.name','=',$projectName)->get(array('projects._id','projects.name'));
+         
+         $usersProject = json_decode($usersProject,true);
+         
+         for($i=0; $i<count($usersProject);$i++){
+             for($j=0; $j<count($usersProject[$i]['projects']); $j++){
+                 if($usersProject[$i]['projects'][$j]['name']!=$projectName){
+                    array_splice($usersProject[$i]['projects'], $j,1);
+                    $j--;
+                 }
+             }
+         }
+         
+         return response()->json($usersProject);     
+     }
 }
-
