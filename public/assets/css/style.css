@@ -71,6 +71,10 @@ body {
     margin-bottom: 0.225rem !important;
 }
 
+.projectsList {
+    background-color: rgba(255,255,255, 0.6);
+}
+
 #savedeletebutton li {
     margin-left: 0;
 }
@@ -119,8 +123,12 @@ body {
     text-transform:uppercase;
 }
 
-.project {
+/*.project {
     background-color: #ececec;
+}*/
+
+#slide {
+    background-color: rgba(255,255,255,0.7);
 }
 
 .formatButtons-list{
