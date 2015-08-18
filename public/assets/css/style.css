@@ -32,6 +32,10 @@ body {
     background-color: #efefef;
 }
 
+.restrictedAreaMenu {
+    border-bottom: 1px black solid;
+}
+
 #footer {
     position: fixed;
     bottom: 0;
@@ -65,6 +69,10 @@ body {
 
 .button {
     margin-bottom: 0.225rem !important;
+}
+
+.projectsList {
+    background-color: rgba(255,255,255, 0.6);
 }
 
 #savedeletebutton li {
@@ -115,8 +123,12 @@ body {
     text-transform:uppercase;
 }
 
-.project {
+/*.project {
     background-color: #ececec;
+}*/
+
+#slide {
+    background-color: rgba(255,255,255,0.7);
 }
 
 .formatButtons-list{
@@ -309,4 +321,8 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 
 #backButtonContainer{
     /*float: right;*/
+}
+
+body{
+    background-image: url(../img/texture.jpg) !important;
 }

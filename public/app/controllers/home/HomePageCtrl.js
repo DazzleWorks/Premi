@@ -2,7 +2,7 @@
 
 angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
-    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService','searchByUserService', function($scope, $rootScope, $modal, logoutService, searchByUserService) {
+    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', '$window', 'logoutService','searchByUserService', function($scope, $rootScope, $modal, $window, logoutService, searchByUserService) {
 
         // disconnect any user on load page
         logoutService.get();
@@ -49,6 +49,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 var user_logout = logoutService.get();
                 $rootScope.user = "false";
                 $scope.openHome();
+                $window.location.href="/";
             }
         };
 
