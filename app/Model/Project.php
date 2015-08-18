@@ -36,7 +36,7 @@ class Project extends Eloquent
     
     
     /**
-     * Functions that allows to have a single embedded Presentation in a Project
+     * Allows to have a single embedded Presentation in a Project
      *  
      * @return array
      */
@@ -45,7 +45,7 @@ class Project extends Eloquent
     }
     
     /**
-     * Functions that allows to have embedded Infographic in a Project 
+     * Allows to have embedded Infographic in a Project 
      * 
      * @return array
      */

@@ -55,7 +55,7 @@ class User extends Eloquent implements AuthenticatableContract,
     
      
     /**
-     * Functions that allows to have embedded Project in a User 
+     * Allows to have embedded Project in a User 
      * 
      * @return array
      */

@@ -37,7 +37,9 @@ class SlideController extends Controller
         $projects = $user->projects();
         $project = $projects-find($projectID);
         
-        $presentation = $project->presentation()->first();
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
+        
         $slide = $presentation->slides()->get();
         
         return response()->json($slide);
@@ -61,7 +63,8 @@ class SlideController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
         
-        $presentation = $project->presentation()->first();
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
         $presentation->slides()->save($slide);
                
         return response()->json($slide);   
@@ -82,11 +85,12 @@ class SlideController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
                 
-        $presentation = $project->presentation()->first();
-        
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
+                
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);
-        $slide = $slide->groupBy()->get(['components']);
+        //$slide = $slide->groupBy()->get(['components']);
         
         return response()->json($slide);
     }
@@ -107,7 +111,8 @@ class SlideController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
                 
-        $presentation = $project->presentation()->first();
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
         
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);
@@ -151,7 +156,8 @@ class SlideController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()->first();
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
 
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);

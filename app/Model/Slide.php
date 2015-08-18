@@ -35,15 +35,16 @@ class Slide extends Eloquent
      * @yIndex: position of the Slide relative to the axis Y in the 
      *          presentation's matrix
      */
-    protected $fillable = ['xIndex', 'yIndex', 'svg'];
+    protected $fillable = ['xIndex', 'yIndex', 'background', 'svg'];
      
     
     /**
-     * functions that allows to have embedded Component in a Slide 
+     * Allows to have embedded Component in a Slide
+     *  
      * @return array
      */
-    public function objects() {
-        return $this->embedsMany(Object::class);
+    public function components() {
+        return $this->embedsMany(Component::class);
     }
 }
 
