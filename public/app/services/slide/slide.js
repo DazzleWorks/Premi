@@ -14,7 +14,8 @@ angular.module('app.services.slide', [])
         return $resource('api/user/:user/project/:project/presentation/:presentation/slide/:slide', null,
             {
                 'update': {
-                    method:'PUT'
+                    method:'PUT',
+                    isArray: true
                 }
             });
 

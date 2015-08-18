@@ -14,10 +14,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         $scope.buttons = {
-            up: 'disabled',
+            up: '',
             right: '',
             down: '',
-            left: 'disabled'
+            left: ''
         };
 
         $scope.components = [
@@ -112,6 +112,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 
 // ----- CANVAS -----
+
+
         $scope.calculateZoomFactor = function($window) {
             var canvasWidth = (800 / 1320) * angular.element($window).width();
             var factor = canvasWidth / 800;
@@ -153,6 +155,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             var scaleResetFactor = 800 / $scope.canvas.getWidth(); // fattore per portare i valori a rapporto 1:1
             $scope.zoomCanvas(scaleResetFactor);
         };
+
+
+// ----- CANVAS FUNCTION -----
+
 
         //this function recalculate canvas scale on window resize
         angular.element($window).bind('resize', function () {
@@ -215,6 +221,9 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             obj.sendBackwards(false);
         };
 
+
+// ----- LOCAL DATA -----
+
         var incrementMaxX = function () {
             localData.maxX ++;
         };
@@ -243,57 +252,60 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             localData.currentY = 1;
         };
 
-        var offset = function (direction, index) {
-            if (direction === "up") {
-                // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-                //     if (presentationData.slidesJSON[i].x === localData.currentX)
-                //         if (presentationData.slidesJSON[i].y >= localData.currentY)
-                //             ++ presentationData.slidesJSON[i].y;
-                // }
-            }
-            else if (direction === "down") {
-                // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-                //     if (presentationData.slidesJSON[i].x === localData.currentX)
-                //         if (presentationData.slidesJSON[i].y >= localData.currentY)
-                //             ++ presentationData.slidesJSON[i].y;
-                // }
-            }
-            else if (direction === "left") {
-                // edit localData's variables
-                localData.maxY.push(0);
-                for (i = localData.currentX; i < localData.maxX; ++ i) {
-
-                    localData.maxY[i] = localData.maxY[i-1];
-                }
-                localData.maxY[localData.currentX-1] = 1;
-
-                // edit database's data
-                // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-                //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
-                //         ++ presentationData.slidesJSON[i].x;
-                //     }
-                // }
-            }
-            else if (direction === "right") {
-                // edit localData's variables
-                localData.maxY.push(0);
-                for (i = localData.currentX; i < localData.maxX; ++ i) {
-                    localData.maxY[i+1] = localData.maxY[i];
-                }
-                localData.maxY[localData.currentX-1] = 1;
-
-                // edit database's data
-                // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-                //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
-                //         ++ presentationData.slidesJSON[i].x;
-                //     }
-                // }
-            }
-        };
+        // var offset = function (direction, index) {
+        //     if (direction === "up") {
+        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
+        //         //     if (presentationData.slidesJSON[i].x === localData.currentX)
+        //         //         if (presentationData.slidesJSON[i].y >= localData.currentY)
+        //         //             ++ presentationData.slidesJSON[i].y;
+        //         // }
+        //     }
+        //     else if (direction === "down") {
+        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
+        //         //     if (presentationData.slidesJSON[i].x === localData.currentX)
+        //         //         if (presentationData.slidesJSON[i].y >= localData.currentY)
+        //         //             ++ presentationData.slidesJSON[i].y;
+        //         // }
+        //     }
+        //     else if (direction === "left") {
+        //         // edit localData's variables
+        //         localData.maxY.push(0);
+        //         for (i = localData.currentX; i < localData.maxX; ++ i) {
+        //
+        //             localData.maxY[i] = localData.maxY[i-1];
+        //         }
+        //         localData.maxY[localData.currentX-1] = 1;
+        //
+        //         // edit database's data
+        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
+        //         //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
+        //         //         ++ presentationData.slidesJSON[i].x;
+        //         //     }
+        //         // }
+        //     }
+        //     else if (direction === "right") {
+        //         // edit localData's variables
+        //         localData.maxY.push(0);
+        //         for (i = localData.currentX; i < localData.maxX; ++ i) {
+        //             localData.maxY[i+1] = localData.maxY[i];
+        //         }
+        //         localData.maxY[localData.currentX-1] = 1;
+        //
+        //         // edit database's data
+        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
+        //         //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
+        //         //         ++ presentationData.slidesJSON[i].x;
+        //         //     }
+        //         // }
+        //     }
+        // };
 
 
 // ----- I/O SLIDE -----
-        $scope.updateCurrentSlide = function () {
+
+
+        // get slide[currentX, currentY]'s id
+        $scope.getIdSlide = function () {
             // 1) if (maxX === 0 and maxY[0] === 0) load maxX and maxY
             // 2) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
 
@@ -301,30 +313,57 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.currentSlide.id = $scope.currentProject.firstSlide;
         };
 
-        // load slide that already exist
+        // load slide [currentX, currentY]
         $scope.loadSlide = function () {
-            $scope.updateCurrentSlide();
+            $scope.getIdSlide();
             var slide = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+
             $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+            $scope.update();
         };
 
-        // save new slide
-        $scope.saveSlide = function () {
-            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX + 1, yIndex:localData.currentY + 1});
+        // create new slide
+        $scope.saveSlide = function (position) {
+            if (position === 'up') {
+                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:localData.currentY});
+            }
+            else if (position === 'down') {
+                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:localData.currentY + 1});
+            }
+            else if (position === 'right') {
+                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:1});
+            }
+            else if (position === 'left') {
+                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:1});
+            }
             $scope.currentSlide = slide.id;
+
             localData.currentX = slide.x;
             localData.currentY = slide.y;
+
+            if (position === 'right' || position === 'left')
+                incrementMaxX();
+            else if (position === 'up' || position === 'down')
+                incrementMaxY(localData.currentX);
+
         };
 
-        // update slide that already exists
+        // save slide that already exists
         $scope.updateSlide = function () {
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
+
             slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
 
+        // remove current slide
         $scope.deleteSlide = function () {
             slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+
+            if (localData.currentY > 1)
+                decrementCurrentY();
+            else
+                decrementCurrentX();
             $scope.loadSlide();
         };
 
@@ -332,85 +371,39 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.loadSlide();
         });
 
-        // add slide
+        // add new slide
         $scope.addSlide = function (position) {
-            if (position === "up") {
-                $scope.updateSlide();
-                incrementMaxY(localData.currentX);
-                $scope.canvas.clear();
-                offset("up", 0);
-                $scope.saveSlide();
-            }
-            else if (position === "down") {
-                $scope.updateSlide();
-                incrementCurrentY();
-                incrementMaxY(localData.currentX);
-                $scope.canvas.clear();
-                if (localData.currentY < localData.maxY[localData.currentX-1]) {
-                    offset("down", 0);
-                }
-                $scope.saveSlide();
-            }
-            else if (position === "left") {
-                $scope.updateSlide();
-                resetCurrentY();
-                incrementMaxX();
-                $scope.canvas.clear();
-                offset("left", 0);
-                $scope.saveSlide();
-            }
-            else if (position === "right") {
-                $scope.updateSlide();
-                incrementCurrentX();
-                resetCurrentY();
-                incrementMaxX();
-                $scope.canvas.clear();
-                if (localData.currentX < localData.maxX) {
-                    offset("right", 0);
-                }
-                localData.maxY[localData.currentX-1] = 1;
-                $scope.saveSlide();
-            }
+            $scope.updateSlide();
+            $scope.canvas.clear();
+            $scope.saveSlide(position);
         };
 
         // change slide
         $scope.changeSlide = function (position) {
             if (position === "up") {
                 if (localData.currentY > 1) {
+                    console.log("up");
                     $scope.updateSlide();
                     decrementCurrentY();
                     $scope.loadSlide();
-                    $scope.update();
                 }
                 if (localData.currentY > 1)
                     $scope.buttons.up = '';
                 else
                     $scope.buttons.up = 'disabled';
+                $scope.buttons.down = '';
             }
             else if (position === "down") {
-                if (localData.currentY < localData.maxY(localData.currentX)) {
+                if (localData.currentY < localData.maxY[localData.currentX]) {
                     $scope.updateSlide();
                     incrementCurrentY();
                     $scope.loadSlide();
-                    $scope.update();
                 }
-                if (localData.currentY < localData.maxY(localData.currentX))
+                if (localData.currentY < localData.maxY[localData.currentX])
                     $scope.buttons.down = '';
                 else
                     $scope.buttons.down = 'disabled';
-            }
-            else if (position === "left") {
-                if (localData.currentX > 1) {
-                    $scope.updateSlide();
-                    decrementCurrentX();
-                    resetCurrentY();
-                    $scope.loadSlide();
-                    $scope.update();
-                }
-                if (localData.currentX > 1)
-                    $scope.buttons.left = '';
-                else
-                    $scope.buttons.left = 'disabled';
+                $scope.buttons.up = '';
             }
             else if (position === "right") {
                 if (localData.currentX < localData.maxX) {
@@ -418,12 +411,25 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     incrementCurrentX();
                     resetCurrentY();
                     $scope.loadSlide();
-                    $scope.update();
                 }
                 if (localData.currentX < localData.maxX)
                     $scope.buttons.right = '';
                 else
                     $scope.buttons.right = 'disabled';
+                $scope.buttons.left = '';
+            }
+            else if (position === "left") {
+                if (localData.currentX > 1) {
+                    $scope.updateSlide();
+                    decrementCurrentX();
+                    resetCurrentY();
+                    $scope.loadSlide();
+                }
+                if (localData.currentX > 1)
+                    $scope.buttons.left = '';
+                else
+                    $scope.buttons.left = 'disabled';
+                $scope.buttons.right = '';
             }
         };
 }]);
