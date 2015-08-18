@@ -28,7 +28,7 @@
 
             <div id="searchResults" class="row" ng-show="checked">
                 <ul class="small-10 small-offset-1 columns" >
-                    <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns" ng-click="analizeProject(project.projectId)" >
+                    <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns">
                         <a href="/presentation.php?id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}" target="_blank">
                         <img src="../assets/img/google-now.jpg"/>
                             <span>{{project.name}}</span>
