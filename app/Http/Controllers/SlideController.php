@@ -126,7 +126,7 @@ class SlideController extends Controller
         $components = $request->get('components');
         foreach($components as $component)
         {
-            $type = $component->type;
+            $type = $component[type];
             switch ($type) {
                 case "text":
                     $newComponent = new Text;
@@ -140,7 +140,8 @@ class SlideController extends Controller
             $slide->components()->save($newComponent);
         }
         
-        return response()->json(['status' => true]);
+        $slide->save();
+        return response()->json($components);
     }
     
     /**

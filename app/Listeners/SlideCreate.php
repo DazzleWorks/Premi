@@ -26,6 +26,6 @@ class SlideCreate
     {
         //$slide = new Slide(['xIndex' => 1, 'yIndex' => 1]);
         $presentation = $event->project->presentation()->get();
-        $presentation->slides()->create(array('xIndex' => 1, 'yIndex' => 1));
+        $presentation->slides()->create(array('xIndex' => 1, 'yIndex' => 1, 'svg' => null));
     }
 }
