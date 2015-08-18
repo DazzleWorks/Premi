@@ -1,15 +1,13 @@
 <div id= "restrictedArea" ng-controller="RestrictedAreaCtrl">
-    <div class="row">
+    <div class="row restrictedAreaMenu">
         <div class= "small-3 columns">
-            <h1>{{radioModel}}</h1>
+            <h4>{{radioModel}}</h4>
         </div>
         <div class= "small-6 columns">
             <nav id="section-menu">
                 <div class="button-group">
-                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myAccount" btn-radio= "'myAccount'">My Account</button>
-                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'" ng-click="loadProjects()">My Projects</button>
-                    <!-- <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="presentationEditor" btn-radio= "'presentationEditor'">Presentation Editor</button>
-                    <button type="button" class="button small radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="infographicEditor" btn-radio= "'infographicEditor'">Infographic Editor</button> -->
+                    <button type="button" class="button tiny radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myAccount" btn-radio= "'myAccount'">My Account</button>
+                    <button type="button" class="button tiny radius MenuRadioButtons" ng-model="radioModel" ng-attr-id="myProjects" btn-radio= "'myProjects'" ng-click="loadProjects()">My Projects</button>
                 </div>
             </nav>
         </div>

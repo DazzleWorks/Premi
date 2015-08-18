@@ -32,6 +32,10 @@ body {
     background-color: #efefef;
 }
 
+.restrictedAreaMenu {
+    border-bottom: 1px black solid;
+}
+
 #footer {
     position: fixed;
     bottom: 0;
