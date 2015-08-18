@@ -315,8 +315,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // save new slide
         $scope.saveSlide = function () {
-            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation});
-            $scope.currentSlide = slide.id; // TO VERIFY
+            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX + 1, yIndex:localData.currentY + 1});
+            $scope.currentSlide = slide.id;
+            localData.currentX = slide.x;
+            localData.currentY = slide.y;
         };
 
         // update slide that already exists
