@@ -12,7 +12,7 @@
 
 		<link rel="stylesheet" href="assets/libs/reveal.js/css/reveal.css">
 
-		<link rel="stylesheet" href="assets/libs/reveal.js/css/theme/{{theme}}.css" id="theme">
+		<link rel="stylesheet" href="assets/libs/reveal.js/css/theme/<?php echo "$_GET[theme]"; ?>.css" id="theme">
 
 		<link rel="stylesheet" href="assets/libs/reveal.js/lib/css/zenburn.css">
 
@@ -58,7 +58,7 @@
 				progress: true,
 				history: true,
 				center: true,
-				transition: '<?php $_GET['transition']; ?>', // none/fade/slide/convex/concave/zoom
+				transition: '<?php $_GET[transition]; ?>', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
