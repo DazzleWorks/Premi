@@ -315,15 +315,17 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // save new slide
         $scope.saveSlide = function () {
-            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation});
-            $scope.currentSlide = slide.id; // TO VERIFY
+            var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX + 1, yIndex:localData.currentY + 1});
+            $scope.currentSlide = slide.id;
+            localData.currentX = slide.x;
+            localData.currentY = slide.y;
         };
 
         // update slide that already exists
         $scope.updateSlide = function () {
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
-            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, (slideJSON, slideSVG));
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON, svg:slideSVG});
         };
 
         $rootScope.$on('showPresentationEditor', function () {

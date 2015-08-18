@@ -3,7 +3,6 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
 /**
@@ -35,8 +34,8 @@ class SlideController extends Controller
     {
         $user = \Auth::user();
         
-        $project = $user->projects();
-        $project = $project-find($projectID);
+        $projects = $user->projects();
+        $project = $projects-find($projectID);
         
         $presentation = $project->presentation()->first();
         $slide = $presentation->slides()->get();
@@ -57,24 +56,16 @@ class SlideController extends Controller
         $user = \Auth::user();
         
         $slide = new Slide(['xIndex' => $request->get('xIndex'), 
-                            'yIndex' => $request->get('yIndex'),
-                             'svg' => $request->get('svg')]);
+                            'yIndex' => $request->get('yIndex')]);
         
-        $objects = $request->get('objects');
-        foreach($objects as $object)
-        {
-            $slide->objects()->save($object);
-        }
-        
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
         
         $presentation = $project->presentation()->first();
         $presentation->slides()->save($slide);
                
-        return response()->json(['status' => true]);   
+        return response()->json($slide);   
     }
-    
     
     /**
      * Display the specified resource.
@@ -88,45 +79,61 @@ class SlideController extends Controller
     {
         $user = \Auth::user();
         
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
                 
         $presentation = $project->presentation()->first();
         
-        $slide = $presentation->slides();
-        $slide = $slide->find($slideID); 
+        $slides = $presentation->slides();
+        $slide = $slides->find($slideID);
+        $slide = $slide->groupBy()->get(['components']);
         
         return response()->json($slide);
     }
     
     /**
      * Update the specified resource in storage.
-     * @param int $project: the id of a project
-     * @param int $slide: the id of a slide
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @param String $slideID: the id of a slide
+     * @return Illuminate\Http\Response
      */
-    public function update($project,$slide)
+    public function update(Request $request,$username,$projectID,$presentationID,$slideID)
     {
         $user = \Auth::user();
         
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
+                
+        $presentation = $project->presentation()->first();
         
-        $presentation = $project->presentation()->first()->get();
+        $slides = $presentation->slides();
+        $slide = $slides->find($slideID);
         
-        $slide = $presentation->slides()->where('_id', '=', $slide);
+        $slide->xIndex = $request->get('xIndex');
+        $slide->yIndex = $request->get('yIndex');
+        $slide->svg = $request->get('svg');
         
-        $slide->yIndex = \Input::get('xIndex');
-        $slide->xIndex = \Input::get('yIndex');
-        
-        $string = \Input::get('components');
-        $json_o = json_decode($string,true);
-        foreach($json_o[component] as $comp) {
-            $slide->components()->save($comp);
+        $objects = $request->get('objects');
+        foreach($objects as $object)
+        {
+            $type = $object->type;
+            switch ($type) {
+                case "text":
+                    $component = new Text;
+                    $component = $object;
+                    break;
+                case "image":
+                    $component = new Image;
+                    $component = $object;
+                    break;
+            }
+            $slide->objects()->save($component);
         }
         
-        $slide->save();
-        
-        return response(true);
+        return response()->json(['status' => true]);
     }
     
     /**
@@ -141,13 +148,13 @@ class SlideController extends Controller
     {
         $user = \Auth::user();
 
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->first();
 
-        $slide = $presentation->slides();
-        $slide = $slide->find($slideID);
+        $slides = $presentation->slides();
+        $slide = $slides->find($slideID);
         
         $slide->delete();
 
