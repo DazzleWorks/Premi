@@ -67,6 +67,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         };
 
         $scope.refreshProjects = function() {
+            $scope.projects = [];
             var load = projectsService.query({user:$rootScope.user});
             load.$promise.then (
                 function(data) {

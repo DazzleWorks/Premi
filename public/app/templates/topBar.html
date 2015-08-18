@@ -13,10 +13,11 @@
         <ul class="right">
             <li class="divider" ng-show="user === 'false'"></li>
             <li class="has-form"><a class= "button round" href="#" ng-show="user === 'false'" ng-click= "signUp()">Sign up</a></li>
+            <li class="divider" ng-show="user !== 'false'"></li>
+            <li><a href="#" ng-show="user !== 'false'" ng-click= "openRestrictedArea()">Restricted Area</a></li>
 
             <li class="divider"></li>
             <li><a href="#" ng-show="user === 'false'" ng-click= "login()">Login</a></li>
-            <li><a href="#" ng-show="user !== 'false'" ng-click= "openRestrictedArea()">Restricted Area</a></li>
             <li><a href="#" ng-show="user !== 'false'" ng-click= "logout()">Logout</a></li>
         </ul>
 
