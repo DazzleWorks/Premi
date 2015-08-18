@@ -67,35 +67,33 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         };
 
         $scope.refreshProjects = function() {
-            if ($scope.projects.length === 0) {
-                var load = projectsService.query({user:$rootScope.user});
-                load.$promise.then (
-                    function(data) {
-                        for (prj in data) {
-                            if (prj !== "$promise" && prj !== "$resolved")
-                            $scope.projects.push(
-                                {
-                                    id: data[prj]._id,
-                                    name: data[prj].name,
-                                    presentation: data[prj].presentation._id.$id,
-                                    firstSlide: data[prj].presentation.slides[0]._id.$id,
-                                    transition:data[prj].presentation.transition
-                                    // maxX: data[prj].presentation.maxX,
-                                    // maxY: data[prj].presentation.maxY
-                                }
-                            );
-                        };
-                        resetCurrentProject();
-                    },
-                    function(data){
-                    });
-            }
+            var load = projectsService.query({user:$rootScope.user});
+            load.$promise.then (
+                function(data) {
+                    for (prj in data) {
+                        if (prj !== "$promise" && prj !== "$resolved")
+                        $scope.projects.push(
+                            {
+                                id: data[prj]._id,
+                                name: data[prj].name,
+                                presentation: data[prj].presentation._id.$id,
+                                firstSlide: data[prj].presentation.slides[0]._id.$id,
+                                transition:data[prj].presentation.transition
+                                // maxX: data[prj].presentation.maxX,
+                                // maxY: data[prj].presentation.maxY
+                            }
+                        );
+                    };
+                    resetCurrentProject();
+                },
+                function(data){
+                });
         };
 
         $rootScope.$on('loadProjects', $scope.refreshProjects);
 
         $scope.editProject = function() {
-			$rootScope.$broadcast('showPresentationEditor');
+			$rootScope.$broadcast('showPresentationEditor', 1);
 		};
 
         $scope.deleteProject = function () {
