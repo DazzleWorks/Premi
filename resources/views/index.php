@@ -57,6 +57,7 @@
 
             <!-- controllers -->
             <script src="app/controllers/home/ForgotPasswordCtrl.js" type="text/javascript"></script>
+            <script src="app/controllers/home/GenericProjectCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/HomePageCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/LoginCtrl.js" type="text/javascript"></script>
             <script src="app/controllers/home/ResetPasswordCtrl.js" type="text/javascript"></script>
@@ -82,6 +83,7 @@
             <script src="app/controllers/project/NewProjectCtrl.js" type="text/javascript"></script>
 
             <!-- directives -->
+            <script src="app/directives/home/genericProject.js" type="text/javascript"></script>
             <script src="app/directives/home/homePage.js" type="text/javascript"></script>
 
             <script src="app/directives/infographic/infographicEditor.js" type="text/javascript"></script>
@@ -94,6 +96,7 @@
 
             <script src="app/directives/restrictedArea/restrictedArea.js" type="text/javascript"></script>
 
+            <script src="app/directives/slide/imageUpload.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditor.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditorPanel.js" type="text/javascript"></script>
             <script src="app/directives/slide/slideEditorPanelSpec.js" type="text/javascript"></script>
@@ -107,6 +110,7 @@
             <script src="app/services/home/forgotPassword.js" type="text/javascript"></script>
             <script src="app/services/home/login.js" type="text/javascript"></script>
             <script src="app/services/home/logout.js" type="text/javascript"></script>
+            <script src="app/services/home/search.js" type="text/javascript"></script>
             <script src="app/services/home/signup.js" type="text/javascript"></script>
 
             <script src="app/services/presentation/presentation.js" type="text/javascript"></script>

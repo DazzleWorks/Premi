@@ -55,17 +55,12 @@ class User extends Eloquent implements AuthenticatableContract,
     
      
     /**
-     * Functions that allows to have embedded Project in a User 
+     * Allows to have embedded Project in a User 
      * 
      * @return array
      */
     public function projects() {
         return $this->embedsMany(Project::class);
-    }
-    
-    public static function getParamByUsername($username) {
-        $user = User::where('username', '=', $username)->get(array('username', 'email', 'firstName', 'lastName'));
-        return $user;
     }
 }
 

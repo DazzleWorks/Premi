@@ -17,7 +17,7 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Component | create class |                 
  * +---------+------------+---------------+-----------------+--------------+
  */
-abstract class Object extends Eloquent
+abstract class Component extends Eloquent
 {
     /**
      * indicates if the model should be timestamped

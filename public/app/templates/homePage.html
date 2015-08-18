@@ -1,79 +1,85 @@
 <div id="homePage">
-    <div class="row">
+    <div class="row" ng-show="searchViewVisibility">
         <div class="small-centered columns">
-            <h1>PREMI</h1>
+            <h1 id="homePageTitle">PREMI</h1>
         </div>
     </div>
 
+    <div class="row" ng-show= "searchViewVisibility">
+        <div class="small-12 columns homeContent">
+            <div class="row">
+                <div class="small-10 small-offset-1 columns">
+                    <input  type="text" ng-model="searchText" class="mainSearchBar"/>
+                </div>
+            </div>
 
-    <!-- Search Bar [BEGIN]-->
-    <div class="row">
-        <div class="small-10 small-offset-1 columns">
-            <input  type="text" ng-model="searchText" class="mainSearchBar"/>
+            <section class="homeCheckbox">
+                <input type="checkbox" id="checkbox2" checked ng-model="checked"/>
+                <label for="checkbox2"></label>
+                    <p>FILTER:    PROJECTS</p>
+                    <p>FILTER:    USERS</p>
+            </section>
+
+            <div class="row">
+                <div class="small-2 columns small-offset-5">
+                    <button class="button radius" id="searchSubmit" ng-click="search()">Search</button>
+                </div>
+            </div>
+
+            <!--<div id="searchResults" class="row" ng-show="checked">
+                <ul class="small-10 small-offset-1 columns" >
+                    <li ng-repeat="project in searchResults.byProjectName" class="searchResultItem small-2 end columns" >&lt;!&ndash; ng-click="setCurrentProject(project.id)" &ndash;&gt;
+                        <a href="/presentation.html?id={{project.id}}">
+                            <img src="../assets/img/google-now.jpg"/>
+                            <span>{{project.name}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
+            <div id="searchResults" class="row" ng-hide="checked">
+                <ul class="small-10 small-offset-1 columns">
+                    <li ng-repeat="result in searchResults" class="searchResultItem small-2 columns" ng-click="analizeUser(result.username)"><!-- ng-click="setCurrentProject(project.id)" -->
+                        <a href>
+                            <img src="../assets/img/user_male.png"/>
+                            <span>{{result.username}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        <!-- switch [END] -->
+           <!--
+            <div class= "row">
+                <div class="small-centered columns">
+                    <button class="button round" ng-click= "login()">LOGIN</button>
+                    <button class="button round" ng-click= "signUp()">SIGN UP</button>
+                </div>
+            </div>
+        -->
         </div>
     </div>
 
-    <!-- Search Bar [END]-->
+    <div class="row" ng-hide="searchViewVisibility">
+        <div class="small-12 columns">
+            <generic-project></generic-project>
 
-<!-- switch [BEGIN] -->
-<!--
-    <div class="switch small">
-  <input id="exampleRadioSwitch1" type="radio" checked name="testGroup">
-  <label for="exampleRadioSwitch1"></label>
-  <input id="exampleRadioSwitch2" type="radio" name="testGroup">
-  <label for="exampleRadioSwitch2"></label>
-</div>
--->
-
-
-    <section class="homeCheckbox">
-        <input type="checkbox" id="checkbox2" checked />
-        <label for="checkbox2"></label>
-
-        <p>FILTER:    PROJECTS</p>
-        <p>FILTER:    USERS</p>
-    </section>
-
-    <div class="row">
-        <div class="small-2 columns small-offset-5">
-            <button class="button radius" id="searchSubmit">Search</button>
         </div>
     </div>
 
-    <div id="searchResults" class="row">
-        <ul class="small-10 small-offset-1 columns">
-            <li ng-repeat="searchResult in searchResults" class="searchResultItem small-2 columns"<!-- ng-click="setCurrentProject(project.id)"--><a href><img src="../assets/img/google-now.jpg"/><span>{{searchResult.name}}</span></a></li>
-        </ul>
-    </div>
-
-<!-- switch [END] -->
-   <!--
-    <div class= "row">
-        <div class="small-centered columns">
-            <button class="button round" ng-click= "login()">LOGIN</button>
-            <button class="button round" ng-click= "signUp()">SIGN UP</button>
+        <!--
+            <div class= "row">
+                <div class="small-3 small-centered columns">
+                    <button class="button round tiny" ng-click= "resetPassword()">RESET PASSWORD</button>
+                </div>
+            </div>
+            -->
+        <div class= "row" id="footer">
+            <div class="small-11 columns">
+                <p></p>
+            </div>
+            <div class="small-1 columns">
+                <img src="../../assets/img/logo.png" />
+            </div>
         </div>
-    </div>
--->
-    <div class= "row">
-        <div class="small-3 small-centered columns">
-            <button class="button round" ng-click= "openRestrictedArea()">RESTRICTED AREA</button>
-        </div>
-    </div>
-<!--
-    <div class= "row">
-        <div class="small-3 small-centered columns">
-            <button class="button round tiny" ng-click= "resetPassword()">RESET PASSWORD</button>
-        </div>
-    </div>
-    -->
-    <div class= "row" id="footer">
-        <div class="small-11 columns">
-            <p></p>
-        </div>
-        <div class="small-1 columns">
-            <img src="../../assets/img/logo.png" />
-        </div>
-    </div>
 
 </div>

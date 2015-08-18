@@ -2,7 +2,7 @@
 
 namespace Premi\Model;
 
-use App\Model\Object;
+use App\Model\Component;
 
 /**
  * @file: app/Model/Chart.php
@@ -17,7 +17,7 @@ use App\Model\Object;
  * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Chart | create class |
  * +---------+------------+---------------+-------------+--------------+
  */
-class Chart extends Object 
+class Chart extends Component 
 {
     /**
      * indicates if the model should be timestamped

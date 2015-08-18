@@ -2,14 +2,13 @@
     <div class="row">
         <div class="small-2 columns" >
             <ul>
-               <!--
                 <li class="editMenuItemContainer">
-                    <button class="button secondary expand radius"><i class="fa fa-cogs"></i> settings</button>
-                </li>
-                -->
-                <li class="editMenuItemContainer" >
                     <button class="button secondary expand radius" ng-click="openModal('presentationStyle')"><i class="fa fa-puzzle-piece"></i> style</button>
                 </li>
+                <ul class="button-group radius" id="savedeletebutton">
+                    <li class="editMenuItemContainer"><a href="" class="button success" ng-click="updateSlide()"><i class="fa fa-floppy-o"></i></a></li>
+                    <li class="editMenuItemContainer"><a href="" class="button alert" ng-click="deleteSlide()"><i class="fa fa-trash-o"></i></a></li>
+                </ul>
             </ul>
             <ul>
                 <li class="editMenuItemContainer" ng-repeat="component in components" ng-click='openModal(component.id)'>
@@ -17,12 +16,12 @@
                 </li>
             </ul>
             <ul class="editMenuContainer">
-                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-click="changeSlide('up')"><i class="fa fa-arrow-up"></i></a></li>
+                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="{{buttons.up}}" ng-click="changeSlide('up')"><i class="fa fa-arrow-up"></i></a></li>
                 <ul class="button-group">
-                    <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-click="changeSlide('left')"><i class="fa fa-arrow-left"></i></i></a></li>
-                    <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-click="changeSlide('right')"><i class="fa fa-arrow-right"></i></a></li>
+                    <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="buttons.left" ng-click="changeSlide('left')"><i class="fa fa-arrow-left"></i></i></a></li>
+                    <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="buttons.right" ng-click="changeSlide('right')"><i class="fa fa-arrow-right"></i></a></li>
                 </ul>
-                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-click="changeSlide('up')"><i class="fa fa-arrow-down"></i></a></li>
+                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="{{buttons.down}}" ng-click="changeSlide('down')"><i class="fa fa-arrow-down"></i></a></li>
             </ul>
             <ul class="editMenuContainer">
                 <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('up')"><i class="fa fa-plus"></i></a></li>
@@ -47,11 +46,9 @@
     </div>
 
     <div class="row">
-        <div class="small-1 columns">
-            <button class="button radius" id="saveButton" ng-click="prova()">Save</button>
-        </div>
-        <div class="small-11 columns">
-            <p id="serialized"></p>
+        <div class="small-12 columns">
+            <p id="serialized">{{slideJSON}}</p>
+            <p id="serialized">{{slideSVG}}</p>
         </div>
     </div>
 </div>

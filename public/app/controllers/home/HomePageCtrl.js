@@ -2,7 +2,7 @@
 
 angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
-    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', 'logoutService', function($scope, $rootScope, $modal, logoutService) {
+    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', '$window', 'logoutService','searchByUserService', function($scope, $rootScope, $modal, $window, logoutService, searchByUserService) {
 
         // disconnect any user on load page
         logoutService.get();
@@ -12,6 +12,9 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $rootScope.currentSlide = {};
 
         $scope.home = "true";
+        $scope.searchViewVisibility="true";
+
+        $scope.checked = false;
 
         $scope.openHome = function () {
             $scope.home = "true";
@@ -46,6 +49,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 var user_logout = logoutService.get();
                 $rootScope.user = "false";
                 $scope.openHome();
+                $window.location.href="/";
             }
         };
 
@@ -77,65 +81,70 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 console.log("reset");
             });
         };
-        /**/
 
-        $scope.searchResults=[
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
-            },
-            {
-                name:"prj1",
-                id:"id",
-                username:"username"
+        $scope.formatResults = function (results){
+            $scope.searchResults.byUsername =[];
+            $scope.searchResults.byUsername.push({username:results.username});
+        };
+
+        $scope.searchViewVisibility = true;
+        $scope.userOfInterest={
+            username:""
+        };
+
+        $scope.toggleSearchViewVisibility = function(){
+            $scope.searchViewVisibility = !$scope.searchViewVisibility;
+        };
+
+        $scope.analizeUser = function (username){
+            $scope.userOfInterest.username=username;
+            $scope.userOfInterest.projects=$scope.searchResults[0].projects;
+
+            $scope.toggleSearchViewVisibility();
+
+        };
+
+        $scope.resetHomePage = function(){
+            $scope.userOfInterest.username="";
+            $scope.searchViewVisibility = true;
+        };
+
+        $scope.searchResults = [];
+
+        $scope.search = function () {
+            if ($scope.checked === false) {
+                var searchResults = searchByUserService.query({username:$scope.searchText});
+                console.log(searchResults[0]);
+                searchResults.$promise.then (
+                    function(data) {
+                        // $scope.searchResults.byProjectName = [];
+                        // $scope.searchResults.byUsername = [];
+                        if(data[0] !== undefined) {
+                            var result = {};
+                            result.username = searchResults[0].username;
+                            result.id = searchResults[0].id;
+                            result.projects = searchResults[0].projects;
+                            $scope.searchResults=[];
+                            $scope.searchResults.push(result);
+                        }else{
+                            $scope.searchResults=[];
+                        }
+                        //console.log($scope.searchResults);
+                    },
+                    function(data) {
+                    });
             }
-        ];
+            else if ($scope.checked === true) {
+                var searchResults = searchByProjectService.get({project:$scope.searchText});
+                searchResults.$promise.then (
+                    function(data) {
+                        console.log(data);
+                        $scope.searchResults.byProjectName = searchResults;
+                        $scope.searchResults.byUsername = [];
+                    },
+                    function(data) {
+                    });
+            }
+        };
 
-        /**/
 }]);

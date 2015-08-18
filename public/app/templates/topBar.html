@@ -1,7 +1,10 @@
-<top-bar class="top-bar" role="navigation">
+<top-bar class="top-bar" role="navigation" >
     <ul class="title-area">
         <li class="name">
             <h1><a href="#" ng-click="openHome()">PREMI</a></h1>
+        </li>
+        <li toggle-top-bar class="menu-icon">
+            <a href="#">MENU</a>
         </li>
     </ul>
 
@@ -10,6 +13,8 @@
         <ul class="right">
             <li class="divider" ng-show="user === 'false'"></li>
             <li class="has-form"><a class= "button round" href="#" ng-show="user === 'false'" ng-click= "signUp()">Sign up</a></li>
+            <li class="divider" ng-show="user !== 'false'"></li>
+            <li><a href="#" ng-show="user !== 'false'" ng-click= "openRestrictedArea()">Restricted Area</a></li>
 
             <li class="divider"></li>
             <li><a href="#" ng-show="user === 'false'" ng-click= "login()">Login</a></li>

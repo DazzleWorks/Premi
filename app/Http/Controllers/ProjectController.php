@@ -34,9 +34,9 @@ class ProjectController extends Controller
     public function index($username)
     {
         $user = \Auth::user();
-        $project = $user->projects()->get();
+        $projects = $user->projects()->get();
 
-        return response()->json($project);
+        return response()->json($projects);
     }
 
 
@@ -72,8 +72,8 @@ class ProjectController extends Controller
     public function show($username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         return response($project);
     }
@@ -89,8 +89,8 @@ class ProjectController extends Controller
     public function update(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $project->name = $request->get('name');
 
@@ -108,8 +108,8 @@ class ProjectController extends Controller
     public function destroy($username,$projectID)
     {
         $user = \Auth::user();
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $project->delete();
 
@@ -125,9 +125,11 @@ class ProjectController extends Controller
      public function searchByUsername(Request $request){
         $username = $request -> get('username');
         
-        $projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));    
+        /*$projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));
+        return response()->json($projects);*/
         
-        return response()->json($projects);
+        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name'));
+        return response()->json($user);
      }
      
      /**
