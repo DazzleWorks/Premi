@@ -91,11 +91,8 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $scope.userOfInterest={
             username:""
         };
-        $scope.projectOfInterest={
-            id:"",
-            theme:"sky",
-            transitionKind:"slide"
-        };
+
+        
 
         $scope.toggleSearchViewVisibility = function(){
             $scope.searchViewVisibility = !$scope.searchViewVisibility;
@@ -105,14 +102,6 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             $scope.userOfInterest.username=username;
             $scope.userOfInterest.projects=$scope.searchResults[0].projects;
 
-            $scope.toggleSearchViewVisibility();
-
-        };
-
-        $scope.analizeProject = function (projectId){
-            $scope.projectOfInterest.id=projectId;
-            //$scope.userOfInterest.projects=$scope.searchResults[0].projects;
-            console.log(projectId);
             $scope.toggleSearchViewVisibility();
 
         };
