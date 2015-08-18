@@ -11,7 +11,8 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             presentation: "",
             firstSlide: "",
             theme:"sky",
-            transition:"slide"
+            transition:"slide",
+            svg:""
             // maxX: 0,
             // maxY: 0
         };
@@ -42,6 +43,12 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                         obj.transition=$scope.userOfInterest.projects[k].transition;
                     else
                         obj.transition="slide";
+
+                    //svg
+                    if($scope.userOfInterest.projects[k].svg !== undefined)
+                        obj.svg=$scope.userOfInterest.projects[k].svg;
+                    else
+                        obj.svg="";
                 }
             }
             return obj;

@@ -92,7 +92,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             username:""
         };
 
-        
+
 
         $scope.toggleSearchViewVisibility = function(){
             $scope.searchViewVisibility = !$scope.searchViewVisibility;
