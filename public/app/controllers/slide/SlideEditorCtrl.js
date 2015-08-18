@@ -323,7 +323,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.updateSlide = function () {
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
-            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, (slideJSON, slideSVG));
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON, svg:slideSVG});
         };
 
         $rootScope.$on('showPresentationEditor', function () {
