@@ -291,6 +291,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
         };
 
+
+// ----- I/O SLIDE -----
         $scope.updateCurrentSlide = function () {
             // 1) if (maxX === 0 and maxY[0] === 0) load maxX and maxY
             // 2) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
@@ -298,13 +300,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             // temporary solution
             $scope.currentSlide.id = $scope.currentProject.firstSlide;
         };
-
-        // variables:
-        // $scope.user = active user
-        // $scope.currentProject.id = active project's id
-        // $scope.currentProject.presentation = active project presentation's id
-        // $scope.currentProject.firstSlide = active project presentation's first slide id
-        // $scope.currentSlide = active slide's id
 
         // load slide that already exist
         $scope.loadSlide = function () {
@@ -328,7 +323,12 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON, svg:slideSVG});
         };
 
-        $rootScope.$on('showPresentationEditor', function () {
+        $scope.deleteSlide = function () {
+            slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+            $scope.loadSlide();
+        };
+
+        $scope.$on('showPresentationEditor', function () {
             $scope.loadSlide();
         });
 
