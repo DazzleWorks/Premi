@@ -2,7 +2,7 @@
 
 namespace Premi\Model;
 
-use App\Model\Object;
+use App\Model\Component;
 
 /**
  * @file: app/Model/Table.php
@@ -17,7 +17,7 @@ use App\Model\Object;
  * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Table  | create class  |
  * +---------+------------+----------------+--------------+---------------+
  */
-class Table extends Object 
+class Table extends Component 
 {
     /**
      * indicates if the model should be timestamped
