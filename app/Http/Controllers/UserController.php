@@ -33,10 +33,10 @@ class UserController extends Controller
         if(!\Auth::user()) {
             return response()->json(['status' => 'utente non loggato']);
         }
-       
-        $data = User::getParamByUsername($username);
+      
+        $data = \Auth::user()->groupBy()->get(['_id','email','firstName','lastName','username']);
         
-        return response($data);
+        return response()->json($data);
     }
     
     /**
