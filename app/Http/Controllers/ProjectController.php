@@ -112,7 +112,7 @@ class ProjectController extends Controller
         /*$projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));
         return response()->json($projects);*/
         
-        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name'));
+        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name','projects.presentation.slides.svg'));
         return response()->json($user);
      }
      
@@ -125,7 +125,7 @@ class ProjectController extends Controller
      public function searchByProjectsName(Request $request){
          $projectName = $request->get('name');
          
-         $usersProject = \Premi\Model\User::where('projects.name','=',$projectName)->get(array('projects._id','projects.name'));
+         $usersProject = \Premi\Model\User::where('projects.name','=',$projectName)->get(array('projects._id','projects.name','projects.presentation.slides.svg'));
          
          $usersProject = json_decode($usersProject,true);
          
