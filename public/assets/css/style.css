@@ -310,3 +310,7 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 #backButtonContainer{
     /*float: right;*/
 }
+
+body{
+    background-image: url(../img/texture.jpg) !important;
+}
