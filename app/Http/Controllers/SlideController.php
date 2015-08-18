@@ -65,6 +65,7 @@ class SlideController extends Controller
         
         $presentations = $project->presentation();
         $presentation = $presentations->get();
+        
         $presentation->slides()->save($slide);
                
         return response()->json($slide);   
@@ -120,22 +121,23 @@ class SlideController extends Controller
         $slide->xIndex = $request->get('xIndex');
         $slide->yIndex = $request->get('yIndex');
         $slide->svg = $request->get('svg');
+        $slide->background = $request->get('background');
         
-        $objects = $request->get('objects');
-        foreach($objects as $object)
+        $components = $request->get('components');
+        foreach($components as $component)
         {
-            $type = $object->type;
+            $type = $component->type;
             switch ($type) {
                 case "text":
-                    $component = new Text;
-                    $component = $object;
+                    $newComponent = new Text;
+                    $newComponent = $component;
                     break;
                 case "image":
-                    $component = new Image;
-                    $component = $object;
+                    $newComponent = new Image;
+                    $newComponent = $component;
                     break;
             }
-            $slide->objects()->save($component);
+            $slide->components()->save($newComponent);
         }
         
         return response()->json(['status' => true]);

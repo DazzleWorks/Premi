@@ -80,7 +80,7 @@ Route::group(array('prefix' => 'api'), function() {
                        
     // Project routes...
     Route::resource('user.project', 'ProjectController',
-                    ['except' => ['create', 'edit']]);
+                    ['except' => ['show', 'create', 'edit']]);
     
     // Infographic routes...
     Route::resource('user.project.infographic', 'InfographicController',

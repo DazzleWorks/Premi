@@ -5,8 +5,8 @@ namespace Premi\Http\Controllers;
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Project;
-use Premi\Model\Presentation;
-use Premi\Model\Slide;
+use Premi\Events\ProjectWasCreated;
+//use Premi\Model\Slide;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -39,7 +39,6 @@ class ProjectController extends Controller
         return response()->json($projects);
     }
 
-
     /**
      * Store a newly created resource in storage.
      * @param Illuminate\Http\Request
@@ -54,30 +53,15 @@ class ProjectController extends Controller
         $project = new Project(['name' => $name]);
         $project = $user->projects()->save($project);
         
-        $presentation = new Presentation(['title' => $name]);
-        $presentation = $project->presentation()->save($presentation);
+        event(new ProjectWasCreated($project));
+        //$presentation = new Presentation(['title' => $name]);
+        //$presentation = $project->presentation()->save($presentation);
         
-        $slide = new Slide();
-        $presentation->slides()->save($slide);
+        //$slide = new Slide;
+        //$slide = $presentation->slides()->save($slide);
 
         return response()->json($project);
     }
-
-    /**
-     * Display the specified resource.
-     * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @return Illuminate\Http\Response
-     */
-    public function show($username,$projectID)
-    {
-        $user = \Auth::user();
-        $projects = $user->projects();
-        $project = $projects->find($projectID);
-
-        return response($project);
-    }
-
 
     /**
      * Update the specified resource in storage.

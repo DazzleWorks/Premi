@@ -2,7 +2,7 @@
 
 namespace Premi\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
 
@@ -34,7 +34,7 @@ class UserController extends Controller
             return response()->json(['status' => 'utente non loggato']);
         }
       
-        $data = \Auth::user()->groupBy()->get(['_id','email','firstName','lastName','username']);
+        $data = User::where('username', $username)->get(['_id','email','firstName','lastName','username']);
         
         return response()->json($data);
     }
