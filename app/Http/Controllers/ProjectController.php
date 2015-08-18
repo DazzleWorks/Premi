@@ -129,5 +129,29 @@ class ProjectController extends Controller
         
         return response()->json($projects);
      }
+     
+     /**
+      * Search for projects by the projects name
+      *
+      * @param Illuminate\Http\Request
+      * @return Response
+      */
+     public function searchByProjectsName(Request $request){
+         $projectName = $request->get('name');
+         
+         $usersProject = \Premi\Model\User::where('projects.name','=',$projectName)->get(array('projects._id','projects.name'));
+         
+         $usersProject = json_decode($usersProject,true);
+         
+         for($i=0; $i<count($usersProject);$i++){
+             for($j=0; $j<count($usersProject[$i]['projects']); $j++){
+                 if($usersProject[$i]['projects'][$j]['name']!=$projectName){
+                    array_splice($usersProject[$i]['projects'], $j,1);
+                    $j--;
+                 }
+             }
+         }
+         
+         return response()->json($usersProject);     
+     }
 }
-
