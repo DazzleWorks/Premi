@@ -97,6 +97,8 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.analizeUser = function (username){
             $scope.userOfInterest.username=username;
+            $scope.userOfInterest.projects=$scope.searchResults[0].projects;
+
             $scope.toggleSearchViewVisibility();
 
         };
@@ -121,7 +123,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                             result.username = searchResults[0].username;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
+                            $scope.searchResults=[];
                             $scope.searchResults.push(result);
+                        }else{
+                            $scope.searchResults=[];
                         }
                         //console.log($scope.searchResults);
                     },

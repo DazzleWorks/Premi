@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="GenericProjectCtrl">
     <div class="row">
         <h4 id="GenericProfileTitle" class="small-8 columns">{{userOfInterest.username}}'s projects</h4>
         <div class="small-2 small-offset-1 columns">
@@ -9,7 +9,7 @@
         <div class="row" id="projectSelectorWrapper">
             <div class="small-12 columns" id='projectSelector'>
                 <ul>
-                    <li ng-repeat="project in searchResults[0].projects" class="projectSelectorItem" ng-click="setCurrentProject(project._id.$id)">
+                    <li ng-repeat="project in userOfInterest.projects" class="projectSelectorItem" ng-click="setCurrentGenericProject(project._id.$id)">
                         <a href>
                             <img src="../assets/img/project_90x90.png" width="40px"/>
                             <span>{{project.name}}</span>
@@ -20,16 +20,16 @@
         </div>
     </div>
 
-    <div class="small-9 columns project"  ng-show="currentProject.name !== ''">
+    <div class="small-9 columns project"  ng-show="currentGenericProject.name !== ''">
 
-        <h3 class="projectTitle" id="PresentationSection">{{currentProject.name}}</h3>
+        <h3 class="projectTitle" id="PresentationSection">{{currentGenericProject.name}}</h3>
 
         <div class="row">
             <div class="small-12 small-centered columns">
                 <div class="myPresentationContainer">
                     <img src="../assets/img/google-now.jpg" class="presentationFront">
                     <div class="icon-bar three-up projectMenu">
-                        <a class="item custonMenuIcon" href="../presentation.php?id={{currentProject._id}}&transition={{currentProject.transition}}" target="_blank">
+                        <a class="item custonMenuIcon" href="../presentation.php?id={{currentGenericProject.id}}&transition={{currentGenericProject.transition}}&theme={{currentGenericProject.theme}}" target="_blank">
                             <img src="../assets/img/play2.png" >
                             <label>Play</label>
                         </a>

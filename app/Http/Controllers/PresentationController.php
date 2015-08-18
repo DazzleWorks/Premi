@@ -3,7 +3,6 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
 /**
@@ -37,8 +36,8 @@ class PresentationController extends Controller
 
         $presentation = new Presentation(['title' => $request->get('title')]);
 
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
         $project->presentation()->save($presentation);
 
         return response()->json(['status' => true]);
@@ -55,8 +54,8 @@ class PresentationController extends Controller
     {
         $user = \Auth::user();
 
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->first();
 
@@ -76,8 +75,8 @@ class PresentationController extends Controller
     {
         $user = \Auth::user();
 
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->first();
         $presentation->title = $request->get('title');
@@ -98,8 +97,8 @@ class PresentationController extends Controller
     {
         $user = \Auth::user();
 
-        $project = $user->projects();
-        $project = $project->find($projectID);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->first();
         $presentation->delete();
