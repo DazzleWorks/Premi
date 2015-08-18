@@ -18,6 +18,6 @@ angular.module('app.services.search', ['ngRoute', 'ngResource'])
 
     .factory('searchByProjectService', ['$http', '$resource', function ($http, $resource) {
 
-        return $resource('/api/user/:user');
+        return $resource('search/byProject');
 
     }]);

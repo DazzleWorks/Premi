@@ -26,16 +26,16 @@
                 </div>
             </div>
 
-            <!--<div id="searchResults" class="row" ng-show="checked">
+            <div id="searchResults" class="row" ng-show="checked">
                 <ul class="small-10 small-offset-1 columns" >
-                    <li ng-repeat="project in searchResults.byProjectName" class="searchResultItem small-2 end columns" >&lt;!&ndash; ng-click="setCurrentProject(project.id)" &ndash;&gt;
-                        <a href="/presentation.html?id={{project.id}}">
-                            <img src="../assets/img/google-now.jpg"/>
+                    <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns" ng-click="analizeProject(project.projectId)" >
+                        <a href="/presentation.php?id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}" target="_blank">
+                        <img src="../assets/img/google-now.jpg"/>
                             <span>{{project.name}}</span>
                         </a>
                     </li>
                 </ul>
-            </div>-->
+            </div>
             <div id="searchResults" class="row" ng-hide="checked">
                 <ul class="small-10 small-offset-1 columns">
                     <li ng-repeat="result in searchResults" class="searchResultItem small-2 columns" ng-click="analizeUser(result.username)"><!-- ng-click="setCurrentProject(project.id)" -->
