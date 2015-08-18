@@ -2,9 +2,8 @@
 
 namespace Premi\Listeners;
 
+use Premi\Model\Slide;
 use Premi\Events\ProjectWasCreated;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SlideCreate
 {
@@ -24,8 +23,8 @@ class SlideCreate
      */
     public function handle(ProjectWasCreated $event)
     {
-        //$slide = new Slide(['xIndex' => 1, 'yIndex' => 1]);
         $presentation = $event->project->presentation()->get();
-        $presentation->slides()->create(array('xIndex' => 1, 'yIndex' => 1, 'svg' => null));
+        $slide = new Slide(['xIndex' => 1, 'yIndex' => 1, 'svg' => null]);
+        $presentation->slides()->save($slide);
     }
 }

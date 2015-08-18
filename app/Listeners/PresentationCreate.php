@@ -4,8 +4,6 @@ namespace Premi\Listeners;
 
 use Premi\Model\Presentation;
 use Premi\Events\ProjectWasCreated;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class PresentationCreate
 {
