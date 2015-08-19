@@ -33,7 +33,7 @@ class Presentation extends Eloquent
      * @protected
      * @title: indicates the title of the Presentation
      */
-    protected $fillable = ['title'];
+    protected $fillable = ['title','theme','transition'];
     
     
     /**

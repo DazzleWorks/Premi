@@ -8,15 +8,6 @@ use Premi\Events\ProjectWasCreated;
 class PresentationCreate
 {
     /**
-     * Create the event listener.
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      * @param  ProjectWasCreated  $event
      * @return void
@@ -24,7 +15,9 @@ class PresentationCreate
     public function handle(ProjectWasCreated $event)
     {
         $name = $event->project->name;
-        $presentation = new Presentation(['title' => $name]);
+        $presentation = new Presentation(['title' => $name,
+                                          'theme' => 'sky',
+                                          'transition' => 'none']);
         $event->project->presentation()->save($presentation);
     }
 }
