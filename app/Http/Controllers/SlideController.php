@@ -135,7 +135,8 @@ class SlideController extends Controller
                     $slide->components()->save($newText);
                     break;
                 case "image":
-                    $slide->components()->save($component);
+                    $newImage = new Image($component);
+                    $slide->components()->save($newImage);
                     break;
             }
         }

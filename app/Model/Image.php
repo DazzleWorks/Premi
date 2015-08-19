@@ -39,6 +39,13 @@ class Image extends Component
      *               when narrows the window
      * @background: indicates the background of the Image
      */
-    protected $fillable = ['src', 'filters', 'crossOrigin', 'alignX', 'alignY',
-                           'meetOrSlice', 'background'];
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top', 'width',
+                           'height', 'fill', 'stroke', 'strokeWidth', 
+                           'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
+                           'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
+                           'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
+                           'clipTo', 'backgroundColor', 'fillRule', 
+                           'globalCompositeOperation', 'src', 'filters', 
+                           'crossOrigin', 'alignX', 'alignY', 'meetOrSlice', 
+                           'background'];
 }
