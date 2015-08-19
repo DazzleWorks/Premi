@@ -3,28 +3,22 @@
 angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
     .controller('GenericProjectCtrl', ['$scope', '$rootScope', '$modal', function($scope, $rootScope, $modal) {
-        console.log($scope.userOfInterest.projects);
-
         $rootScope.currentGenericProject = {
             id: "",
             name: "",
             presentation: "",
             firstSlide: "",
             theme:"sky",
-            transition:"slide",
+            transition:"none",
             svg:""
             // maxX: 0,
             // maxY: 0
         };
 
-
-
-         $scope.findProjectById = function(id){
-             console.log($scope.userOfInterest.projects);
+        $scope.findProjectById = function(id){
             var k;
             var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide"};
             for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
-                console.log($scope.userOfInterest.projects[k]._id.$id);
                 if($scope.userOfInterest.projects[k]._id.$id === id) {
 
                     obj.id=$scope.userOfInterest.projects[k]._id.$id;
@@ -38,7 +32,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                     else
                         obj.theme="sky";
 
-                    //transtion
+                    //transition
                     if($scope.userOfInterest.projects[k].transition !== undefined)
                         obj.transition=$scope.userOfInterest.projects[k].transition;
                     else
@@ -54,8 +48,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             return obj;
         };
 
-
-        $scope.setCurrentGenericProject= function(id){
+        $scope.setCurrentGenericProject = function(id){
             var obj = $scope.findProjectById(id);
             $rootScope.currentGenericProject.id = obj.id;
             $rootScope.currentGenericProject.name = obj.name;
@@ -63,7 +56,5 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $rootScope.currentGenericProject.firstSlide = obj.firstSlide;
             $rootScope.currentGenericProject.theme = obj.theme;
             $rootScope.currentGenericProject.transition = obj.transition;
-
-            console.log($rootScope.currentGenericProject);
         };
     }]);
