@@ -30,9 +30,9 @@
             <div class="row">
                 <div class="small-12 small-centered columns">
                     <div class="myPresentationContainer">
-                        <div class="presentationFront">
-                            {{currentGenericProject.svg}}
+                        <div class="presentationFront" ng-bind-html="currentGenericProject.svg" id="presentationFrontSvgContainer">
                         </div>
+
                         <div class="icon-bar two-up projectMenu">
                             <a class="item custonMenuIcon" href="../presentation.php?id={{currentGenericProject.id}}&transition={{currentGenericProject.transition}}&theme={{currentGenericProject.theme}}" target="_blank">
                                 <img src="../assets/img/play2.png" >

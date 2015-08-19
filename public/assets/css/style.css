@@ -156,12 +156,109 @@ body {
 }
 
 .presentationFront{
-	height: auto !important;
-	width:50% !important;
+	/*height: auto !important;
+    height: calc(width * 1.75);*/
+	max-width:100% !important;
+  /*  margin-left: 25% !important;*/
+}
+.presentationFront svg.sky{
+    background: #add9e4;
+    background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
+    background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background-color: #f7fbfc;
 }
 
+
+.presentationFront svg.beige{
+
+    background: #f7f2d3;
+    background: -moz-radial-gradient(center, circle cover, #ffffff 0%, #f7f2d3 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ffffff), color-stop(100%, #f7f2d3));
+    background: -webkit-radial-gradient(center, circle cover, #ffffff 0%, #f7f2d3 100%);
+    background: -o-radial-gradient(center, circle cover, #ffffff 0%, #f7f2d3 100%);
+    background: -ms-radial-gradient(center, circle cover, #ffffff 0%, #f7f2d3 100%);
+    background: radial-gradient(center, circle cover, #ffffff 0%, #f7f2d3 100%);
+    background-color: #f7f3de;
+
+}
+
+.presentationFront svg.black, .presentationFront svg.blood{
+    background: #222;
+    background-color: #222;
+}
+.presentationFront svg.league{
+    background: #1c1e20;
+    background: -moz-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #555a5f), color-stop(100%, #1c1e20));
+    background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+    background: -o-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+    background: -ms-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+    background: radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+    background-color: #2b2b2b;
+}
+
+.presentationFront svg.moon{
+    background: #002b36;
+    background-color: #002b36;
+
+}
+.presentationFront svg.night{
+    background:#111;
+    background-color: #111;
+}
+.presentationFront svg.serif{
+    background: #F0F1EB;
+    background-color: #F0F1EB;
+}
+.presentationFront svg.simple,
+.presentationFront svg.white{
+    background: #fff;
+    background-color: #fff;
+}
+
+.presentationFront svg.solarized{
+    background: #fdf6e3;
+    background-color: #fdf6e3;
+}
+
+.genericPresentationFront{
+	/*height: auto !important;
+    height: calc(width * 1.75);*/
+	max-width:100% !important;
+    margin-left: 25% !important;
+}
+
+/*
+.svg-content{
+    display: inline-block;
+    max-width: 100%;
+    padding-bottom: 100%;
+    vertical-align: middle;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+*/
+
+/*
+.presentationFront >svg{
+	height: auto !important;
+	width:100% !important;
+     position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top:0;
+}
+*/
+
 .projectMenu{
-	max-width:50%;
+	/*max-width:100%;*/
 }
 
 .projectTitle{
