@@ -9,6 +9,11 @@ angular.module('app.services.project', ['ngRoute', 'ngResource'])
 
     .factory('projectService', ['$resource', function($resource) {
 
-        return $resource('api/user/:user/project/:project');
+        return $resource('api/user/:user/project/:project', null,
+            {
+                'update': {
+                    method:'PUT'
+                }
+            });
 
     }]);

@@ -5,13 +5,14 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
     .controller('GenericProjectCtrl', ['$scope', '$rootScope', '$modal', '$sce', '$window', '$document', function($scope, $rootScope, $modal, $sce, $window, $document) {
         console.log($scope.userOfInterest.projects);
 
+
         $rootScope.currentGenericProject = {
             id: "",
             name: "",
             presentation: "",
             firstSlide: "",
             theme:"sky",
-            transition:"slide",
+            transition:"none",
             svg:""
             // maxX: 0,
             // maxY: 0
@@ -49,6 +50,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
          $scope.findProjectById = function(id){
              //console.log($scope.userOfInterest.projects);
+
             var k;
             var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide"};
             for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
@@ -65,7 +67,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                     else
                         obj.theme="sky";
 
-                    //transtion
+                    //transition
                     if($scope.userOfInterest.projects[k].transition !== undefined)
                         obj.transition=$scope.userOfInterest.projects[k].transition;
                     else
@@ -86,8 +88,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             return obj;
         };
 
-
-        $scope.setCurrentGenericProject= function(id){
+        $scope.setCurrentGenericProject = function(id){
             var obj = $scope.findProjectById(id);
             $rootScope.currentGenericProject.id = obj.id;
             $rootScope.currentGenericProject.name = obj.name;
@@ -95,7 +96,9 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $rootScope.currentGenericProject.firstSlide = obj.firstSlide;
             $rootScope.currentGenericProject.theme = obj.theme;
             $rootScope.currentGenericProject.transition = obj.transition;
+
             $rootScope.currentGenericProject.svg = obj.svg;
            // console.log($rootScope.currentGenericProject);
+
         };
     }]);

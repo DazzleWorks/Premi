@@ -24,26 +24,6 @@ use Premi\Http\Controllers\Controller;
 class PresentationController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
-     * @param Illuminate\Http\Request
-     * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @return Illuminate\Http\Response
-     */
-    public function store(Request $request,$username,$projectID)
-    {
-        $user = \Auth::user();
-
-        $presentation = new Presentation(['title' => $request->get('title')]);
-
-        $projects = $user->projects();
-        $project = $projects->find($projectID);
-        $project->presentation()->save($presentation);
-
-        return response()->json(['status' => true]);
-    }
-
-    /**
      * Display the specified resource.
      * @param String $username: the username of a user
      * @param String $projectID: the id of a project
@@ -79,7 +59,9 @@ class PresentationController extends Controller
         $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->first();
-        $presentation->title = $request->get('title');
+        //$presentation->title = $request->get('title');
+        $presentation->theme = $request->get('theme');
+        $presentation->transition = $request->get('transition');
         $presentation->save();
 
         return response()->json(['status' => true]);

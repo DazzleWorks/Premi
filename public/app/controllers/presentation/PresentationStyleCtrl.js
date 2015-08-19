@@ -2,16 +2,21 @@ angular.module('app.controllers.PresentationStyleCtrl', ['ngRoute'])
 
     .controller('PresentationStyleCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
-        $scope.transitions=[
-            {name:"None", img:"../assets/img/transitions/transition4.png"},
-            {name:"Fade", img:"../assets/img/transitions/transition7.png"},
-            {name:"Slide", img:"../assets/img/transitions/transition3.png"},
-            {name:"Convex", img:"../assets/img/transitions/transition1.png"},
-            {name:"Concave", img:"../assets/img/transitions/transition2.png"},
-            {name:"Zoom", img:"../assets/img/transitions/transition8.png"}
+        $scope.style = {
+            transition: "none",
+            theme: "sky"
+        };
+
+        $scope.transitions = [
+            {name:"none", img:"../assets/img/transitions/transition4.png"},
+            {name:"fade", img:"../assets/img/transitions/transition7.png"},
+            {name:"slide", img:"../assets/img/transitions/transition3.png"},
+            {name:"convex", img:"../assets/img/transitions/transition1.png"},
+            {name:"concave", img:"../assets/img/transitions/transition2.png"},
+            {name:"zoom", img:"../assets/img/transitions/transition8.png"}
         ];
 
-        $scope.themes=[
+        $scope.themes = [
             {name:"beige", backgroundColor:"#FAF7E4", textColor:"#F6D688", linkColor:"#8b743d"},
             {name:"black", backgroundColor:"#222222", textColor:"#FFFFFF", linkColor:"#8DCFFC"},
             {name:"blood", backgroundColor:"#222222", textColor:"#FFFFFF", linkColor:"#aa2233"},
@@ -25,9 +30,16 @@ angular.module('app.controllers.PresentationStyleCtrl', ['ngRoute'])
             {name:"white", backgroundColor:"#FFFFFF", textColor:"#000000", linkColor:"#2a76dd"}
         ];
 
+        $scope.setTransition = function (name) {
+            $scope.style.transition = name;
+        };
+
+        $scope.setTheme = function (name) {
+            $scope.style.theme = name;
+        };
 
         $scope.ok = function () {
-            $modalInstance.close();
+            $modalInstance.close($scope.style);
         };
 
         $scope.cancel = function () {

@@ -4,7 +4,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 
 // ----- VARIABLES & INITIALIZATION -----
-        $scope.currentSlide = {};
+        $scope.currentSlide = '';
 
         var localData = {
             currentX: 1,
@@ -104,8 +104,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     controller: 'PresentationStyleCtrl'
                 });
 
-                modalInstance.result.then(function (selectedImg) {
-                    $scope.insertImageOnCanvas(selectedImg);
+                modalInstance.result.then(function (style) {
+                    presentationService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {theme:style.theme, transition:style.transition});
                 });
             }
         };
@@ -224,6 +224,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 // ----- LOCAL DATA -----
 
+
         var incrementMaxX = function () {
             localData.maxX ++;
         };
@@ -310,14 +311,15 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             // 2) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
 
             // temporary solution
-            $scope.currentSlide.id = $scope.currentProject.firstSlide;
+            // $scope.currentSlide = $scope.currentProject.firstSlide;
         };
 
         // load slide [currentX, currentY]
         $scope.loadSlide = function () {
             $scope.canvas.clear().renderAll();
             $scope.getIdSlide();
-            var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+
+            var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
             load.$promise.then (
                 function(data) {
                     var slide = {
@@ -338,18 +340,25 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:localData.currentY});
             }
             else if (position === 'down') {
-                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:localData.currentY + 1});
+                incrementCurrentY();
+                var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:localData.currentY});
             }
             else if (position === 'right') {
+                incrementCurrentX();
                 var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:1});
             }
             else if (position === 'left') {
                 var slide = slideService.save({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:localData.currentX, yIndex:1});
             }
-            $scope.currentSlide = slide.id;
 
-            localData.currentX = slide.x;
-            localData.currentY = slide.y;
+            slide.$promise.then (
+                function(data) {
+                    $scope.currentSlide = slide._id;
+                    localData.currentX = slide.xIndex;
+                    localData.currentY = slide.yIndex;
+                },
+                function(data) {
+                });
 
             if (position === 'right' || position === 'left')
                 incrementMaxX();
@@ -363,12 +372,12 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
 
-            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
 
         // remove current slide
         $scope.deleteSlide = function () {
-            slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+            slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
 
             if (localData.currentY > 1)
                 decrementCurrentY();
@@ -378,6 +387,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         $scope.$on('showPresentationEditor', function () {
+            $scope.currentSlide = $scope.currentProject.firstSlide;
             $scope.loadSlide();
         });
 
