@@ -11,6 +11,11 @@ angular.module('app.services.slide', [])
 
     .factory('slideService', ['$resource', function($resource) {
 
-        return $resource('api/user/:user/project/:project/presentation/:presentation/slide/:slide');
+        return $resource('api/user/:user/project/:project/presentation/:presentation/slide/:slide', null,
+            {
+                'update': {
+                    method:'PUT'
+                }
+            });
 
     }]);
