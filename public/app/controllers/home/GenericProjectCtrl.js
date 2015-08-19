@@ -33,7 +33,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $scope.originalWidth=svgString.substring(indexBeginWidth,indexEndWidth);
             $scope.originalHeight=svgString.substring(indexBeginHeight,indexEndHeight);
             console.log($scope.originalHeight);
-            svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ (SVGWidth * 3/4) +"' class='svg-content beige' ");
+            svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ (SVGWidth * 3/4) +"' class='svg-content "+ $rootScope.currentGenericProject.theme +"' ");
 
             /*
             *   PEZZO DA AGGIUNGERE

@@ -112,9 +112,15 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             $scope.searchViewVisibility = true;
         };
 
-        $scope.searchResults = [];
+
+        $scope.resetSearchResults = function(){
+            $scope.searchResults = [];
+        };
+
+        $scope.resetSearchResults();
 
         $scope.search = function () {
+            $scope.resetSearcResults;
             if ($scope.checked === false) {     //BY USERNAME
                 var searchResults = searchByUserService.query({username:$scope.searchText});
                 searchResults.$promise.then (
@@ -126,12 +132,10 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                             result.username = searchResults[0].username;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
-                            $scope.searchResults=[];
+                            $scope.resetSearchResults();
                             $scope.searchResults.push(result);
                         }else{
-                            $scope.searchResults=[];
                         }
-                        //console.log($scope.searchResults);
                     },
                     function(data) {
                     });
@@ -141,7 +145,6 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 //if($scope.searchText !== "" || $scope.searchText !== undefined ) {
                     var searchResults = searchByProjectService.query({name:$scope.searchText});
                 //}
-                //console.log(searchResults);
                 searchResults.$promise.then (
                     function(data) {
                         //console.log(data);
@@ -149,8 +152,6 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                         $scope.searchResults.byProjectName = searchResults;
                         $scope.searchResults.byUsername = [];
                         for (var i=0; i<searchResults.length; i++) {
-                            //console.log(searchResults[0]);
-                            //console.log(searchResults[0].projects[0].name);
 
                             var result = {};
                             result.name = searchResults[i].projects[0].name;
