@@ -1,6 +1,6 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'projectService', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, projectService, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, presentationService, slideService) {
 
 
 // ----- VARIABLES & INITIALIZATION -----
@@ -105,7 +105,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 });
 
                 modalInstance.result.then(function (style) {
-                    projectService.update({user:$scope.user, project:$scope.currentProject.id}, {theme:style.theme, transition:style.transition});
+                    presentationService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {theme:style.theme, transition:style.transition});
                 });
             }
         };
