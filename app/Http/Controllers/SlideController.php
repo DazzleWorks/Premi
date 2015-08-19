@@ -142,7 +142,7 @@ class SlideController extends Controller
         }
         
         $slide->save();
-        return response()->json($components);
+        return response()->json(['status' => true]);
     }
     
     /**
