@@ -2,7 +2,7 @@
 
 namespace Premi\Model;
 
-use App\Model\Component;
+use Premi\Model\Component;
 
 /**
  * @file: app/Model/Text.php
@@ -40,7 +40,27 @@ class Text extends Component
      * @textAlign: indicates the alignment of the Text
      * @textBackgroundColor: indicates the background color of a Text box
      */
-    protected $fillable = ['text', 'fontSize', 'fontWeight', 'fontFamily', 
-                           'fontStyle', 'lineHeight', 'textDecoration', 
-                           'textAlign', 'textBackgroundColor'];
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top' ,'width',
+                           'height', 'fill', 'stroke', 'strokeWidth', 
+                           'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
+                           'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
+                           'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
+                           'clipTo', 'backgroundColor', 'fillRule', 
+                           'globalCompositeOperation', 'text', 'fontSize', 
+                           'fontWeight', 'fontFamily', 'fontStyle', 'lineHeight',
+                           'textDecoration', 'textAlign', 'textBackgroundColor'];
+    
+    
+    /*public function setParam($component) {
+        parent::setParam($component);
+        $this->text = $component['text'];
+        $this->fontSize = $component['fontSize'];
+        $this->fontWeight = $component['fontWeight'];
+        $this->fontFamily = $component['fontFamily'];
+        $this->fontStyle = $component['fontStyle'];
+        $this->lineHeight = $component['lineHeight'];
+        $this->textDecoration = $component['textDecoration'];
+        $this->textAlign = $component['textAlign'];
+        $this->textBackgroundColor = $component['textBackgroundColor'];
+    }*/
 }

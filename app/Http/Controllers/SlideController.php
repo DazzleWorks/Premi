@@ -4,6 +4,8 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Slide;
+use Premi\Model\Text;
 
 /**
  * @file: app/Http/Controller/SlideController.php
@@ -126,18 +128,16 @@ class SlideController extends Controller
         $components = $request->get('components');
         foreach($components as $component)
         {
-            $type = $component[type];
+            $type = $component['type'];
             switch ($type) {
                 case "text":
-                    $newComponent = new Text;
-                    $newComponent = $component;
+                    $newText = new Text($component);
+                    $slide->components()->save($newText);
                     break;
                 case "image":
-                    $newComponent = new Image;
-                    $newComponent = $component;
+                    $slide->components()->save($component);
                     break;
             }
-            $slide->components()->save($newComponent);
         }
         
         $slide->save();

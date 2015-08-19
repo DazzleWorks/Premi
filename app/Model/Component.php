@@ -17,7 +17,7 @@ use Jenssegers\Mongodb\Model as Eloquent;
  * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Component | create class |                 
  * +---------+------------+---------------+-----------------+--------------+
  */
-abstract class Component extends Eloquent
+class Component extends Eloquent
 {
     /**
      * indicates if the model should be timestamped
@@ -64,11 +64,41 @@ abstract class Component extends Eloquent
      * @globalCompositeOperation: indicates the origin where the Component are 
      *                            drawn within the group
      */
-    protected $fillable = ['type', 'originX', 'OriginY', 'left', 'top', 'width',
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top', 'width',
                            'height', 'fill', 'stroke', 'strokeWidth', 
                            'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
                            'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
                            'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
                            'clipTo', 'backgroundColor', 'fillRule', 
                            'globalCompositeOperation'];
+ 
+    
+    /*public function setParam($component) {
+        $this->type = $component['type'];
+        $this->originX = $component['originX'];
+        $this->originY = $component['originY'];
+        $this->left = $component['left'];
+        $this->top = $component['top'];
+        $this->width = $component['width'];
+        $this->height = $component['height'];
+        $this->fill = $component['fill'];
+        $this->stroke = $component['stroke'];
+        $this->strokeWidth = $component['strokeWidth'];
+        $this->strokeDashArray = $component['strokeDashArray'];
+        $this->strokeLineCap = $component['strokeLineCap'];
+        $this->strokeLineJoin = $component['strokeLineJoin'];
+        $this->strokeMiterLimit = $component['strokeMiterLimit'];
+        $this->scaleX = $component['scaleX'];
+        $this->scaleY = $component['scaleY'];
+        $this->angle = $component['angle'];
+        $this->flipX = $component['flipX'];
+        $this->flipY = $component['flipY'];
+        $this->opacity = $component['opacity'];
+        $this->shadow = $component['shadow'];
+        $this->visible = $component['visible'];
+        $this->clipTo = $component['clipTo'];
+        $this->backgroundColor = $component['backgroundColor'];
+        $this->fillRule = $component['fillRule'];
+        $this->globalCompositeOperation = $component['globalCompositeOperation'];
+    }*/
 }
