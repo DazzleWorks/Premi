@@ -315,10 +315,20 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // load slide [currentX, currentY]
         $scope.loadSlide = function () {
+            $scope.canvas.clear().renderAll();
             $scope.getIdSlide();
-            var slide = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+            var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide.id});
+            load.$promise.then (
+                function(data) {
+                    var slide = {
+                        objects: load.components,
+                        background: load.background
+                    };
+                    $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+                },
+                function(data) {
+                });
 
-            $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
             $scope.update();
         };
 
@@ -374,7 +384,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // add new slide
         $scope.addSlide = function (position) {
             $scope.updateSlide();
-            $scope.canvas.clear();
+            $scope.canvas.clear().renderAll();
             $scope.saveSlide(position);
         };
 
@@ -382,7 +392,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.changeSlide = function (position) {
             if (position === "up") {
                 if (localData.currentY > 1) {
-                    console.log("up");
                     $scope.updateSlide();
                     decrementCurrentY();
                     $scope.loadSlide();
