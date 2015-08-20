@@ -120,7 +120,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $scope.resetSearchResults();
 
         $scope.search = function () {
-            $scope.resetSearcResults;
+            $scope.resetSearchResults();
             if ($scope.checked === false) {     //BY USERNAME
                 var searchResults = searchByUserService.query({username:$scope.searchText});
                 searchResults.$promise.then (
