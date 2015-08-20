@@ -58,8 +58,8 @@ class PresentationController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()->first();
-        //$presentation->title = $request->get('title');
+        $presentation = $project->presentation()->get();
+    
         $presentation->theme = $request->get('theme');
         $presentation->transition = $request->get('transition');
         $presentation->save();

@@ -46,12 +46,16 @@ class Presentation extends Eloquent
     
     public static function incrementIndex($presentation,$xIndex,$yIndex)
     {
-        $slides = $presentation->slides();
+        $slides = $presentation->slides()->get();
         
         // horizontal increment
         if($yIndex == 1)
         {
-            $slides->where('xIndex', '$gte', $xIndex)->increment('xIndex');
+            $slides->where('xIndex', '>=', $xIndex)->get();
+            foreach($slides as $slide)
+            {
+                $slide->increment('xIndex');
+            }
         }
         // vertical increment
         else

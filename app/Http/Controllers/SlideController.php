@@ -72,7 +72,7 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        //Presentation::incrementIndex($presentation,$xIndex,$yIndex);
+        Presentation::incrementIndex($presentation,$xIndex,$yIndex);
 
         $presentation->slides()->save($slide);
 
@@ -191,17 +191,15 @@ class SlideController extends Controller
         $slides = $presentation->slides()->get();
         $slide = $slides->where('xIndex', $request->get('xIndex'))
                         ->where('yIndex', $request->get('yIndex'))->first();
-
-        $slideID = $slide->_id;
-        return response()->json(['id' => $slideID]);
-        /*if($slide)
+        
+        if($slide)
         {
             $slideID = $slide->_id;
-            return response()->json($slideID);
+            return response()->json(['id' => $slideID]);
         }
         else
         {
-            return response()->json($slide);
-        }*/
+            return response()->json(['id' => null]);
+        }
     }
 }
