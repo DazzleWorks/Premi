@@ -190,9 +190,10 @@ class SlideController extends Controller
         
         $slides = $presentation->slides()->get();
         $slide = $slides->where('xIndex', $request->get('xIndex'))
-                        ->where('yIndex', $request->get('yIndex'))->get();
+                        ->where('yIndex', $request->get('yIndex'))->first();
         
-        return response()->json($slide);
+        $slideID = $slide->_id;
+        return response()->json($slideID);
         /*if($slide)
         {
             $slideID = $slide->_id;
