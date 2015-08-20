@@ -11,6 +11,6 @@ angular.module('app.services.index', [])
 
     .factory('indexService', ['$resource', function($resource) {
 
-        return $resource('api/user/:user/project/:project/presentation/:presentation/slide/find');
+        return $resource('api/user/:user/project/:project/presentation/:presentation/slide/find', {});
 
     }]);

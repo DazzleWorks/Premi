@@ -259,14 +259,16 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // get slide[currentX, currentY]'s id
         $scope.getIdSlide = function () {
-            var indexes = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:$scope.currentX, yIndex:$scope.currentY});
+            var indexes = indexService.query({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
             indexes.$promise.then (
                 function(data) {
-                    if (data !== 'null') {
-                        $scope.currentSlide = indexes._id;
+                    if (data._id !== undefined) {
+                        console.log("c'è");
+                        $scope.currentSlide = indexes[0]._id;
                         return true;
                     }
                     else {
+                        console.log("non c'è");
                         return false;
                     }
                 },
