@@ -253,80 +253,30 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             localData.currentY = 1;
         };
 
-        // var offset = function (direction, index) {
-        //     if (direction === "up") {
-        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-        //         //     if (presentationData.slidesJSON[i].x === localData.currentX)
-        //         //         if (presentationData.slidesJSON[i].y >= localData.currentY)
-        //         //             ++ presentationData.slidesJSON[i].y;
-        //         // }
-        //     }
-        //     else if (direction === "down") {
-        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-        //         //     if (presentationData.slidesJSON[i].x === localData.currentX)
-        //         //         if (presentationData.slidesJSON[i].y >= localData.currentY)
-        //         //             ++ presentationData.slidesJSON[i].y;
-        //         // }
-        //     }
-        //     else if (direction === "left") {
-        //         // edit localData's variables
-        //         localData.maxY.push(0);
-        //         for (i = localData.currentX; i < localData.maxX; ++ i) {
-        //
-        //             localData.maxY[i] = localData.maxY[i-1];
-        //         }
-        //         localData.maxY[localData.currentX-1] = 1;
-        //
-        //         // edit database's data
-        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-        //         //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
-        //         //         ++ presentationData.slidesJSON[i].x;
-        //         //     }
-        //         // }
-        //     }
-        //     else if (direction === "right") {
-        //         // edit localData's variables
-        //         localData.maxY.push(0);
-        //         for (i = localData.currentX; i < localData.maxX; ++ i) {
-        //             localData.maxY[i+1] = localData.maxY[i];
-        //         }
-        //         localData.maxY[localData.currentX-1] = 1;
-        //
-        //         // edit database's data
-        //         // for (i = 0; i < presentationData.slidesJSON.length; ++i) {
-        //         //     if (presentationData.slidesJSON[i].x >= localData.currentX) {
-        //         //         ++ presentationData.slidesJSON[i].x;
-        //         //     }
-        //         // }
-        //     }
-        // };
-
 
 // ----- I/O SLIDE -----
 
 
         // get slide[currentX, currentY]'s id
         $scope.getIdSlide = function () {
-            // 1) if (maxX === 0 and maxY[0] === 0) load maxX and maxY
             var indexes = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:$scope.currentX, yIndex:$scope.currentY});
             indexes.$promise.then (
                 function(data) {
-                    // if (data !== 'null')
-                    //     $scope.currentSlide = indexes._id;
-                    // else {
-                    //
-                    // }
-                    console.log(data);
+                    if (data !== 'null') {
+                        $scope.currentSlide = indexes._id;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 },
                 function(data) {
-
                 });
         };
 
         // load slide [currentX, currentY]
         $scope.loadSlide = function () {
             $scope.canvas.clear().renderAll();
-            $scope.getIdSlide();
 
             var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
             load.$promise.then (
@@ -410,54 +360,75 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // change slide
         $scope.changeSlide = function (position) {
             if (position === "up") {
-                if (localData.currentY > 1) {
-                    $scope.updateSlide();
-                    decrementCurrentY();
+                $scope.updateSlide();
+                decrementCurrentY();
+
+                if ($scope.getIdSlide() === true)
                     $scope.loadSlide();
-                }
-                if (localData.currentY > 1)
-                    $scope.buttons.up = '';
                 else
-                    $scope.buttons.up = 'disabled';
-                $scope.buttons.down = '';
-            }
-            else if (position === "down") {
-                if (localData.currentY < localData.maxY[localData.currentX]) {
-                    $scope.updateSlide();
                     incrementCurrentY();
-                    $scope.loadSlide();
-                }
-                if (localData.currentY < localData.maxY[localData.currentX])
-                    $scope.buttons.down = '';
-                else
-                    $scope.buttons.down = 'disabled';
-                $scope.buttons.up = '';
+
+                // if (localData.currentY > 1)
+                //     $scope.buttons.up = '';
+                // else
+                //     $scope.buttons.up = 'disabled';
+                // $scope.buttons.down = '';
             }
+
+            else if (position === "down") {
+                $scope.updateSlide();
+                incrementCurrentY();
+
+                if ($scope.getIdSlide() === true)
+                    $scope.loadSlide();
+                else
+                    decrementCurrentY();
+
+                // if (localData.currentY < localData.maxY[localData.currentX])
+                //     $scope.buttons.down = '';
+                // else
+                //     $scope.buttons.down = 'disabled';
+                // $scope.buttons.up = '';
+            }
+
             else if (position === "right") {
-                if (localData.currentX < localData.maxX) {
-                    $scope.updateSlide();
-                    incrementCurrentX();
-                    resetCurrentY();
+                $scope.updateSlide();
+                incrementCurrentX();
+                var tmpY = localData.currentY;
+                resetCurrentY();
+
+                if ($scope.getIdSlide() === true)
                     $scope.loadSlide();
-                }
-                if (localData.currentX < localData.maxX)
-                    $scope.buttons.right = '';
-                else
-                    $scope.buttons.right = 'disabled';
-                $scope.buttons.left = '';
-            }
-            else if (position === "left") {
-                if (localData.currentX > 1) {
-                    $scope.updateSlide();
+                else {
                     decrementCurrentX();
-                    resetCurrentY();
-                    $scope.loadSlide();
+                    currentY = tmpY;
                 }
-                if (localData.currentX > 1)
-                    $scope.buttons.left = '';
-                else
-                    $scope.buttons.left = 'disabled';
-                $scope.buttons.right = '';
+
+                // if (localData.currentX < localData.maxX)
+                //     $scope.buttons.right = '';
+                // else
+                //     $scope.buttons.right = 'disabled';
+                // $scope.buttons.left = '';
+            }
+
+            else if (position === "left") {
+                $scope.updateSlide();
+                decrementCurrentX();
+                var tmpY = localData.currentY;
+                resetCurrentY();
+
+                if ($scope.getIdSlide() === true)
+                    $scope.loadSlide();
+                else {
+                    incrementCurrentX();
+                    currentY = tmpY;
+                }
+
+                // if (localData.currentX > 1)
+                //     $scope.buttons.left = '';
+                // else
+                //     $scope.buttons.left = 'disabled';
+                // $scope.buttons.right = '';
             }
         };
 }]);
