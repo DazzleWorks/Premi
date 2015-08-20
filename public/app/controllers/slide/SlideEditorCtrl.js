@@ -238,11 +238,13 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         };
 
         var decrementCurrentX = function () {
-            localData.currentX --;
+            if (localData.currentX > 1)
+                localData.currentX --;
         };
 
         var decrementCurrentY = function () {
-            localData.currentY --;
+            if (localData.currentY > 1)
+                localData.currentY --;
         };
 
         var incrementCurrentY = function () {
@@ -258,19 +260,55 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 
         // get slide[currentX, currentY]'s id
-        $scope.getIdSlide = function () {
-            var indexes = indexService.query({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
-            indexes.$promise.then (
+        $scope.getIdSlide = function (position) {
+            var index = '';
+            if (position === "up") {
+                decrementCurrentY();
+                    index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
+
+                // if (localData.currentY > 1)
+                //     $scope.buttons.up = '';
+                // else
+                //     $scope.buttons.up = 'disabled';
+                // $scope.buttons.down = '';
+            }
+
+            else if (position === "down") {
+                incrementCurrentY();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
+
+                // if (localData.currentY < localData.maxY[localData.currentX])
+                //     $scope.buttons.down = '';
+                // else
+                //     $scope.buttons.down = 'disabled';
+                // $scope.buttons.up = '';
+            }
+
+            else if (position === "right") {
+                incrementCurrentX();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:1});
+
+                // if (localData.currentX < localData.maxX)
+                //     $scope.buttons.right = '';
+                // else
+                //     $scope.buttons.right = 'disabled';
+                // $scope.buttons.left = '';
+            }
+
+            else if (position === "left") {
+                decrementCurrentX();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:1});
+
+                // if (localData.currentX > 1)
+                //     $scope.buttons.left = '';
+                // else
+                //     $scope.buttons.left = 'disabled';
+                // $scope.buttons.right = '';
+            }
+
+            index.$promise.then (
                 function(data) {
-                    if (data._id !== undefined) {
-                        console.log("c'è");
-                        $scope.currentSlide = indexes[0]._id;
-                        return true;
-                    }
-                    else {
-                        console.log("non c'è");
-                        return false;
-                    }
+                    $scope.currentSlide = index.id;
                 },
                 function(data) {
                 });
@@ -288,6 +326,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                         background: load.background
                     };
                     $scope.canvas.loadFromJSON(slide, $scope.canvas.renderAll.bind($scope.canvas));
+                    localData.currentX = load.xIndex;
+                    localData.currentY = load.yIndex;
                 },
                 function(data) {
                 });
@@ -361,76 +401,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // change slide
         $scope.changeSlide = function (position) {
-            if (position === "up") {
-                $scope.updateSlide();
-                decrementCurrentY();
-
-                if ($scope.getIdSlide() === true)
-                    $scope.loadSlide();
-                else
-                    incrementCurrentY();
-
-                // if (localData.currentY > 1)
-                //     $scope.buttons.up = '';
-                // else
-                //     $scope.buttons.up = 'disabled';
-                // $scope.buttons.down = '';
-            }
-
-            else if (position === "down") {
-                $scope.updateSlide();
-                incrementCurrentY();
-
-                if ($scope.getIdSlide() === true)
-                    $scope.loadSlide();
-                else
-                    decrementCurrentY();
-
-                // if (localData.currentY < localData.maxY[localData.currentX])
-                //     $scope.buttons.down = '';
-                // else
-                //     $scope.buttons.down = 'disabled';
-                // $scope.buttons.up = '';
-            }
-
-            else if (position === "right") {
-                $scope.updateSlide();
-                incrementCurrentX();
-                var tmpY = localData.currentY;
-                resetCurrentY();
-
-                if ($scope.getIdSlide() === true)
-                    $scope.loadSlide();
-                else {
-                    decrementCurrentX();
-                    currentY = tmpY;
-                }
-
-                // if (localData.currentX < localData.maxX)
-                //     $scope.buttons.right = '';
-                // else
-                //     $scope.buttons.right = 'disabled';
-                // $scope.buttons.left = '';
-            }
-
-            else if (position === "left") {
-                $scope.updateSlide();
-                decrementCurrentX();
-                var tmpY = localData.currentY;
-                resetCurrentY();
-
-                if ($scope.getIdSlide() === true)
-                    $scope.loadSlide();
-                else {
-                    incrementCurrentX();
-                    currentY = tmpY;
-                }
-
-                // if (localData.currentX > 1)
-                //     $scope.buttons.left = '';
-                // else
-                //     $scope.buttons.left = 'disabled';
-                // $scope.buttons.right = '';
-            }
+            $scope.updateSlide();
+            $scope.getIdSlide(position);
+            $scope.loadSlide();
         };
 }]);
