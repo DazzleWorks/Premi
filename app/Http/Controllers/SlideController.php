@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Presentation;
 use Premi\Model\Slide;
 
 /**
@@ -57,16 +58,21 @@ class SlideController extends Controller
      */
     public function store(Request $request,$username,$projectID,$presentationID)
     {
-        $user = \Auth::user();
+        $xIndex = $request->get('xIndex');
+        $yIndex = $request->get('yIndex');
         
-        $slide = new Slide(['xIndex' => $request->get('xIndex'), 
-                            'yIndex' => $request->get('yIndex')]);
+        $user = \Auth::user();
+               
+        $slide = new Slide(['xIndex' => $xIndex, 
+                            'yIndex' => $yIndex]);
         
         $projects = $user->projects();
         $project = $projects->find($projectID);
         
         $presentations = $project->presentation();
         $presentation = $presentations->get();
+        
+        Presentation::incrementIndex($presentation,$xIndex,$yIndex);
         
         $presentation->slides()->save($slide);
                
@@ -154,7 +160,12 @@ class SlideController extends Controller
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);
         
+        $xIndex = $slide->xIndex;
+        $yIndex = $slide->yIndex;
+        
         $slide->delete();
+        
+        Presentation::decrementIndex($presentation,$xIndex,$yIndex);
 
         return response()->json(['status' => true]);
     }
@@ -172,7 +183,7 @@ class SlideController extends Controller
         $user = \Auth::user();
         
         $projects = $user->projects();
-        $project = $projects-find($projectID);
+        $project = $projects->find($projectID);
         
         $presentations = $project->presentation();
         $presentation = $presentations->get();
@@ -181,7 +192,15 @@ class SlideController extends Controller
         $slide = $slides->where('xIndex', $request->get('xIndex'))
                         ->where('yIndex', $request->get('yIndex'))->get();
         
-        $slideID = $slide->_id;
-        return response()->json($slideID);
+        return response()->json($slide);
+        /*if($slide)
+        {
+            $slideID = $slide->_id;
+            return response()->json($slideID);
+        }
+        else 
+        {
+            return response()->json($slide);
+        }*/
     }
 }

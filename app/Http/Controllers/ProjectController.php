@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Project;
 use Premi\Events\ProjectWasCreated;
-//use Premi\Model\Slide;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -54,11 +53,6 @@ class ProjectController extends Controller
         $project = $user->projects()->save($project);
         
         event(new ProjectWasCreated($project));
-        //$presentation = new Presentation(['title' => $name]);
-        //$presentation = $project->presentation()->save($presentation);
-        
-        //$slide = new Slide;
-        //$slide = $presentation->slides()->save($slide);
 
         return response()->json($project);
     }

@@ -43,4 +43,47 @@ class Presentation extends Eloquent
     public function slides() {
         return $this->embedsMany(Slide::class);
     }
+    
+    public static function incrementIndex($presentation,$xIndex,$yIndex)
+    {
+        $slides = $presentation->slides();
+        
+        // horizontal increment
+        if($yIndex == 1)
+        {
+            $slides->where('xIndex', '$gte', $xIndex)->increment('xIndex');
+        }
+        // vertical increment
+        else
+        {
+            $slides->where('xIndex', $xIndex)
+                   ->where('yIndex', '$gte', $yIndex)->increment('yIndex');
+        }        
+    }
+    
+    public static function DecrementIndex($presentation,$xIndex,$yIndex)
+    {
+        $slides = $presentation->slides();
+        
+        // horizontal decrement
+        if($yIndex == 1)
+        {
+            $numSlide = $slides->where('xIndex', $xIndex)->count();
+            if($numSlide == 1)
+            {
+                $slides->where('xIndex', '$gt', $xIndex)->decrement('xIndex');
+            }
+            else
+            {
+                $slides->where('xIndex', $xIndex)
+                       ->where('yIndex', '$gt', $yIndex)->decrement('yIndex');
+            }
+        }
+        // vertical decrement
+        else
+        {
+            $slides->where('xIndex', $xIndex)
+                   ->where('yIndex', '$gt', $yIndex)->decrement('yIndex');
+        }        
+    }
 }

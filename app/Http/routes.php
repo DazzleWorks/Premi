@@ -96,7 +96,7 @@ Route::group(array('prefix' => 'api'), function() {
     
     // Slide routes...
     //Find the correct ID of a slide by xIndex and yIndex
-    Route::get('user.project.presentation.slide/find', 'SlideController@findByAxis');
+    Route::get('user/{username}/project/{projectID}/presentation/{presentationID}/slide/find', 'SlideController@findByAxis');
     Route::resource('user.project.presentation.slide', 'SlideController',
                     ['except' => ['create', 'edit']]);
 });
