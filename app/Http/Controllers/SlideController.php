@@ -72,7 +72,7 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
         
-        Presentation::incrementIndex($presentation,$xIndex,$yIndex);
+        //Presentation::incrementIndex($presentation,$xIndex,$yIndex);
         
         $presentation->slides()->save($slide);
                
