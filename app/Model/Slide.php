@@ -4,6 +4,8 @@ namespace Premi\Model;
 
 use Jenssegers\Mongodb\Model as Eloquent;
 use Premi\Model\Component;
+use Premi\Model\Text;
+use Premi\Model\Image;
 
 /**
  * @file: app/Model/Slide.php
@@ -52,13 +54,37 @@ class Slide extends Eloquent
      * @param Slide $slide
      * @return void
      */
-    public static function deleteOldComponent($slide)
+    public static function deleteOldComponents($slide)
     {
         $components = $slide->components()->all();
         
         foreach($components as $component)
         {
             $component->delete();
+        }
+    }
+    
+    /**
+     * Update a Slide with new components 
+     * @param Slide $slide
+     * @param Component[] $components
+     * @return void
+     */
+    public static function updateNewComponents($slide,$components)
+    {
+        foreach($components as $component)
+        {
+            $type = $component['type'];
+            switch ($type) {
+                case "text":
+                    $newText = new Text($component);
+                    $slide->components()->save($newText);
+                    break;
+                case "image":
+                    $newImage = new Image($component);
+                    $slide->components()->save($newImage);
+                    break;
+            }
         }
     }
 }

@@ -5,8 +5,6 @@ namespace Premi\Http\Controllers;
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Slide;
-use Premi\Model\Text;
-use Premi\Model\Image;
 
 /**
  * @file: app/Http/Controller/SlideController.php
@@ -126,23 +124,10 @@ class SlideController extends Controller
         $slide->svg = $request->get('svg');
         $slide->background = $request->get('background');
         
-        Slide::deleteOldComponent($slide);
+        Slide::deleteOldComponents($slide);
         
         $components = $request->get('components');
-        foreach($components as $component)
-        {
-            $type = $component['type'];
-            switch ($type) {
-                case "text":
-                    $newText = new Text($component);
-                    $slide->components()->save($newText);
-                    break;
-                case "image":
-                    $newImage = new Image($component);
-                    $slide->components()->save($newImage);
-                    break;
-            }
-        }
+        Slide::updateNewComponents($slide,$components);
         
         $slide->save();
         return response()->json(['status' => true]);

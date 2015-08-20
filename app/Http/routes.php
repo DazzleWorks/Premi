@@ -69,8 +69,6 @@ Route::get('search/byUsername', 'ProjectController@searchByUsername');
 //Search for projects by the projects name
 Route::get('search/byProject', 'ProjectController@searchByProjectsName');
 
-//Find the correct ID of a slide by xIndex and yIndex
-Route::get('find/byAxis', 'SlideController@findByAxis');
 
 // Logout routes...
 Route::get('/logout', function(){
@@ -97,6 +95,8 @@ Route::group(array('prefix' => 'api'), function() {
                     ['except' => ['index', 'store', 'create', 'edit']]);
     
     // Slide routes...
+    //Find the correct ID of a slide by xIndex and yIndex
+    Route::get('user.project.presentation.slide/find', 'SlideController@findByAxis');
     Route::resource('user.project.presentation.slide', 'SlideController',
                     ['except' => ['create', 'edit']]);
 });
