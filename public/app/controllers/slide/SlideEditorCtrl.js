@@ -1,6 +1,6 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'indexService', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, indexService, presentationService, slideService) {
 
 
 // ----- VARIABLES & INITIALIZATION -----
@@ -308,10 +308,19 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         // get slide[currentX, currentY]'s id
         $scope.getIdSlide = function () {
             // 1) if (maxX === 0 and maxY[0] === 0) load maxX and maxY
-            // 2) get the slide's id from backend with x === currentX and y === currentY, assign it to $rootScope.currentProject.slide
+            var indexes = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, {xIndex:$scope.currentX, yIndex:$scope.currentY});
+            indexes.$promise.then (
+                function(data) {
+                    // if (data !== 'null')
+                    //     $scope.currentSlide = indexes._id;
+                    // else {
+                    //
+                    // }
+                    console.log(data);
+                },
+                function(data) {
 
-            // temporary solution
-            // $scope.currentSlide = $scope.currentProject.firstSlide;
+                });
         };
 
         // load slide [currentX, currentY]
