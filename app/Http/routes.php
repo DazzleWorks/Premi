@@ -67,7 +67,10 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::get('search/byUsername', 'ProjectController@searchByUsername');
 
 //Search for projects by the projects name
-Route::get('search/byProject','ProjectController@searchByProjectsName');
+Route::get('search/byProject', 'ProjectController@searchByProjectsName');
+
+//Find the correct ID of a slide by xIndex and yIndex
+Route::get('find/byAxis', 'SlideController@findByAxis');
 
 // Logout routes...
 Route::get('/logout', function(){
