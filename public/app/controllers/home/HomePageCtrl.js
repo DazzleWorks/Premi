@@ -148,9 +148,9 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 searchResults.$promise.then (
                     function(data) {
                         //console.log(data);
-                        $scope.searchResults=[];
-                        $scope.searchResults.byProjectName = searchResults;
-                        $scope.searchResults.byUsername = [];
+
+                        $scope.resetSearchResults();
+
                         for (var i=0; i<searchResults.length; i++) {
 
                             var result = {};

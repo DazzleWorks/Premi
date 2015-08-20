@@ -16,7 +16,7 @@
     <div class="row">
         <div class="small-3 columns projectsList">
             <ul class="side-nav">
-                <li ng-repeat="project in userOfInterest.projects" ng-click="setCurrentGenericProject(project._id.$id)">
+                <li ng-repeat="project in userOfInterest.projects" ng-click="setCurrentGenericProject(project._id.$id); ">
                     <a><i class="fa fa-flask"></i> {{project.name}}</a>
                 </li>
             </ul>

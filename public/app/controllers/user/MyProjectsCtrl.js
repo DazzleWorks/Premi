@@ -36,13 +36,22 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
         ];
 
         var resetCurrentProject = function () {
-            $rootScope.currentProject.id = $scope.projects[0].id;
-            $rootScope.currentProject.name = $scope.projects[0].name;
-            $rootScope.currentProject.presentation = $scope.projects[0].presentation;
-            $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
-            $rootScope.currentProject.transition = $scope.projects[0].transition;
-            // $rootScope.currentProject.maxX = $scope.projects[0].maxX;
-            // $rootScope.currentProject.maxY = $scope.projects[0].maxY;
+            if($scope.projects[0]) {
+                $rootScope.currentProject.id = $scope.projects[0].id;
+                $rootScope.currentProject.name = $scope.projects[0].name;
+                $rootScope.currentProject.presentation = $scope.projects[0].presentation;
+                $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
+                $rootScope.currentProject.transition = $scope.projects[0].transition;
+                // $rootScope.currentProject.maxX = $scope.projects[0].maxX;
+                // $rootScope.currentProject.maxY = $scope.projects[0].maxY;
+            }else{
+                $rootScope.currentProject.id = "";
+                $rootScope.currentProject.name = "";
+                $rootScope.currentProject.presentation = "";
+                $rootScope.currentProject.firstSlide = "";
+                $rootScope.currentProject.transition = "";
+            }
+
         };
 
         var findProjectById = function(id){
@@ -88,6 +97,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                     resetCurrentProject();
                 },
                 function(data){
+                    resetCurrentProject();
+                    $scope.apply;
                 });
         };
 

@@ -3,7 +3,7 @@
 angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
     .controller('GenericProjectCtrl', ['$scope', '$rootScope', '$modal', '$sce', '$window', '$document', function($scope, $rootScope, $modal, $sce, $window, $document) {
-        console.log($scope.userOfInterest.projects);
+       // console.log($scope.userOfInterest.projects);
 
 
         $rootScope.currentGenericProject = {
@@ -25,16 +25,16 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
 
             //3 se esiste l'attributo  __ viewBox="0 0 800 600" __ aggiorno le dimensioni, altrimenti lo aggiungo
-            var SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
+            $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
             var indexBeginWidth = svgString.lastIndexOf("width=\"")+7;
             var indexEndWidth=    svgString.indexOf(" height")-2;
             var indexBeginHeight = svgString.lastIndexOf("height=\"")+8;
             var indexEndHeight=    svgString.indexOf("\" xml:space")-1;
             $scope.originalWidth=svgString.substring(indexBeginWidth,indexEndWidth);
             $scope.originalHeight=svgString.substring(indexBeginHeight,indexEndHeight);
-            console.log($scope.originalHeight);
-            svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ (SVGWidth * 3/4) +"' class='svg-content "+ $rootScope.currentGenericProject.theme +"' ");
+            svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ ($scope.SVGWidth * 3/4) +"' class='svg-content "+ $rootScope.currentGenericProject.theme +"' ");
 
+            //console.log( $scope.originalHeight);
             /*
             *   PEZZO DA AGGIUNGERE
 
@@ -47,6 +47,20 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
              return svgString;
         };
+
+
+        angular.element($window).bind('resize', function () {   //non va
+                $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
+                var indexBeginHeight = $rootScope.currentGenericProject.svg.toString().lastIndexOf("height=\"")+8;
+                var indexEndHeight=    $rootScope.currentGenericProject.svg.toString().indexOf("\" xml:space")-1;
+                var oldHeight=$rootScope.currentGenericProject.svg.toString().substring(indexBeginHeight,indexEndHeight);
+                console.log(/*$rootScope.currentGenericProject.svg.toString().replace(oldHeight, $scope.SVGWidth *3/4)*/$scope.SVGWidth *3/4);
+                var placeholder=$rootScope.currentGenericProject.svg;
+                $rootScope.currentGenericProject.svg="";
+                $rootScope.currentGenericProject.svg=placeholder.toString().replace(oldHeight.toString(), $scope.SVGWidth *3/4);
+                console.log(oldHeight);
+                $scope.apply;
+        });
 
          $scope.findProjectById = function(id){
              //console.log($scope.userOfInterest.projects);
@@ -79,10 +93,12 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                     var svg= $scope.userOfInterest.projects[k].presentation.slides[0].svg;
                     if(svg !== undefined && svg !== "" && svg !== null) {
                         obj.svg = $sce.trustAsHtml($scope.adjustSVGViewbox($scope.userOfInterest.projects[k].presentation.slides[0].svg));
-                        $scope.apply;
+                        //$scope.apply;
                     }
                     else
                         obj.svg="";
+
+                    $scope.apply;
                 }
             }
             return obj;
@@ -98,7 +114,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $rootScope.currentGenericProject.transition = obj.transition;
 
             $rootScope.currentGenericProject.svg = obj.svg;
-           // console.log($rootScope.currentGenericProject);
-
+            console.log($rootScope.currentGenericProject);
+            $scope.apply;
         };
     }]);
