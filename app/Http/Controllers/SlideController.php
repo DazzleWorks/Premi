@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\Slide;
 use Premi\Model\Text;
+use Premi\Model\Image;
 
 /**
  * @file: app/Http/Controller/SlideController.php
@@ -43,9 +44,9 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
         
-        $slide = $presentation->slides()->get();
+        $slides = $presentation->slides()->get();
         
-        return response()->json($slide);
+        return response()->json($slides);
     }
     
     /**
@@ -94,8 +95,7 @@ class SlideController extends Controller
                 
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);
-        //$slide = $slide->groupBy()->get(['components']);
-        
+                
         return response()->json($slide);
     }
     
@@ -125,6 +125,8 @@ class SlideController extends Controller
         $slide->yIndex = $request->get('yIndex');
         $slide->svg = $request->get('svg');
         $slide->background = $request->get('background');
+        
+        Slide::deleteOldComponent($slide);
         
         $components = $request->get('components');
         foreach($components as $component)
@@ -170,5 +172,31 @@ class SlideController extends Controller
         $slide->delete();
 
         return response()->json(['status' => true]);
+    }
+    
+    /**
+     * Return the ID of a slide by its X and Y position.
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $presentationID: the id of a presentation
+     * @return Illuminate\Http\Response
+     */
+    public function findByAxis(Request $request,$username,$projectID,$presentationID)
+    {
+        $user = \Auth::user();
+        
+        $projects = $user->projects();
+        $project = $projects-find($projectID);
+        
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
+        
+        $slides = $presentation->slides()->get();
+        $slide = $slides->where('xIndex', $request->get('xIndex'))
+                        ->where('yIndex', $request->get('yIndex'))->get();
+        
+        $slideID = $slide->_id;
+        return response()->json($slideID);
     }
 }

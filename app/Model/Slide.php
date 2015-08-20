@@ -3,6 +3,7 @@
 namespace Premi\Model;
 
 use Jenssegers\Mongodb\Model as Eloquent;
+use Premi\Model\Component;
 
 /**
  * @file: app/Model/Slide.php
@@ -40,11 +41,25 @@ class Slide extends Eloquent
     
     /**
      * Allows to have embedded Component in a Slide
-     *  
      * @return array
      */
     public function components() {
         return $this->embedsMany(Component::class);
+    }
+    
+    /**
+     * Delete old components of a Slide before update it
+     * @param Slide $slide
+     * @return void
+     */
+    public static function deleteOldComponent($slide)
+    {
+        $components = $slide->components()->all();
+        
+        foreach($components as $component)
+        {
+            $component->delete();
+        }
     }
 }
 
