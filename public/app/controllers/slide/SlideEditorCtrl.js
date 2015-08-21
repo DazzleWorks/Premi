@@ -263,8 +263,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.getIdSlide = function (position) {
             var index = '';
             if (position === "up") {
-                decrementCurrentY();
-                    index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
+                // decrementCurrentY();
+                    index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY-1});
 
                 // if (localData.currentY > 1)
                 //     $scope.buttons.up = '';
@@ -274,8 +274,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
 
             else if (position === "down") {
-                incrementCurrentY();
-                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY});
+                // incrementCurrentY();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY+1});
 
                 // if (localData.currentY < localData.maxY[localData.currentX])
                 //     $scope.buttons.down = '';
@@ -296,8 +296,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
 
             else if (position === "left") {
-                decrementCurrentX();
-                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:1});
+                // decrementCurrentX();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX-1, yIndex:1});
 
                 // if (localData.currentX > 1)
                 //     $scope.buttons.left = '';
@@ -311,16 +311,13 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     if (index.id !== null)
                         $scope.currentSlide = index.id;
                         $scope.loadSlide();
-                    console.log("prima");
                 },
                 function(data) {
                 });
-
         };
 
         // load slide [currentX, currentY]
         $scope.loadSlide = function () {
-            console.log("dopo");
             $scope.canvas.clear().renderAll();
 
             var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
@@ -375,8 +372,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // save slide that already exists
         $scope.updateSlide = function () {
-            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true}); $scope.slideJSON = slideJSON;
-            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true}); $scope.slideSVG = slideSVG;
+            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
+            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
 
             slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
@@ -386,10 +383,9 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
 
             if (localData.currentY > 1)
-                decrementCurrentY();
+                $scope.getIdSlide("up");
             else
-                decrementCurrentX();
-            $scope.loadSlide();
+                $scope.getIdSlide("left");
         };
 
         $scope.$on('showPresentationEditor', function () {
