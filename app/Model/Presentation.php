@@ -51,7 +51,7 @@ class Presentation extends Eloquent
         // horizontal increment
         if($yIndex == 1)
         {
-            $slides->where('xIndex', '>=', $xIndex)->get();
+            $slides = $slides->where('xIndex', '$gte', $xIndex)->get();
             foreach($slides as $slide)
             {
                 $slide->increment('xIndex');
@@ -60,14 +60,18 @@ class Presentation extends Eloquent
         // vertical increment
         else
         {
-            $slides->where('xIndex', $xIndex)
-                   ->where('yIndex', '$gte', $yIndex)->increment('yIndex');
+            $slides = $slides->where('xIndex', $xIndex)
+                             ->where('yIndex', '$gte', $yIndex)->get();
+            foreach($slides as $slide)
+            {
+                $slide->increment('yIndex');
+            }
         }        
     }
     
     public static function DecrementIndex($presentation,$xIndex,$yIndex)
     {
-        $slides = $presentation->slides();
+        $slides = $presentation->slides()->get();
         
         // horizontal decrement
         if($yIndex == 1)
@@ -75,19 +79,31 @@ class Presentation extends Eloquent
             $numSlide = $slides->where('xIndex', $xIndex)->count();
             if($numSlide == 1)
             {
-                $slides->where('xIndex', '$gt', $xIndex)->decrement('xIndex');
+                $slides = $slides->where('xIndex', '$gt', $xIndex)->get();
+                foreach($slides as $slide)
+                {
+                    $slide->decrement('xIndex');
+                }
             }
             else
             {
-                $slides->where('xIndex', $xIndex)
-                       ->where('yIndex', '$gt', $yIndex)->decrement('yIndex');
+                $slides = $slides->where('xIndex', $xIndex)
+                                 ->where('yIndex', '$gt', $yIndex)->get();
+                foreach($slides as $slide)
+                {
+                    $slide->decrement('yIndex');
+                }
             }
         }
         // vertical decrement
         else
         {
-            $slides->where('xIndex', $xIndex)
-                   ->where('yIndex', '$gt', $yIndex)->decrement('yIndex');
+            $slides = $slides->where('xIndex', $xIndex)
+                             ->where('yIndex', '$gt', $yIndex)->get();
+            foreach($slides as $slide)
+            {
+                $slide->decrement('yIndex');
+            }
         }        
     }
 }
