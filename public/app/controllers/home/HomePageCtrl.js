@@ -2,7 +2,7 @@
 
 angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
-    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', '$window', 'logoutService','searchByProjectService', 'searchByUserService', function($scope, $rootScope, $modal, $window, logoutService,searchByProjectService, searchByUserService) {
+    .controller('HomePageCtrl', ['$scope', '$rootScope', '$modal', '$window', 'logoutService','searchByProjectService', 'searchByUserService', function($scope, $rootScope, $modal, $window, logoutService, searchByProjectService, searchByUserService) {
 
         // disconnect any user on load page
         logoutService.get();
@@ -158,23 +158,8 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                             result.id = searchResults[i].id;
                             result.username = searchResults[i].projects[0].username;
                             result.projectId = searchResults[i]._id;
-                            console.log(result.projectId);
                             result.theme = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].theme !== undefined : "sky";
                             result.transition = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].transition !== undefined : "slide";
-                            /*
-                             result.SVG = searchResults[0].projects[0].SVG;
-                             result.theme = searchResults[0].projects[0].theme;
-                             result.transitionKind = searchResults[0].projects[0].transition;
-                             */
-                            /*
-                             *  {
-                             -                               name:"prj1",
-                             -                               id:"55cc87eeedee62610c8b4591",
-                             -                               username:"username1"
-                             -                           }
-                             * */
-
-                            $scope.searchResults.push(result);
                         }
                      },
                     function(data) {

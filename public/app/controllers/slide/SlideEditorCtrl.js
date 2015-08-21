@@ -285,8 +285,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             }
 
             else if (position === "right") {
-                incrementCurrentX();
-                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:1});
+                // incrementCurrentX();
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX+1, yIndex:1});
 
                 // if (localData.currentX < localData.maxX)
                 //     $scope.buttons.right = '';
@@ -308,14 +308,19 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
             index.$promise.then (
                 function(data) {
-                    $scope.currentSlide = index.id;
+                    if (index.id !== null)
+                        $scope.currentSlide = index.id;
+                        $scope.loadSlide();
+                    console.log("prima");
                 },
                 function(data) {
                 });
+
         };
 
         // load slide [currentX, currentY]
         $scope.loadSlide = function () {
+            console.log("dopo");
             $scope.canvas.clear().renderAll();
 
             var load = slideService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
@@ -403,6 +408,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.changeSlide = function (position) {
             $scope.updateSlide();
             $scope.getIdSlide(position);
-            $scope.loadSlide();
+            // $scope.loadSlide();
         };
 }]);
