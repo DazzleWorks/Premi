@@ -27,13 +27,12 @@ class SlideController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Illuminate\Http\Request
      * @param String $username: the username of a user
      * @param String $projectID: the id of a project
      * @param String $presentationID: the id of a presentation
      * @return Illuminate\Http\Response
      */
-    public function index(Request $request,$username,$projectID,$presentationID)
+    public function index($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 

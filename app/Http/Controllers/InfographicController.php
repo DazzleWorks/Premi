@@ -3,7 +3,6 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
 /**
@@ -26,89 +25,109 @@ class InfographicController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param int $project: the id of a project  
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @return Illuminate\Http\Response
      */
-    public function index($project)
+    public function index($username,$projectID)
     {
         $user = \Auth::user();
         
-        $infographic = $user->projects()->where('_id', '=', $project)->infographics()->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
         
-        return response($infographic);
+        $infographics = $project->infographics()->get();
+        
+        return response($infographics);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param int $project: the id of a project 
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @return Illuminate\Http\Response
      */
-    public function store($project)
+    public function store(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
         
-        $infographic = new Infographic(array('name' => \Input::get('name'), 'path' => \Input::get('path')));
+        $infographic = new Infographic(array('name' => $request->get('name'), 
+                                             'path' => $request->get('path')));
         
-        $project = $user->projects()->where('_id', '=', $project)->infographics()->save($infographic);
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
+        
+        $infographic = $project->infographics()->save($infographic);
                
-        return response(true);
+        return response()->json($infographic);
     }
 
     /**
      * Display the specified resource.
-     * @param int $project: the id of a project 
-     * @param int $infographic: the id of an infographic
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $infographicID: the id of a infographic
+     * @return Illuminate\Http\Response
      */
-    public function show($project,$infographic)
+    public function show($username,$projectID,$infographicID)
     {
         $user = \Auth::user();
         
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
                 
-        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        $infographics = $project->infographics();
+        $infographic = $infographics->find($infographicID);
         
-        return response($infographic);
+        return response()->json($infographic);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param int $project: the id of a project 
-     * @param int $infographic: the id of an infographic
-     * @return Response
+     * @param Illuminate\Http\Request
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $infographicID: the id of a infographic
+     * @return Illuminate\Http\Response
      */
-    public function update($project,$infographic)
+    public function update(Request $request,$username,$projectID,$infographicID)
     {
         $user = \Auth::user();
         
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
         
-        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        $infographics = $project->infographics();
+        $infographic = $infographics->find($infographicID);
         
-        $infographic->name = \Input::get('name');
-        $infographic->path = \Input::get('path');
+        $infographic->name = $request->get('name');
+        $infographic->path = $request->get('path');
         
         $infographic->save();
         
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $project: the id of a project 
-     * @param int $infographic: the id of an infographic
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the id of a project
+     * @param String $infographicID: the id of a infographic
+     * @return Illuminate\Http\Response
      */
-    public function destroy($project,$infographic)
+    public function destroy($username,$projectID,$infographicID)
     {
         $user = \Auth::user();
         
-        $project->$user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
         
-        $infographic = $project->infographics()->where('_id', '=', $infographic)->get();
+        $infographics = $project->infographics();
+        $infographic = $infographics->find($infographicID);
         
         $infographic->delete();
         
-        return response(true);
+        return response()->json(['status' => true]);
     }
 }

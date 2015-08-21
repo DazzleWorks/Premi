@@ -72,33 +72,4 @@ class Component extends Eloquent
                            'clipTo', 'backgroundColor', 'fillRule', 
                            'globalCompositeOperation'];
  
-    
-    /*public function setParam($component) {
-        $this->type = $component['type'];
-        $this->originX = $component['originX'];
-        $this->originY = $component['originY'];
-        $this->left = $component['left'];
-        $this->top = $component['top'];
-        $this->width = $component['width'];
-        $this->height = $component['height'];
-        $this->fill = $component['fill'];
-        $this->stroke = $component['stroke'];
-        $this->strokeWidth = $component['strokeWidth'];
-        $this->strokeDashArray = $component['strokeDashArray'];
-        $this->strokeLineCap = $component['strokeLineCap'];
-        $this->strokeLineJoin = $component['strokeLineJoin'];
-        $this->strokeMiterLimit = $component['strokeMiterLimit'];
-        $this->scaleX = $component['scaleX'];
-        $this->scaleY = $component['scaleY'];
-        $this->angle = $component['angle'];
-        $this->flipX = $component['flipX'];
-        $this->flipY = $component['flipY'];
-        $this->opacity = $component['opacity'];
-        $this->shadow = $component['shadow'];
-        $this->visible = $component['visible'];
-        $this->clipTo = $component['clipTo'];
-        $this->backgroundColor = $component['backgroundColor'];
-        $this->fillRule = $component['fillRule'];
-        $this->globalCompositeOperation = $component['globalCompositeOperation'];
-    }*/
 }

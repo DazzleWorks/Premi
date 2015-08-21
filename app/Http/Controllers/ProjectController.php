@@ -96,23 +96,19 @@ class ProjectController extends Controller
     
      /**
       * Search for projects by username
-      *
       * @param Illuminate\Http\Request
       * @return Response
       */
      public function searchByUsername(Request $request){
         $username = $request -> get('username');
         
-        /*$projects = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('projects._id','projects.name'));
-        return response()->json($projects);*/
-        
-        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()->get(array('username','projects._id','projects.name','projects.presentation.slides.0.svg'));
+        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()
+                ->get(array('username','projects._id','projects.name','projects.presentation.slides.0.svg'));
         return response()->json($user);
      }
      
      /**
       * Search for projects by the projects name
-      *
       * @param Illuminate\Http\Request
       * @return Response
       */

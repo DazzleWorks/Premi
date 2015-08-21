@@ -50,17 +50,4 @@ class Text extends Component
                            'fontWeight', 'fontFamily', 'fontStyle', 'lineHeight',
                            'textDecoration', 'textAlign', 'textBackgroundColor'];
     
-    
-    /*public function setParam($component) {
-        parent::setParam($component);
-        $this->text = $component['text'];
-        $this->fontSize = $component['fontSize'];
-        $this->fontWeight = $component['fontWeight'];
-        $this->fontFamily = $component['fontFamily'];
-        $this->fontStyle = $component['fontStyle'];
-        $this->lineHeight = $component['lineHeight'];
-        $this->textDecoration = $component['textDecoration'];
-        $this->textAlign = $component['textAlign'];
-        $this->textBackgroundColor = $component['textBackgroundColor'];
-    }*/
 }

@@ -42,7 +42,6 @@ class PresentationController extends Controller
         return response()->json($presentation);
     }
 
-
     /**
      * Update the specified resource in storage.
      * @param Illuminate\Http\Request
@@ -67,7 +66,6 @@ class PresentationController extends Controller
         return response()->json(['status' => true]);
     }
 
-    
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
