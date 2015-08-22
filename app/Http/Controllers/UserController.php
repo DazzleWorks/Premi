@@ -9,14 +9,14 @@ use Premi\Model\User;
 /**
  * @file: app/Http/Controller/UserController.php
  * @author: DazzleWorks
- * @date: 2015-06-20
+ * @date: 2015-06-24
  * @description: This class handles the deleting and viewing, through a specific
  * view, of a user.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class,|
+ * |  1.0.0  | 2015-06-24 |Burlin Valerio | class UserController |create class,|
  * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+

@@ -7,14 +7,14 @@ use Premi\Model\Component as Component;
 /**
  * @file: app/Model/Text.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the structure of the data required to 
- * represent a Text in a slide
+ * represent a Text in a slide.
  * 
  * +---------+------------+----------------+--------------+----------------+ 
  * | Version |    Date    |   Programmer   |    Modify    |  Description   |
  * +---------+------------+----------------+--------------+----------------+
- * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Text   | create class   |
+ * |  1.0.0  | 2015-06-23 | Burlin Valerio | class Text   | create class   |
  * +---------+------------+----------------+--------------+----------------+
  */
 class Text extends Component 

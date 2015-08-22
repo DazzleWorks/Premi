@@ -7,16 +7,24 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Presentation.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class is the presentation of the project. Contains all the 
  * slide that are designed to describe and explain something to a group of 
- * people
+ * people.
  *
- * +---------+------------+---------------+--------------------+---------------+
- * | Version |     Date   |  Programmer   |       Modify       |  Description  |
- * +---------+------------+---------------+--------------------+---------------+
- * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Presentation | create class  |
- * +---------+------------+---------------+--------------------+---------------+
+ * +---------+------------+----------------+--------------------+---------------+
+ * | Version |     Date   |  Programmer    |       Modify       |  Description  |
+ * +---------+------------+----------------+--------------------+---------------+
+ * |  0.1.0  | 2015-06-23 |Suierica Bogdan | class Presentation | create class  |
+ * |         |            |                |                    | and function  |
+ * |         |            |                |                    |    slides()   | 
+ * +---------+------------+----------------+--------------------+---------------+
+ * |  1.0.0  | 2015-06-29 | Burlin Valerio | class Presentation |    create     |
+ * |         |            |                |                    | functions for |
+ * |         |            |                |                    | increment and |   
+ * |         |            |                |                    |   decrement   |
+ * |         |            |                |                    | slides index  |
+ * +---------+------------+----------------+--------------------+---------------+ 
  */
 class Presentation extends Eloquent
 {
@@ -44,6 +52,13 @@ class Presentation extends Eloquent
         return $this->embedsMany(Slide::class);
     }
     
+    /**
+     * Increment the indexes of the Presentation's slides if it's necessary
+     * @param Presentation $presentation
+     * @param int $xIndex
+     * @param int $yIndex
+     * @return void
+     */
     public static function incrementIndex($presentation,$xIndex,$yIndex)
     {
         $slides = $presentation->slides()->get();
@@ -69,6 +84,13 @@ class Presentation extends Eloquent
         }        
     }
     
+    /**
+     * Decrement the indexes of the Presentation's slides if it's necessary
+     * @param Presentation $presentation
+     * @param int $xIndex
+     * @param int $yIndex
+     * @return void
+     */
     public static function DecrementIndex($presentation,$xIndex,$yIndex)
     {
         $slides = $presentation->slides()->get();

@@ -8,14 +8,14 @@ use Premi\Http\Controllers\Controller;
 /**
  * @file: app/Http/Controller/InfographicController.php
  * @author: DazzleWorks
- * @date: 2015-06-23
+ * @date: 2015-06-25
  * @description: This class handles the infographic data, meets the requirements of 
  * views and queries the database when necessary.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-23 |Burlin Valerio | class                |create class,| 
+ * |  1.0.0  | 2015-06-25 |Burlin Valerio | class                |create class,| 
  * |         |            |               | InfographicController|and its rest |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+

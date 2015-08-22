@@ -11,14 +11,14 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 /**
  * @file: app/Http/Controller/Auth/AuthController.php
  * @author: DazzleWorks
- * @date: 2015-06-21
+ * @date: 2015-06-24
  * @description: This class handles the registration of new users, as well as 
  *               the authentication of existing users.
  * 
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-21 |Suierica Bogdan| class AuthController |create class | 
+ * |  1.0.0  | 2015-06-24 |Suierica Bogdan| class AuthController |create class | 
  * |         |            |               |                      |and its      |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+

@@ -8,14 +8,14 @@ use Premi\Http\Controllers\Controller;
 /**
  * @file: app/Http/Controller/PresentationController.php
  * @author: DazzleWorks
- * @date: 2015-06-23
+ * @date: 2015-06-25
  * @description: This class handles the saving, editing, deleting and viewing,
  * through a specific view, of a presentation.
  *
  * +---------+------------+---------------+-----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify         | Description |
  * +---------+------------+---------------+-----------------------+-------------+
- * |  1.0.0  | 2015-06-23 |Suierica Bogdan| class                 |create class,| 
+ * |  1.0.0  | 2015-06-25 |Suierica Bogdan| class                 |create class,| 
  * |         |            |               | PresentationController|and its rest |
  * |         |            |               |                       |functions    |
  * +---------+------------+---------------+-----------------------+-------------+

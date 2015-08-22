@@ -7,14 +7,14 @@ use Premi\Model\Component;
 /**
  * @file: app/Model/Image.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the structure of the data required to 
- * represent an image in a slide
+ * represent an image in a slide.
  *
  * +---------+------------+---------------+-------------+--------------+
  * | Version |     Date   |  Programmer   |   Modify    | Description  |
  * +---------+------------+---------------+-------------+--------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Image | create class |
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class Image | create class |
  * +---------+------------+---------------+-------------+--------------+
  */
 class Image extends Component

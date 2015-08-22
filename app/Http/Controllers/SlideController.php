@@ -10,16 +10,25 @@ use Premi\Model\Slide;
 /**
  * @file: app/Http/Controller/SlideController.php
  * @author: DazzleWorks
- * @date: 2015-06-23
+ * @date: 2015-06-26
  * @description: This class handles the saving, editing, deleting and viewing,
  * through a specific view, of a slide.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-23 |Burlin Valerio |class SlideController |create class |
+ * |  1.0.0  | 2015-06-26 |Burlin Valerio |class SlideController |create class |
  * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.1.0  | 2015-06-30 |Burlin Valerio |class SlideController |modify update|
+ * |         |            |               |                      |function for |
+ * |         |            |               |                      |delete&update|
+ * |         |            |               |                      | components  |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  2.0.0  | 2015-07-02 |Burlin Valerio |class SlideController |    create   |
+ * |         |            |               |                      |   function  |
+ * |         |            |               |                      |  findByAxis |
  * +---------+------------+---------------+----------------------+-------------+
  */
 

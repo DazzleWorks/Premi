@@ -10,15 +10,23 @@ use Premi\Model\Image;
 /**
  * @file: app/Model/Slide.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class stores slide data that is retrieved by the slide 
- * controller
+ * controller.
  * 
  * +---------+------------+----------------+--------------+--------------+ 
  * | Version |    Date    |   Programmer   |    Modify    | Description  |
  * +---------+------------+----------------+--------------+--------------+
- * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Slide  | create class |
+ * |  0.1.0  | 2015-06-23 | Burlin Valerio | class Slide  | create class | 
+ * |         |            |                |              | and function |
+ * |         |            |                |              | components() | 
  * +---------+------------+----------------+--------------+--------------+
+ * |  1.0.0  | 2015-06-27 | Burlin Valerio | class Slide  |    create    |
+ * |         |            |                |              |functions for |
+ * |         |            |                |              |  update and  |   
+ * |         |            |                |              |    delete    |
+ * |         |            |                |              |  compoents   |
+ * +---------+------------+----------------+--------------+--------------+ 
  */
 class Slide extends Eloquent 
 {

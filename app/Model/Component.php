@@ -7,14 +7,14 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Component.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the general structure of a component 
- * of the slide
+ * of the slide.
  *
  * +---------+------------+---------------+-----------------+--------------+
  * | Version |     Date   |  Programmer   |     Modify      | Description  |
  * +---------+------------+---------------+-----------------+--------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Component | create class |                 
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class Component | create class |                 
  * +---------+------------+---------------+-----------------+--------------+
  */
 class Component extends Eloquent

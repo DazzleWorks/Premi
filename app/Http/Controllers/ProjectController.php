@@ -10,17 +10,25 @@ use Premi\Events\ProjectWasCreated;
 /**
  * @file: app/Http/Controller/ProjectController.php
  * @author: DazzleWorks
- * @date: 2015-06-21
+ * @date: 2015-06-24
  * @description: This class handles the saving, editing, deleting and viewing, 
  *               through a specific view, of a project. 
  * 
- * +---------+------------+--------------+-----------------------+-------------+
- * | Version |     Date   |  Programmer  |        Modify         | Description |
- * +---------+------------+--------------+-----------------------+-------------+
- * |  1.0.0  | 2015-06-21 |Burlin Valerio|class ProjectController| create class| 
- * |         |            |              |                       | and its rest|
- * |         |            |              |                       | functions   |
- * +---------+------------+--------------+-----------------------+-------------+
+ * +---------+------------+---------------+-----------------------+-------------------+
+ * | Version |     Date   |  Programmer   |        Modify         |   Description     |
+ * +---------+------------+---------------+-----------------------+-------------------+
+ * |  0.1.0  | 2015-06-24 |Burlin Valerio |class ProjectController| create class and  | 
+ * |         |            |               |                       |  rest functions   |
+ * +---------+------------+---------------+-----------------------+-------------------+
+ * |  0.2.0  | 2015-06-28 |Burlin Valerio |class ProjectController|add call to event  | 
+ * |         |            |               |                       |ProjectWasCreated  |
+ * +---------+------------+---------------+-----------------------+-------------------+
+ * |  0.3.0  | 2015-07-09 |Suierica Bogdan|class ProjectController| create function   | 
+ * |         |            |               |                       | searchByUsername  |
+ * +---------+------------+---------------+-----------------------+-------------------+
+ * |  1.0.0  | 2015-07-11 |Suierica Bogdan|class ProjectController| create function   | 
+ * |         |            |               |                       |searchByProjectName|
+ * +---------+------------+---------------+-----------------------+-------------------+
  */
 
 class ProjectController extends Controller
