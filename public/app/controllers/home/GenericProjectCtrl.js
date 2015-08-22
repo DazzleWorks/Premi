@@ -1,3 +1,21 @@
+/**
+ * @file: public/app/controllers/home/GenericProjectCtrl.js
+ * @author: DazzleWorks
+ * @date: 2015-07-5
+ * @description: Controller for progect retrive and visualization
+ *
+ * +---------+------------+---------------+---------------------------------------------------------------------+
+ * | Version |     Date   |  Programmer   |   Modify                             | Description                  |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ * |  1.0.0  | 2015-07-1  | Carraro Nicola| $rootScope.currentGenericProject     | create class                 |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ * |  1.0.0  | 2015-07-3  |  Ros Fabio    | setCurrentGenericProject()           | add Feature                  |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ * |  0.1.0  | 2015-07-5  |  Ros Fabio    | adjustSVGViewbox(), findProjectById()| create class                 |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ * |  1.0.0  | 2015-07-5  | Carraro Nicola| Angular.bind('resize')               | add Feature                  |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ */
 'use strict';
 
 angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
@@ -18,6 +36,13 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             // maxY: 0
         };
 
+        /**
+         * calculate the right size for SVG using the window size
+         * @param: $scope.currentGenericProject
+         * @param: $window, angular variable for get window size informations
+         * @param: svgString, contains she SVG entirecode
+         * @return: new SVG string
+         */
         $scope.adjustSVGViewbox = function(svgString){    //da chiamare anche al resize della pagina
             //1 calcolo dimensione finestra
 
@@ -48,6 +73,13 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
              return svgString;
         };
 
+        /**
+         * call this function on window resize
+         * @param: $scope.currentGenericProject
+         * @param: $scope.SVGWidth
+         * @param: $window, angular variable for get window size informations
+         * @return: new SVG string
+         */
 
         angular.element($window).bind('resize', function () {   //non va
                 $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
@@ -62,6 +94,11 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                 $scope.apply;
         });
 
+        /**
+         * returns entire project from id
+         * @param: id - the project id
+         * @return: the entire project in a json object or null
+         */
          $scope.findProjectById = function(id){
              //console.log($scope.userOfInterest.projects);
 
@@ -103,7 +140,11 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             }
             return obj;
         };
-
+        /**
+         * set current project from id and refresh view
+         * @param: id - the project id
+         * @return: void
+         */
         $scope.setCurrentGenericProject = function(id){
             var obj = $scope.findProjectById(id);
             $rootScope.currentGenericProject.id = obj.id;

@@ -1,3 +1,17 @@
+/**
+* @file: public/app/controllers/home/LoginCtrl.js
+* @author: DazzleWorks
+* @date: 2015-06-20
+* @description: Controller for user login
+*
+* +---------+------------+---------------+----------------------------------------------------------------------+
+* | Version |     Date   |  Programmer   |   Modify                             | Description                   |
+* +---------+------------+---------------+--------------------------------------+-------------------------------+
+ * |  0.1.0  | 2015-06-18 |  Ros Fabio    | LoginCtrl.ok(), LoginCtrl.cancel()   | create class                 |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ * |  1.0.0  | 2015-06-20 | Carraro Nicola| LoginCtrl.ok(), LoginCtrl.cancel()   | add forgot Password Feature  |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+*/
 angular.module('app.controllers.LoginCtrl', ['ngRoute'])
 
     .controller('LoginCtrl', ['$scope', '$http', '$modal', '$modalInstance', 'loginService', function($scope, $http, $modal, $modalInstance, loginService) {
@@ -6,7 +20,11 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
             username: "",
             password: ""
         };
-
+        /**
+         * open forgot Password View
+         *
+         * @return: void
+         */
         $scope.forgotPassword = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/forgotPassword.html',
@@ -18,6 +36,11 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
             });
         };
 
+        /**
+         * try to authenticate an user using loginService
+         * @param $scope.login_data
+         * @return void
+         */
         $scope.ok = function () {
             var user = loginService.save($scope.login_data);
             user.$promise.then(
@@ -34,6 +57,10 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
                 });
         };
 
+        /**
+         * abort login process
+         * @return void
+         */
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
