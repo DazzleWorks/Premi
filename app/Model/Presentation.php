@@ -51,7 +51,7 @@ class Presentation extends Eloquent
         // horizontal increment
         if($yIndex == 1)
         {
-            $slides = $slides->where('xIndex', '$gte', $xIndex)->get();
+            $slides = $slides->where('xIndex', '>=', $xIndex);
             foreach($slides as $slide)
             {
                 $slide->increment('xIndex');
@@ -61,7 +61,7 @@ class Presentation extends Eloquent
         else
         {
             $slides = $slides->where('xIndex', $xIndex)
-                             ->where('yIndex', '$gte', $yIndex)->get();
+                             ->where('yIndex', '>=', $yIndex)->get();
             foreach($slides as $slide)
             {
                 $slide->increment('yIndex');
@@ -79,7 +79,7 @@ class Presentation extends Eloquent
             $numSlide = $slides->where('xIndex', $xIndex)->count();
             if($numSlide == 1)
             {
-                $slides = $slides->where('xIndex', '$gt', $xIndex)->get();
+                $slides = $slides->where('xIndex', '>', $xIndex)->get();
                 foreach($slides as $slide)
                 {
                     $slide->decrement('xIndex');
@@ -88,7 +88,7 @@ class Presentation extends Eloquent
             else
             {
                 $slides = $slides->where('xIndex', $xIndex)
-                                 ->where('yIndex', '$gt', $yIndex)->get();
+                                 ->where('yIndex', '>', $yIndex)->get();
                 foreach($slides as $slide)
                 {
                     $slide->decrement('yIndex');
@@ -99,7 +99,7 @@ class Presentation extends Eloquent
         else
         {
             $slides = $slides->where('xIndex', $xIndex)
-                             ->where('yIndex', '$gt', $yIndex)->get();
+                             ->where('yIndex', '>', $yIndex)->get();
             foreach($slides as $slide)
             {
                 $slide->decrement('yIndex');

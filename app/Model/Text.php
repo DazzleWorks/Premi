@@ -2,7 +2,7 @@
 
 namespace Premi\Model;
 
-use Premi\Model\Component;
+use Premi\Model\Component as Component;
 
 /**
  * @file: app/Model/Text.php

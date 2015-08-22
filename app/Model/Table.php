@@ -2,7 +2,7 @@
 
 namespace Premi\Model;
 
-use App\Model\Component;
+use Premi\Model\Component;
 
 /**
  * @file: app/Model/Table.php
