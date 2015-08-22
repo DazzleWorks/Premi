@@ -43,8 +43,9 @@ class SlideController extends Controller
         $presentation = $presentations->get();
 
         $slides = $presentation->slides()->get();
+        $orderSlides = $slides->orderBy('xIndex', 'yIndex')->get();
 
-        return response()->json($slides);
+        return response()->json($orderSlides);
     }
 
     /**

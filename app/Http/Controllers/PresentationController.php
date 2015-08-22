@@ -37,7 +37,7 @@ class PresentationController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()->first();
+        $presentation = $project->presentation()->first(['users.projects.presentation._id','theme','transition']);
 
         return response()->json($presentation);
     }
