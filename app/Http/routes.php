@@ -3,7 +3,7 @@
 /**
  * @file: app/Http/routes.php
  * @author: DazzleWorks
- * @date: 2015-06-21
+ * @date: 2015-06-24
  * @description: This file contains all of the routes for an application. Simply
  *               tell the URIs it should respond to and give it the controller
  *               to call when that URI is requested.
@@ -11,24 +11,24 @@
  * +---------+------------+---------------+-------------+----------------+
  * | Version |     Date   |  Programmer   |    Modify   |  Description   |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.1.0  | 2015-06-21 |Suierica Bogdan| routes.php  |create class    | 
+ * |  0.1.0  | 2015-06-24 |Suierica Bogdan| routes.php  |create class    | 
  * |         |            |               |             |and auth routes |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.2.0  | 2015-06-21 |Burlin Valerio | routes.php  |add users and   | 
+ * |  0.2.0  | 2015-06-24 |Burlin Valerio | routes.php  |add users and   | 
  * |         |            |               |             |slides routes   |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.3.0  | 2015-06-22 |Burlin Valerio | routes.php  |add projects and| 
+ * |  0.3.0  | 2015-06-24 |Burlin Valerio | routes.php  |add projects and| 
  * |         |            |               |             |presentation    |
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.4.0  | 2015-06-22 |Burlin Valerio | routes.php  |add infographics| 
+ * |  0.4.0  | 2015-06-24 |Burlin Valerio | routes.php  |add infographics| 
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.5.0  | 2015-08-01 |Suierica Bogdan| routes.php  |add password    |
+ * |  0.5.0  | 2015-07-07 |Suierica Bogdan| routes.php  |add password    |
  * |         |            |               |             |reset link      |
  * |         |            |               |             |request routes  |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.5.1  | 2015-08-01 |Suierica Bogdan| routes.php  |add password    |
+ * |  1.0.0  | 2015-07-07 |Suierica Bogdan| routes.php  |add password    |
  * |         |            |               |             |reset routes    |
  * +---------+------------+---------------+-------------+----------------+ 
  */

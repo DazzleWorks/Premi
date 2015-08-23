@@ -7,10 +7,10 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Infographic.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class is graphic visual rapresentation of the presentation 
  * that intends to present information quickly and clearly. It contains the path 
- * of the image if the user already eloborated it
+ * of the image if the user already eloborated it.
  *
  * +---------+------------+---------------+--------------------+--------------+
  * | Version |     Date   |  Programmer   |       Modify       | Description  |

@@ -11,14 +11,16 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 /**
  * @file: app/Model/User.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class stores user data that is retrieved by the user 
- * controller
+ * controller.
  *
  * +---------+------------+---------------+------------+---------------+
  * | Version |     Date   |  Programmer   |   Modify   | Description   |
  * +---------+------------+---------------+------------+---------------+
- * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class User | create class  | 
+ * |  1.0.0  | 2015-06-23 |Suierica Bogdan| class User | create class  |
+ * |         |            |               |            | and function  |
+ * |         |            |               |            | projects()    |
  * +---------+------------+---------------+------------+---------------+
  */
 class User extends Eloquent implements AuthenticatableContract, 
@@ -56,7 +58,6 @@ class User extends Eloquent implements AuthenticatableContract,
      
     /**
      * Allows to have embedded Project in a User 
-     * 
      * @return array
      */
     public function projects() {

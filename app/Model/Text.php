@@ -2,19 +2,19 @@
 
 namespace Premi\Model;
 
-use Premi\Model\Component;
+use Premi\Model\Component as Component;
 
 /**
  * @file: app/Model/Text.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the structure of the data required to 
- * represent a Text in a slide
+ * represent a Text in a slide.
  * 
  * +---------+------------+----------------+--------------+----------------+ 
  * | Version |    Date    |   Programmer   |    Modify    |  Description   |
  * +---------+------------+----------------+--------------+----------------+
- * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Text   | create class   |
+ * |  1.0.0  | 2015-06-23 | Burlin Valerio | class Text   | create class   |
  * +---------+------------+----------------+--------------+----------------+
  */
 class Text extends Component 
@@ -50,17 +50,4 @@ class Text extends Component
                            'fontWeight', 'fontFamily', 'fontStyle', 'lineHeight',
                            'textDecoration', 'textAlign', 'textBackgroundColor'];
     
-    
-    /*public function setParam($component) {
-        parent::setParam($component);
-        $this->text = $component['text'];
-        $this->fontSize = $component['fontSize'];
-        $this->fontWeight = $component['fontWeight'];
-        $this->fontFamily = $component['fontFamily'];
-        $this->fontStyle = $component['fontStyle'];
-        $this->lineHeight = $component['lineHeight'];
-        $this->textDecoration = $component['textDecoration'];
-        $this->textAlign = $component['textAlign'];
-        $this->textBackgroundColor = $component['textBackgroundColor'];
-    }*/
 }

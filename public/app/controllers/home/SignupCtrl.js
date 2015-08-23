@@ -1,3 +1,15 @@
+/**
+ * @file: public/app/controllers/home/SignUpCtrl.js
+ * @author: DazzleWorks
+ * @date: 2015-06-18
+ * @description: Controller for user registration
+ *
+ * +---------+------------+---------------+----------------------------------------------------------------------+
+ * | Version |     Date   |  Programmer   |   Modify                             | Description                   |
+ * +---------+------------+---------------+--------------------------------------+-------------------------------+
+ * |  0.1.0  | 2015-06-18 |  Ros Fabio    | LoginCtrl.ok(), LoginCtrl.cancel()   | create class                 |
+ * +---------+------------+---------------+--------------------------------------+------------------------------+
+ */
 angular.module('app.controllers.SignupCtrl', ['ngRoute'])
 
     .controller('SignupCtrl', ['$scope','$http', '$modalInstance', 'signupService', function($scope, $http, $modalInstance, signupService) {
@@ -20,7 +32,11 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
         };
 
         $scope.isCorrect = false;
-
+        /**
+         * try to register an user using loginService using signup service and if something goes wrong show the correct error
+         * @param $scope.signup_data
+         * @return void
+         */
         $scope.ok = function () {
             $scope.isCorrect = true;
             var user = signupService.save($scope.signup_data);
@@ -60,7 +76,10 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
                     $modalInstance.close();
                 });
         };
-
+    /**
+    * abort signup process
+    * @return void
+    */
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };

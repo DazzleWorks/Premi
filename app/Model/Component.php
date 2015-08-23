@@ -7,14 +7,14 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Component.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the general structure of a component 
- * of the slide
+ * of the slide.
  *
  * +---------+------------+---------------+-----------------+--------------+
  * | Version |     Date   |  Programmer   |     Modify      | Description  |
  * +---------+------------+---------------+-----------------+--------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Component | create class |                 
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class Component | create class |                 
  * +---------+------------+---------------+-----------------+--------------+
  */
 class Component extends Eloquent
@@ -72,33 +72,4 @@ class Component extends Eloquent
                            'clipTo', 'backgroundColor', 'fillRule', 
                            'globalCompositeOperation'];
  
-    
-    /*public function setParam($component) {
-        $this->type = $component['type'];
-        $this->originX = $component['originX'];
-        $this->originY = $component['originY'];
-        $this->left = $component['left'];
-        $this->top = $component['top'];
-        $this->width = $component['width'];
-        $this->height = $component['height'];
-        $this->fill = $component['fill'];
-        $this->stroke = $component['stroke'];
-        $this->strokeWidth = $component['strokeWidth'];
-        $this->strokeDashArray = $component['strokeDashArray'];
-        $this->strokeLineCap = $component['strokeLineCap'];
-        $this->strokeLineJoin = $component['strokeLineJoin'];
-        $this->strokeMiterLimit = $component['strokeMiterLimit'];
-        $this->scaleX = $component['scaleX'];
-        $this->scaleY = $component['scaleY'];
-        $this->angle = $component['angle'];
-        $this->flipX = $component['flipX'];
-        $this->flipY = $component['flipY'];
-        $this->opacity = $component['opacity'];
-        $this->shadow = $component['shadow'];
-        $this->visible = $component['visible'];
-        $this->clipTo = $component['clipTo'];
-        $this->backgroundColor = $component['backgroundColor'];
-        $this->fillRule = $component['fillRule'];
-        $this->globalCompositeOperation = $component['globalCompositeOperation'];
-    }*/
 }

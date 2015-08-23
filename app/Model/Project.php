@@ -7,14 +7,18 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Project.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents a project of a user. It contains the
- * presentation and zero or more infographic created by it
+ * presentation and zero or more infographic created by it.
  *
  * +---------+------------+---------------+---------------+---------------+
  * | Version |     Date   |  Programmer   |    Modify     |  Description  |
  * +---------+------------+---------------+---------------+---------------+
- * |  1.0.0  | 2015-06-19 |Suierica Bogdan| class Project | create class  |
+ * |  1.0.0  | 2015-06-23 |Suierica Bogdan| class Project | create class  |
+ * |         |            |               |               | and functions |
+ * |         |            |               |               | presentation()|
+ * |         |            |               |               |      and      |
+ * |         |            |               |               | infographics()|   
  * +---------+------------+---------------+---------------+---------------+
  */
 class Project extends Eloquent 
@@ -37,7 +41,6 @@ class Project extends Eloquent
     
     /**
      * Allows to have a single embedded Presentation in a Project
-     *  
      * @return array
      */
     public function presentation() {
@@ -46,7 +49,6 @@ class Project extends Eloquent
     
     /**
      * Allows to have embedded Infographic in a Project 
-     * 
      * @return array
      */
     public function infographics() {

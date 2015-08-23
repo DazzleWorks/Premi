@@ -10,16 +10,25 @@ use Premi\Model\Slide;
 /**
  * @file: app/Http/Controller/SlideController.php
  * @author: DazzleWorks
- * @date: 2015-06-23
+ * @date: 2015-06-26
  * @description: This class handles the saving, editing, deleting and viewing,
  * through a specific view, of a slide.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-23 |Burlin Valerio |class SlideController |create class |
+ * |  1.0.0  | 2015-06-26 |Burlin Valerio |class SlideController |create class |
  * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  1.1.0  | 2015-06-30 |Burlin Valerio |class SlideController |modify update|
+ * |         |            |               |                      |function for |
+ * |         |            |               |                      |delete&update|
+ * |         |            |               |                      | components  |
+ * +---------+------------+---------------+----------------------+-------------+
+ * |  2.0.0  | 2015-07-02 |Burlin Valerio |class SlideController |    create   |
+ * |         |            |               |                      |   function  |
+ * |         |            |               |                      |  findByAxis |
  * +---------+------------+---------------+----------------------+-------------+
  */
 
@@ -27,13 +36,12 @@ class SlideController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Illuminate\Http\Request
      * @param String $username: the username of a user
      * @param String $projectID: the id of a project
      * @param String $presentationID: the id of a presentation
      * @return Illuminate\Http\Response
      */
-    public function index(Request $request,$username,$projectID,$presentationID)
+    public function index($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
@@ -44,8 +52,9 @@ class SlideController extends Controller
         $presentation = $presentations->get();
 
         $slides = $presentation->slides()->get();
+        $orderSlides = $slides->orderBy('xIndex', 'yIndex')->get();
 
-        return response()->json($slides);
+        return response()->json($orderSlides);
     }
 
     /**
