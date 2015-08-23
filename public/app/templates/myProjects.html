@@ -18,20 +18,28 @@
     <h3 class="projectTitle" id="PresentationSection">{{currentProject.name}}</h3>
 
     <div class="row">
-        <div class="small-12 small-centered columns">
+        <div class="small-9 small-centered columns">
             <div class="myPresentationContainer">
                 <img src="../assets/img/google-now.jpg" class="presentationFront">
-                <div class="icon-bar three-up projectMenu">
+                <div class="icon-bar four-up projectMenu">
                     <a class="item custonMenuIcon" href="../presentation.php?user={{currentProject.username}}&pId={{currentProject.presentationId}}&id={{currentProject.id}}&transition={{currentProject.transition}}" target="_blank">
-                        <img src="../assets/img/play2.png" >
+                        <!-- <img src="../assets/img/play2.png" > -->
+                        <i class="fa fa-play"></i>
                         <label>Play</label>
                     </a>
                     <a class="item custonMenuIcon" ng-click="editProject()">
-                        <img src="../assets/img/edit.png" >
+                        <!-- <img src="../assets/img/edit.png" > -->
+                        <i class="fa fa-pencil-square-o"></i>
                         <label>Edit</label>
                     </a>
+                    <a class="item custonMenuIcon" ng-click="renameProject()">
+                        <!-- <img src="../assets/img/delete.svg" > -->
+                        <i class="fa fa-pencil"></i>
+                        <label>Rename</label>
+                    </a>
                     <a class="item custonMenuIcon" ng-click="deleteProject()">
-                        <img src="../assets/img/delete.svg" >
+                        <!-- <img src="../assets/img/delete.svg" > -->
+                        <i class="fa fa-trash-o"></i>
                         <label>Delete</label>
                     </a>
                 </div>
@@ -44,7 +52,7 @@
             <h4 id="InfographicsSection">Infographics</h4>
             <button class="button small radius success" >Add new Infographic</button>
         </div>
-        <div>
+        <div class="small-12 small-centered columns">
             <ul class="inline-list infographicsList small-11 small-centered columns ">
                 <li class="animate-repeat" ng-repeat="infographic in infographics">
                     <a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>

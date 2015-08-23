@@ -274,6 +274,11 @@ body {
 	max-width:10%;
 }
 
+.infographicsList ul {
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;    
+}
+
 .infographicsList img{
 	max-width:200px;
 	display:block;

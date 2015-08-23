@@ -124,6 +124,20 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         };
 
+        $scope.renameProject = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/renameProject.html',
+                controller: 'RenameProjectCtrl',
+                windowClass: 'myModal'
+            });
+            modalInstance.result.then(function (data) {
+                if (data !== 'error'){
+                    $scope.projects = [];
+                    $scope.refreshProjects();
+                }
+            });
+        };
+
         $scope.newProject = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'app/templates/newProject.html',
