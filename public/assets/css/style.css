@@ -15,8 +15,9 @@ body {
 #homePage {
     min-height: 800px;
     margin-top:-10px;
-    background-color: #8A748F !important;
-    background:url("../img/flatBackground.png") ;
+    /*background-color: #8A748F !important;*/
+    background-color: #ffffff !important;
+    background:url("../img/flatBackground.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center top;
@@ -307,7 +308,8 @@ section.homeCheckbox label {
     cursor: pointer;
     display: inline-block;
     position: relative;
-    background: rgb(189, 189, 189);
+    /*background: rgb(189, 189, 189);*/
+    background: rgb(88, 88, 88);
     border-radius: 30px;
 
     transition: background-color 0.4s;
@@ -335,9 +337,11 @@ input:checked + label:after {
 .mainSearchBar{
     text-align: center !important;
 }
+
 section.homeCheckbox p {
     /*font: normal 8px/40px Arial;*/
-    color: rgb(189, 189, 189);
+    /*color: rgb(189, 189, 189);*/
+    color: rgb(88, 88, 88);
     display: none;
     text-transform: uppercase;
     letter-spacing: 1px;
