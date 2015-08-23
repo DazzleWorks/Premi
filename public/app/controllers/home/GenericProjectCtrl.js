@@ -86,7 +86,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                 var indexBeginHeight = $rootScope.currentGenericProject.svg.toString().lastIndexOf("height=\"")+8;
                 var indexEndHeight=    $rootScope.currentGenericProject.svg.toString().indexOf("\" xml:space")-1;
                 var oldHeight=$rootScope.currentGenericProject.svg.toString().substring(indexBeginHeight,indexEndHeight);
-                console.log(/*$rootScope.currentGenericProject.svg.toString().replace(oldHeight, $scope.SVGWidth *3/4)*/$scope.SVGWidth *3/4);
+                //console.log(/*$rootScope.currentGenericProject.svg.toString().replace(oldHeight, $scope.SVGWidth *3/4)*/$scope.SVGWidth *3/4);
                 var placeholder=$rootScope.currentGenericProject.svg;
                 $rootScope.currentGenericProject.svg="";
                 $rootScope.currentGenericProject.svg=placeholder.toString().replace(oldHeight.toString(), $scope.SVGWidth *3/4);
@@ -106,10 +106,11 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide"};
             for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
                 if($scope.userOfInterest.projects[k]._id.$id === id) {
-
+                    console.log($scope.userOfInterest.projects[k]);
                     obj.id=$scope.userOfInterest.projects[k]._id.$id;
                     obj.name=$scope.userOfInterest.projects[k].name;
                     obj.presentation=$scope.userOfInterest.projects[k].presentation;
+                    obj.presentationId=$scope.userOfInterest.projects[k].presentation._id;
                     obj.firstSlide=$scope.userOfInterest.projects[k].firstSlide;
 
                     //theme
@@ -155,7 +156,11 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $rootScope.currentGenericProject.transition = obj.transition;
 
             $rootScope.currentGenericProject.svg = obj.svg;
-            console.log($rootScope.currentGenericProject);
+
+            $rootScope.currentGenericProject.presentationId = obj.presentationId;
+
+
+            console.log(obj);
             $scope.apply;
         };
     }]);
