@@ -126,14 +126,12 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 var searchResults = searchByUserService.query({username:$scope.searchText});
                 searchResults.$promise.then (
                     function(data) {
-                        // $scope.searchResults.byProjectName = [];
-                        // $scope.searchResults.byUsername = [];
                         if(data[0] !== undefined) {
                             var result = {};
                             result.username = searchResults[0].username;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
-                            $scope.resetSearchResults();
+                            //$scope.resetSearchResults();
                             $scope.searchResults.push(result);
                         }else{
                         }
@@ -148,19 +146,22 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 //}
                 searchResults.$promise.then (
                     function(data) {
-                        //console.log(data);
-
+                        console.log(data);
                         $scope.resetSearchResults();
 
                         for (var i=0; i<searchResults.length; i++) {
 
                             var result = {};
                             result.name = searchResults[i].projects[0].name;
-                            result.id = searchResults[i].id;
-                            result.username = searchResults[i].projects[0].username;
+                            result.id = searchResults[i]._id;
+                            result.username = searchResults[i].username;
+                            result.presentationId = searchResults[i].projects[0]._id.$id;
                             result.projectId = searchResults[i]._id;
                             result.theme = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].theme !== undefined : "sky";
                             result.transition = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].transition !== undefined : "slide";
+                            $scope.searchResults.push(result);
+                            console.log(result);
+
                         }
                      },
                     function(data) {
