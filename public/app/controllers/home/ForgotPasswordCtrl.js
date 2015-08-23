@@ -7,7 +7,7 @@ angular.module('app.controllers.ForgotPasswordCtrl', ['ngRoute'])
         };
 
         $scope.ok = function () {
-            forgotPasswordService().save($scope.forgot_data);
+            forgotPasswordService.save($scope.forgot_data);
             $modalInstance.close($scope.forgot_data.email);
         };
 
