@@ -103,14 +103,14 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
              //console.log($scope.userOfInterest.projects);
 
             var k;
-            var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide"};
+            var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide", username:""};
             for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
                 if($scope.userOfInterest.projects[k]._id.$id === id) {
                     console.log($scope.userOfInterest.projects[k]);
                     obj.id=$scope.userOfInterest.projects[k]._id.$id;
                     obj.name=$scope.userOfInterest.projects[k].name;
                     obj.presentation=$scope.userOfInterest.projects[k].presentation;
-                    obj.presentationId=$scope.userOfInterest.projects[k].presentation._id;
+                    obj.presentationId=$scope.userOfInterest.projects[k].presentation._id.$id;
                     obj.firstSlide=$scope.userOfInterest.projects[k].firstSlide;
 
                     //theme
@@ -136,6 +136,9 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                     else
                         obj.svg="";
 
+
+                    obj.username=$scope.userOfInterest.username;
+
                     $scope.apply;
                 }
             }
@@ -155,12 +158,14 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             $rootScope.currentGenericProject.theme = obj.theme;
             $rootScope.currentGenericProject.transition = obj.transition;
 
+
+            $rootScope.currentGenericProject.username = obj.username;
             $rootScope.currentGenericProject.svg = obj.svg;
 
             $rootScope.currentGenericProject.presentationId = obj.presentationId;
 
 
-            console.log(obj);
+           // console.log(obj);
             $scope.apply;
         };
     }]);

@@ -143,6 +143,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 //var searchResults =null;
                 //if($scope.searchText !== "" || $scope.searchText !== undefined ) {
                     var searchResults = searchByProjectService.query({name:$scope.searchText});
+
                 //}
                 searchResults.$promise.then (
                     function(data) {
