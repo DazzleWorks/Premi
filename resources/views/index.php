@@ -11,6 +11,9 @@
         <title>Premi - Presentation Editor</title>
 
         <script src="assets/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+
+        <link rel="icon" href="assets/img/favicon.ico">
+
         <!-- custom -->
         <script src="assets/js/model.js"></script>
         <script src="app/scripts/scripts.js"></script>
