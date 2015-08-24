@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\User;
 use Premi\Model\Presentation;
 use Premi\Model\Slide;
 
@@ -43,7 +44,7 @@ class SlideController extends Controller
      */
     public function index($username,$projectID,$presentationID)
     {
-        $user = \Auth::user();
+        $user = User::where('username', '=', $username)->first();
 
         $projects = $user->projects();
         $project = $projects->find($projectID);
