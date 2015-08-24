@@ -52,13 +52,14 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        $slides = $presentation->slides()->all();
+        $slides = $presentation->slides()->orderBy('yIndex')->groupBy('xIndex')->all();
         
-        $orderSlides = array_values(array_sort($slides, function($value){
+        
+        /*$orderSlides = array_values(array_sort($slides, function($value){
             return $value['xIndex'];
-        }));
+        }));*/
 
-        return response()->json($orderSlides);
+        return response()->json($slides);
     }
 
     /**
