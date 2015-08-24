@@ -46,7 +46,7 @@ angular.module('app.controllers.PresentationCtrl', ['ngRoute'])
                  );
                  */
 
-                var results = presentationDataService.query({
+                var results = presentationDataService.get({
                         user: username,
                         project: projectId,
                         presentation: presentationId
@@ -55,22 +55,45 @@ angular.module('app.controllers.PresentationCtrl', ['ngRoute'])
 
                 results.$promise.then(
                     function(data){
-                        console.log(results);
+                        //console.log(results);
+                        $scope.columnsIds=[];
+                        $scope.slidesSVG=[];
+                        for (var xVal in results) {
+                            if(isNaN(xVal) === false){
+                                for (var yVal in results[xVal]) {
+                                    //console.log(xVal + ':' + results[xVal] + '; y: ' + results[xVal][yVal]);
+                                    var slideItem = {
+                                        x: xVal,
+                                        y: yVal,
+                                        src: $sce.trustAsHtml(results[xVal][yVal].svg)
+                                    };
+                                    $scope.slidesSVG.push(slideItem);
+                                    if ($scope.columnsIds.indexOf(slideItem.x) == -1) {
+                                        $scope.columnsIds.push(slideItem.x);
 
-                        for (var k = 0; k < results.length; ++k) {
-                            var slideItem ={
-                                x:results[k].xIndex,
-                                y:results[k].yIndex,
-                                src:$sce.trustAsHtml(results[k].svg)
-                            };
-                            $scope.slidesSVG.push(slideItem);
-                            if( $scope.columnsIds.indexOf(slideItem.x) == -1){
-                                $scope.columnsIds.push(slideItem.x);
+                                    }
+                                }
                             }
                         }
-                       // $scope.getColumnsIds();
-                        console.log($scope.columnsIds);
+                        console.log($scope.slidesSVG);
                         $scope.apply;
+                        //for (var k = 0; k < results.length; ++k) {
+                        //    for (var j = 0; j < results[k].length; ++j) {
+                        //        console.log("x: "+ "y: "+ " -> "+ results[k][j]);
+                               /* var slideItem = {
+                                    x: results[k].xIndex,
+                                    y: results[k].yIndex,
+                                    src: $sce.trustAsHtml(results[k].svg)
+                                };
+                                $scope.slidesSVG.push(slideItem);
+                                if ($scope.columnsIds.indexOf(slideItem.x) == -1) {
+                                    $scope.columnsIds.push(slideItem.x);
+                                }*/
+                         //   }
+                        //}
+                       // $scope.getColumnsIds();
+                       // console.log($scope.columnsIds);
+
                     });
 
 
