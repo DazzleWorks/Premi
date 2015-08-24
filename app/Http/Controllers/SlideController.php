@@ -46,7 +46,7 @@ class SlideController extends Controller
         $user = \Auth::user();
 
         $projects = $user->projects();
-        $project = $projects-find($projectID);
+        $project = $projects->find($projectID);
 
         $presentations = $project->presentation();
         $presentation = $presentations->get();
