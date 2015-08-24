@@ -58,7 +58,8 @@
 				progress: true,
 				history: true,
 				center: true,
-				transition: '<?php $_GET[transition]; ?>', // none/fade/slide/convex/concave/zoom
+				transition: '<?php $_GET[transition]?>', // none/fade/slide/convex/concave/zoom
+				theme: '<?php $_GET[theme]?>',
 
 				// Optional reveal.js plugins
 				dependencies: [

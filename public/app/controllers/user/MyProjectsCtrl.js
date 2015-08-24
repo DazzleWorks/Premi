@@ -8,7 +8,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             name: "",
             presentation: "",
             firstSlide: "",
-            transition:"slide"
+            transition:"none",
+            theme: "sky"
             // maxX: 0,
             // maxY: 0
         };
@@ -42,6 +43,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 $rootScope.currentProject.presentation = $scope.projects[0].presentation;
                 $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
                 $rootScope.currentProject.transition = $scope.projects[0].transition;
+                $rootScope.currentProject.theme = $scope.projects[0].theme;
                 // $rootScope.currentProject.maxX = $scope.projects[0].maxX;
                 // $rootScope.currentProject.maxY = $scope.projects[0].maxY;
             }else{
@@ -49,7 +51,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 $rootScope.currentProject.name = "";
                 $rootScope.currentProject.presentation = "";
                 $rootScope.currentProject.firstSlide = "";
-                $rootScope.currentProject.transition = "";
+                $rootScope.currentProject.transition = "none";
+                $rootScope.currentProject.theme = "slide";
             }
 
         };
@@ -81,19 +84,21 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             load.$promise.then (
                 function(data) {
                     for (prj in data) {
-                        if (prj !== "$promise" && prj !== "$resolved")
-                        $scope.projects.push(
-                            {
-                                id: data[prj]._id,
-                                name: data[prj].name,
-                                presentation: data[prj].presentation._id.$id,
-                                firstSlide: data[prj].presentation.slides[0]._id.$id,
-                                transition:data[prj].presentation.transition
-                                // maxX: data[prj].presentation.maxX,
-                                // maxY: data[prj].presentation.maxY
-                            }
-                        );
+                        if (isNaN(prj) === false)
+                            $scope.projects.push(
+                                {
+                                    id: data[prj]._id,
+                                    name: data[prj].name,
+                                    presentation: data[prj].presentation._id.$id,
+                                    firstSlide: data[prj].presentation.slides[0]._id.$id,
+                                    transition:data[prj].presentation.transition,
+                                    theme:data[prj].presentation.theme
+                                    // maxX: data[prj].presentation.maxX,
+                                    // maxY: data[prj].presentation.maxY
+                                }
+                            );
                     };
+                    console.log($scope.projects);
                     resetCurrentProject();
                 },
                 function(data){
