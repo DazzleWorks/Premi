@@ -99,7 +99,7 @@ class Presentation extends Eloquent
         if($yIndex == 1)
         {
             $numSlide = $slides->where('xIndex', $xIndex)->count();
-            if($numSlide == 1)
+            if($numSlide == 0)
             {
                 $slides = $slides->where('xIndex', '>', $xIndex)->get();
                 foreach($slides as $slide)
@@ -109,8 +109,7 @@ class Presentation extends Eloquent
             }
             else
             {
-                $slides = $slides->where('xIndex', $xIndex)
-                                 ->where('yIndex', '>', $yIndex)->get();
+                $slides = $slides->where('xIndex', $xIndex)->get();
                 foreach($slides as $slide)
                 {
                     $slide->decrement('yIndex');
