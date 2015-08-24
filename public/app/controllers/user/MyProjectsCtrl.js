@@ -14,28 +14,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             // maxY: 0
         };
 
-        $scope.infographics=[
-            {   title:"title1",
-                id:"a1",
-                img:"../assets/img/infographicPlaceholder.png"
-                },
-            {
-                title:"title2",
-                id:"a2",
-                img:"../assets/img/infographicPlaceholder.png"
-            },
-            {
-                title:"title3",
-                id:"a3",
-                img:"../assets/img/infographicPlaceholder.png"
-            },
-            {
-                title:"title4",
-                id:"a4",
-                img:"../assets/img/infographicPlaceholder.png"
-            }
-        ];
-
         var resetCurrentProject = function () {
             if($scope.projects[0]) {
                 $rootScope.currentProject.id = $scope.projects[0].id;
@@ -98,8 +76,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                                 }
                             );
                     };
-                    console.log($scope.projects);
-                    resetCurrentProject();
                 },
                 function(data){
                     resetCurrentProject();
@@ -157,23 +133,43 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
         };
 
-        // $scope.deleteInfographic = function (id, index){
-        //     var modalInstance = $modal.open({
-        //         templateUrl: 'app/templates/deleteInfographic.html',
-        //         controller: 'DeleteInfographicCtrl',
-        //         windowClass: 'myModal'
-        //     });
-        //     modalInstance.result.then(function (data) {
-        //         //$scope.infographics;
-        //         $scope.infographics.forEach(function(element, index, array){
-        //             if(element.id === id){
-        //                 delete $scope.infographics[element];
-        //             }
-        //         });
-        //         $scope.apply;
-        //         $scope.infographics.splice(index, 1);
-        //         //$modalInstance.close();
-        //     });
+        /**
+         * calculate the right size for SVG using the window size
+         * @param: $scope.currentGenericProject
+         * @param: $window, angular variable for get window size informations
+         * @param: svgString, contains she SVG entirecode
+         * @return: new SVG string
+         */
+        //$scope.adjustSVGViewbox = function(svgString){    //da chiamare anche al resize della pagina
+        //    //1 calcolo dimensione finestra
         //
-        // };
+        //    //2 trovo larghezza in pixel ed altezza = larghezza*3/4 del ViewBox
+        //
+        //
+        //    //3 se esiste l'attributo  __ viewBox="0 0 800 600" __ aggiorno le dimensioni, altrimenti lo aggiungo
+        //    $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
+        //    var indexBeginWidth = svgString.lastIndexOf("width=\"")+7;
+        //    var indexEndWidth=    svgString.indexOf(" height")-2;
+        //    var indexBeginHeight = svgString.lastIndexOf("height=\"")+8;
+        //    var indexEndHeight=    svgString.indexOf("\" xml:space")-1;
+        //    $scope.originalWidth=svgString.substring(indexBeginWidth,indexEndWidth);
+        //    $scope.originalHeight=svgString.substring(indexBeginHeight,indexEndHeight);
+        //    svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ ($scope.SVGWidth * 3/4) +"' class='svg-content "+ $rootScope.currentGenericProject.theme +"' ");
+
+            //console.log( $scope.originalHeight);
+            /*
+             *   PEZZO DA AGGIUNGERE
+
+             width="156px" height="117.064px"
+             viewBox="0 0 156 117.064"
+             preserveAspectRatio="xMidYMid"
+
+
+             * */
+        //
+        //    return svgString;
+        //};
+
+
+
 }]);

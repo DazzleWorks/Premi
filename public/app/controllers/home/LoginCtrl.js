@@ -53,7 +53,6 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
                 },
                 // loginService.login() unsuccess
                 function(data){
-                    $modalInstance.close();
                 });
         };
 
