@@ -47,7 +47,10 @@
                 </section>
 
 
-				<section data-markdown></section>
+				<section data-markdown>
+				    <p>thank you</p>
+				    <img src="assets/img/logo.png" width="50%">
+				</section>
 
 
 			</div>
