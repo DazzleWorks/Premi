@@ -8,16 +8,16 @@ and open the template in the editor.
     Author     : fabio
 */
 
-body {
-    font-family: "lato";
+body{
+    background-image: url(../img/texture.png) !important;
 }
 
 #homePage {
     min-height: 800px;
     margin-top:-10px;
     /*background-color: #8A748F !important;*/
-    background-color: #ffffff !important;
-    background:url("../img/flatBackground.png");
+    /*background-color: #ffffff !important;*/
+    /*background:url("../img/flatBackground.png");*/
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center top;
@@ -25,7 +25,7 @@ body {
 }
 
 #homePageTitle{
-    color: #FFF;
+    color: #333333;
 }
 
 .homePageContent {
@@ -276,7 +276,7 @@ body {
 
 .infographicsList ul {
     padding-left: 0.9375rem;
-    padding-right: 0.9375rem;    
+    padding-right: 0.9375rem;
 }
 
 .infographicsList img{
@@ -314,7 +314,7 @@ section.homeCheckbox label {
     display: inline-block;
     position: relative;
     /*background: rgb(189, 189, 189);*/
-    background: rgb(88, 88, 88);
+    background: #333333;
     border-radius: 30px;
 
     transition: background-color 0.4s;
@@ -340,13 +340,14 @@ input:checked + label:after {
 }
 
 .mainSearchBar{
+    border: 1px solid #333333 !important;
     text-align: center !important;
 }
 
 section.homeCheckbox p {
     /*font: normal 8px/40px Arial;*/
     /*color: rgb(189, 189, 189);*/
-    color: rgb(88, 88, 88);
+    color: #333333;
     display: none;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -415,11 +416,11 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 #searchResults .searchResultItem >img{
     min-height: 100px;
     width: 100%;
-
 }
+
 #searchResults .searchResultItem >a{
     width: 100%;
-    color: #BDBDBD;
+    color: #333333;
     /*text-transform: capitalize;*/
 }
 
@@ -430,8 +431,4 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 
 #backButtonContainer{
     /*float: right;*/
-}
-
-body{
-    background-image: url(../img/texture.jpg) !important;
 }

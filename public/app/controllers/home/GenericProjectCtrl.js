@@ -90,7 +90,6 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                 var placeholder=$rootScope.currentGenericProject.svg;
                 $rootScope.currentGenericProject.svg="";
                 $rootScope.currentGenericProject.svg=placeholder.toString().replace(oldHeight.toString(), $scope.SVGWidth *3/4);
-                console.log(oldHeight);
                 $scope.apply;
         });
 
@@ -106,7 +105,6 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide", username:""};
             for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
                 if($scope.userOfInterest.projects[k]._id.$id === id) {
-                    console.log($scope.userOfInterest.projects[k]);
                     obj.id=$scope.userOfInterest.projects[k]._id.$id;
                     obj.name=$scope.userOfInterest.projects[k].name;
                     obj.presentation=$scope.userOfInterest.projects[k].presentation;
