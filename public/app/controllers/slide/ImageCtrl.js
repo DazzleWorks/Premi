@@ -106,6 +106,10 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute'])
             {
               url: '/assets/users/img/Superheroes-circle-thor.png',
               name: 'thor'
+            },
+            {
+              url: '/assets/users/img/logo.png',
+              name: 'logos'
             }
         ];
     }]);
