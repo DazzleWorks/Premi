@@ -127,8 +127,11 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 searchResults.$promise.then (
                     function(data) {
                         if(data[0] !== undefined) {
+                            console.log(searchResults);
                             var result = {};
                             result.username = searchResults[0].username;
+                            result.presentationId = searchResults[0].presentationId;
+                            result.projectId=searchResults[0].projectId;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
                             //$scope.resetSearchResults();
