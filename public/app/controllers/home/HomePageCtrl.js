@@ -123,12 +123,15 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $scope.search = function () {
             $scope.resetSearchResults();
             if ($scope.checked === false) {     //BY USERNAME
-                var searchResults = searchByUserService.query({username:$scope.searchText});
+                var searchResults = searchByUserService.get({username:$scope.searchText});
                 searchResults.$promise.then (
                     function(data) {
                         if(data[0] !== undefined) {
+                            console.log(searchResults);
                             var result = {};
                             result.username = searchResults[0].username;
+                            result.presentationId = searchResults[0].presentationId;
+                            result.projectId=searchResults[0].projectId;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
                             //$scope.resetSearchResults();
@@ -142,7 +145,7 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             else if ($scope.checked === true) { // BY PROJECT NAME
                 //var searchResults =null;
                 //if($scope.searchText !== "" || $scope.searchText !== undefined ) {
-                    var searchResults = searchByProjectService.query({name:$scope.searchText});
+                    var searchResults = searchByProjectService.query({name:$scope.searchText, });
 
                 //}
                 searchResults.$promise.then (

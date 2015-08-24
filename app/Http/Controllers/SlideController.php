@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\User;
 use Premi\Model\Presentation;
 use Premi\Model\Slide;
 
@@ -43,16 +44,19 @@ class SlideController extends Controller
      */
     public function index($username,$projectID,$presentationID)
     {
-        $user = \Auth::user();
-
+        $user = User::where('username', '=', $username)->first();
+        
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        $slides = $presentation->slides()->get();
-        $orderSlides = $slides->orderBy('xIndex', 'yIndex')->get();
+        $slides = $presentation->slides()->all();
+        
+        $orderSlides = array_values(array_sort($slides, function($value){
+            return $value['xIndex'];
+        }));
 
         return response()->json($orderSlides);
     }

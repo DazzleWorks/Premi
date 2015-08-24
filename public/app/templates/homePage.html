@@ -29,7 +29,7 @@
             <div id="searchResults" class="row" ng-show="checked">
                 <ul class="small-10 small-offset-1 columns" >
                     <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns">
-                        <a href="/presentation.php?user={{project.username}}&presentationId={{project.presentationId}}&id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}" target="_blank">
+                        <a href="/presentation.php?user={{project.username}}&presentationId={{project.presentationId}}&id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}&slideNumber=true" target="_blank">
                         <img src="../assets/img/google-now.jpg"/>
                             <span>{{project.name}}</span>
                         </a>

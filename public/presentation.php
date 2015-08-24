@@ -4,7 +4,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Premi - Presentation Editor</title>
-
+        <style>
+            div.slide-number{
+                font-size:85% !important;
+            }
+        </style>
 		<!-- <meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
 
