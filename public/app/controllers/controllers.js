@@ -3,6 +3,7 @@
 angular.module('app.controllers',
     [
         'ngRoute',
+        'angularFileUpload',
         'app.controllers.DeleteInfographicCtrl',
         'app.controllers.DeleteProjectCtrl',
         'app.controllers.ForgotPasswordCtrl',
