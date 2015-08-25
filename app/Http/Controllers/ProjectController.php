@@ -142,4 +142,45 @@ class ProjectController extends Controller
          
          return response()->json($usersProject);     
      }
+     
+     /**
+      * Returns all the media files of the authenticated user
+      * @param $username, $projectID
+      * @return json
+      */
+     public function returnAllFiles($username, $projectID){
+         $directory = $username.'/'.$projectID;
+         $files = Storage::files($directory);
+         return $files;
+     }
+     
+     /**
+      * Deletes selected media file of the authenticated user
+      * @param $username, $projectID, $filename
+      */
+     public function deleteSelectedFile($username, $projectID, $filename){
+         $directory = $username.'/'.$projectID;
+         Storage::delete($directory.'/'.$filename);
+     }
+     
+     /**
+      * Upload media for the selected project
+      * @return json
+      */
+     public function uploadMedia($username, $projectID){
+         $file = Request::file('filefield');
+         if($file->isValid()){
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getFileOriginialExtension();
+            if(Storage::exists($username.'/'.$projectID.'/'.$filename.$extension)){
+                 return response()->json(['error' => 'File already exists, please change the name before uploading']);
+            }
+            else{
+                 Storage::put($username.'/'.$projectID.'/'.$filename.$extension, File::get($file));
+            }
+         }else{
+             return $file->getError();
+         }
+     }
+     
 }
