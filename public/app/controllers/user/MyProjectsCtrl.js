@@ -9,8 +9,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             presentation: '',
             firstSlide: '',
             theme: 'sky',
-            transition: 'slide'
-            // svg: ''
+            transition: 'slide',
+            svg: ''
         };
 
         var resetCurrentProject = function() {
@@ -62,14 +62,16 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 function(data) {
                     for (var prj in data) {
                         if (isNaN(prj) === false)
+                            console.log(data[prj]);
                             $scope.projects.push(
                                 {
-                                    id: data[prj]._id,
+                                    id: data[prj].projectID,
                                     name: data[prj].name,
-                                    presentation: data[prj].presentation._id.$id,
-                                    firstSlide: data[prj].presentation.slides[0]._id.$id,
-                                    theme: data[prj].presentation.theme,
-                                    transition: data[prj].presentation.transition,
+                                    presentation: data[prj].presentationID,
+                                    firstSlide: data[prj].slideID,
+                                    theme: data[prj].theme,
+                                    transition: data[prj].transition,
+                                    svg: $sce.trustAsHtml($scope.adjustSVGViewbox(data[prj].firstSvg))
                                     // svg: $sce.trustAsHtml($scope.adjustSVGViewbox($scope.userOfInterest.projects[obj].presentation.slides[0].svg))
                                 }
                             );
