@@ -11,10 +11,14 @@
         <title>Premi - Presentation Editor</title>
 
         <script src="assets/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+
+        <link rel="icon" href="assets/img/favicon.ico">
+
         <!-- custom -->
         <script src="assets/js/model.js"></script>
         <script src="app/scripts/scripts.js"></script>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+
 
         <!-- css -->
         <link href="assets/libs/fileTree/fileTree.css" rel="stylesheet" type="text/css">
@@ -43,6 +47,7 @@
         <script src="assets/libs/angular.min.js" type="text/javascript"></script>
         <script src="assets/libs/angular-route.min.js" type="text/javascript"></script>
         <script src="assets/libs/angular-resource.min.js" type="text/javascript"></script>
+        <script src="assets/libs/angular-file-uploader/angular-file-upload.min.js" type="text/javascript"></script>
         <script src="assets/libs/fabric.js/dist/fabric.min.js" type="text/javascript"></script>
         <script src="assets/libs/fastclick.js" type="text/javascript"></script>
         <script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
