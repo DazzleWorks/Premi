@@ -53,6 +53,9 @@
         <script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
         <script src="assets/libs/modernizr.js" type="text/javascript"></script>
 
+        <!-- Foundation ProgressBar -->
+        <script src="assets/libs/foundation/js/mm-foundation-progressBar.js" type="text/javascript"></script>
+
         <!-- custom -->
         <script src="app/app.js" type="text/javascript"></script>
         <script src="app/controllers/controllers.js" type="text/javascript"></script>

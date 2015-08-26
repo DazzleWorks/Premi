@@ -34,7 +34,7 @@ class UserController extends Controller
             return response()->json(['status' => 'utente non loggato']);
         }
 
-        $data = User::where('username', $username)->get(['_id','email','firstName','lastName','username']);
+        $data = User::where('username', $username)->get(['email','firstName','lastName','username']);
 
         return response()->json($data);
     }

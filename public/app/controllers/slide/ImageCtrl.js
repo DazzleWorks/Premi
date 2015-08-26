@@ -1,4 +1,4 @@
-angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload'])
+angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload', 'mm.foundation.progressbar'])
 
     .controller('ImageCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
 
@@ -67,6 +67,8 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload'])
         //     };
         // };
 
+
+
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
@@ -112,7 +114,7 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload'])
               name: 'logos'
             }
         ];
-    }]) .controller('AppController', ['$scope', 'FileUploader', function($scope, FileUploader) {
+    }]) .controller('AppController', ['$scope', 'FileUploader', function($scope,FileUploader) {
         var uploader = $scope.uploader = new FileUploader({
             url: 'upload.php'
         });

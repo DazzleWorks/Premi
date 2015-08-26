@@ -41,7 +41,7 @@ class ProjectController extends Controller
     public function index($username)
     {
         $user = \Auth::user();
-        $projects = $user->projects()->get();
+        $projects = $user->projects()->get(['_id','name','presentation._id','presentation.theme','presentation.transition','presentation.slides.0.svg']);
 
         return response()->json($projects);
     }
