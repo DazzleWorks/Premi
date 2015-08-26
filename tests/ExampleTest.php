@@ -7,14 +7,16 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ExampleTest extends TestCase
 {
     use WithoutMiddleware;
+    
     /**
-     * A basic functional test example.
-     *
+     * A basic functional test example
      * @return void
      */
-    public function testApplication()
+    public function testBasicUsername()
     {
-        $this->post('api/user', ['username' => 'valexbrl'])
-             ->seeJson(['created' => true ]);
+        $this->get('api/user/valexbrl', ['username' => 'valexbrl'])
+             ->seeJson([
+                 'created' => true,
+             ]);
     }
 }

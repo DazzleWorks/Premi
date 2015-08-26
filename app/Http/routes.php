@@ -39,7 +39,7 @@ Route::get('/', function () {
 });
 
 Route::get('check', function(){
-   echo Auth::user(); 
+    echo Auth::user(); 
 });
 
 // Authentication routes...
@@ -55,7 +55,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::controllers([
    'password' => 'Auth\PasswordController',
 ]);
-
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 
@@ -77,7 +76,7 @@ Route::get('/logout', function(){
 });
 
 
-Route::group(array('prefix' => 'api'), function() {
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     // User routes...
     Route::resource('user', 'UserController',
                     ['except' => ['index', 'store', 'create', 'edit']]);
@@ -90,13 +89,14 @@ Route::group(array('prefix' => 'api'), function() {
     Route::resource('user.project.infographic', 'InfographicController',
                     ['except' => ['create', 'edit']]);
     
-    //Presentation routes..
+    // Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
                     ['except' => ['index', 'store', 'create', 'edit']]);
     
     // Slide routes...
-    //Find the correct ID of a slide by xIndex and yIndex
-    Route::get('user/{username}/project/{projectID}/presentation/{presentationID}/slide/find', 'SlideController@findByAxis');
+    // Find the correct ID of a slide by xIndex and yIndex
+    Route::get('user/{username}/project/{projectID}/presentation/{presentationID}/slide/find', 
+               'SlideController@findByAxis');
     Route::resource('user.project.presentation.slide', 'SlideController',
                     ['except' => ['create', 'edit']]);
 });

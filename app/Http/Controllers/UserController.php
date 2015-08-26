@@ -29,19 +29,18 @@ class UserController extends Controller
      * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
-    public function show($username){
-        if(!\Auth::user()) {
-            return response()->json(['status' => 'utente non loggato']);
-        }
+    public function show($username)
+    {
+        $user = \Auth::user(); 
 
-        $data = User::where('username', $username)->get(['_id','email','firstName','lastName','username']);
+        $data = $user->get(['email','firstName','lastName','username']);
 
         return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
@@ -56,7 +55,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['status' => true]);;
+        return response()->json(['status' => true]);
     }
 
     /**
