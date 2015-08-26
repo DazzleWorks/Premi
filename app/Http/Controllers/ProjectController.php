@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\User;
 use Premi\Model\Project;
 use Premi\Events\ProjectWasCreated;
 
@@ -41,44 +42,54 @@ class ProjectController extends Controller
     public function index($username)
     {
         $user = \Auth::user();
-        $projects = $user->projects()->get(['_id','name','presentation._id','presentation.theme','presentation.transition','presentation.slides.0.svg']);
-
-        return response()->json($projects);
+        
+        $projects = $user->projects()->get();
+        
+        $data = array();
+        foreach($projects as $project)
+        {
+            array_push($data, Project::getParamByProject($project));
+        }
+        
+        return response()->json($data);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
     public function store(Request $request,$username)
     {
         $user = \Auth::user();
+        
         $name  = $request->get('name');
-
-        $project = new Project(['name' => $name]);
-        $project = $user->projects()->save($project);
+        $newProject = new Project(['name' => $name]);
+        $project = $user->projects()->save($newProject);
         
         $pathname = $username.'/'.$project->_id;
         
         \Illuminate\Support\Facades\Storage::makeDirectory($pathname);
         
         event(new ProjectWasCreated($project));
+        
+        $data = Project::getParamByProject($project);
 
-        return response()->json($project);
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
+     * @param String $projectID: the ID of a project
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
+     
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
@@ -92,12 +103,13 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
+     * @param String $projectID: the ID of a project
      * @return Illuminate\Http\Response
      */
     public function destroy($username,$projectID)
     {
         $user = \Auth::user();
+        
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
@@ -106,81 +118,92 @@ class ProjectController extends Controller
         return response()->json(['status' => true]);
     }
     
-     /**
-      * Search for projects by username
-      * @param Illuminate\Http\Request
-      * @return Response
-      */
-     public function searchByUsername(Request $request){
+    /**
+     * Search for projects by username
+     * @param Illuminate\Http\Request $request
+     * @return Illuminate\Http\Response
+     */
+    public function searchByUsername(Request $request){
         $username = $request -> get('username');
         
-        $user = \Premi\Model\User::where('username', '=', $username)->groupBy()
-                ->get(array('username','projects._id','projects.name','projects.presentation._id','projects.presentation.slides.0.svg'));
+        $user = User::where('username', '=', $username)->groupBy()
+                               ->get(['username','projects._id','projects.name',
+                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
+        
         return response()->json($user);
-     }
+    }
      
-     /**
-      * Search for projects by the projects name
-      * @param Illuminate\Http\Request
-      * @return Response
-      */
-     public function searchByProjectsName(Request $request){
-         $projectName = $request->get('name');
+    /**
+     * Search for projects by the projects name
+     * @param Illuminate\Http\Request $request
+     * @return Illuminate\Http\Response
+     */
+    public function searchByProjectsName(Request $request){
+        $projectName = $request->get('name');
          
-         $usersProject = \Premi\Model\User::where('projects.name','=',$projectName)->get(array('username','projects._id','projects.name','projects.presentation._id','projects.presentation.slides.0.svg'));
+        $searchProject = User::where('projects.name', '=', $projectName)
+                               ->get(['username','projects._id','projects.name',
+                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
          
-         $usersProject = json_decode($usersProject,true);
+        $usersProject = json_decode($searchProject,true);
          
-         for($i=0; $i<count($usersProject);$i++){
-             for($j=0; $j<count($usersProject[$i]['projects']); $j++){
-                 if($usersProject[$i]['projects'][$j]['name']!=$projectName){
-                    array_splice($usersProject[$i]['projects'], $j,1);
-                    $j--;
-                 }
-             }
-         }
-         
-         return response()->json($usersProject);     
-     }
-     
-     /**
-      * Returns all the media files of the authenticated user
-      * @param $username, $projectID
-      * @return json
-      */
-     public function returnAllFiles($username, $projectID){
-         $directory = $username.'/'.$projectID;
-         $files = Storage::files($directory);
-         return $files;
-     }
-     
-     /**
-      * Deletes selected media file of the authenticated user
-      * @param $username, $projectID, $filename
-      */
-     public function deleteSelectedFile($username, $projectID, $filename){
-         $directory = $username.'/'.$projectID;
-         Storage::delete($directory.'/'.$filename);
-     }
-     
-     /**
-      * Upload media for the selected project
-      * @return json
-      */
-     public function uploadMedia($username, $projectID){
-         $file = Request::file('filefield');
-         if($file->isValid()){
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getFileOriginialExtension();
-            if(Storage::exists($username.'/'.$projectID.'/'.$filename.$extension)){
-                 return response()->json(['error' => 'File already exists, please change the name before uploading']);
+        for($i=0; $i<count($usersProject);$i++){
+            for($j=0; $j<count($usersProject[$i]['projects']); $j++){
+                if($usersProject[$i]['projects'][$j]['name']!=$projectName){
+                   array_splice($usersProject[$i]['projects'], $j,1);
+                   $j--;
+                }
             }
-            else{
-                 Storage::put($username.'/'.$projectID.'/'.$filename.$extension, File::get($file));
-            }
-         }else{
-             return $file->getError();
-         }
-     }
+        }
+         
+        return response()->json($usersProject);     
+    }
      
+    /**
+     * Returns all the media files of the authenticated user
+     * @param $username: the username of a user
+     * @param $projectID: the ID of a project
+     * @return json
+     */
+    public function returnAllFiles($username, $projectID){
+        $directory = $username.'/'.$projectID;
+        $files = Storage::files($directory);
+        
+        return $files;
+    }
+     
+    /**
+     * Deletes selected media file of the authenticated user
+     * @param $username: the username of a user 
+     * @param $projectID: the ID of a project
+     * @param $filename: the name of the file to delete
+     */
+    public function deleteSelectedFile($username, $projectID, $filename){
+        $directory = $username.'/'.$projectID;
+        Storage::delete($directory.'/'.$filename);
+    }
+     
+    /**
+     * Upload media for the selected project
+     * @param $username: the username of a user 
+     * @param $projectID: the ID of a project
+     * @return json
+     */
+    public function uploadMedia($username, $projectID){
+        $file = Request::file('filefield');
+        
+        if($file->isValid()){
+           $filename = $file->getClientOriginalName();
+           $extension = $file->getFileOriginialExtension();
+           if(Storage::exists($username.'/'.$projectID.'/'.$filename.$extension)){
+                return response()->json(['error' => 'File already exists, please change the name before uploading']);
+           }
+           else{
+                Storage::put($username.'/'.$projectID.'/'.$filename.$extension, File::get($file));
+           }
+        }
+        else{
+            return $file->getError();
+        }
+    } 
 }

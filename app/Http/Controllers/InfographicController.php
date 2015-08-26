@@ -26,7 +26,7 @@ class InfographicController extends Controller
     /**
      * Display a listing of the resource.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
+     * @param String $projectID: the ID of a project
      * @return Illuminate\Http\Response
      */
     public function index($username,$projectID)
@@ -36,38 +36,39 @@ class InfographicController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
         
-        $infographics = $project->infographics()->get();
+        $infographics = $project->infographics()->get(['_id', 'name', 'path']);
         
         return response($infographics);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
+     * @param String $projectID: the ID of a project
      * @return Illuminate\Http\Response
      */
     public function store(Request $request,$username,$projectID)
     {
         $user = \Auth::user();
         
-        $infographic = new Infographic(array('name' => $request->get('name'), 
-                                             'path' => $request->get('path')));
+        $newInfographic = new Infographic(array('name' => $request->get('name'), 
+                                                'path' => $request->get('path')));
         
         $projects = $user->projects();
         $project = $projects->find($projectID);
         
-        $infographic = $project->infographics()->save($infographic);
-               
+        $infographic = $project->infographics()->save($newInfographic);
+        $infographic = $infographic->get(['_id', 'name', 'path']);
+        
         return response()->json($infographic);
     }
 
     /**
      * Display the specified resource.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $infographicID: the id of a infographic
+     * @param String $projectID: the ID of a project
+     * @param String $infographicID: the ID of a infographic
      * @return Illuminate\Http\Response
      */
     public function show($username,$projectID,$infographicID)
@@ -79,16 +80,17 @@ class InfographicController extends Controller
                 
         $infographics = $project->infographics();
         $infographic = $infographics->find($infographicID);
+        $infographic = $infographic->get(['_id', 'name','path']);
         
         return response()->json($infographic);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $infographicID: the id of a infographic
+     * @param String $projectID: the ID of a project
+     * @param String $infographicID: the ID of a infographic
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username,$projectID,$infographicID)
@@ -112,8 +114,8 @@ class InfographicController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $infographicID: the id of a infographic
+     * @param String $projectID: the ID of a project
+     * @param String $infographicID: the ID of a infographic
      * @return Illuminate\Http\Response
      */
     public function destroy($username,$projectID,$infographicID)

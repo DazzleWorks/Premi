@@ -38,8 +38,8 @@ class SlideController extends Controller
     /**
      * Display a listing of the resource.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function index($username,$projectID,$presentationID)
@@ -52,22 +52,18 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        $slides = $presentation->slides()->orderBy('yIndex')->groupBy('xIndex')->all();
-        
-        
-        /*$orderSlides = array_values(array_sort($slides, function($value){
-            return $value['xIndex'];
-        }));*/
+        $slides = $presentation->slides()->orderBy('yIndex')->groupBy('xIndex')
+                                              ->all(['xIndex', 'yIndex', 'svg']);
 
         return response()->json($slides);
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function store(Request $request,$username,$projectID,$presentationID)
@@ -77,8 +73,8 @@ class SlideController extends Controller
 
         $user = \Auth::user();
 
-        $slide = new Slide(['xIndex' => $xIndex,
-                            'yIndex' => $yIndex]);
+        $newSlide = new Slide(['xIndex' => $xIndex,
+                               'yIndex' => $yIndex]);
 
         $projects = $user->projects();
         $project = $projects->find($projectID);
@@ -88,7 +84,8 @@ class SlideController extends Controller
 
         Presentation::incrementIndex($presentation,$xIndex,$yIndex);
 
-        $presentation->slides()->save($slide);
+        $presentation->slides()->save($newSlide);
+        $slide = $newSlide->get(['xIndex', 'yIndex']);
 
         return response()->json($slide);
     }
@@ -96,9 +93,9 @@ class SlideController extends Controller
     /**
      * Display the specified resource.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
-     * @param String $slideID: the id of a slide
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
+     * @param String $slideID: the ID of a slide
      * @return Illuminate\Http\Response
      */
     public function show($username,$projectID,$presentationID,$slideID)
@@ -119,11 +116,11 @@ class SlideController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
-     * @param String $slideID: the id of a slide
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
+     * @param String $slideID: the ID of a slide
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username,$projectID,$presentationID,$slideID)
@@ -156,9 +153,9 @@ class SlideController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
-     * @param String $slideID: the id of a slide
+     * @param String $projectID: the id ID a project
+     * @param String $presentationID: the ID of a presentation
+     * @param String $slideID: the ID of a slide
      * @return Illuminate\Http\Response
      */
     public function destroy($username,$projectID,$presentationID,$slideID)
@@ -186,10 +183,10 @@ class SlideController extends Controller
 
     /**
      * Return the ID of a slide by its X and Y position.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function findByAxis(Request $request,$username,$projectID,$presentationID)

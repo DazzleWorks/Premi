@@ -29,7 +29,7 @@ trait AuthenticatesUsers
             return response()->json(['username' => $username]); 
         }
 
-        return response()->json(['status' => 'credenziali errate']); 
+        return response()->json(['status' => 'entered credentials incorrect']); 
     }
 
     /**

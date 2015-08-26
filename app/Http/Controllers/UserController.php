@@ -1,11 +1,8 @@
 <?php
-
 namespace Premi\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
-
 /**
  * @file: app/Http/Controller/UserController.php
  * @author: DazzleWorks
@@ -21,7 +18,6 @@ use Premi\Model\User;
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+
  */
-
 class UserController extends Controller
 {
     /**
@@ -29,36 +25,28 @@ class UserController extends Controller
      * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
-    public function show($username){
-        if(!\Auth::user()) {
-            return response()->json(['status' => 'utente non loggato']);
-        }
-
-        $data = User::where('username', $username)->get(['email','firstName','lastName','username']);
-
+    public function show($username)
+    {
+        $user = \Auth::user(); 
+        $data = $user->get(['email','firstName','lastName','username']);
         return response()->json($data);
     }
-
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username)
     {
         $user = \Auth::user();
-
         $user->email = $request->get('email');
         $user->firstName = $request->get('firstName');
         $user->secondName = $request->get('secondName');
         $user->password = $request->get('password');
-
         $user->save();
-
-        return response()->json(['status' => true]);;
+        return response()->json(['status' => true]);
     }
-
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
@@ -67,9 +55,7 @@ class UserController extends Controller
     public function destroy($username)
     {
         $user = \Auth::user();
-
         $user->delete();
-
         return response()->json(['status' => true]);;
     }
 }

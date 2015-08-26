@@ -54,5 +54,18 @@ class Project extends Eloquent
     public function infographics() {
         return $this->embedsMany(Infographic::class);
     }
+    
+    
+    public static function getParamByProject($project) {
+        $data = (['projectID' => $project->_id, 
+                  'name' => $project->name,
+                  'presentationID' => $project->presentation->_id,
+                  'theme' => $project->presentation->theme,
+                  'transition' => $project->presentation->transition,
+                  'slideID' => $project->presentation->slides[0]->_id,
+                  'firstSvg' => $project->presentation->slides[0]->svg]);
+        
+        return $data;
+    }
 }
 

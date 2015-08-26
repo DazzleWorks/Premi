@@ -26,8 +26,8 @@ class PresentationController extends Controller
     /**
      * Display the specified resource.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function show($username,$projectID,$presentationID)
@@ -37,17 +37,18 @@ class PresentationController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()->first(['users.projects.presentation._id','theme','transition']);
+        $presentation = $project->presentation()
+                                ->first(['_id','theme','transition']);
 
         return response()->json($presentation);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Illuminate\Http\Request
+     * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function update(Request $request,$username,$projectID,$presentationID)
@@ -69,8 +70,8 @@ class PresentationController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
-     * @param String $projectID: the id of a project
-     * @param String $presentationID: the id of a presentation
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
      * @return Illuminate\Http\Response
      */
     public function destroy($username,$projectID,$presentationID)
