@@ -40,7 +40,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             };
             for (var obj in $scope.projects) {
                 if ($scope.projects[obj].id === id)
-                    prj = $scope.projects[k];
+                    prj = $scope.projects[obj];
             }
             return prj;
         };
