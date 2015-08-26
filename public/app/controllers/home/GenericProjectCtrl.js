@@ -9,9 +9,9 @@
  * +---------+------------+---------------+--------------------------------------+------------------------------+
  * |  1.0.0  | 2015-07-1  | Carraro Nicola| $rootScope.currentGenericProject     | create class                 |
  * +---------+------------+---------------+--------------------------------------+------------------------------+
- * |  1.0.0  | 2015-07-3  |  Ros Fabio    | setCurrentGenericProject()           | add Feature                  |
+ * |  1.0.0  | 2015-07-3  | Ros Fabio     | setCurrentGenericProject()           | add Feature                  |
  * +---------+------------+---------------+--------------------------------------+------------------------------+
- * |  0.1.0  | 2015-07-5  |  Ros Fabio    | adjustSVGViewbox(), findProjectById()| create class                 |
+ * |  0.1.0  | 2015-07-5  | Ros Fabio     | adjustSVGViewbox(), findProjectById()| create class                 |
  * +---------+------------+---------------+--------------------------------------+------------------------------+
  * |  1.0.0  | 2015-07-5  | Carraro Nicola| Angular.bind('resize')               | add Feature                  |
  * +---------+------------+---------------+--------------------------------------+------------------------------+
@@ -21,19 +21,15 @@
 angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
 
     .controller('GenericProjectCtrl', ['$scope', '$rootScope', '$modal', '$sce', '$window', '$document', function($scope, $rootScope, $modal, $sce, $window, $document) {
-       // console.log($scope.userOfInterest.projects);
-
 
         $rootScope.currentGenericProject = {
-            id: "",
-            name: "",
-            presentation: "",
-            firstSlide: "",
-            theme:"sky",
-            transition:"none",
-            svg:""
-            // maxX: 0,
-            // maxY: 0
+            id: '',
+            name: '',
+            presentation: '',
+            firstSlide: '',
+            theme: 'sky',
+            transition: 'none',
+            svg: ''
         };
 
         /**
@@ -43,34 +39,27 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
          * @param: svgString, contains she SVG entirecode
          * @return: new SVG string
          */
+
         $scope.adjustSVGViewbox = function(svgString){    //da chiamare anche al resize della pagina
-            //1 calcolo dimensione finestra
+            // 1) find window's size
+            // 2) set newWidth = SVGWidth * x / y
+            // 3) replace the old size with the new size --> viewBox = "0 0 width height"
 
-            //2 trovo larghezza in pixel ed altezza = larghezza*3/4 del ViewBox
+            var svgBoxWidth = document.getElementById('presentationFrontSvgContainer').offsetWidth;
 
+            var originalWidth = $(svgString).attr("width");
+            var originalHeight = $(svgString).attr("height");
 
-            //3 se esiste l'attributo  __ viewBox="0 0 800 600" __ aggiorno le dimensioni, altrimenti lo aggiungo
-            $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
-            var indexBeginWidth = svgString.lastIndexOf("width=\"")+7;
-            var indexEndWidth=    svgString.indexOf(" height")-2;
-            var indexBeginHeight = svgString.lastIndexOf("height=\"")+8;
-            var indexEndHeight=    svgString.indexOf("\" xml:space")-1;
-            $scope.originalWidth=svgString.substring(indexBeginWidth,indexEndWidth);
-            $scope.originalHeight=svgString.substring(indexBeginHeight,indexEndHeight);
-            svgString = svgString.replace("svg","svg viewBox='0 0 "+ $scope.originalWidth +" "+ $scope.originalHeight +" ' width='100%' height='"+ ($scope.SVGWidth * 3/4) +"' class='svg-content "+ $rootScope.currentGenericProject.theme +"' ");
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(svgString, "image/svg+xml");
 
-            //console.log( $scope.originalHeight);
-            /*
-            *   PEZZO DA AGGIUNGERE
+            doc.firstChild.setAttribute('width', svgBoxWidth);
+            doc.firstChild.setAttribute('height', (svgBoxWidth * 2 / 3));
+            doc.firstChild.setAttribute('class', $rootScope.currentGenericProject.theme);
 
-              width="156px" height="117.064px"
-              viewBox="0 0 156 117.064"
-              preserveAspectRatio="xMidYMid"
+            var svgString = doc.firstChild.outerHTML;
 
-
-            * */
-
-             return svgString;
+            return svgString;
         };
 
         /**
@@ -82,15 +71,9 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
          */
 
         angular.element($window).bind('resize', function () {   //non va
-                $scope.SVGWidth=document.getElementById('presentationFrontSvgContainer').clientWidth;
-                var indexBeginHeight = $rootScope.currentGenericProject.svg.toString().lastIndexOf("height=\"")+8;
-                var indexEndHeight=    $rootScope.currentGenericProject.svg.toString().indexOf("\" xml:space")-1;
-                var oldHeight=$rootScope.currentGenericProject.svg.toString().substring(indexBeginHeight,indexEndHeight);
-                //console.log(/*$rootScope.currentGenericProject.svg.toString().replace(oldHeight, $scope.SVGWidth *3/4)*/$scope.SVGWidth *3/4);
-                var placeholder=$rootScope.currentGenericProject.svg;
-                $rootScope.currentGenericProject.svg="";
-                $rootScope.currentGenericProject.svg=placeholder.toString().replace(oldHeight.toString(), $scope.SVGWidth *3/4);
-                $scope.apply;
+            var svgBoxWidth = document.getElementById('presentationFrontSvgContainer').offsetWidth;
+            document.getElementById('presentationFrontSvgContainer').getElementsByTagName('svg')[0].setAttribute('width', svgBoxWidth);
+            document.getElementById('presentationFrontSvgContainer').getElementsByTagName('svg')[0].setAttribute('height', svgBoxWidth * 2 / 3);
         });
 
         /**
@@ -98,72 +81,73 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
          * @param: id - the project id
          * @return: the entire project in a json object or null
          */
-         $scope.findProjectById = function(id){
-             //console.log($scope.userOfInterest.projects);
 
-            var k;
-            var obj = {id: "", name: "", presentation: "",firstSlide: "", theme:"sky", transition:"slide", username:""};
-            for (k = 0; k < $scope.userOfInterest.projects.length; ++k) {
-                if($scope.userOfInterest.projects[k]._id.$id === id) {
-                    obj.id=$scope.userOfInterest.projects[k]._id.$id;
-                    obj.name=$scope.userOfInterest.projects[k].name;
-                    obj.presentation=$scope.userOfInterest.projects[k].presentation;
-                    obj.presentationId=$scope.userOfInterest.projects[k].presentation._id.$id;
-                    obj.firstSlide=$scope.userOfInterest.projects[k].firstSlide;
+        $scope.findProjectById = function(id) {
 
-                    //theme
-                    if($scope.userOfInterest.projects[k].theme !== undefined)
-                        obj.theme=$scope.userOfInterest.projects[k].theme;
+            var prj = {
+                username: '',
+                id: '',
+                name: '',
+                presentation: '',
+                firstSlide: '',
+                theme: 'sky',
+                transition: 'slide'
+            };
+
+            for (var obj in $scope.userOfInterest.projects) {
+                if($scope.userOfInterest.projects[obj]._id.$id === id) {
+                    prj.id = $scope.userOfInterest.projects[obj]._id.$id;
+                    prj.name = $scope.userOfInterest.projects[obj].name;
+                    prj.presentation = $scope.userOfInterest.projects[obj].presentation;
+                    prj.presentationId = $scope.userOfInterest.projects[obj].presentation._id.$id;
+                    prj.firstSlide = $scope.userOfInterest.projects[obj].firstSlide;
+
+                    // theme
+                    if($scope.userOfInterest.projects[obj].theme !== undefined)
+                        prj.theme = $scope.userOfInterest.projects[obj].theme;
                     else
-                        obj.theme="sky";
+                        prj.theme = "sky";
 
-                    //transition
-                    if($scope.userOfInterest.projects[k].transition !== undefined)
-                        obj.transition=$scope.userOfInterest.projects[k].transition;
+                    // transition
+                    if($scope.userOfInterest.projects[obj].transition !== undefined)
+                        prj.transition = $scope.userOfInterest.projects[obj].transition;
                     else
-                        obj.transition="slide";
+                        prj.transition = "slide";
 
-                    //svg
-                    //console.log(obj.svg=$scope.userOfInterest.projects[k].presentation.slides[0].svg);
-
-                    var svg= $scope.userOfInterest.projects[k].presentation.slides[0].svg;
+                    // svg
+                    var svg = $scope.userOfInterest.projects[obj].presentation.slides[0].svg;
                     if(svg !== undefined && svg !== "" && svg !== null) {
-                        obj.svg = $sce.trustAsHtml($scope.adjustSVGViewbox($scope.userOfInterest.projects[k].presentation.slides[0].svg));
-                        //$scope.apply;
+                        prj.svg = $sce.trustAsHtml($scope.adjustSVGViewbox($scope.userOfInterest.projects[obj].presentation.slides[0].svg));
                     }
                     else
-                        obj.svg="";
+                        prj.svg="";
 
-
-                    obj.username=$scope.userOfInterest.username;
-
-                    $scope.apply;
+                    prj.username = $scope.userOfInterest.username;
                 }
             }
-            return obj;
+            return prj;
         };
+
+
         /**
          * set current project from id and refresh view
          * @param: id - the project id
          * @return: void
          */
+
         $scope.setCurrentGenericProject = function(id){
             var obj = $scope.findProjectById(id);
+
+            $rootScope.currentGenericProject.username = obj.username;
+
             $rootScope.currentGenericProject.id = obj.id;
             $rootScope.currentGenericProject.name = obj.name;
             $rootScope.currentGenericProject.presentation = obj.presentation;
+            $rootScope.currentGenericProject.presentationId = obj.presentationId;
             $rootScope.currentGenericProject.firstSlide = obj.firstSlide;
             $rootScope.currentGenericProject.theme = obj.theme;
             $rootScope.currentGenericProject.transition = obj.transition;
 
-
-            $rootScope.currentGenericProject.username = obj.username;
             $rootScope.currentGenericProject.svg = obj.svg;
-
-            $rootScope.currentGenericProject.presentationId = obj.presentationId;
-
-
-           // console.log(obj);
-            $scope.apply;
         };
     }]);

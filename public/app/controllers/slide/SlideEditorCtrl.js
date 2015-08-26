@@ -8,16 +8,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         var localData = {
             currentX: 1,
-            currentY: 1,
-            maxX: 0,
-            maxY: [0]
-        };
-
-        $scope.buttons = {
-            up: '',
-            right: '',
-            down: '',
-            left: ''
+            currentY: 1
         };
 
         $scope.components = [
@@ -201,14 +192,9 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         $scope.insertImageOnCanvas = function(source_path){
             fabric.Image.fromURL(source_path, function(oImg) {
-                // scale image down, and flip it, before adding it onto canvas
-                // oImg.scale(0.5).setFlipX(true);
                 oImg.set({
                     left: $scope.canvas.width / 10,
-                    top: $scope.canvas.height / 5,
-                    // width:($scope.canvas.height * 0.5) / oImg.width
-                    // scaleY: ($scope.canvas.height * 0.5) / oImg.width,
-                    // scaleX: ($scope.canvas.width * 0.) / oImg.width
+                    top: $scope.canvas.height / 5
                 });
                 $scope.canvas.add(oImg);
             });
@@ -224,15 +210,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 
 // ----- LOCAL DATA -----
-
-
-        var incrementMaxX = function () {
-            localData.maxX ++;
-        };
-
-        var incrementMaxY = function (x) {
-            localData.maxY[x-1] ++;
-        };
 
         var incrementCurrentX = function () {
             localData.currentX ++;
@@ -264,47 +241,19 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.getIdSlide = function (position) {
             var index = '';
             if (position === "up") {
-                // decrementCurrentY();
-                    index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY-1});
-
-                // if (localData.currentY > 1)
-                //     $scope.buttons.up = '';
-                // else
-                //     $scope.buttons.up = 'disabled';
-                // $scope.buttons.down = '';
+                index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY - 1});
             }
 
             else if (position === "down") {
-                // incrementCurrentY();
                 index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX, yIndex:localData.currentY+1});
-
-                // if (localData.currentY < localData.maxY[localData.currentX])
-                //     $scope.buttons.down = '';
-                // else
-                //     $scope.buttons.down = 'disabled';
-                // $scope.buttons.up = '';
             }
 
             else if (position === "right") {
-                // incrementCurrentX();
                 index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX+1, yIndex:1});
-
-                // if (localData.currentX < localData.maxX)
-                //     $scope.buttons.right = '';
-                // else
-                //     $scope.buttons.right = 'disabled';
-                // $scope.buttons.left = '';
             }
 
             else if (position === "left") {
-                // decrementCurrentX();
                 index = indexService.get({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, xIndex:localData.currentX-1, yIndex:1});
-
-                // if (localData.currentX > 1)
-                //     $scope.buttons.left = '';
-                // else
-                //     $scope.buttons.left = 'disabled';
-                // $scope.buttons.right = '';
             }
 
             index.$promise.then (
@@ -363,18 +312,22 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 },
                 function(data) {
                 });
-
-            if (position === 'right' || position === 'left')
-                incrementMaxX();
-            else if (position === 'up' || position === 'down')
-                incrementMaxY(localData.currentX);
-
         };
 
         // save slide that already exists
         $scope.updateSlide = function () {
             var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
             var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
+
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(slideSVG, "image/svg+xml");
+
+                var width = doc.firstChild.getAttribute('width');
+                var height = doc.firstChild.getAttribute('height');
+                doc.firstChild.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                doc.firstChild.setAttribute('preserveAspectRatio', 'xMidYMin meet');
+                slideSVG = doc.firstChild.outerHTML;
 
             slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
@@ -405,6 +358,5 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
         $scope.changeSlide = function (position) {
             $scope.updateSlide();
             $scope.getIdSlide(position);
-            // $scope.loadSlide();
         };
 }]);
