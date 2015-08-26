@@ -40,18 +40,16 @@
         <div class="reveal">
 			<div class="slides">
                 <!-- <section ng-bind-html="slide.src">-->
+				<section data-markdown>
+				    <p></p>
+				    <!-- <img src="assets/img/logo.png" width="50%"> -->
+				</section>
+
                 <section ng-repeat="columnId in columnsIds" >
                     <section ng-repeat="slide in (slidesSVG | filter:{x:columnId}:true) " ng-bind-html="slide.src">
                     <!--<section ng-repeat="y in this[slide]" ng-if="y !== 1" ng-bind-html="y.src"></section> -->
                     </section>
                 </section>
-
-
-				<section data-markdown>
-				    <p>thank you</p>
-				    <img src="assets/img/logo.png" width="50%">
-				</section>
-
 
 			</div>
 		</div>
@@ -86,6 +84,7 @@
 		<script src="assets/libs/angular.min.js" type="text/javascript"></script>
 		<script src="assets/libs/angular-route.min.js" type="text/javascript"></script>
 		<script src="assets/libs/angular-resource.min.js" type="text/javascript"></script>
+        <script src="assets/libs/angular-file-uploader/angular-file-upload.min.js" type="text/javascript"></script>
 		<script src="assets/libs/fabric.js/dist/fabric.min.js" type="text/javascript"></script>
 		<script src="assets/libs/fastclick.js" type="text/javascript"></script>
 		<script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>

@@ -17,6 +17,11 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.checked = false;
 
+        $scope.searchViewVisibility = true;
+        $scope.userOfInterest = {
+            username: ""
+        };
+
         $scope.openHome = function () {
             $scope.home = "true";
         };
@@ -83,30 +88,21 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
             });
         };
 
+
         $scope.formatResults = function (results){
             $scope.searchResults.byUsername =[];
             $scope.searchResults.byUsername.push({username:results.username});
         };
-
-        $scope.searchViewVisibility = true;
-        $scope.userOfInterest={
-            username:""
-        };
-
-
 
         $scope.toggleSearchViewVisibility = function(){
             $scope.searchViewVisibility = !$scope.searchViewVisibility;
         };
 
         $scope.analizeUser = function (username){
-            $scope.userOfInterest.username=username;
-            $scope.userOfInterest.projects=$scope.searchResults[0].projects;
-
+            $scope.userOfInterest.username = username;
+            $scope.userOfInterest.projects = $scope.searchResults[0].projects;
             $scope.toggleSearchViewVisibility();
-
         };
-
 
         $scope.resetHomePage = function(){
             $scope.userOfInterest.username="";
@@ -122,19 +118,19 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
         $scope.search = function () {
             $scope.resetSearchResults();
+
             if ($scope.checked === false) {     //BY USERNAME
                 var searchResults = searchByUserService.query({username:$scope.searchText});
+                $scope.resetSearchResults();
                 searchResults.$promise.then (
                     function(data) {
                         if(data[0] !== undefined) {
-                            console.log(searchResults);
                             var result = {};
                             result.username = searchResults[0].username;
                             result.presentationId = searchResults[0].presentationId;
                             result.projectId=searchResults[0].projectId;
                             result.id = searchResults[0].id;
                             result.projects = searchResults[0].projects;
-                            //$scope.resetSearchResults();
                             $scope.searchResults.push(result);
                         }else{
                         }
@@ -142,32 +138,29 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     function(data) {
                     });
             }
-            else if ($scope.checked === true) { // BY PROJECT NAME
-                //var searchResults =null;
-                //if($scope.searchText !== "" || $scope.searchText !== undefined ) {
-                    var searchResults = searchByProjectService.query({name:$scope.searchText, });
 
-                //}
+            else if ($scope.checked === true) { // BY PROJECT NAME
+                var searchResults = searchByProjectService.query({name:$scope.searchText});
+                $scope.resetSearchResults();
                 searchResults.$promise.then (
                     function(data) {
-                        console.log(data);
-                        $scope.resetSearchResults();
 
                         for (var i=0; i<searchResults.length; i++) {
 
                             var result = {};
+                            result.username = searchResults[i].username;
+
                             result.name = searchResults[i].projects[0].name;
                             result.id = searchResults[i]._id;
-                            result.username = searchResults[i].username;
                             result.presentationId = searchResults[i].projects[0]._id.$id;
                             result.projectId = searchResults[i]._id;
+
                             result.theme = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].theme !== undefined : "sky";
                             result.transition = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].transition !== undefined : "slide";
-                            $scope.searchResults.push(result);
-                            console.log(result);
 
+                            $scope.searchResults.push(result);
                         }
-                     },
+                    },
                     function(data) {
                     });
             }
