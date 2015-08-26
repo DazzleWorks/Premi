@@ -84,6 +84,7 @@
 		<script src="assets/libs/angular.min.js" type="text/javascript"></script>
 		<script src="assets/libs/angular-route.min.js" type="text/javascript"></script>
 		<script src="assets/libs/angular-resource.min.js" type="text/javascript"></script>
+        <script src="assets/libs/angular-file-uploader/angular-file-upload.min.js" type="text/javascript"></script>
 		<script src="assets/libs/fabric.js/dist/fabric.min.js" type="text/javascript"></script>
 		<script src="assets/libs/fastclick.js" type="text/javascript"></script>
 		<script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
