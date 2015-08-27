@@ -70,7 +70,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
          * @return: new SVG string
          */
 
-        angular.element($window).bind('resize', function () {   //non va
+        angular.element($window).bind('resize', function () {
             var svgBoxWidth = document.getElementById('presentationFrontSvgContainer').offsetWidth;
             document.getElementById('presentationFrontSvgContainer').getElementsByTagName('svg')[0].setAttribute('width', svgBoxWidth);
             document.getElementById('presentationFrontSvgContainer').getElementsByTagName('svg')[0].setAttribute('height', svgBoxWidth * 2 / 3);
