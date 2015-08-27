@@ -33,7 +33,6 @@ trait AuthenticatesUsers
 
     /**
      * Get the needed authorization credentials from the request.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -44,7 +43,6 @@ trait AuthenticatesUsers
 
     /**
      * Log the user out of the application.
-     *
      * @return \Illuminate\Http\Response
      */
     public function getLogout()
