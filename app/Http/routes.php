@@ -63,7 +63,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 //Search for projects by username
-Route::get('search/byUsername', 'ProjectController@searchByUsername');
+Route::get('search/byUsername', 'UserController@searchByUsername');
 
 //Search for projects by the projects name
 Route::get('search/byProject', 'ProjectController@searchByProjectsName');
@@ -76,7 +76,7 @@ Route::get('/logout', function(){
 });
 
 
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'api'], function() {
     // User routes...
     Route::resource('user', 'UserController',
                     ['except' => ['index', 'store', 'create', 'edit']]);
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
     // Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
-                    ['except' => ['index', 'store', 'create', 'edit']]);
+                    ['except' => ['index', 'show', 'store', 'create', 'edit']]);
     
     // Slide routes...
     // Find the correct ID of a slide by xIndex and yIndex

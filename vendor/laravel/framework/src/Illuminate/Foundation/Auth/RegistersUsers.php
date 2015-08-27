@@ -11,7 +11,6 @@ trait RegistersUsers
 
     /**
      * Handle a registration request for the application.
-     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -27,8 +26,11 @@ trait RegistersUsers
             $this->create($request->all());
             $credentials = $this->getCredentials($request);
             Auth::attempt($credentials, $request->has('remember'));
+            
             $username = Auth::user()->username;
+            
             \Illuminate\Support\Facades\Storage::makeDirectory($username);
+            
             return response()->json(['username' => $username]);
         }
     }

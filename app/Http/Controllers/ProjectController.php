@@ -117,21 +117,6 @@ class ProjectController extends Controller
 
         return response()->json(['status' => true]);
     }
-    
-    /**
-     * Search for projects by username
-     * @param Illuminate\Http\Request $request
-     * @return Illuminate\Http\Response
-     */
-    public function searchByUsername(Request $request){
-        $username = $request -> get('username');
-        
-        $user = User::where('username', '=', $username)->groupBy()
-                               ->get(['username','projects._id','projects.name',
-                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
-        
-        return response()->json($user);
-    }
      
     /**
      * Search for projects by the projects name

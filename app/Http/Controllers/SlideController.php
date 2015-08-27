@@ -4,7 +4,6 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\User;
 use Premi\Model\Presentation;
 use Premi\Model\Slide;
 
@@ -44,7 +43,7 @@ class SlideController extends Controller
      */
     public function index($username,$projectID,$presentationID)
     {
-        $user = User::where('username', '=', $username)->first();
+        $user = \Auth::user();
         
         $projects = $user->projects();
         $project = $projects->find($projectID);
@@ -52,10 +51,17 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        $slides = $presentation->slides()->orderBy('yIndex')->groupBy('xIndex')
-                                              ->all(['xIndex', 'yIndex', 'svg']);
+        $slides = $presentation->slides()->get();
+        
+        $filterSlides = collect([]);
+        foreach($slides as $slide)
+        {
+            $filterSlides->push(Slide::getSVGBySlides($slide));
+        }        
+                
+        $orderSlides = $filterSlides->sortBy('yIndex')->groupBy('xIndex')->all();
 
-        return response()->json($slides);
+        return response()->json($orderSlides);
     }
 
     /**
@@ -84,8 +90,7 @@ class SlideController extends Controller
 
         Presentation::incrementIndex($presentation,$xIndex,$yIndex);
 
-        $presentation->slides()->save($newSlide);
-        $slide = $newSlide->get(['xIndex', 'yIndex']);
+        $slide = $presentation->slides()->save($newSlide);
 
         return response()->json($slide);
     }
@@ -110,8 +115,10 @@ class SlideController extends Controller
 
         $slides = $presentation->slides();
         $slide = $slides->find($slideID);
+        
+        $data = Slide::getComponentsBySlide($slide);
 
-        return response()->json($slide);
+        return response()->json($data);
     }
 
     /**

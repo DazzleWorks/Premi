@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Presentation;
 
 /**
  * @file: app/Http/Controller/PresentationController.php
@@ -23,26 +24,6 @@ use Premi\Http\Controllers\Controller;
 
 class PresentationController extends Controller
 {
-    /**
-     * Display the specified resource.
-     * @param String $username: the username of a user
-     * @param String $projectID: the ID of a project
-     * @param String $presentationID: the ID of a presentation
-     * @return Illuminate\Http\Response
-     */
-    public function show($username,$projectID,$presentationID)
-    {
-        $user = \Auth::user();
-
-        $projects = $user->projects();
-        $project = $projects->find($projectID);
-
-        $presentation = $project->presentation()
-                                ->first(['_id','theme','transition']);
-
-        return response()->json($presentation);
-    }
-
     /**
      * Update the specified resource in storage.
      * @param Illuminate\Http\Request $request
