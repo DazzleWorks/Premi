@@ -3,6 +3,7 @@ namespace Premi\Http\Controllers;
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
+
 /**
  * @file: app/Http/Controller/UserController.php
  * @author: DazzleWorks
@@ -27,9 +28,9 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        $user = \Auth::user(); 
-        $data = $user->get(['email','firstName','lastName','username']);
-        return response()->json($data);
+        $user = User::where('username', $username)->get(['email','firstName','lastName','username']); 
+        
+        return response()->json($user);
     }
     /**
      * Update the specified resource in storage.
