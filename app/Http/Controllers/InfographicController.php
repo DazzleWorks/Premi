@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Infographic;
 
 /**
  * @file: app/Http/Controller/InfographicController.php
@@ -36,9 +37,15 @@ class InfographicController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
         
-        $infographics = $project->infographics()->get(['_id', 'name', 'path']);
+        $infographics = $project->infographics()->get();
         
-        return response($infographics);
+        $data = array();
+        foreach($infographics as $infographic)
+        {
+            array_push($data, Infographic::getParamByInfographic($infographic));
+        }
+        
+        return response()->json($data);
     }
 
     /**
@@ -59,9 +66,10 @@ class InfographicController extends Controller
         $project = $projects->find($projectID);
         
         $infographic = $project->infographics()->save($newInfographic);
-        $infographic = $infographic->get(['_id', 'name', 'path']);
+                
+        $data = Infographic::getParamByInfographic($infographic);
         
-        return response()->json($infographic);
+        return response()->json($data);
     }
 
     /**
@@ -80,9 +88,10 @@ class InfographicController extends Controller
                 
         $infographics = $project->infographics();
         $infographic = $infographics->find($infographicID);
-        $infographic = $infographic->get(['_id', 'name','path']);
         
-        return response()->json($infographic);
+        $data = Infographic::getParamByInfographic($infographic);
+        
+        return response()->json($data);
     }
 
     /**

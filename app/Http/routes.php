@@ -63,7 +63,7 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 //Search for projects by username
-Route::get('search/byUsername', 'ProjectController@searchByUsername');
+Route::get('search/byUsername', 'UserController@searchByUsername');
 
 //Search for projects by the projects name
 Route::get('search/byProject', 'ProjectController@searchByProjectsName');

@@ -4,6 +4,7 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
+use Premi\Model\Presentation;
 
 /**
  * @file: app/Http/Controller/PresentationController.php
@@ -37,10 +38,11 @@ class PresentationController extends Controller
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()
-                                ->first(['_id','theme','transition']);
+        $presentation = $project->presentation()->first();
+        
+        $data = Presentation::getParamByPresentation($presentation);
 
-        return response()->json($presentation);
+        return response()->json($data);
     }
 
     /**

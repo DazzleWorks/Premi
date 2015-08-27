@@ -35,4 +35,13 @@ class Infographic extends Eloquent
      * @path: indicates the path to retrieve the file for the Infographic
      */
     protected $fillable = ['name', 'path'];
+    
+    
+    public static function getParamByInfographic($infographic) {
+        $data = (['infographicID' => $infographic->_id,
+                  'name' => $infographic->name,
+                  'path' => $infographic->path]);
+        
+        return $data;
+    }
 }

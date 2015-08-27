@@ -33,11 +33,7 @@ class SlideCreate
         $presentation = $event->project->presentation()->get();
         $slide = new Slide(['xIndex' => 1, 
                             'yIndex' => 1, 
-                            'svg' => '<svg xmlns="http://www.w3.org/2000/svg" 
-                                       xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                       version="1.1" width="800" height="600"
-                                       xml:space="preserve" viewBox="0 0 800 600" 
-                                       preserveAspectRatio="xMidYMin meet"><defs/></svg>',
+                            'svg' => '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" xml:space="preserve" viewBox="0 0 800 600" preserveAspectRatio="xMidYMin meet"><defs/></svg>',
                             'background' => '']);
         $presentation->slides()->save($slide);
     }

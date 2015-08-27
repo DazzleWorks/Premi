@@ -127,4 +127,12 @@ class Presentation extends Eloquent
             }
         }        
     }
+    
+    public static function getParamByPresentation($presentation) {
+        $data = (['presentationID' => $presentation->_id,
+                  'theme' => $presentation->theme,
+                  'transition' => $presentation->transition]);
+        
+        return $data;
+    }
 }
