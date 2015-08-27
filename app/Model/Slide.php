@@ -106,16 +106,11 @@ class Slide extends Eloquent
         return $data;
     }
     
-    public static function getSVGBySlides($groupSlide) 
+    public static function getSVGBySlides($slide) 
     {
-        $data = array();
-        foreach($groupSlide as $slide)
-        {
-            $filter = (['svg' => $slide->svg,
-                        'xIndex' => $slide->xIndex,
-                        'yIndex' => $slide->yIndex]);
-            array_push($data, $filter);
-        }
+        $data = (['svg' => $slide->svg,
+                  'xIndex' => $slide->xIndex,
+                  'yIndex' => $slide->yIndex]);
         
         return $data;
     }

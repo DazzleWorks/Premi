@@ -51,15 +51,17 @@ class SlideController extends Controller
         $presentations = $project->presentation();
         $presentation = $presentations->get();
 
-        $groupSlides = $presentation->slides()->orderBy('yIndex')->groupBy('xIndex')->get();
-
-        $slides = array();
-        foreach($groupSlides as $groupSlide)
+        $slides = $presentation->slides()->get();
+        
+        $filterSlides = collect([]);
+        foreach($slides as $slide)
         {
-            array_push($slides, Slide::getSVGBySlides($groupSlide));
-        }
+            $filterSlides->push(Slide::getSVGBySlides($slide));
+        }        
                 
-        return response()->json($slides);
+        $orderSlides = $filterSlides->sortBy('yIndex')->groupBy('xIndex')->all();
+
+        return response()->json($orderSlides);
     }
 
     /**
