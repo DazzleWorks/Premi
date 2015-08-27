@@ -91,7 +91,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
     // Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
-                    ['except' => ['index', 'store', 'create', 'edit']]);
+                    ['except' => ['index', 'show', 'store', 'create', 'edit']]);
     
     // Slide routes...
     // Find the correct ID of a slide by xIndex and yIndex

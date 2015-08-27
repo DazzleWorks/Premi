@@ -25,27 +25,6 @@ use Premi\Model\Presentation;
 class PresentationController extends Controller
 {
     /**
-     * Display the specified resource.
-     * @param String $username: the username of a user
-     * @param String $projectID: the ID of a project
-     * @param String $presentationID: the ID of a presentation
-     * @return Illuminate\Http\Response
-     */
-    public function show($username,$projectID,$presentationID)
-    {
-        $user = \Auth::user();
-
-        $projects = $user->projects();
-        $project = $projects->find($projectID);
-
-        $presentation = $project->presentation()->first();
-        
-        $data = Presentation::getParamByPresentation($presentation);
-
-        return response()->json($data);
-    }
-
-    /**
      * Update the specified resource in storage.
      * @param Illuminate\Http\Request $request
      * @param String $username: the username of a user
