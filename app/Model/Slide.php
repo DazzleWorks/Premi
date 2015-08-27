@@ -95,5 +95,29 @@ class Slide extends Eloquent
             }
         }
     }
+    
+    public static function getComponentsBySlide($slide) 
+    {
+        $data = (['slideID' => $slide->_id,
+                  'components' => $slide->components,
+                  'xIndex' => $slide->xIndex,
+                  'yIndex' => $slide->yIndex]);
+        
+        return $data;
+    }
+    
+    public static function getSVGBySlides($groupSlide) 
+    {
+        $data = array();
+        foreach($groupSlide as $slide)
+        {
+            $filter = (['svg' => $slide->svg,
+                        'xIndex' => $slide->xIndex,
+                        'yIndex' => $slide->yIndex]);
+            array_push($data, $filter);
+        }
+        
+        return $data;
+    }
 }
 

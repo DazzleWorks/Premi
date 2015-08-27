@@ -76,7 +76,7 @@ Route::get('/logout', function(){
 });
 
 
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'api'], function() {
     // User routes...
     Route::resource('user', 'UserController',
                     ['except' => ['index', 'store', 'create', 'edit']]);
