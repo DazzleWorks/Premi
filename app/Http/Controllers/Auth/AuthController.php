@@ -2,10 +2,11 @@
 
 namespace Premi\Http\Controllers\Auth;
 
-use Premi\Model\User;
 use Validator;
 use Premi\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Premi\Model\User;
+use Socialite;
 
 
 /**
@@ -69,5 +70,25 @@ class AuthController extends Controller
             'lastName' => $data['lastName'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    
+    /**
+     * Redirect the user to the GitHub authentication page.
+     * @return Illuminate\Http\Response
+     */
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    
+    /**
+     * Obtain the user information from GitHub.
+     * @return Illuminate\Http\Response
+     */
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        // $user->token;
     }
 }
