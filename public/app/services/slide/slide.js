@@ -13,6 +13,10 @@ angular.module('app.services.slide', [])
 
         return $resource('api/user/:user/project/:project/presentation/:presentation/slide/:slide', null,
             {
+                'save': {
+                    method: 'POST',
+                    isArray: true
+                },
                 'update': {
                     method:'PUT'
                 }
