@@ -433,19 +433,22 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     /*float: right;*/
 }
 
-/* Gridster styles */
-.demo {
-    margin: 3em 0;
-    padding: 7.5em 0 5.5em;
-    background: #004756;
+/*GRIDSTER*/
+
+.gridster ul {
+    list-style: none;
+    background-color: #EFEFEF;
 }
 
-.demo:hover .gridster {
-    opacity: 1;
+.gridster li {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100%;
 }
+
 
 .gridster {
-    width: 940px;
     margin: 0 auto;
 
     opacity: .8;
@@ -457,9 +460,17 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     transition: opacity .6s;
 }
 
-.gridster .gs_w {
-    background: #FFF;
+.gridster .gs-w {
+    background: #DDD;
     cursor: pointer;
-    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.gridster .player {
+    background: #BBB;
+}
+
+
+.gridster .preview-holder {
+    border: none!important;
+    background: red!important;
 }
