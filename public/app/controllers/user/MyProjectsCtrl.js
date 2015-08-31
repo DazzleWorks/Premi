@@ -43,7 +43,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 $rootScope.currentProject.firstSlide = $scope.projects[0].firstSlide;
                 $rootScope.currentProject.theme = $scope.projects[0].theme;
                 $rootScope.currentProject.transition = $scope.projects[0].transition;
-                $rootScope.currentProject.svg = $scope.projects[0].svg;
+                $rootScope.currentProject.svg = $sce.trustAsHtml($scope.projects[0].svg);
             }
             else {
                 $rootScope.currentProject.id = "";
