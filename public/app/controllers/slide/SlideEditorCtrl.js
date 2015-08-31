@@ -1,6 +1,6 @@
-angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
+angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'indexService', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, indexService, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', '$sce','indexService', 'presentationService', 'presentationDataService', 'slideService', function($scope, $rootScope, $modal, $window, $sce, indexService, presentationService, presentationDataService, slideService) {
 
 
 // ----- VARIABLES & INITIALIZATION -----
@@ -284,6 +284,14 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 function(data) {
                 });
 
+            //---------
+
+
+            $scope.drawGrid(1);
+
+            //---------
+
+
             $scope.update();
         };
 
@@ -364,4 +372,57 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.updateSlide();
             $scope.getIdSlide(position);
         };
+
+        /*Gridster.js*/
+        $scope.drawGrid= function (currentSlide){
+              var results = presentationDataService.get({
+                        user: $scope.user,
+                        project: $scope.currentProject.id,
+                        presentation: $scope.currentProject.presentation
+                    }
+              );
+
+              results.$promise.then(
+                  function(data){
+
+                      $scope.GridsterColumnsIds=[];
+                      $scope.GridsterSlidesSVG=[];
+                      for (var xVal in results) {
+                          if(isNaN(xVal) === false){
+                              for (var yVal in results[xVal]) {
+                                  //console.log(xVal + ':' + results[xVal] + '; y: ' + results[xVal][yVal]);
+                                  var slideItem = {
+                                      sizeX: 1,
+                                      sizeY: 1,
+                                      row: xVal,
+                                      col: yVal,
+                                      src: $sce.trustAsHtml(results[xVal][yVal].svg)
+                                  };
+                                  //console.log(results[xVal][yVal].svg);
+                                  $scope.GridsterSlidesSVG.push(slideItem);
+                                  if ($scope.GridsterColumnsIds.indexOf(slideItem.x) == -1) {
+                                      $scope.GridsterColumnsIds.push(slideItem.x);
+
+                                  }
+                              }
+                          }
+
+                      }
+
+                  }
+              );
+        };
+       /*  $scope.standardItems = [
+              { sizeX: 2, sizeY: 1, row: 0, col: 0 },
+              { sizeX: 2, sizeY: 2, row: 0, col: 2 },
+              { sizeX: 1, sizeY: 1, row: 0, col: 4 },
+              { sizeX: 1, sizeY: 1, row: 0, col: 5 },
+              { sizeX: 2, sizeY: 1, row: 1, col: 0 },
+              { sizeX: 1, sizeY: 1, row: 1, col: 4 },
+              { sizeX: 1, sizeY: 2, row: 1, col: 5 },
+              { sizeX: 1, sizeY: 1, row: 2, col: 0 },
+              { sizeX: 2, sizeY: 1, row: 2, col: 1 },
+              { sizeX: 1, sizeY: 1, row: 2, col: 3 },
+              { sizeX: 1, sizeY: 1, row: 2, col: 4 }
+            ];*/
 }]);

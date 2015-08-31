@@ -21,6 +21,7 @@
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"> 
 
         <!-- css -->
+        <link href="assets/libs/angular-gridster/angular-gridster.min.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/gridster/jquery.gridster.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/fileTree/fileTree.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -53,6 +54,7 @@
         <script src="assets/libs/fastclick.js" type="text/javascript"></script>
         <script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
         <script src="assets/libs/modernizr.js" type="text/javascript"></script>
+        <script src="assets/libs/angular-gridster/angular-gridster.min.js" type="text/javascript"></script>
 
         <!-- Foundation ProgressBar -->
         <script src="assets/libs/foundation/js/mm-foundation-progressBar.js" type="text/javascript"></script>
