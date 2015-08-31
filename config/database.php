@@ -48,12 +48,11 @@ return [
 
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env ('DB_HOST', 'localhost'),
-            'port'     => 27017,
+            'host'     => 'ds035723.mongolab.com',
+            'port'     => 35723,
             'database' => 'premi',
-            'options' => [
-                'db' => 'admin' // sets the authentication database required by mongo 3
-            ],
+            'username' => 'swedb',
+            'password' => 'dazzlegroup',
         ],
 
         'sqlite' => [
