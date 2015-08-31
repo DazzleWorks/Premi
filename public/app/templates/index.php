@@ -18,7 +18,7 @@
         <script src="assets/js/model.js"></script>
         <script src="app/scripts/scripts.js"></script>
         <script src="assets/libs/gridster/jquery.gridster.js"></script>
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css"> 
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
         <!-- css -->
         <link href="assets/libs/gridster/jquery.gridster.css" rel="stylesheet" type="text/css">
@@ -117,6 +117,7 @@
 
 
             <!-- services -->
+            <script src="app/services/home/facebook.js" type="text/javascript"></script>
             <script src="app/services/home/forgotPassword.js" type="text/javascript"></script>
             <script src="app/services/home/login.js" type="text/javascript"></script>
             <script src="app/services/home/logout.js" type="text/javascript"></script>

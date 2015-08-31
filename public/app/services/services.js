@@ -4,6 +4,7 @@ angular.module('app.services',
     [
         'ngRoute',
         'ngResource',
+        'app.services.facebook',
         'app.services.forgotPassword',
         'app.services.index',
         'app.services.login',

@@ -14,7 +14,7 @@
 */
 angular.module('app.controllers.LoginCtrl', ['ngRoute'])
 
-    .controller('LoginCtrl', ['$scope', '$http', '$modal', '$modalInstance', 'loginService', function($scope, $http, $modal, $modalInstance, loginService) {
+    .controller('LoginCtrl', ['$scope', '$http', '$modal', '$modalInstance', 'loginService', 'facebookService', function($scope, $http, $modal, $modalInstance, loginService, facebookService) {
 
         $scope.login_data = {
             username: "",
@@ -34,6 +34,17 @@ angular.module('app.controllers.LoginCtrl', ['ngRoute'])
             modalInstance.result.then(function (data) {
                 $modalInstance.close();
             });
+        };
+
+        $scope.loginFacebook = function () {
+            var face = facebookService.get();
+            face.$promise.then(
+                function(data) {
+                    console.log("OK facebook");
+                },
+                function(data) {
+
+                });
         };
 
         /**

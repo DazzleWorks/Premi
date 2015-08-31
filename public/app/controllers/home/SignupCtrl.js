@@ -12,7 +12,7 @@
  */
 angular.module('app.controllers.SignupCtrl', ['ngRoute'])
 
-    .controller('SignupCtrl', ['$scope','$http', '$modalInstance', 'signupService', function($scope, $http, $modalInstance, signupService) {
+    .controller('SignupCtrl', ['$scope','$http', '$modalInstance', 'signupService', 'facebookService', function($scope, $http, $modalInstance, signupService, facebookService) {
 
         $scope.signup_data = {
             email: "",
@@ -32,6 +32,18 @@ angular.module('app.controllers.SignupCtrl', ['ngRoute'])
         };
 
         $scope.isCorrect = false;
+
+        $scope.signupFacebook = function () {
+            var face = facebookService.get();
+            face.$promise.then(
+                function(data) {
+                    console.log("OK facebook");
+                },
+                function(data) {
+
+                });
+        };
+
         /**
          * try to register an user using loginService using signup service and if something goes wrong show the correct error
          * @param $scope.signup_data
