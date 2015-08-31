@@ -8,9 +8,9 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload', 'mm
             console.log(data);
         };
 
-        // $scope.insertImage = function (imageId) {
-        //     $modalInstance.close(imageId);
-        // };
+        $scope.insertImage = function (imageId) {
+            $modalInstance.close(imageId);
+        };
 
 
         // $scope.uploadFile = function(files) {
