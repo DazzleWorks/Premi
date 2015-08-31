@@ -17,10 +17,11 @@
         <!-- custom -->
         <script src="assets/js/model.js"></script>
         <script src="app/scripts/scripts.js"></script>
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-
+        <script src="assets/libs/gridster/jquery.gridster.js"></script>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"> 
 
         <!-- css -->
+        <link href="assets/libs/gridster/jquery.gridster.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/fileTree/fileTree.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="assets/libs/foundation/css/foundation.css" rel="stylesheet" type="text/css">
