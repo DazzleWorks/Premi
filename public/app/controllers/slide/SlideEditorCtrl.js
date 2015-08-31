@@ -334,12 +334,17 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         // remove current slide
         $scope.deleteSlide = function () {
-            slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
+            var del = slideService.delete({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide});
 
-            if (localData.currentY > 1)
-                $scope.getIdSlide("up");
-            else
-                $scope.getIdSlide("left");
+            del.$promise.then (
+                function(data) {
+                    if (localData.currentY > 1)
+                        $scope.getIdSlide("up");
+                    else
+                        $scope.getIdSlide("left");
+                },
+                function(data) {
+                });
         };
 
         $scope.$on('showPresentationEditor', function () {

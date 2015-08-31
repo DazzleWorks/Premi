@@ -37,6 +37,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         var resetCurrentProject = function() {
             if ($scope.projects[0]) {
+                console.log("reset");
                 $rootScope.currentProject.id = $scope.projects[0].id;
                 $rootScope.currentProject.name = $scope.projects[0].name;
                 $rootScope.currentProject.presentation = $scope.projects[0].presentation;
@@ -46,6 +47,7 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                 $rootScope.currentProject.svg = $sce.trustAsHtml($scope.projects[0].svg);
             }
             else {
+                console.log("noreset");
                 $rootScope.currentProject.id = "";
                 $rootScope.currentProject.name = "";
                 $rootScope.currentProject.presentation = "";
@@ -100,6 +102,8 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
                             );
                         }
                     }
+                    if (!$scope.projects[0])
+                        resetCurrentProject();
                 },
                 function(data){
                     resetCurrentProject();

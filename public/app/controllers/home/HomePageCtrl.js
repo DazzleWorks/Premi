@@ -13,7 +13,8 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
         $rootScope.currentSlide = {};
 
         $scope.home = "true";
-        $scope.searchViewVisibility="true";
+        $scope.searchViewVisibility = "true";
+        $scope.noResults = false;
 
         $scope.checked = false;
 
@@ -126,14 +127,16 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                     function(data) {
                         if(data[0] !== undefined) {
                             var result = {};
-                            result.username = searchResults[0].username;
-                            result.presentationId = searchResults[0].presentationId;
-                            result.projectId=searchResults[0].projectId;
-                            result.id = searchResults[0].id;
-                            result.projects = searchResults[0].projects;
+                            result.username = data[0].username;
+                            result.presentationId = data[0].presentationId;
+                            result.projectId = data[0].projectId;
+                            result.id = data[0].id;
+                            result.projects = data[0].projects;
                             $scope.searchResults.push(result);
-                        }else{
+                            $scope.noResults = false;
                         }
+                        else
+                            $scope.noResults = true;
                     },
                     function(data) {
                     });
@@ -144,22 +147,28 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
                 $scope.resetSearchResults();
                 searchResults.$promise.then (
                     function(data) {
+                        if (data[0] !== undefined) {
 
-                        for (var i=0; i<searchResults.length; i++) {
+                            for (var i = 0; i < searchResults.length; i++) {
 
-                            var result = {};
-                            result.username = searchResults[i].username;
+                                var result = {};
+                                result.username = data[i].username;
 
-                            result.name = searchResults[i].projects[0].name;
-                            result.id = searchResults[i]._id;
-                            result.presentationId = searchResults[i].projects[0]._id.$id;
-                            result.projectId = searchResults[i]._id;
+                                result.name = data[i].projects[0].name;
+                                result.id = data[i]._id;
+                                result.presentationId = data[i].projects[0]._id.$id;
+                                result.projectId = data[i]._id;
 
-                            result.theme = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].theme !== undefined : "sky";
-                            result.transition = (searchResults[i].projects[0].theme !== undefined) ? searchResults[i].projects[0].transition !== undefined : "slide";
+                                result.theme = (data[i].projects[0].theme !== undefined) ? data[i].projects[0].theme !== undefined : "sky";
+                                result.transition = (data[i].projects[0].theme !== undefined) ? data[i].projects[0].transition !== undefined : "slide";
 
-                            $scope.searchResults.push(result);
+                                $scope.searchResults.push(result);
+                            }
+
+                            $scope.noResults = false;
                         }
+                        else
+                            $scope.noResults = true;
                     },
                     function(data) {
                     });

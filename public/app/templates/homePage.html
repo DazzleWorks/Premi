@@ -21,30 +21,36 @@
             </section>
 
             <div class="row">
-                <div class="small-2 columns small-offset-5">
+                <div class="small-2 columns small-centered">
                     <button class="button round" id="searchSubmit" ng-click="search()"><i class="fa fa-search" fa-lg></i> Search</button>
                 </div>
             </div>
 
-            <div id="searchResults" class="row" ng-show="checked">
-                <ul class="small-10 small-offset-1 columns" >
-                    <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns">
-                        <a href="/presentation.php?user={{project.username}}&presentationId={{project.presentationId}}&id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}&slideNumber=true/1/1" target="_blank">
-                        <img src="../assets/img/google-now.jpg"/>
-                            <span>{{project.name}}</span>
-                        </a>
-                    </li>
-                </ul>
+            <div id="noResults" class="row" ng-show="noResults">
+                <div class="small-10 small-centered columns">
+                    <h4>No results</h4>
+                </div>
             </div>
-            <div id="searchResults" class="row" ng-hide="checked">
-                <ul class="small-10 small-offset-1 columns">
-                    <li ng-repeat="result in searchResults" class="searchResultItem small-2 columns" ng-click="analizeUser(result.username)"><!-- ng-click="setCurrentProject(project.id)" -->
-                        <a href>
-                            <img src="../assets/img/user_male.png"/>
-                            <span>{{result.username}}</span>
-                        </a>
-                    </li>
-                </ul>
+
+            <div id="searchResults" class="row">
+                <div class="small-10 small-centered columns">
+                    <ul ng-show="checked">
+                        <li ng-repeat="project in searchResults" class="searchResultItem small-4 end columns">
+                            <a href="/presentation.php?user={{project.username}}&presentationId={{project.presentationId}}&id={{project.projectId}}&theme={{project.theme}}&transition={{project.transition}}&slideNumber=true/1/1" target="_blank">
+                            <img src="../assets/img/google-now.jpg"/>
+                                <span>{{project.name}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul ng-hide="checked">
+                        <li ng-repeat="result in searchResults" class="searchResultItem small-2 columns" ng-click="analizeUser(result.username)"><!-- ng-click="setCurrentProject(project.id)" -->
+                            <a href>
+                                <img src="../assets/img/user_male.png"/>
+                                <span>{{result.username}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
