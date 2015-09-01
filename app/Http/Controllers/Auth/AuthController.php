@@ -73,7 +73,7 @@ class AuthController extends Controller
     }
     
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the Facebook authentication page.
      * @return Illuminate\Http\Response
      */
     public function redirectToFacebook()
@@ -82,7 +82,7 @@ class AuthController extends Controller
     }
     
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from Facebook.
      * @return Illuminate\Http\Response
      */
     public function handleFacebookCallback()
