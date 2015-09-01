@@ -29,5 +29,6 @@ class Kernel extends HttpKernel
         'auth' => \Premi\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Premi\Http\Middleware\RedirectIfAuthenticated::class,
+        'auth.social' => \Premi\Http\Middleware\CORS::class,
     ];
 }
