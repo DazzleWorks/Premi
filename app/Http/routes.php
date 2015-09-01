@@ -66,6 +66,11 @@ Route::get('search/byUsername', 'UserController@searchByUsername');
 //Search for projects by the projects name
 Route::get('search/byProject', 'ProjectController@searchByProjectsName');
 
+//Upload, return, delete media
+Route::delete('user/{username}/project/{projectID}/image/{filename}', 'ProjectController@deleteSelectedFile');
+Route::get('user/{username}/project/{projectID}/image', 'ProjectController@returnAllFiles');
+Route::put('user/{username}/project/{projectID}', 'ProjectController@uploadMedia');
+
 
 // Logout routes...
 Route::get('/logout', function(){
