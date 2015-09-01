@@ -7,21 +7,21 @@
  * @description: This file contains all of the routes for an application. Simply
  *               tell the URIs it should respond to and give it the controller
  *               to call when that URI is requested.
- * 
+ *
  * +---------+------------+---------------+-------------+----------------+
  * | Version |     Date   |  Programmer   |    Modify   |  Description   |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.1.0  | 2015-06-24 |Suierica Bogdan| routes.php  |create class    | 
+ * |  0.1.0  | 2015-06-24 |Suierica Bogdan| routes.php  |create class    |
  * |         |            |               |             |and auth routes |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.2.0  | 2015-06-24 |Burlin Valerio | routes.php  |add users and   | 
+ * |  0.2.0  | 2015-06-24 |Burlin Valerio | routes.php  |add users and   |
  * |         |            |               |             |slides routes   |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.3.0  | 2015-06-24 |Burlin Valerio | routes.php  |add projects and| 
+ * |  0.3.0  | 2015-06-24 |Burlin Valerio | routes.php  |add projects and|
  * |         |            |               |             |presentation    |
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
- * |  0.4.0  | 2015-06-24 |Burlin Valerio | routes.php  |add infographics| 
+ * |  0.4.0  | 2015-06-24 |Burlin Valerio | routes.php  |add infographics|
  * |         |            |               |             |routes          |
  * +---------+------------+---------------+-------------+----------------+
  * |  0.5.0  | 2015-07-07 |Suierica Bogdan| routes.php  |add password    |
@@ -30,7 +30,7 @@
  * +---------+------------+---------------+-------------+----------------+
  * |  1.0.0  | 2015-07-07 |Suierica Bogdan| routes.php  |add password    |
  * |         |            |               |             |reset routes    |
- * +---------+------------+---------------+-------------+----------------+ 
+ * +---------+------------+---------------+-------------+----------------+
  */
 
 // Home Page routes...
@@ -69,7 +69,7 @@ Route::get('search/byProject', 'ProjectController@searchByProjectsName');
 //Upload, return, delete media
 Route::delete('user/{username}/project/{projectID}/image/{filename}', 'ProjectController@deleteSelectedFile');
 Route::get('user/{username}/project/{projectID}/image', 'ProjectController@returnAllFiles');
-Route::put('user/{username}/project/{projectID}', 'ProjectController@uploadMedia');
+Route::post('user/{username}/project/{projectID}/image', 'ProjectController@uploadMedia');
 
 
 // Logout routes...
@@ -83,22 +83,22 @@ Route::group(['prefix' => 'api'], function() {
     // User routes...
     Route::resource('user', 'UserController',
                     ['except' => ['index', 'store', 'create', 'edit']]);
-                       
+
     // Project routes...
     Route::resource('user.project', 'ProjectController',
                     ['except' => ['show', 'create', 'edit']]);
-    
+
     // Infographic routes...
     Route::resource('user.project.infographic', 'InfographicController',
                     ['except' => ['create', 'edit']]);
-    
+
     // Presentation routes..
     Route::resource('user.project.presentation', 'PresentationController',
                     ['except' => ['index', 'show', 'store', 'create', 'edit']]);
-    
+
     // Slide routes...
     // Find the correct ID of a slide by xIndex and yIndex
-    Route::get('user/{username}/project/{projectID}/presentation/{presentationID}/slide/find', 
+    Route::get('user/{username}/project/{projectID}/presentation/{presentationID}/slide/find',
                'SlideController@findByAxis');
     Route::resource('user.project.presentation.slide', 'SlideController',
                     ['except' => ['create', 'edit']]);

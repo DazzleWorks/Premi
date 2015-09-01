@@ -131,6 +131,7 @@
             <script src="app/services/project/project.js" type="text/javascript"></script>
             <script src="app/services/project/projects.js" type="text/javascript"></script>
 
+            <script src="app/services/slide/image.js" type="text/javascript"></script>
             <script src="app/services/slide/index.js" type="text/javascript"></script>
             <script src="app/services/slide/slide.js" type="text/javascript"></script>
 

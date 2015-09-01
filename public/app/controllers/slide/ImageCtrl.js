@@ -1,12 +1,22 @@
 angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload', 'mm.foundation.progressbar'])
 
-    .controller('ImageCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+    .controller('ImageCtrl', ['$scope', '$rootScope', '$modalInstance', 'imageService', function($scope, rootScope, $modalInstance, imageService) {
 
         $scope.uImage = "";
 
         $scope.upload = function (data) {
+
             console.log(data);
-        };
+            var up = imageService.save({user:$scope.user, project:$scope.currentProject.id}, {filefield:data});
+            up.$promise.then (
+                function(data) {
+                    console.log(data);
+                },
+                function(data) {
+                    console.log(data);
+                }
+
+        )};
 
         $scope.insertImage = function (imageId) {
             $modalInstance.close(imageId);
