@@ -38,9 +38,10 @@
 .gridster .preview-holder {
     z-index: 1;
     position: absolute;
-    background-color: #fff;
+    /*background-color: #fff;*/
     border-color: #fff;
     opacity: 0.3;
+    background-color: #ff2c2d !important;
 }
 
 .gridster .player-revert {
@@ -119,3 +120,20 @@
   opacity:0;
 }
 */
+
+/*-----------------------   custom   ------------------------------*/
+/*
+.gridster .gs-w {
+    background: #DDD;
+    cursor: pointer;
+}
+
+.gridster .player {
+    background: #BBB;
+}
+
+
+.gridster .preview-holder {
+    border: none!important;
+    background: red!important;
+}*/

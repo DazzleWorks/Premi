@@ -372,6 +372,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             $scope.updateSlide();
             $scope.getIdSlide(position);
         };
+//--------------------------------------------------------------------------------------------------
+
+
+
 
         /*Gridster.js*/
         $scope.drawGrid= function (currentSlide){
@@ -390,39 +394,23 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                       for (var xVal in results) {
                           if(isNaN(xVal) === false){
                               for (var yVal in results[xVal]) {
-                                  //console.log(xVal + ':' + results[xVal] + '; y: ' + results[xVal][yVal]);
                                   var slideItem = {
                                       sizeX: 1,
                                       sizeY: 1,
-                                      row: xVal,
-                                      col: yVal,
+                                      row: yVal,
+                                      col: xVal,
                                       src: $sce.trustAsHtml(results[xVal][yVal].svg)
                                   };
-                                  //console.log(results[xVal][yVal].svg);
                                   $scope.GridsterSlidesSVG.push(slideItem);
-                                  if ($scope.GridsterColumnsIds.indexOf(slideItem.x) == -1) {
-                                      $scope.GridsterColumnsIds.push(slideItem.x);
+                                  if ($scope.GridsterColumnsIds.indexOf(slideItem.row) == -1) {
+                                      $scope.GridsterColumnsIds.push(slideItem.row);
 
                                   }
                               }
                           }
 
                       }
-
                   }
               );
         };
-       /*  $scope.standardItems = [
-              { sizeX: 2, sizeY: 1, row: 0, col: 0 },
-              { sizeX: 2, sizeY: 2, row: 0, col: 2 },
-              { sizeX: 1, sizeY: 1, row: 0, col: 4 },
-              { sizeX: 1, sizeY: 1, row: 0, col: 5 },
-              { sizeX: 2, sizeY: 1, row: 1, col: 0 },
-              { sizeX: 1, sizeY: 1, row: 1, col: 4 },
-              { sizeX: 1, sizeY: 2, row: 1, col: 5 },
-              { sizeX: 1, sizeY: 1, row: 2, col: 0 },
-              { sizeX: 2, sizeY: 1, row: 2, col: 1 },
-              { sizeX: 1, sizeY: 1, row: 2, col: 3 },
-              { sizeX: 1, sizeY: 1, row: 2, col: 4 }
-            ];*/
 }]);

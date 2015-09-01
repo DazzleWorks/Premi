@@ -437,7 +437,7 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 
 .gridster ul {
     list-style: none;
-    background-color: #EFEFEF;
+    background-color: #004756;
 }
 
 .gridster li {
@@ -473,4 +473,8 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 .gridster .preview-holder {
     border: none!important;
     background: red!important;
+}
+
+.panorama{
+    background-color: #003f54 !important;
 }
