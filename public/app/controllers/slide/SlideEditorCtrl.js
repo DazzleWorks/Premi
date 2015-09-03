@@ -1,6 +1,12 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal', '$window', 'indexService', 'presentationService', 'slideService', function($scope, $rootScope, $modal, $window, indexService, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal',
+     '$window', '$tour', 'indexService', 'presentationService', 'slideService',
+     function($scope, $rootScope, $modal, $window, $tour, indexService, presentationService, slideService) {
+
+// ----- INITIALIZATION TOUR -----
+        $scope.startTour = $tour.start;
+
 
 
 // ----- VARIABLES & INITIALIZATION -----
