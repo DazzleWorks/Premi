@@ -1,6 +1,6 @@
 angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
-    .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', '$sce', '$window', '$document', 'projectsService', function($scope, $rootScope, $modal, $sce, $window, $document, projectsService) {
+    .controller('MyProjectsCtrl', ['$scope','$rootScope', '$modal', '$sce', '$window', '$document', 'projectsService', 'presentationDataService', function($scope, $rootScope, $modal, $sce, $window, $document, projectsService, presentationDataService) {
 
         $scope.projects = [];
         $rootScope.currentProject = {
@@ -113,9 +113,55 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
 
         $rootScope.$on('loadProjects', $scope.refreshProjects);
 
-        $scope.editProject = function() {
+        $scope.downloadProject = function () {
+            var slidesSVG = "";
+            var columnsIds = [];
+            var results = presentationDataService.get({user: username, project: projectId, presentation: presentationId});
+
+            results.$promise.then(
+                function(data){
+                    for (var xVal in results) {
+                        if(isNaN(xVal) === false) {
+                            for (var yVal in results[xVal]) {
+                                var slideItem = {
+                                    x: xVal,
+                                    y: yVal,
+                                    src: $sce.trustAsHtml(results[xVal][yVal].svg)
+                                };
+                                slidesSVG.push(slideItem);
+                                if ($scope.columnsIds.indexOf(slideItem.x) == -1) {
+                                    $scope.columnsIds.push(slideItem.x);
+                                }
+                            }
+                        }
+                    }
+                    $scope.apply;
+                },
+
+                function (data) {
+                });
+                
+
+            console.log(slideSVG);
+        };
+
+        $scope.editProject = function () {
 			$rootScope.$broadcast('showPresentationEditor', 1);
 		};
+
+        $scope.renameProject = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/renameProject.html',
+                controller: 'RenameProjectCtrl',
+                windowClass: 'myModal'
+            });
+            modalInstance.result.then(function (data) {
+                if (data !== 'error'){
+                    $scope.projects = [];
+                    $scope.refreshProjects();
+                }
+            });
+        };
 
         $scope.deleteProject = function () {
             var modalInstance = $modal.open({
@@ -126,20 +172,6 @@ angular.module('app.controllers.MyProjectsCtrl', ['ngRoute'])
             });
             modalInstance.result.then(function (data) {
                 if (data === 'delete'){
-                    $scope.projects = [];
-                    $scope.refreshProjects();
-                }
-            });
-        };
-
-        $scope.renameProject = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'app/templates/renameProject.html',
-                controller: 'RenameProjectCtrl',
-                windowClass: 'myModal'
-            });
-            modalInstance.result.then(function (data) {
-                if (data !== 'error'){
                     $scope.projects = [];
                     $scope.refreshProjects();
                 }

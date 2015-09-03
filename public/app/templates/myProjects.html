@@ -21,29 +21,28 @@
         <div class="small-9 small-centered columns">
             <div class="myPresentationContainer">
                 <div class="presentationFront" ng-bind-html="currentProject.svg" id="presentationMyProjectsSvg"></div>
-                <div class="icon-bar five-up projectMenu">
+                <div class="icon-bar six-up projectMenu">
                     <a class="item custonMenuIcon" href="../presentation.php?user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition=convex&theme={{currentProject.theme}}&slideNumber=true/1/1" target="_blank">
-                        <!-- <img src="../assets/img/play2.png" > -->
                         <i class="fa fa-play"></i>
                         <label>Play</label>
                     </a>
                     <a class="item custonMenuIcon" href="../presentation.php?print-pdf&user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition=convex&theme={{currentProject.theme}}" target="_blank">
-                        <!-- <img src="../assets/img/play2.png" > -->
                         <i class="fa fa-print"></i>
                         <label>Print</label>
                     </a>
+                    <a class="item custonMenuIcon" ng-click="downloadProject()">
+                        <i class="fa fa-download"></i>
+                        <label>Download</label>
+                    </a>
                     <a class="item custonMenuIcon" ng-click="editProject()">
-                        <!-- <img src="../assets/img/edit.png" > -->
                         <i class="fa fa-pencil-square-o"></i>
                         <label>Edit</label>
                     </a>
                     <a class="item custonMenuIcon" ng-click="renameProject()">
-                        <!-- <img src="../assets/img/delete.svg" > -->
                         <i class="fa fa-pencil"></i>
                         <label>Rename</label>
                     </a>
                     <a class="item custonMenuIcon" ng-click="deleteProject()">
-                        <!-- <img src="../assets/img/delete.svg" > -->
                         <i class="fa fa-trash-o"></i>
                         <label>Delete</label>
                     </a>
