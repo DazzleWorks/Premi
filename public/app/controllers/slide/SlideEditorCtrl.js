@@ -5,6 +5,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
 // ----- VARIABLES & INITIALIZATION -----
         $scope.currentSlide = '';
+        $scope.GridsterSlidesSVG = [];
 
         var localData = {
             currentX: 1,
@@ -284,14 +285,6 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                 function(data) {
                 });
 
-            //---------
-
-
-            $scope.drawGrid(1);
-
-            //---------
-
-
             $scope.update();
         };
 
@@ -355,9 +348,53 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                 });
         };
 
+        $scope.adjustSVGViewbox = function(svgString){    //da chiamare anche al resize della pagina
+
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(svgString, "image/svg+xml");
+
+            doc.firstChild.setAttribute('width', 140);
+            doc.firstChild.setAttribute('height', 105);
+
+            var svgString = doc.firstChild.outerHTML;
+
+            return svgString;
+        };
+
+        $scope.drawGrid = function (currentSlide){
+            var results = presentationDataService.get({user: $scope.user, project: $scope.currentProject.id, presentation: $scope.currentProject.presentation});
+
+            results.$promise.then(
+                function(data){
+
+                    $scope.GridsterColumnsIds = [];
+                    $scope.GridsterSlidesSVG = [];
+                    for (var xVal in results) {
+                        if(isNaN(xVal) === false){
+                            for (var yVal in results[xVal]) {
+                                var slideItem = {
+                                    sizeX: 1,
+                                    sizeY: 1,
+                                    row: yVal,
+                                    col: xVal,
+                                    src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg))
+                                };
+                                $scope.GridsterSlidesSVG.push(slideItem);
+                                if ($scope.GridsterColumnsIds.indexOf(slideItem.row) == -1) {
+                                    $scope.GridsterColumnsIds.push(slideItem.row);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            );
+        };
+
         $scope.$on('showPresentationEditor', function () {
             $scope.currentSlide = $scope.currentProject.firstSlide;
             $scope.loadSlide();
+            $scope.drawGrid();
         });
 
         // add new slide
@@ -372,45 +409,11 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             $scope.updateSlide();
             $scope.getIdSlide(position);
         };
-//--------------------------------------------------------------------------------------------------
 
-
-
-
-        /*Gridster.js*/
-        $scope.drawGrid= function (currentSlide){
-              var results = presentationDataService.get({
-                        user: $scope.user,
-                        project: $scope.currentProject.id,
-                        presentation: $scope.currentProject.presentation
-                    }
-              );
-
-              results.$promise.then(
-                  function(data){
-
-                      $scope.GridsterColumnsIds=[];
-                      $scope.GridsterSlidesSVG=[];
-                      for (var xVal in results) {
-                          if(isNaN(xVal) === false){
-                              for (var yVal in results[xVal]) {
-                                  var slideItem = {
-                                      sizeX: 1,
-                                      sizeY: 1,
-                                      row: yVal,
-                                      col: xVal,
-                                      src: $sce.trustAsHtml(results[xVal][yVal].svg)
-                                  };
-                                  $scope.GridsterSlidesSVG.push(slideItem);
-                                  if ($scope.GridsterColumnsIds.indexOf(slideItem.row) == -1) {
-                                      $scope.GridsterColumnsIds.push(slideItem.row);
-
-                                  }
-                              }
-                          }
-
-                      }
-                  }
-              );
+        $scope.gridsterConfig = {
+            minRows: 1,
+            resizable: {enable: false},
+            widget_base_dimensions: [140, 105]
         };
+
 }]);

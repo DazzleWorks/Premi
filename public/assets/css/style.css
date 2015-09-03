@@ -435,7 +435,16 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 
 /*GRIDSTER*/
 
-.gridster ul {
+.gridster .gridster-item {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    color: #004756;
+    background: #ffffff;
+    padding: 10px;
+}
+
+/*.gridster ul {
     list-style: none;
     background-color: #004756;
 }
@@ -477,4 +486,4 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 
 .panorama{
     background-color: #003f54 !important;
-}
+}*/
