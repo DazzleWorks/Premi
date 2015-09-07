@@ -12,6 +12,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             currentY: 1
         };
 
+        $scope.maxX=1;
+
         $scope.components = [
             {label: "Text", id: "editText", classes: "fa fa-font"},
             {label: "Image", id: "editImage", classes: "fa fa-camera-retro"},
@@ -361,11 +363,14 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             return svgString;
         };
 
-        $scope.drawGrid = function (currentSlide){
+        $scope.drawGrid = function (){
             var results = presentationDataService.get({user: $scope.user, project: $scope.currentProject.id, presentation: $scope.currentProject.presentation});
 
             results.$promise.then(
                 function(data){
+                    console.log(data);
+                    var currentX=localData.currentX;
+                    var currentY=localData.currentY;
 
                     $scope.GridsterColumnsIds = [];
                     $scope.GridsterSlidesSVG = [];
@@ -377,8 +382,14 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                                     sizeY: 1,
                                     row: yVal,
                                     col: xVal,
-                                    src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg))
+                                    src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg)),
+                                    selected:"unselectedSlideInGrid"
                                 };
+                                //console.log("x: "+ currentX + " vs " + xVal + " - y: "+ currentY + " vs " + Number(yVal)+1);
+                                if(Number(currentX) === Number(xVal) && Number(currentY) === Number(yVal)+1)
+                                    slideItem.selected="selectedSlideInGrid";
+                                if(xVal>$scope.maxX)
+                                    $scope.maxX=xVal;
                                 $scope.GridsterSlidesSVG.push(slideItem);
                                 if ($scope.GridsterColumnsIds.indexOf(slideItem.row) == -1) {
                                     $scope.GridsterColumnsIds.push(slideItem.row);
@@ -387,6 +398,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                             }
                         }
                     }
+                    $scope.gridsterConfig.columns=$scope.maxX;
+                    //$scope.$apply();
                 }
             );
         };
@@ -394,7 +407,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
         $scope.$on('showPresentationEditor', function () {
             $scope.currentSlide = $scope.currentProject.firstSlide;
             $scope.loadSlide();
-            $scope.drawGrid();
+            //$scope.drawGrid();
         });
 
         // add new slide
@@ -402,18 +415,50 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             $scope.updateSlide();
             $scope.canvas.clear().renderAll();
             $scope.saveSlide(position);
+            $scope.drawGrid();
+            $scope.toggleGridVisibility();
+            $scope.toggleGridVisibility();
+           // $scope.$apply();
         };
 
         // change slide
         $scope.changeSlide = function (position) {
             $scope.updateSlide();
             $scope.getIdSlide(position);
+            $scope.drawGrid();
+            $scope.toggleGridVisibility();
+            $scope.toggleGridVisibility();
+           // $scope.$apply();
         };
+
+        //GRIDSTER
+
+        $scope.gridVisibility=false;
+
+        $scope.toggleGridVisibility = function(){
+            if ( $scope.gridVisibility === true)
+                $scope.gridVisibility=false;
+            else{
+                $scope.drawGrid();
+                $scope.gridVisibility=true;
+            }
+
+        };
+
+
+        $scope.updateGrid= function(){
+
+        };
+
 
         $scope.gridsterConfig = {
             minRows: 1,
             resizable: {enable: false},
-            widget_base_dimensions: [140, 105]
+           // avoid_overlapped_widgets: true,
+            defaultSizeX:140,
+            defaultSizeY:105,
+            //widgetBaseDimensions: [140, 105],
+            columns:$scope.maxX
         };
 
 }]);

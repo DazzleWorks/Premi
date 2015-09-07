@@ -485,5 +485,22 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
 }
 
 .panorama{
+overflow-y:scroll;
     background-color: #003f54 !important;
-}*/
+}
+*/
+
+.gridster-preview-holder {
+    background-color: #00008B !important;
+    opacity: 0;
+}
+.selectedSlideInGrid{
+    /*
+        width: 160px !important;
+        height: 120px !important;
+    */
+    background-color: #DB244F !important;
+}
+li.presentationPreview {
+    display: inline-block !important;
+}
