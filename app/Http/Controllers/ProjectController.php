@@ -69,10 +69,6 @@ class ProjectController extends Controller
         $newProject = new Project(['name' => $name]);
         $project = $user->projects()->save($newProject);
 
-        $pathname = $username.'/'.$project->_id;
-
-        \Illuminate\Support\Facades\Storage::makeDirectory($pathname);
-
         event(new ProjectWasCreated($project));
 
         $data = Project::getParamByProject($project);
