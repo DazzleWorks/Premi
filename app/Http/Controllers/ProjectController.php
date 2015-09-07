@@ -160,9 +160,9 @@ class ProjectController extends Controller
      * @param $projectID: the ID of a project
      * @param $filename: the name of the file to delete
      */
-    public function deleteSelectedFile($username, $projectID, $filename){
-        $directory = $username.'/'.$projectID;
-        Storage::delete($directory.'/'.$filename);
+    public function deleteSelectedFile($username, $filename){
+        $directory = $username.'/'.$filename;
+        Storage::delete($directory);
     }
 
     /**
