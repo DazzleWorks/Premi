@@ -14,4 +14,10 @@ angular.module('app.services.user', ['ngRoute', 'ngResource'])
 
         return $resource('/api/user/:id');
 
+    }])
+
+    .factory('userMediaService', ['$http', '$resource', function ($http, $resource) {
+
+        return $resource('/api/user/:username/media', {});
+
     }]);

@@ -198,9 +198,12 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         $scope.insertImageOnCanvas = function(source_path){
             fabric.Image.fromURL(source_path, function(oImg) {
+                oImg.scale(0.5).setFlipX(true);
                 oImg.set({
                     left: $scope.canvas.width / 10,
-                    top: $scope.canvas.height / 5
+                    top: $scope.canvas.height / 5,
+                    scaleY: ($scope.canvas.height * 0.5) / oImg.width,
+                    scaleX: scaleY
                 });
                 $scope.canvas.add(oImg);
             });

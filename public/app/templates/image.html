@@ -4,16 +4,32 @@
     </div>
 
     <div class="row modal-body">
-        <img ng-repeat="image in imageList" class="imgThumbnailEditor" ng-src="{{image.url}}" ng-click='insertImage(image.url)' alt="{{image.name}}">
+        <div>
+            <img ng-repeat="image in imageList" class="imgThumbnailEditor" ng-src="{{image}}" ng-click='insertImage(image)'>
+        </div>
     </div>
 
-    <div class="row modal-footer" id="modal-footer-img">
-        <form name="form" class="css-form" enctype='multipart/form-data'>
-            <input type="file" file-model="myFile" accept="image/*" data-file="uImage"/>
-
-            <input type="submit" class="button small radius" value="Upload" ng-click="upload(uImage)"></input>
-            <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
-        </form>
+    <div class="row modal-footer">
+        <div ng-controller="AppController" nv-file-drop="" uploader="uploader">
+            <div ng-show="uploader.isHTML5">
+                <input type="file" accept="image/*" nv-file-select="" uploader="uploader" multiple />
+                <ul style="list-style:none;">
+                    <li ng-repeat="item in uploader.queue">
+                        <div>Name: {{ item.file.name }}</div>
+                        <div ng-show="uploader.isHTML5">
+                            <p>Progress: {{ item.progress }}%</p>
+                            <div class="progress large-4">
+                                <span style="width: {{item.progress}}%;" class="meter custom"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <button ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess" class="button tiny radius MenuRadioButtons">Upload</button>
+                            <button ng-click="item.cancel()" ng-disabled="!item.isUploading" class="button tiny radius MenuRadioButtons">Cancel</button>
+                            <button ng-click="item.remove()" class="button tiny radius MenuRadioButtons">Remove</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
 </div>
