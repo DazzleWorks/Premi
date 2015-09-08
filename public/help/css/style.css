@@ -1,0 +1,158 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: 'Lato';
+  src: url('Lato-Regular.ttf') format('truetype');
+}
+
+body{
+    font-family: 'Lato';
+    margin: 10%;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+body ul li{
+  font-size: 20px;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+.manuale{
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bold{
+  font-weight: bold;
+  margin-top: 3%;
+}
+
+#glo ul li{
+  font-size: 30px;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+.glo ul li{
+  font-size: 30px;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 20%;
+}
+
+.acronimi{
+  margin-top: 15%;
+}
+
+#logo{
+  font-size: 35px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+#logo img{
+  width: 25%;
+  margin-top: 10%;
+}
+
+
+#indice{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 15%;
+}
+
+.sezioni{
+  margin-top: 2%;
+}
+
+.sezioni a{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 2%;
+}
+
+.space{
+  margin-top: 2%;
+}
+
+.subsection{
+  font-size: 20px;
+  text-align: left;
+  font-weight: normal;
+  margin-top: 1%;
+  margin-left: 2%;
+}
+
+.subsubsection{
+  font-size: 20px;
+  text-align: left;
+  font-weight: normal;
+  margin-top: 1%;
+  margin-left: 4%;
+}
+
+.titolo{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 30%;
+}
+
+.titolosub{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 5%;
+}
+
+.testo{
+  font-size: 20px;
+  text-align: left;
+  font-weight: normal;
+  margin-top: 1%;
+}
+
+
+
+.imgbig img{
+  margin-top: 2%;
+  width: 80%;
+  margin-left: 10%;
+
+}
+
+.imgsmall img{
+  margin-top: 2%;
+  width: 30%;
+  margin-left: 32%;
+}
+
+.imgsmallest img{
+  margin-top: 2%;
+  width: 15%;
+  margin-left: 39%;
+}
+
+
+#top{
+      width:100px;
+        padding:5px;
+        position:fixed;
+        bottom:10px;
+        right:-38px;
+        cursor:pointer;
+        display:none;
+}
+
+#top img{
+  width: 40%;
+}
