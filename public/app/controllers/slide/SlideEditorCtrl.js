@@ -290,6 +290,26 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             $scope.update();
         };
 
+
+        // save slide that already exists
+        $scope.updateSlide = function () {
+            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
+            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
+
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(slideSVG, "image/svg+xml");
+
+                var width = doc.firstChild.getAttribute('width');
+                var height = doc.firstChild.getAttribute('height');
+                doc.firstChild.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                doc.firstChild.setAttribute('preserveAspectRatio', 'xMidYMin meet');
+                slideSVG = doc.firstChild.outerHTML;
+
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
+        };
+
+
         // create new slide
         $scope.saveSlide = function (position) {
             if (position === 'up') {
@@ -312,27 +332,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                     $scope.currentSlide = slide._id;
                     localData.currentX = slide.xIndex;
                     localData.currentY = slide.yIndex;
+                    $scope.updateSlide();
                 },
                 function(data) {
                 });
-        };
-
-        // save slide that already exists
-        $scope.updateSlide = function () {
-            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
-            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
-
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(slideSVG, "image/svg+xml");
-
-                var width = doc.firstChild.getAttribute('width');
-                var height = doc.firstChild.getAttribute('height');
-                doc.firstChild.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
-
-                doc.firstChild.setAttribute('preserveAspectRatio', 'xMidYMin meet');
-                slideSVG = doc.firstChild.outerHTML;
-
-            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
 
         // remove current slide
@@ -445,11 +448,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
         };
 
-
         $scope.updateGrid= function(){
-
         };
-
 
         $scope.gridsterConfig = {
             minRows: 1,
