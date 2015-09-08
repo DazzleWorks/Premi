@@ -380,8 +380,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                                 var slideItem = {
                                     sizeX: 1,
                                     sizeY: 1,
-                                    row: yVal,
-                                    col: xVal,
+                                    row: Number(yVal)-1,
+                                    col: Number(xVal)-1,
                                     src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg)),
                                     selected:"unselectedSlideInGrid"
                                 };
@@ -398,7 +398,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                             }
                         }
                     }
-                    $scope.gridsterConfig.columns=$scope.maxX;
+                    $scope.gridsterConfig.columns=Number($scope.maxX)+1;
                     //$scope.$apply();
                 }
             );

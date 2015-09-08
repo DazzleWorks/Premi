@@ -44,12 +44,15 @@
             </div>
         </div>
 
-        <button class="button" ng-click="toggleGridVisibility()">Toggle Grid</button>
+        <button class="button tiny radius MenuRadioButtons small-2 columns small-offset-1" ng-click="toggleGridVisibility()"><span ng-show="gridVisibility">Close Grid</span><span ng-hide="gridVisibility">Open Grid</span></button>
+        <button  class="button tiny radius MenuRadioButtons small-2 small-offset-1 columns" ng-show="gridVisibility" ng-click="toggleGridVisibility()">Save Changes</button>
 
         <!-- GRIDSTER -->
         <div class="row" ng-show="gridVisibility">
 
+
             <div class="small-12 columns">
+
                 <div gridster=gridsterConfig >
                     <ul>
                         <li gridster-item="item" class="presentationPreview ng-class:item.selected" ng-repeat="item in GridsterSlidesSVG"  ng-bind-html="item.src" ></li>

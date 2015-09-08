@@ -442,6 +442,7 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     color: #004756;
     background: #ffffff;
     padding: 10px;
+    cursor: move !important;
 }
 
 /*.gridster ul {
@@ -499,7 +500,7 @@ overflow-y:scroll;
         width: 160px !important;
         height: 120px !important;
     */
-    background-color: #DB244F !important;
+    background-color: #008CBA !important;
 }
 li.presentationPreview {
     display: inline-block !important;
