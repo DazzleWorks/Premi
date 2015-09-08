@@ -1,8 +1,8 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal',
-     '$window', '$tour', 'indexService', 'presentationService', 'slideService',
-     function($scope, $rootScope, $modal, $window, $tour, indexService, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$sce', '$modal',
+     '$window', '$tour', 'indexService', 'presentationService', 'presentationDataService', 'slideService',
+     function($scope, $rootScope, $sce, $modal, $window, $tour, indexService, presentationService, presentationDataService, slideService) {
 
 // ----- INITIALIZATION TOUR -----
         $scope.startTour = $tour.start;
