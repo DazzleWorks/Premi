@@ -22,11 +22,11 @@
             <div class="myPresentationContainer">
                 <div class="presentationFront" ng-bind-html="currentProject.svg" id="presentationMyProjectsSvg"></div>
                 <div class="icon-bar six-up projectMenu">
-                    <a class="item custonMenuIcon" href="../presentation.php?user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition=convex&theme={{currentProject.theme}}&slideNumber=true/1/1" target="_blank">
+                    <a class="item custonMenuIcon" href="../presentation.php?user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition={{currentProject.transition}}&theme={{currentProject.theme}}&slideNumber=true/1/1" target="_blank">
                         <i class="fa fa-play"></i>
                         <label>Play</label>
                     </a>
-                    <a class="item custonMenuIcon" href="../presentation.php?print-pdf&user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition=convex&theme={{currentProject.theme}}" target="_blank">
+                    <a class="item custonMenuIcon" href="../presentation.php?print-pdf&user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition={{currentProject.transition}}&theme={{currentProject.theme}}" target="_blank">
                         <i class="fa fa-print"></i>
                         <label>Print</label>
                     </a>
@@ -50,18 +50,4 @@
             </div>
         </div>
     </div>
-
-    <!--<div class="row row-top-space myPresentationContainer">-->
-        <!--<div class="row">-->
-            <!--<h4 id="InfographicsSection">Infographics</h4>-->
-            <!--<button class="button small radius success" >Add new Infographic</button>-->
-        <!--</div>-->
-        <!--<div class="small-12 small-centered columns">-->
-            <!--<ul class="inline-list infographicsList small-11 small-centered columns ">-->
-                <!--<li class="animate-repeat" ng-repeat="infographic in infographics">-->
-                    <!--<a> <img src= "../assets/img/infographicPlaceholder.png"><span class="infographicListText">{{infographic.title}}</span></a><a class="infographicListDelete" ng-click="deleteInfographic(infographic.id, $index)">Delete</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
 </div>

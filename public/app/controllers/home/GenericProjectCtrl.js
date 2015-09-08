@@ -90,8 +90,8 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                 name: '',
                 presentation: '',
                 firstSlide: '',
-                theme: 'sky',
-                transition: 'slide'
+                theme: '',
+                transition: ''
             };
 
             for (var obj in $scope.userOfInterest.projects) {
