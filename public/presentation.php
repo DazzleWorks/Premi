@@ -87,6 +87,8 @@
 		<script src="assets/libs/fastclick.js" type="text/javascript"></script>
 		<script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
 		<script src="assets/libs/modernizr.js" type="text/javascript"></script>
+		<script src="assets/libs/angular-gridster/angular-gridster.min.js" type="text/javascript"></script>
+
 
 		<!-- custom -->
 		<script src="app/app.js" type="text/javascript"></script>

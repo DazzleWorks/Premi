@@ -23,9 +23,9 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload', 'mm
         $scope.upload = function () {
         };
 
-        $scope.insertImage = function (imageId) {
-            $modalInstance.close(imageId);
-        };
+        // $scope.insertImage = function (imageId) {
+        //     $modalInstance.close(imageId);
+        // };
 
         $scope.uploadFile = function(files) {
         };

@@ -53,6 +53,8 @@
                 </ul>
                 <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('down')"><i class="fa fa-plus"></i></a></li>
             </ul>
+            <button class="button secondary expand radius MenuRadioButtons" ng-click="toggleGridVisibility()"><span ng-show="gridVisibility">Close Grid</span><span ng-hide="gridVisibility">Open Grid</span></button>
+            <button  class="button secondary expand radius MenuRadioButtons" ng-show="gridVisibility" ng-click="toggleGridVisibility()">Save Changes</button>
 
         </div>
 
@@ -74,6 +76,17 @@
         <div class="small-2 columns" id="slideEditorPanel">
         <div ng-show= "objectSelected !== 'null'">
             <slide-editor-panel></slide-editor-panel>
+            </div>
+        </div>
+
+        <!-- GRIDSTER -->
+        <div class="row" ng-show="gridVisibility">
+            <div class="small-12 columns">
+                <div gridster=gridsterConfig >
+                    <ul>
+                        <li gridster-item="item" class="presentationPreview ng-class:item.selected" ng-repeat="item in GridsterSlidesSVG"  ng-bind-html="item.src" ></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
