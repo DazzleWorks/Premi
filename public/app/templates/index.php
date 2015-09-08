@@ -129,6 +129,7 @@
 
             <script src="app/services/presentation/presentation.js" type="text/javascript"></script>
             <script src="app/services/presentation/presentationData.js" type="text/javascript"></script>
+            <script src="app/services/presentation/presentationIndexUpdater.js" type="text/javascript"></script>
 
 
             <script src="app/services/project/project.js" type="text/javascript"></script>
