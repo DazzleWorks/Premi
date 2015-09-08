@@ -95,6 +95,7 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
             };
 
             for (var obj in $scope.userOfInterest.projects) {
+                console.log($scope.userOfInterest.projects[obj]);
                 if($scope.userOfInterest.projects[obj]._id.$id === id) {
                     prj.id = $scope.userOfInterest.projects[obj]._id.$id;
                     prj.name = $scope.userOfInterest.projects[obj].name;
@@ -103,14 +104,14 @@ angular.module('app.controllers.GenericProjectCtrl', ['ngRoute'])
                     prj.firstSlide = $scope.userOfInterest.projects[obj].firstSlide;
 
                     // theme
-                    if($scope.userOfInterest.projects[obj].theme !== undefined)
-                        prj.theme = $scope.userOfInterest.projects[obj].theme;
+                    if($scope.userOfInterest.projects[obj].presentation.theme !== undefined)
+                        prj.theme = $scope.userOfInterest.projects[obj].presentation.theme;
                     else
                         prj.theme = "sky";
 
                     // transition
-                    if($scope.userOfInterest.projects[obj].transition !== undefined)
-                        prj.transition = $scope.userOfInterest.projects[obj].transition;
+                    if($scope.userOfInterest.projects[obj].presentation.transition !== undefined)
+                        prj.transition = $scope.userOfInterest.projects[obj].presentation.transition;
                     else
                         prj.transition = "slide";
 

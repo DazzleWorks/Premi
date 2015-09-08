@@ -127,7 +127,7 @@ class ProjectController extends Controller
 
         $searchProject = User::where('projects.name', '=', $projectName)
                                ->get(['username','projects._id','projects.name',
-                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
+                                      'projects.presentation._id','projects.presentation.slides.0.svg', 'projects.presentation.theme', 'projects.presentation.transition']);
 
         $usersProject = json_decode($searchProject,true);
 

@@ -29,11 +29,11 @@ class UserController extends Controller
     public function show($username)
     {
         $user = User::where('username', $username)->get(['email','firstName',
-                                                        'lastName','username']); 
-        
+                                                        'lastName','username']);
+
         return response()->json($user);
     }
-    
+
     /**
      * Update the specified resource in storage.
      * @param Illuminate\Http\Request $request
@@ -43,17 +43,17 @@ class UserController extends Controller
     public function update(Request $request,$username)
     {
         $user = \Auth::user();
-        
+
         $user->email = $request->get('email');
         $user->firstName = $request->get('firstName');
         $user->secondName = $request->get('secondName');
         $user->password = $request->get('password');
-        
+
         $user->save();
-        
+
         return response()->json(['status' => true]);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      * @param String $username: the username of a user
@@ -62,12 +62,12 @@ class UserController extends Controller
     public function destroy($username)
     {
         $user = \Auth::user();
-        
+
         $user->delete();
-        
+
         return response()->json(['status' => true]);;
     }
-    
+
     /**
      * Search for projects by username
      * @param Illuminate\Http\Request $request
@@ -75,11 +75,11 @@ class UserController extends Controller
      */
     public function searchByUsername(Request $request){
         $username = $request -> get('username');
-        
+
         $user = User::where('username', '=', $username)->groupBy()
                                ->get(['username','projects._id','projects.name',
-                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
-        
+                                      'projects.presentation._id','projects.presentation.slides.0.svg','projects.presentation.theme', 'projects.presentation.transition']);
+
         return response()->json($user);
     }
 }
