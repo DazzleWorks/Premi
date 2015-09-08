@@ -2,8 +2,8 @@
 
 namespace Premi\Http\Controllers;
 
-//use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
 use Premi\Model\Project;

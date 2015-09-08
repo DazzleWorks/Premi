@@ -13,7 +13,6 @@ angular.module('app.controllers.ImageCtrl', ['ngRoute', 'angularFileUpload', 'mm
                         if (isNaN(i) === false)
                             $scope.imageList.push(data[i]);
                     }
-                    console.log($scope.imageList);
                 },
                 function(data) {
                 });

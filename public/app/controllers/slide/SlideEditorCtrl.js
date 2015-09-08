@@ -202,8 +202,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 oImg.set({
                     left: $scope.canvas.width / 10,
                     top: $scope.canvas.height / 5,
-                    scaleY: ($scope.canvas.height * 0.5) / oImg.width,
-                    scaleX: scaleY
+                    scaleY: ($scope.canvas.height * 0.3) / oImg.width,
+                    scaleX: ($scope.canvas.height * 0.3) / oImg.width
                 });
                 $scope.canvas.add(oImg);
             });
