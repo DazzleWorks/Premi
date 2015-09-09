@@ -149,12 +149,7 @@ return [
          * MongoDB Service Providers...
          */
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-	Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
-        
-        /*
-         * Social Service Providers...
-         */
-        Laravel\Socialite\SocialiteServiceProvider::class,
+	    Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
     ],
 
     /*
