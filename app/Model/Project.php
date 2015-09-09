@@ -55,7 +55,11 @@ class Project extends Eloquent
         return $this->embedsMany(Infographic::class);
     }
     
-    
+    /**
+     * Filters out the parameters for a project
+     * @param Project $project
+     * @return array
+     */
     public static function getParamByProject($project) {
         $data = (['projectID' => $project->_id, 
                   'name' => $project->name,

@@ -4,7 +4,6 @@ namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Premi\Http\Controllers\Controller;
-use Premi\Model\Presentation;
 
 /**
  * @file: app/Http/Controller/PresentationController.php
@@ -66,5 +65,26 @@ class PresentationController extends Controller
         $presentation->delete();
 
         return response()->json(['status' => true]);
+    }
+    
+    public function updateAxisPosition(Request $request,$username,$projectID,$presentationID)
+    {
+        $updates = $request->all();        
+        
+        $user = \Auth::user();
+        
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
+
+        $presentation = $project->presentation()->first();
+        
+        $slides = $presentation->slides()->get();
+        
+        foreach($updates as $update) {
+            $ID = $update['slideID'];
+            $slide = $slides->find($ID);
+            $slide->xIndex = $update['xIndex'];
+            $slide->yIndex = $update['yIndex'];
+        }
     }
 }

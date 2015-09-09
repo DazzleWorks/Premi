@@ -36,7 +36,11 @@ class Infographic extends Eloquent
      */
     protected $fillable = ['name', 'path'];
     
-    
+    /**
+     * Filters out the parameters for a infographic
+     * @param Infographic $infographic
+     * @return array
+     */
     public static function getParamByInfographic($infographic) {
         $data = (['infographicID' => $infographic->_id,
                   'name' => $infographic->name,
