@@ -86,6 +86,9 @@ Route::group(['prefix' => 'api'], function() {
                     ['except' => ['create', 'edit']]);
 
     // Presentation routes..
+    // update the axis position of the slides
+    Route::post('user/{username}/project/{projectID}/presentation/{presentationID}/axisUpdate',
+               'PresentationController@updateAxisPosition');
     Route::resource('user.project.presentation', 'PresentationController',
                     ['except' => ['index', 'show', 'store', 'create', 'edit']]);
 
