@@ -60,6 +60,10 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::get('auth/facebook', 'Auth\AuthController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'Auth\AuthController@handleFacebookCallback');
 
+// Facebook Authentication routes...
+Route::get('auth/github', 'Auth\AuthController@redirectToGithub');
+Route::get('auth/github/callback', 'Auth\AuthController@handleGithubCallback');
+
 //Search for projects by username
 Route::get('search/byUsername', 'UserController@searchByUsername');
 

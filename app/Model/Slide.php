@@ -96,6 +96,11 @@ class Slide extends Eloquent
         }
     }
     
+    /**
+     * Filters out the parameters for a slide
+     * @param Slide $slide
+     * @return array
+     */
     public static function getComponentsBySlide($slide) 
     {
         $data = (['slideID' => $slide->_id,
@@ -106,6 +111,11 @@ class Slide extends Eloquent
         return $data;
     }
     
+    /**
+     * Filters out the parameters for a slide
+     * @param Slide $slide
+     * @return array
+     */
     public static function getSVGBySlides($slide) 
     {
         $data = (['svg' => $slide->svg,
