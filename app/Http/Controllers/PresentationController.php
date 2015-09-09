@@ -15,7 +15,7 @@ use Premi\Http\Controllers\Controller;
  * +---------+------------+---------------+-----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify         | Description |
  * +---------+------------+---------------+-----------------------+-------------+
- * |  1.0.0  | 2015-06-25 |Suierica Bogdan| class                 |create class,| 
+ * |  1.0.0  | 2015-06-25 |Suierica Bogdan| class                 |create class,|
  * |         |            |               | PresentationController|and its rest |
  * |         |            |               |                       |functions    |
  * +---------+------------+---------------+-----------------------+-------------+
@@ -39,7 +39,7 @@ class PresentationController extends Controller
         $project = $projects->find($projectID);
 
         $presentation = $project->presentation()->get();
-    
+
         $presentation->theme = $request->get('theme');
         $presentation->transition = $request->get('transition');
         $presentation->save();
@@ -66,25 +66,29 @@ class PresentationController extends Controller
 
         return response()->json(['status' => true]);
     }
-    
+
     public function updateAxisPosition(Request $request,$username,$projectID,$presentationID)
     {
-        $updates = $request->all();        
-        
+        $updates = $request->all();
+
         $user = \Auth::user();
-        
+
         $projects = $user->projects();
         $project = $projects->find($projectID);
 
-        $presentation = $project->presentation()->first();
-        
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
+
         $slides = $presentation->slides()->get();
-        
+
         foreach($updates as $update) {
             $ID = $update['slideID'];
             $slide = $slides->find($ID);
-            $slide->xIndex = $update['xIndex'];
-            $slide->yIndex = $update['yIndex'];
+            $slide->xIndex = $update['col'] + 1;
+            $slide->yIndex = $update['row'] + 1;
+            $slide->save();
         }
+
+        return response()->json(['status' => true]);
     }
 }

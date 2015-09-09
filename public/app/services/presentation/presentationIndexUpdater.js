@@ -11,10 +11,11 @@ angular.module('app.services.presentationIndexUpdater', ['ngRoute', 'ngResource'
 
     .factory('presentationIndexUpdater', ['$resource', function($resource) {
 
-        return $resource('api/user/:user/project/:project/presentation/:presentation', null,
+        return $resource('api/user/:user/project/:project/presentation/:presentation/axisUpdate', null,
             {
                 'update': {
-                    method:'PUT'
+                    method:'PUT',
+                    isArray: false
                 }
             });
 

@@ -1,8 +1,8 @@
 angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
     .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$sce', '$modal',
-     '$window', '$tour', 'indexService', 'presentationService', 'presentationDataService', 'slideService',
-     function($scope, $rootScope, $sce, $modal, $window, $tour, indexService, presentationService, presentationDataService, slideService) {
+     '$window', '$tour', 'indexService', 'presentationIndexUpdater', 'presentationService', 'presentationDataService', 'slideService',
+     function($scope, $rootScope, $sce, $modal, $window, $tour, indexService, presentationIndexUpdater, presentationService, presentationDataService, slideService) {
 
 // ----- INITIALIZATION TOUR -----
         $scope.startTour = $tour.start;
@@ -395,7 +395,8 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
                                     row: Number(yVal)-1,
                                     col: Number(xVal)-1,
                                     src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg)),
-                                    selected:"unselectedSlideInGrid"
+                                    selected:"unselectedSlideInGrid",
+                                    slideID:results[xVal][yVal].slideID
                                 };
                                 //console.log("x: "+ currentX + " vs " + xVal + " - y: "+ currentY + " vs " + Number(yVal)+1);
                                 if(Number(currentX) === Number(xVal) && Number(currentY) === Number(yVal)+1)
@@ -453,11 +454,16 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
             else{
                 $scope.drawGrid();
                 $scope.gridVisibility=true;
+                //console.log($scope.GridsterSlidesSVG);
             }
 
         };
 
+
         $scope.updateGrid= function(){
+            $scope.toggleGridVisibility();
+            presentationIndexUpdater.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation}, $scope.GridsterSlidesSVG);
+
         };
 
         $scope.gridsterConfig = {
