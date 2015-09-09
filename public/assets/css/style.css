@@ -433,19 +433,33 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     /*float: right;*/
 }
 
-/* Gridster styles */
-.demo {
-    margin: 3em 0;
-    padding: 7.5em 0 5.5em;
-    background: #004756;
+/*GRIDSTER*/
+
+.gridster .gridster-item {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    color: #004756;
+    background: #ffffff;
+    padding: 10px;
+    cursor: move !important;
 }
 
-.demo:hover .gridster {
-    opacity: 1;
+/*.gridster ul {
+    list-style: none;
+    background-color: #004756;
 }
+
+.gridster li {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100%;
+}
+
 
 .gridster {
-    width: 940px;
+>>>>>>> frontend
     margin: 0 auto;
 
     opacity: .8;
@@ -457,6 +471,7 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
     transition: opacity .6s;
 }
 
+<<<<<<< HEAD
 .gridster .gs_w {
     background: #FFF;
     cursor: pointer;
@@ -483,4 +498,40 @@ section.homeCheckbox input:not(:checked) ~ p:nth-of-type(2) {
   position: absolute;
   top: 50%;
   left: 82%;
+}
+=======
+.gridster .gs-w {
+    background: #DDD;
+    cursor: pointer;
+}
+
+.gridster .player {
+    background: #BBB;
+}
+
+
+.gridster .preview-holder {
+    border: none!important;
+    background: red!important;
+}
+
+.panorama{
+overflow-y:scroll;
+    background-color: #003f54 !important;
+}
+*/
+
+.gridster-preview-holder {
+    background-color: #00008B !important;
+    opacity: 0;
+}
+.selectedSlideInGrid{
+    /*
+        width: 160px !important;
+        height: 120px !important;
+    */
+    background-color: #008CBA !important;
+}
+li.presentationPreview {
+    display: inline-block !important;
 }

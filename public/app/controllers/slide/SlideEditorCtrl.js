@@ -1,8 +1,8 @@
-angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
+angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
-    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$modal',
-     '$window', '$tour', 'indexService', 'presentationService', 'slideService',
-     function($scope, $rootScope, $modal, $window, $tour, indexService, presentationService, slideService) {
+    .controller('SlideEditorCtrl', ['$scope', '$rootScope', '$sce', '$modal',
+     '$window', '$tour', 'indexService', 'presentationService', 'presentationDataService', 'slideService',
+     function($scope, $rootScope, $sce, $modal, $window, $tour, indexService, presentationService, presentationDataService, slideService) {
 
 // ----- INITIALIZATION TOUR -----
         $scope.startTour = $tour.start;
@@ -11,11 +11,14 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
 // ----- VARIABLES & INITIALIZATION -----
         $scope.currentSlide = '';
+        $scope.GridsterSlidesSVG = [];
 
         var localData = {
             currentX: 1,
             currentY: 1
         };
+
+        $scope.maxX=1;
 
         $scope.components = [
             {label: "Text", id: "editText", classes: "fa fa-font"},
@@ -198,9 +201,12 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
 
         $scope.insertImageOnCanvas = function(source_path){
             fabric.Image.fromURL(source_path, function(oImg) {
+                oImg.scale(0.5).setFlipX(true);
                 oImg.set({
                     left: $scope.canvas.width / 10,
-                    top: $scope.canvas.height / 5
+                    top: $scope.canvas.height / 5,
+                    scaleY: ($scope.canvas.height * 0.3) / oImg.width,
+                    scaleX: ($scope.canvas.height * 0.3) / oImg.width
                 });
                 $scope.canvas.add(oImg);
             });
@@ -293,6 +299,26 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.update();
         };
 
+
+        // save slide that already exists
+        $scope.updateSlide = function () {
+            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
+            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
+
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(slideSVG, "image/svg+xml");
+
+                var width = doc.firstChild.getAttribute('width');
+                var height = doc.firstChild.getAttribute('height');
+                doc.firstChild.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                doc.firstChild.setAttribute('preserveAspectRatio', 'xMidYMin meet');
+                slideSVG = doc.firstChild.outerHTML;
+
+            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
+        };
+
+
         // create new slide
         $scope.saveSlide = function (position) {
             if (position === 'up') {
@@ -315,27 +341,10 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                     $scope.currentSlide = slide._id;
                     localData.currentX = slide.xIndex;
                     localData.currentY = slide.yIndex;
+                    $scope.updateSlide();
                 },
                 function(data) {
                 });
-        };
-
-        // save slide that already exists
-        $scope.updateSlide = function () {
-            var slideJSON = $scope.canvas.toJSON({suppressPreamble: true});
-            var slideSVG = $scope.canvas.toSVG({suppressPreamble: true});
-
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(slideSVG, "image/svg+xml");
-
-                var width = doc.firstChild.getAttribute('width');
-                var height = doc.firstChild.getAttribute('height');
-                doc.firstChild.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
-
-                doc.firstChild.setAttribute('preserveAspectRatio', 'xMidYMin meet');
-                slideSVG = doc.firstChild.outerHTML;
-
-            slideService.update({user:$scope.user, project:$scope.currentProject.id, presentation:$scope.currentProject.presentation, slide:$scope.currentSlide}, {xIndex:localData.currentX, yIndex:localData.currentY, components:slideJSON.objects, background:slideJSON.background, svg:slideSVG});
         };
 
         // remove current slide
@@ -353,9 +362,64 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
                 });
         };
 
+        $scope.adjustSVGViewbox = function(svgString){    //da chiamare anche al resize della pagina
+
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(svgString, "image/svg+xml");
+
+            doc.firstChild.setAttribute('width', 140);
+            doc.firstChild.setAttribute('height', 105);
+
+            var svgString = doc.firstChild.outerHTML;
+
+            return svgString;
+        };
+
+        $scope.drawGrid = function (){
+            var results = presentationDataService.get({user: $scope.user, project: $scope.currentProject.id, presentation: $scope.currentProject.presentation});
+
+            results.$promise.then(
+                function(data){
+                    console.log(data);
+                    var currentX=localData.currentX;
+                    var currentY=localData.currentY;
+
+                    $scope.GridsterColumnsIds = [];
+                    $scope.GridsterSlidesSVG = [];
+                    for (var xVal in results) {
+                        if(isNaN(xVal) === false){
+                            for (var yVal in results[xVal]) {
+                                var slideItem = {
+                                    sizeX: 1,
+                                    sizeY: 1,
+                                    row: Number(yVal)-1,
+                                    col: Number(xVal)-1,
+                                    src: $sce.trustAsHtml($scope.adjustSVGViewbox(results[xVal][yVal].svg)),
+                                    selected:"unselectedSlideInGrid"
+                                };
+                                //console.log("x: "+ currentX + " vs " + xVal + " - y: "+ currentY + " vs " + Number(yVal)+1);
+                                if(Number(currentX) === Number(xVal) && Number(currentY) === Number(yVal)+1)
+                                    slideItem.selected="selectedSlideInGrid";
+                                if(xVal>$scope.maxX)
+                                    $scope.maxX=xVal;
+                                $scope.GridsterSlidesSVG.push(slideItem);
+                                if ($scope.GridsterColumnsIds.indexOf(slideItem.row) == -1) {
+                                    $scope.GridsterColumnsIds.push(slideItem.row);
+
+                                }
+                            }
+                        }
+                    }
+                    $scope.gridsterConfig.columns=Number($scope.maxX)+1;
+                    //$scope.$apply();
+                }
+            );
+        };
+
         $scope.$on('showPresentationEditor', function () {
             $scope.currentSlide = $scope.currentProject.firstSlide;
             $scope.loadSlide();
+            //$scope.drawGrid();
         });
 
         // add new slide
@@ -363,11 +427,47 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute'])
             $scope.updateSlide();
             $scope.canvas.clear().renderAll();
             $scope.saveSlide(position);
+            $scope.drawGrid();
+            $scope.toggleGridVisibility();
+            $scope.toggleGridVisibility();
+           // $scope.$apply();
         };
 
         // change slide
         $scope.changeSlide = function (position) {
             $scope.updateSlide();
             $scope.getIdSlide(position);
+            $scope.drawGrid();
+            $scope.toggleGridVisibility();
+            $scope.toggleGridVisibility();
+           // $scope.$apply();
         };
+
+        //GRIDSTER
+
+        $scope.gridVisibility=false;
+
+        $scope.toggleGridVisibility = function(){
+            if ( $scope.gridVisibility === true)
+                $scope.gridVisibility=false;
+            else{
+                $scope.drawGrid();
+                $scope.gridVisibility=true;
+            }
+
+        };
+
+        $scope.updateGrid= function(){
+        };
+
+        $scope.gridsterConfig = {
+            minRows: 1,
+            resizable: {enable: false},
+           // avoid_overlapped_widgets: true,
+            defaultSizeX:140,
+            defaultSizeY:105,
+            //widgetBaseDimensions: [140, 105],
+            columns:$scope.maxX
+        };
+
 }]);

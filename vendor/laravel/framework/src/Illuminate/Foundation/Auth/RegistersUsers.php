@@ -17,6 +17,7 @@ trait RegistersUsers
     public function postRegister(Request $request)
     {
         $validator = $this->validator($request->all());
+
         if ($validator->fails()) {
             $messages = $validator->messages();
             return response($messages);
@@ -25,8 +26,10 @@ trait RegistersUsers
             $this->create($request->all());
             $credentials = $this->getCredentials($request);
             Auth::attempt($credentials, $request->has('remember'));
+            
             $username = Auth::user()->username;
             File::makeDirectory('storage/'.$username);
+
             return response()->json(['username' => $username]);
         }
     }

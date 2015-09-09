@@ -156,11 +156,11 @@ angular.module('app.controllers.HomePageCtrl', ['ngRoute'])
 
                                 result.name = data[i].projects[0].name;
                                 result.id = data[i]._id;
-                                result.presentationId = data[i].projects[0]._id.$id;
-                                result.projectId = data[i]._id;
+                                result.presentationId = data[i].projects[0].presentation._id.$id;
+                                result.projectId = data[i].projects[0]._id.$id;
 
-                                result.theme = (data[i].projects[0].theme !== undefined) ? data[i].projects[0].theme !== undefined : "sky";
-                                result.transition = (data[i].projects[0].theme !== undefined) ? data[i].projects[0].transition !== undefined : "slide";
+                                result.theme = (data[i].projects[0].presentation.theme !== undefined) ? data[i].projects[0].presentation.theme : "sky";
+                                result.transition = (data[i].projects[0].presentation.transition !== undefined) ? data[i].projects[0].presentation.transition : "slide";
 
                                 $scope.searchResults.push(result);
                             }

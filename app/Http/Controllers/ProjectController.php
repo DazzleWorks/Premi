@@ -2,12 +2,14 @@
 
 namespace Premi\Http\Controllers;
 
-//use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Request;
 use Premi\Http\Controllers\Controller;
 use Premi\Model\User;
 use Premi\Model\Project;
 use Premi\Events\ProjectWasCreated;
+use Storage;
+use Illuminate\Support\Facades\File;
 
 /**
  * @file: app/Http/Controller/ProjectController.php
@@ -69,10 +71,6 @@ class ProjectController extends Controller
         $newProject = new Project(['name' => $name]);
         $project = $user->projects()->save($newProject);
 
-        $pathname = $username.'/'.$project->_id;
-
-        \Illuminate\Support\Facades\Storage::makeDirectory($pathname);
-
         event(new ProjectWasCreated($project));
 
         $data = Project::getParamByProject($project);
@@ -129,7 +127,7 @@ class ProjectController extends Controller
 
         $searchProject = User::where('projects.name', '=', $projectName)
                                ->get(['username','projects._id','projects.name',
-                                      'projects.presentation._id','projects.presentation.slides.0.svg']);
+                                      'projects.presentation._id','projects.presentation.slides.0.svg', 'projects.presentation.theme', 'projects.presentation.transition']);
 
         $usersProject = json_decode($searchProject,true);
 
@@ -151,9 +149,10 @@ class ProjectController extends Controller
      * @param $projectID: the ID of a project
      * @return json
      */
-    public function returnAllFiles($username, $projectID){
-        $directory = $username.'/'.$projectID;
-        $files = Storage::files($directory);
+    public function returnAllFiles($username){
+        $directory = $username;
+        // $files = Storage::files($directory);
+        $files = File::files('storage/'.$username);
 
         return $files;
     }
@@ -164,33 +163,9 @@ class ProjectController extends Controller
      * @param $projectID: the ID of a project
      * @param $filename: the name of the file to delete
      */
-    public function deleteSelectedFile($username, $projectID, $filename){
-        $directory = $username.'/'.$projectID;
-        Storage::delete($directory.'/'.$filename);
+    public function deleteSelectedFile($username, $filename){
+        $directory = $username.'/'.$filename;
+        Storage::delete($directory);
     }
 
-    /**
-     * Upload media for the selected project
-     * @param $username: the username of a user
-     * @param $projectID: the ID of a project
-     * @return json
-     */
-    public function uploadMedia($username, $projectID){
-        // $file = Request::file('filefield');
-        $filename = \Illuminate\Support\Facades\Input::file('filefield')->getClientOriginalName();
-
-        //if($file->isValid()){
-        //    $filename = $file->getClientOriginalName();
-           $extension = $file->getFileOriginialExtension();
-           if(Storage::exists($username.'/'.$projectID.'/'.$filename.$extension)){
-                return response()->json(['error' => 'File already exists, please change the name before uploading']);
-           }
-           else{
-                Storage::put($username.'/'.$projectID.'/'.$filename.$extension, File::get($file));
-           }
-        //}
-        //else{
-        //    return $file->getError();
-        //}
-    }
 }

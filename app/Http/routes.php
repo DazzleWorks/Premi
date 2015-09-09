@@ -56,25 +56,14 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-// Facebook Authentication routes...
-Route::get('auth/facebook', 'Auth\AuthController@redirectToFacebook');
-Route::get('auth/facebook/callback', 'Auth\AuthController@handleFacebookCallback');
-
-// Facebook Authentication routes...
-Route::get('auth/github', 'Auth\AuthController@redirectToGithub');
-Route::get('auth/github/callback', 'Auth\AuthController@handleGithubCallback');
-
 //Search for projects by username
 Route::get('search/byUsername', 'UserController@searchByUsername');
 
 //Search for projects by the projects name
 Route::get('search/byProject', 'ProjectController@searchByProjectsName');
 
-//Upload, return, delete media
-Route::delete('user/{username}/project/{projectID}/image/{filename}', 'ProjectController@deleteSelectedFile');
-Route::get('user/{username}/project/{projectID}/image', 'ProjectController@returnAllFiles');
-Route::post('user/{username}/project/{projectID}/image', 'ProjectController@uploadMedia');
-
+//Return media
+Route::get('api/user/{user}/media', 'ProjectController@returnAllFiles');
 
 // Logout routes...
 Route::get('/logout', function(){

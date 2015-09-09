@@ -87,6 +87,8 @@
 		<script src="assets/libs/fastclick.js" type="text/javascript"></script>
 		<script src="assets/libs/foundation/js/foundation.js" type="text/javascript"></script>
 		<script src="assets/libs/modernizr.js" type="text/javascript"></script>
+		<script src="assets/libs/angular-gridster/angular-gridster.min.js" type="text/javascript"></script>
+
 
 		<!-- custom -->
 		<script src="app/app.js" type="text/javascript"></script>
@@ -157,6 +159,7 @@
 
 		<script src="app/services/presentation/presentation.js" type="text/javascript"></script>
 		<script src="app/services/presentation/presentationData.js" type="text/javascript"></script>
+		<script src="app/services/presentation/presentationIndexUpdater.js" type="text/javascript"></script>
 
 
 		<script src="app/services/project/project.js" type="text/javascript"></script>
