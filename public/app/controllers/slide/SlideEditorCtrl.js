@@ -201,7 +201,7 @@ angular.module('app.controllers.SlideEditorCtrl', ['ngRoute', 'gridster'])
 
         $scope.insertImageOnCanvas = function(source_path){
             fabric.Image.fromURL(source_path, function(oImg) {
-                oImg.scale(0.5).setFlipX(true);
+                oImg.scale(0.5);
                 oImg.set({
                     left: $scope.canvas.width / 10,
                     top: $scope.canvas.height / 5,
