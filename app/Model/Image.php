@@ -2,22 +2,22 @@
 
 namespace Premi\Model;
 
-use App\Model\Component;
+use Premi\Model\Component;
 
 /**
  * @file: app/Model/Image.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the structure of the data required to 
- * represent an image in a slide
+ * represent an image in a slide.
  *
  * +---------+------------+---------------+-------------+--------------+
  * | Version |     Date   |  Programmer   |   Modify    | Description  |
  * +---------+------------+---------------+-------------+--------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Image | create class |
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class Image | create class |
  * +---------+------------+---------------+-------------+--------------+
  */
-class Image extends Component 
+class Image extends Component
 {
     /**
      * indicates if the model should be timestamped
@@ -39,6 +39,13 @@ class Image extends Component
      *               when narrows the window
      * @background: indicates the background of the Image
      */
-    protected $fillable = ['src', 'filters', 'crossOrigin', 'alignX', 'alignY',
-                           'meetOrSlice', 'background'];
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top', 'width',
+                           'height', 'fill', 'stroke', 'strokeWidth', 
+                           'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
+                           'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
+                           'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
+                           'clipTo', 'backgroundColor', 'fillRule', 
+                           'globalCompositeOperation', 'src', 'filters', 
+                           'crossOrigin', 'alignX', 'alignY', 'meetOrSlice', 
+                           'background'];
 }

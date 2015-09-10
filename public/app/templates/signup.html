@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">SIGNUP</h3>
+</div>
+<form name="signup" ng-submit="ok()" >
+    <div class="modal-body">
+    	<label>Email</label>
+    	<input type="email" ng-model="signup_data.email" placeholder="Enter your email" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.email}}</div>
+
+    	<label>Username</label>
+        <input type="text" ng-model="signup_data.username" class="form-control" placeholder="Enter username" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.username}}</div>
+
+        <label>Password</label>
+    	<input type="password" minlength=8 ng-model="signup_data.password" placeholder="Enter password" required />
+
+        <label>Repeat password</label>
+    	<input type="password" minlength=8 ng-model="signup_data.password_confirmation" placeholder="Repeat password" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.password}}</div>
+
+        <label>First Name</label>
+    	<input type="text" ng-model="signup_data.firstName" placeholder="Enter your first name" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.firstName}}</div>
+
+        <label>Last Name</label>
+    	<input type="text" ng-model="signup_data.lastName" placeholder="Enter your last name" required />
+        <div class="signupError" ng-show="isCorrect === false">{{error.lastName}}</div>
+
+    </div>
+
+    <div class="modal-footer">
+     	<button class="button small radius" type="submit" id="submit" ng-disabled="fieldsError">Confirm</button>
+        <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+
+        <!-- <div class="row">
+            <label>Signup with:</label>
+            <a ng-click="signupFacebook()"><img src="../assets/img/facebook.png" style="width:50px;"></a>
+            <a ng-click="signupTwitter()"><img src="../assets/img/twitter.png" style="width:50px;"></a>
+            <a ng-click="signupGooglePlus()"><img src="../assets/img/google-plus.png" style="width:50px;"></a>
+        </div> -->
+    </div>
+</form>

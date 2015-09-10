@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">Presentation Style</h3>
+</div>
+
+<div class="row">
+    <div class="row modal-body">
+        <div class="row">
+            <h4 class="row">Transitions</h4>
+            <div ng-repeat="transition in transitions" class="transitionsWrapper">
+                <img ng-src="{{transition.img}}" ng-click="setTransition(transition.name)" alt="{{transition.name}}">
+                <p>{{transition.name}}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <h4 class="row">Skins</h4>
+            <div ng-repeat="theme in themes" ng-click="setTheme(theme.name)" class="themesWrapper " style="background-color: {{theme.backgroundColor}}">
+                <p style="color: {{theme.textColor}}">{{theme.name}}<br /><a style="color: {{theme.linkColor}}"href>Link</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row modal-footer" id="modal-footer-img">
+    <button class="button small radius" id="projectStyleOkButton" ng-click="ok()">OK</button>
+    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</div>

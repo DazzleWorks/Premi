@@ -6,14 +6,17 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+    use WithoutMiddleware;
+    
     /**
-     * A basic functional test example.
-     *
+     * A basic functional test example
      * @return void
      */
-    public function testBasicExample()
+    public function testBasicUsername()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $this->get('api/user/valexbrl', ['username' => 'valexbrl'])
+             ->seeJson([
+                 'created' => true,
+             ]);
     }
 }

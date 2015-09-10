@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">LOGIN</h3>
+</div>
+<form>
+    <div class="modal-body">
+        <label>Username</label>
+        <input type="text" ng-model="login_data.username" class="form-control">
+
+    	<label>Password <a ng-click="forgotPassword()">(forgot password)</a></label>
+        <input type="password" ng-model="login_data.password" class="form-control">
+
+        <div class="loginError" ng-show="error !== ''">{{error}}</div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="button small radius" ng-click="ok()">OK</button>
+        <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+
+        <!-- <div class="row">
+            <label>Login with:</label>
+            <a ng-click="loginFacebook()"><img src="../assets/img/facebook.png" style="width:50px;"></a>
+            <a ng-click="loginTwitter()"><img src="../assets/img/twitter.png" style="width:50px;"></a>
+            <a ng-click="loginGooglePlus()"><img src="../assets/img/google-plus.png" style="width:50px;"></a>
+        </div> -->
+    </div>
+</form>

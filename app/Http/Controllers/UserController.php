@@ -1,86 +1,85 @@
 <?php
-
 namespace Premi\Http\Controllers;
-
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
-use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
-
+use Premi\Model\User;
 
 /**
  * @file: app/Http/Controller/UserController.php
  * @author: DazzleWorks
- * @date: 2015-06-20
- * @description: This class handles the deleting and viewing, through a specific 
+ * @date: 2015-06-24
+ * @description: This class handles the deleting and viewing, through a specific
  * view, of a user.
  *
  * +---------+------------+---------------+----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify        | Description |
  * +---------+------------+---------------+----------------------+-------------+
- * |  1.0.0  | 2015-06-20 |Burlin Valerio | class UserController |create class,| 
+ * |  1.0.0  | 2015-06-24 |Burlin Valerio | class UserController |create class,|
  * |         |            |               |                      |and its rest |
  * |         |            |               |                      |functions    |
  * +---------+------------+---------------+----------------------+-------------+
  */
-
 class UserController extends Controller
 {
     /**
-     * This method returns the data to display a user's profile
-     * 
-     * @return array json
+     * Returns the data to display a user's profile
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
-    public function show($username= ""){
-        if(!\Auth::user()) {
-            return redirect()->route('auth/login');
-        }
-        
-        if(empty($username)) {
-            $username = \Auth::user()->username;
-        }
-        
-        $user = getParamByUsername($username);
-        
-        $project = \Auth::user()->projects()->find(array('_id' => '1', 'name' => '1'))->get();
-        
-        return response($user, $project);
+    public function show($username)
+    {
+        $user = User::where('username', $username)->get(['email','firstName',
+                                                        'lastName','username']);
+
+        return response()->json($user);
     }
-    
+
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param Illuminate\Http\Request $request
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request,$username)
     {
         $user = \Auth::user();
-        
-        $user->email = \Input::get('email');
-        $user->firstName = \Input::get('firstName');
-        $user->secondName = \Input::get('secondName');
-        $user->password = \Input::get('password');
-        
+
+        $user->email = $request->get('email');
+        $user->firstName = $request->get('firstName');
+        $user->secondName = $request->get('secondName');
+        $user->password = $request->get('password');
+
         $user->save();
-        
-        return response(true);
+
+        return response()->json(['status' => true]);
     }
-    
+
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
+     * @param String $username: the username of a user
+     * @return Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($username)
     {
         $user = \Auth::user();
-                
+
         $user->delete();
-        
-        return response(true);
+
+        return response()->json(['status' => true]);;
+    }
+
+    /**
+     * Search for projects by username
+     * @param Illuminate\Http\Request $request
+     * @return Illuminate\Http\Response
+     */
+    public function searchByUsername(Request $request){
+        $username = $request -> get('username');
+
+        $user = User::where('username', '=', $username)->groupBy()
+                               ->get(['username','projects._id','projects.name',
+                                      'projects.presentation._id','projects.presentation.slides.0.svg','projects.presentation.theme', 'projects.presentation.transition']);
+
+        return response()->json($user);
     }
 }

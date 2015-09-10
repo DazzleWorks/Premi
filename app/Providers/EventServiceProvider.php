@@ -9,25 +9,22 @@ class EventServiceProvider extends ServiceProvider
 {
     /**
      * The event listener mappings for the application.
-     *
      * @var array
      */
     protected $listen = [
-        'Premi\Events\SomeEvent' => [
-            'Premi\Listeners\EventListener',
+        'Premi\Events\ProjectWasCreated' => [
+            'Premi\Listeners\PresentationCreate',
+            'Premi\Listeners\SlideCreate',
         ],
     ];
 
     /**
      * Register any other events for your application.
-     *
      * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
-        //
     }
 }

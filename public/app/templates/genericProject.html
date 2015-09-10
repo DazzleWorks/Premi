@@ -1,0 +1,51 @@
+<div ng-controller="GenericProjectCtrl">
+
+    <div class="row restrictedAreaMenu">
+        <div class= "small-3 columns">
+            <h4>{{userOfInterest.username}}'s projects</h4>
+        </div>
+        <div class= "small-3 columns">
+            <nav id="section-menu">
+                <div>
+                    <button type="button" class="button tiny radius MenuRadioButtons" ng-click= "resetHomePage()"><i class="fa fa-arrow-circle-left"></i> Search results</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns projectsList">
+            <ul class="side-nav">
+                <li ng-repeat="project in userOfInterest.projects" ng-click="setCurrentGenericProject(project._id.$id); ">
+                    <a><i class="fa fa-flask"></i> {{project.name}}</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="small-9 columns project" ng-show="currentGenericProject.name !== ''">
+
+            <h3 class="projectTitle" id="PresentationSection">{{currentGenericProject.name}}</h3>
+
+            <div class="row">
+                <div class="small-12 small-centered columns">
+                    <div class="myPresentationContainer">
+                        <div class="presentationFront" ng-bind-html="currentGenericProject.svg" id="presentationFrontSvgContainer">
+                        </div>
+
+                        <div class="icon-bar two-up projectMenu">
+                            <a class="item custonMenuIcon" href="../presentation.php?user={{currentGenericProject.username}}&id={{currentGenericProject.id}}&presentationId={{currentGenericProject.presentationId}}&transition={{currentGenericProject.transition}}&theme={{currentGenericProject.theme}}&slideNumber=true/1/1" target="_blank">
+                                <i class="fa fa-play"></i>
+                                <label>Play</label>
+                            </a>
+                            <a class="item custonMenuIcon" href="../presentation.php?print-pdf&user={{currentGenericProject.username}}&id={{currentGenericProject.id}}&presentationId={{currentGenericProject.presentationId}}&transition={{currentGenericProject.transition}}&theme={{currentGenericProject.theme}}&slideNumber=true/1/1" target="_blank">
+                                <i class="fa fa-print"></i>
+                                <label>Print</label>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

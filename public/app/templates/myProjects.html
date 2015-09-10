@@ -1,0 +1,49 @@
+<div class="small-3 columns projectsList">
+    <div class="row">
+        <div>
+            <button class="button small radius success expand" ng-click="newProject()">New Project</button>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="side-nav">
+            <li ng-repeat="project in projects" ng-click="setCurrentProject(project.id)">
+                <a><i class="fa fa-flask"></i> {{project.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="small-9 columns project" ng-show="currentProject.name !== ''">
+
+    <h3 class="projectTitle" id="PresentationSection">{{currentProject.name}}</h3>
+
+    <div class="row">
+        <div class="small-9 small-centered columns">
+            <div class="myPresentationContainer">
+                <div class="presentationFront" ng-bind-html="currentProject.svg" id="presentationMyProjectsSvg"></div>
+                <div class="icon-bar five-up projectMenu">
+                    <a class="item custonMenuIcon" href="../presentation.php?user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition={{currentProject.transition}}&theme={{currentProject.theme}}&slideNumber=true/1/1" target="_blank">
+                        <i class="fa fa-play"></i>
+                        <label>Play</label>
+                    </a>
+                    <a class="item custonMenuIcon" href="../presentation.php?print-pdf&user={{user}}&presentationId={{currentProject.presentation}}&id={{currentProject.id}}&transition={{currentProject.transition}}&theme={{currentProject.theme}}" target="_blank">
+                        <i class="fa fa-print"></i>
+                        <label>Print</label>
+                    </a>
+                    <a class="item custonMenuIcon" ng-click="editProject()">
+                        <i class="fa fa-pencil-square-o"></i>
+                        <label>Edit</label>
+                    </a>
+                    <a class="item custonMenuIcon" ng-click="renameProject()">
+                        <i class="fa fa-pencil"></i>
+                        <label>Rename</label>
+                    </a>
+                    <a class="item custonMenuIcon" ng-click="deleteProject()">
+                        <i class="fa fa-trash-o"></i>
+                        <label>Delete</label>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

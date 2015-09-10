@@ -149,8 +149,7 @@ return [
          * MongoDB Service Providers...
          */
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-	Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
-
+	    Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
     ],
 
     /*
@@ -194,13 +193,12 @@ return [
         'Route'     => Illuminate\Support\Facades\Route::class,
         'Schema'    => Illuminate\Support\Facades\Schema::class,
         'Session'   => Illuminate\Support\Facades\Session::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Storage'   => Illuminate\Support\Facades\Storage::class,
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
-
     ],
-
 ];

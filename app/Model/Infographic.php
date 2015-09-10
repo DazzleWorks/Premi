@@ -7,10 +7,10 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Infographic.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class is graphic visual rapresentation of the presentation 
  * that intends to present information quickly and clearly. It contains the path 
- * of the image if the user already eloborated it
+ * of the image if the user already eloborated it.
  *
  * +---------+------------+---------------+--------------------+--------------+
  * | Version |     Date   |  Programmer   |       Modify       | Description  |
@@ -35,4 +35,17 @@ class Infographic extends Eloquent
      * @path: indicates the path to retrieve the file for the Infographic
      */
     protected $fillable = ['name', 'path'];
+    
+    /**
+     * Filters out the parameters for a infographic
+     * @param Infographic $infographic
+     * @return array
+     */
+    public static function getParamByInfographic($infographic) {
+        $data = (['infographicID' => $infographic->_id,
+                  'name' => $infographic->name,
+                  'path' => $infographic->path]);
+        
+        return $data;
+    }
 }

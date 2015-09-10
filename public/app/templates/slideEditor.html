@@ -1,0 +1,93 @@
+<div ng-controller= "SlideEditorCtrl">
+    <div class="row">
+      <button class="button radius success" ng-click="startTour()">Visual Help</button>
+        <div class="small-2 columns" >
+            <ul>
+                <li class="editMenuItemContainer">
+                    <button class="button secondary expand radius" ng-click="openModal('presentationStyle')"
+                    step-text="Use this button to change transition effects and skins of the slide."
+                    step-index="1"
+                    step-placement="bottom"
+                    ><i class="fa fa-puzzle-piece"></i> style</button>
+                </li>
+                <ul class="button-group radius" id="savedeletebutton">
+                    <li class="editMenuItemContainer"
+                    step-text="Use this button to save changes."
+                    step-index="2"
+                    step-placement="bottom"
+                    ><a href="" class="button success" ng-click="updateSlide()"><i class="fa fa-floppy-o"></i></a></li>
+                    <li class="editMenuItemContainer"
+                    step-text="Use this button to discard changes."
+                    step-index="3"
+                    step-placement="bottom"
+                    ><a href="" class="button alert" ng-click="deleteSlide()"><i class="fa fa-trash-o"></i></a></li>
+                </ul>
+            </ul>
+            <ul
+            step-text="Use this buttons to insert an element into the slide."
+            step-index="4"
+            step-placement="right">
+                <li class="editMenuItemContainer" ng-repeat="component in components" ng-click='openModal(component.id)'>
+                    <button class="button expand radius" id="{{component.id}}"><i class="{{component.classes}}"></i> {{component.label}}</button>
+                </li>
+            </ul>
+            <ul class="editMenuContainer"
+            step-text="Use this buttons to navigate up, left, down and right through the slides of the presentation."
+            step-index="5"
+            step-placement="right">
+                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="buttons.up" ng-click="changeSlide('up')"><i class="fa fa-arrow-up"></i></a></li>
+                <ul class="button-group">
+                    <li><a href="" class="button tiny secondary" ng-class="buttons.left" ng-click="changeSlide('left')"><i class="fa fa-arrow-left"></i></i></a></li>
+                    <li><a href="" class="button tiny secondary" ng-class="buttons.right" ng-click="changeSlide('right')"><i class="fa fa-arrow-right"></i></a></li>
+                </ul>
+                <li class="editMenuItemContainer"><a href="" class="button tiny secondary" ng-class="buttons.down" ng-click="changeSlide('down')"><i class="fa fa-arrow-down"></i></a></li>
+            </ul>
+            <ul class="editMenuContainer"
+            step-text="Use this buttons to add an empty slide in the direction indicated by the +."
+            step-index="6"
+            step-placement="right">
+                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('up')"><i class="fa fa-plus"></i></a></li>
+                <ul class="button-group">
+                    <li><a href="" class="button tiny success" ng-click="addSlide('left')"><i class="fa fa-plus"></i></a></li>
+                    <li><a href="" class="button tiny success" ng-click="addSlide('right')"><i class="fa fa-plus"></i></a></li>
+                </ul>
+                <li class="editMenuItemContainer"><a href="" class="button tiny success" ng-click="addSlide('down')"><i class="fa fa-plus"></i></a></li>
+            </ul>
+            <button class="button secondary expand radius MenuRadioButtons" ng-click="toggleGridVisibility()"><span ng-show="gridVisibility">Close Grid</span><span ng-hide="gridVisibility">Open Grid</span></button>
+            <button  class="button secondary expand radius MenuRadioButtons" ng-show="gridVisibility" ng-click="updateGrid()">Save Changes</button>
+
+        </div>
+
+        <div class="small-8 columns">
+          <div class="workshop" step-text="This is the workspace in which you can manage the elements inserted into the slide.
+          You can use your mouse to select, to move, to stretch, to rotate or to resize an element."
+          step-index="7"
+          step-placement="bottom">
+        </div>
+            <canvas id="slide" width="800" height="600" style="border:1px solid #000000;"></canvas>
+        </div>
+
+        <div class="small-2 columns" id="help" step-text="After you selected an element from the workspace, here will appear
+        an extra menù. The menù allow you to modify the parameters of the element
+        selected, for example: height, width, scale, size and many others."
+        step-index="8"
+        step-placement="left">
+      </div>
+        <div class="small-2 columns" id="slideEditorPanel">
+        <div ng-show= "objectSelected !== 'null'">
+            <slide-editor-panel></slide-editor-panel>
+            </div>
+        </div>
+
+        <!-- GRIDSTER -->
+        <div class="row" ng-show="gridVisibility">
+            <div class="small-12 columns">
+                <div gridster=gridsterConfig >
+                    <ul>
+                        <li gridster-item="item" class="presentationPreview ng-class:item.selected" ng-repeat="item in GridsterSlidesSVG"  ng-bind-html="item.src" ></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

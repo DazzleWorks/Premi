@@ -7,17 +7,17 @@ use Jenssegers\Mongodb\Model as Eloquent;
 /**
  * @file: app/Model/Component.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the general structure of a component 
- * of the slide
+ * of the slide.
  *
  * +---------+------------+---------------+-----------------+--------------+
  * | Version |     Date   |  Programmer   |     Modify      | Description  |
  * +---------+------------+---------------+-----------------+--------------+
- * |  1.0.0  | 2015-06-19 |Burlin Valerio | class Component | create class |                 
+ * |  1.0.0  | 2015-06-23 |Burlin Valerio | class Component | create class |                 
  * +---------+------------+---------------+-----------------+--------------+
  */
-abstract class Component extends Eloquent
+class Component extends Eloquent
 {
     /**
      * indicates if the model should be timestamped
@@ -64,11 +64,12 @@ abstract class Component extends Eloquent
      * @globalCompositeOperation: indicates the origin where the Component are 
      *                            drawn within the group
      */
-    protected $fillable = ['type', 'originX', 'OriginY', 'left', 'top', 'width',
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top', 'width',
                            'height', 'fill', 'stroke', 'strokeWidth', 
                            'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
                            'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
                            'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
                            'clipTo', 'backgroundColor', 'fillRule', 
                            'globalCompositeOperation'];
+ 
 }

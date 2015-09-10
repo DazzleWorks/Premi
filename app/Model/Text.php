@@ -2,19 +2,19 @@
 
 namespace Premi\Model;
 
-use App\Model\Component;
+use Premi\Model\Component as Component;
 
 /**
  * @file: app/Model/Text.php
  * @author: DazzleWorks
- * @date: 2015-06-19
+ * @date: 2015-06-23
  * @description: This class represents the structure of the data required to 
- * represent a Text in a slide
+ * represent a Text in a slide.
  * 
  * +---------+------------+----------------+--------------+----------------+ 
  * | Version |    Date    |   Programmer   |    Modify    |  Description   |
  * +---------+------------+----------------+--------------+----------------+
- * |  1.0.0  | 2015-06-19 | Burlin Valerio | class Text   | create class   |
+ * |  1.0.0  | 2015-06-23 | Burlin Valerio | class Text   | create class   |
  * +---------+------------+----------------+--------------+----------------+
  */
 class Text extends Component 
@@ -40,7 +40,14 @@ class Text extends Component
      * @textAlign: indicates the alignment of the Text
      * @textBackgroundColor: indicates the background color of a Text box
      */
-    protected $fillable = ['text', 'fontSize', 'fontWeight', 'fontFamily', 
-                           'fontStyle', 'lineHeight', 'textDecoration', 
-                           'textAlign', 'textBackgroundColor'];
+    protected $fillable = ['type', 'originX', 'originY', 'left', 'top' ,'width',
+                           'height', 'fill', 'stroke', 'strokeWidth', 
+                           'strokeDashArray', 'strokeLineCap', 'strokeLineJoin',
+                           'strokeMiterLimit', 'scaleX', 'scaleY', 'angle', 
+                           'flipX', 'flipY', 'opacity', 'shadow', 'visible', 
+                           'clipTo', 'backgroundColor', 'fillRule', 
+                           'globalCompositeOperation', 'text', 'fontSize', 
+                           'fontWeight', 'fontFamily', 'fontStyle', 'lineHeight',
+                           'textDecoration', 'textAlign', 'textBackgroundColor'];
+    
 }

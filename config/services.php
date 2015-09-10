@@ -33,6 +33,5 @@ return [
         'model'  => Premi\User::class,
         'key' => '',
         'secret' => '',
-    ],
-
+    ],    
 ];

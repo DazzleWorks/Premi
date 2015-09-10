@@ -3,20 +3,19 @@
 namespace Premi\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Premi\Http\Requests;
 use Premi\Http\Controllers\Controller;
 
 /**
  * @file: app/Http/Controller/PresentationController.php
  * @author: DazzleWorks
- * @date: 2015-06-23
+ * @date: 2015-06-25
  * @description: This class handles the saving, editing, deleting and viewing,
  * through a specific view, of a presentation.
  *
  * +---------+------------+---------------+-----------------------+-------------+
  * | Version |     Date   |  Programmer   |        Modify         | Description |
  * +---------+------------+---------------+-----------------------+-------------+
- * |  1.0.0  | 2015-06-23 |Suierica Bogdan| class                 |create class,| 
+ * |  1.0.0  | 2015-06-25 |Suierica Bogdan| class                 |create class,|
  * |         |            |               | PresentationController|and its rest |
  * |         |            |               |                       |functions    |
  * +---------+------------+---------------+-----------------------+-------------+
@@ -25,73 +24,71 @@ use Premi\Http\Controllers\Controller;
 class PresentationController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
-     * @param int $project: the id of a project
-     * @return Response
-     */
-    public function store($project)
-    {
-        $user = \Auth::user();
-
-        $presentation = new Presentation(array('title' => \Input::get('title')));
-
-        $user->projects()->where('_id', '=', $project)->presentations()->save($presentation);
-
-        return response(true);
-    }
-
-    /**
-     * Display the specified resource.
-     * @param int $project: the id of a project
-     * @return Response
-     */
-    public function show($project)
-    {
-        $user = \Auth::user();
-
-        $project = $user->projects()->where('_id', '=', $project)->get();
-
-        $presentation = $project->presentations()->first();
-
-        return response($presentation);
-    }
-
-
-    /**
      * Update the specified resource in storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param Illuminate\Http\Request $request
+     * @param String $username: the username of a user
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function update($project)
+    public function update(Request $request,$username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
-        $presentation = $project->presentations()->first();
+        $presentation = $project->presentation()->get();
 
-        $presentation->title = \Input::get('title');
-
+        $presentation->theme = $request->get('theme');
+        $presentation->transition = $request->get('transition');
         $presentation->save();
 
-        return response(true);
+        return response()->json(['status' => true]);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $project: the id of a project
-     * @return Response
+     * @param String $username: the username of a user
+     * @param String $projectID: the ID of a project
+     * @param String $presentationID: the ID of a presentation
+     * @return Illuminate\Http\Response
      */
-    public function destroy($project)
+    public function destroy($username,$projectID,$presentationID)
     {
         $user = \Auth::user();
 
-        $project = $user->projects()->where('_id', '=', $project)->get();
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
 
-        $presentation = $project->presentations()->first();
-
+        $presentation = $project->presentation()->first();
         $presentation->delete();
 
-        return response(true);
+        return response()->json(['status' => true]);
+    }
+
+    public function updateAxisPosition(Request $request,$username,$projectID,$presentationID)
+    {
+        $updates = $request->all();
+
+        $user = \Auth::user();
+
+        $projects = $user->projects();
+        $project = $projects->find($projectID);
+
+        $presentations = $project->presentation();
+        $presentation = $presentations->get();
+
+        $slides = $presentation->slides()->get();
+
+        foreach($updates as $update) {
+            $ID = $update['slideID'];
+            $slide = $slides->find($ID);
+            $slide->xIndex = $update['col'] + 1;
+            $slide->yIndex = $update['row'] + 1;
+            $slide->save();
+        }
+
+        return response()->json(['status' => true]);
     }
 }

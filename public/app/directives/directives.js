@@ -3,17 +3,20 @@
 angular.module('app.directives',
     [
         'ngRoute',
-        'app.directives.homePageDirective',
-        'app.directives.infographicEditorDirective',
-        'app.directives.menuPageSwitcherDirective',
-        'app.directives.myProjectsDirective',
-        'app.directives.presentationEditorDirective',
-        'app.directives.restrictedAreaDirective',
-        'app.directives.slideEditorDirective',
-        'app.directives.slideEditorPanelDirective',
-        'app.directives.slideEditorPanelSpecDirective',
-        'app.directives.textEditPanelDirective',
-        'app.directives.topBarDirective',
-        'app.directives.topMenuDirective'
+        'app.directives.genericProject',
+        'app.directives.homePage',
+        'app.directives.imageUpload',
+        'app.directives.infographicEditor',
+        'app.directives.myAccount',
+        'app.directives.myProjects',
+        'app.directives.presentation',
+        'app.directives.presentationEditor',
+        'app.directives.restrictedArea',
+        'app.directives.slideEditor',
+        'app.directives.slideEditorPanel',
+        'app.directives.slideEditorPanelSpec',
+        'app.directives.textEditPanel',
+        'app.directives.topBarMe',
+        'app.directives.topMenu'
     ]
 );
