@@ -45,7 +45,7 @@ class SlideController extends Controller
     public function index($username,$projectID,$presentationID)
     {
         // $user = \Auth::user();
-        $user = User::where('username, $username')->first();
+        $user = User::find($username);
 
         $projects = $user->projects();
         $project = $projects->find($projectID);
